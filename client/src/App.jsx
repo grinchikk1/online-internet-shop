@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
 import About from "./pages/About/About";
 
 import Cart from "./pages/Cart/Cart";
@@ -10,17 +11,7 @@ import NotFound from "./pages/NotFound/NotFound";
 function App() {
   return (
     <div className="wrapper">
-      <nav>
-        <Link to="/"> Home</Link>
-        <br />
-        <Link to="/about"> About</Link>
-        <br />
-        <Link to="/cart"> Cart</Link>
-        <br />
-        <Link to="/contact"> Contact</Link>
-        <br />
-        <br />
-      </nav>
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
