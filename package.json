@@ -35,5 +35,10 @@
   "devDependencies": {
     "nodemon": "^1.19.1",
     "husky": "^8.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   }
 }
