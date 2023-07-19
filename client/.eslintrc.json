@@ -7,15 +7,14 @@
   "extends": [
     "react-app",
     "react-app/jest",
-    "airbnb",
-    "plugin:prettier/recommended"
+    "prettier"
   ],
  
   "rules": {
     "quotes": [
-    1,
-    "prefer-double"
+    2,
+    "double"
     ]
   },
-   "plugins": ["react", "prettier"]
+   "plugins": [ "prettier"]
 }
