@@ -1,10 +1,11 @@
 import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Basket from "./pages/Basket";
-import Contact from "./pages/Contact";
-import NotFound from "./pages/NotFound";
+import About from "./pages/About/About";
+
+import Cart from "./pages/Cart/Cart";
+import Contact from "./pages/Contact/Contact";
+import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <br />
         <Link to="/about"> About</Link>
         <br />
-        <Link to="/basket"> Basket</Link>
+        <Link to="/cart"> Cart</Link>
         <br />
         <Link to="/contact"> Contact</Link>
         <br />
@@ -23,7 +24,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/basket" element={<Basket />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
