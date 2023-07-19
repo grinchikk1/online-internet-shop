@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
-export function Basket() {
-  return (
-    <h1>Basket page</h1>
-  )
+function Basket() {
+  return <div>Basket</div>;
 }
+
+export default Basket;
