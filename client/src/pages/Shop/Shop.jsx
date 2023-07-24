@@ -1,28 +1,34 @@
 import React from "react";
-import { Box, FormControl, TextField, Typography } from "@mui/material";
-import { styles } from "./InputStyle";
+import { Box, TextField, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import { makeStyles } from "@mui/material/styles";
 
+const useStyles = makeStyles((theme) => ({
+  searchInput: {
+    fontSize: "14px",
+  },
+}));
 function Shop() {
-  const classes = styles();
-
+  const classes = useStyles();
   return (
-    <Box>
+    <Stack
+      spacing={{ xs: 1, sm: 4 }}
+      direction="row"
+      useFlexGap
+      flexWrap="wrap"
+    >
       <Typography
         variant="h6"
         sx={{ fontSize: "33px" }}
-        style={classes.formFilterContainer}
+        className={classes.searchInput}
       >
         Shop The Latest
       </Typography>
-      <FormControl>
-        <TextField
-          name="search"
-          type="text"
-          placeholder="Search"
-          sx={{ height: "35px" }}
-        />
-      </FormControl>
-    </Box>
+      <Box component="form">
+        <TextField label="Search" type="search" />
+      </Box>
+      <div>list</div>
+    </Stack>
   );
 }
 export default Shop;
