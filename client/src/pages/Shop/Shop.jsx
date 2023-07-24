@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { makeStyles } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles((theme) => ({
   searchInput: {
@@ -17,15 +17,15 @@ function Shop() {
       useFlexGap
       flexWrap="wrap"
     >
-      <Typography
-        variant="h6"
-        sx={{ fontSize: "33px" }}
-        className={classes.searchInput}
-      >
+      <Typography variant="h6" sx={{ fontSize: "33px" }}>
         Shop The Latest
       </Typography>
       <Box component="form">
-        <TextField label="Search" type="search" />
+        <TextField
+          label="Search"
+          type="search"
+          className={classes.searchInput}
+        />
       </Box>
       <div>list</div>
     </Stack>
