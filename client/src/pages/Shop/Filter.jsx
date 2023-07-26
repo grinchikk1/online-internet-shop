@@ -27,10 +27,6 @@ function Filter() {
     setValueSlider(newValue);
   };
 
-  // const valueText = (value) => {
-  //   return `${value}$ - ${value}`;
-  // };
-
   // UseState for Select
 
   const [selectedValueShop, setSelectedValueShop] = useState("");
@@ -157,7 +153,7 @@ function Filter() {
           Price: {valueSlider[0]}$ - {valueSlider[1]}$
         </Typography>
       </Box>
-      <Box className={classes.BoxSwitch} sx={{ marginBottom: "39px" }}>
+      <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>
         <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>On Sale</Typography>
         <Switch
           size="medium"
