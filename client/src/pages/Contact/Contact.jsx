@@ -1,5 +1,4 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
 import {
   Container,
   Grid,
@@ -9,16 +8,10 @@ import {
   Typography,
 } from "@mui/material";
 import CustomButton from "../../components/CustomButton/CustomButton";
-import { useStyles, theme } from "./ContactStyles";
+import { useStyles, theme, fieldStyle } from "./ContactStyles";
 import { ThemeProvider } from "@mui/material/styles";
-
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  subject: Yup.string().required("Subject is required"),
-  message: Yup.string().required("Message is required"),
-});
+import Checkout from "../../components/Checkout/Checkout";
+import { initialValues, validationSchema } from "./formSettings";
 
 const ContactForm = () => {
   const classes = useStyles();
@@ -34,20 +27,14 @@ const ContactForm = () => {
           ideas with our Team!
         </Typography>
         <Formik
-          initialValues={{
-            firstName: "",
-            lastName: "",
-            email: "",
-            subject: "",
-            message: "",
-          }}
+          initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
             console.log(values);
             resetForm();
           }}
         >
-          {({ isSubmitting }) => (
+          {({ isSubmitting, handleSubmit }) => (
             <Form>
               <Grid container spacing={5}>
                 <Grid item xs={6}>
@@ -56,14 +43,7 @@ const ContactForm = () => {
                     name="firstName"
                     label="First name"
                     className={classes.field}
-                    sx={{
-                      "& fieldset": {
-                        border: "none",
-                        borderBottom: `1px solid ${"#D8D8D8"}`,
-                        borderRadius: "0px",
-                        marginRight: "5vw",
-                      },
-                    }}
+                    sx={fieldStyle}
                   />
                   <ErrorMessage name="firstName" component="div" />
                 </Grid>
@@ -73,13 +53,7 @@ const ContactForm = () => {
                     name="lastName"
                     label="Last name"
                     className={classes.field}
-                    sx={{
-                      "& fieldset": {
-                        border: "none",
-                        borderBottom: `1px solid ${"#D8D8D8"}`,
-                        borderRadius: "0px",
-                      },
-                    }}
+                    sx={fieldStyle}
                   />
                   <ErrorMessage name="lastName" component="div" />
                 </Grid>
@@ -89,14 +63,7 @@ const ContactForm = () => {
                     name="email"
                     label="Email"
                     className={classes.field}
-                    sx={{
-                      "& fieldset": {
-                        border: "none",
-                        borderBottom: `1px solid ${"#D8D8D8"}`,
-                        borderRadius: "0px",
-                        marginRight: "5vw",
-                      },
-                    }}
+                    sx={fieldStyle}
                   />
                   <ErrorMessage name="email" component="div" />
                 </Grid>
@@ -118,6 +85,7 @@ const ContactForm = () => {
                         border: "none",
                         borderBottom: `1px solid ${"#D8D8D8"}`,
                         borderRadius: "0px",
+                        marginRight: "5vw",
                       },
                     }}
                   >
@@ -141,14 +109,7 @@ const ContactForm = () => {
                     multiline
                     rows={5}
                     className={classes.field}
-                    sx={{
-                      "& fieldset": {
-                        border: "none",
-                        borderBottom: `1px solid ${"#D8D8D8"}`,
-                        borderRadius: "0px",
-                        fontFamily: "DM Sans, sans-serif",
-                      },
-                    }}
+                    sx={fieldStyle}
                   />
                   <ErrorMessage name="message" component="div" />
                 </Grid>
@@ -158,12 +119,14 @@ const ContactForm = () => {
                   type="submit"
                   value={"SEND"}
                   disabled={isSubmitting}
+                  onClick={handleSubmit}
                 />
               </Grid>
             </Form>
           )}
         </Formik>
       </Container>
+      <Checkout />
     </ThemeProvider>
   );
 };
