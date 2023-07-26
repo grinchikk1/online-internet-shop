@@ -1,16 +1,9 @@
 import Button from "@mui/material/Button";
-import { useFormikContext } from "formik";
 import { customButtonStyle } from "./CustomStyle";
 
-function CustomButton({ value }) {
-  const formik = useFormikContext();
-
-  const handleClick = () => {
-    formik.handleSubmit();
-  };
-
+function CustomButton({ value, onClick }) {
   return (
-    <Button variant="contained" style={customButtonStyle} onClick={handleClick}>
+    <Button variant="contained" style={customButtonStyle} onClick={onClick}>
       {value}
     </Button>
   );
