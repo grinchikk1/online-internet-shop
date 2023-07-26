@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Container } from "@mui/material";
+import { Box, Typography, Container, useMediaQuery } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { theme, useStyles } from "./InputStyle";
 import { ThemeProvider } from "@mui/material/styles";
@@ -14,21 +14,20 @@ import CardItem from "./CardItem/CardItem";
 function Shop() {
   const classes = useStyles();
 
+  const isScreenSmall = useMediaQuery("(max-width: 767.98px)");
+
   const stackStyle = {
     paddingBottom: "250px",
     paddingTop: "96px",
-    display: "flex",
   };
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg">
         <Stack
-          container
-          direction="row"
-          alignItems="center"
+          direction={isScreenSmall ? "column" : "row"}
           spacing={{ xs: 1, sm: 4 }}
           useFlexGap
-          flexWrap="wrap"
+          justifyContent={isScreenSmall ? "start" : "center"}
           className={stackStyle}
         >
           <Box className={classes.Container}>
