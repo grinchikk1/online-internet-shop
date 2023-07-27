@@ -3,15 +3,9 @@ import { Typography, Container, Box, IconButton,  Divider } from "@mui/material"
 
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 
-<<<<<<< HEAD
-import { useStyles} from "./AboutStyles"; 
-
-// import { ThemeProvider } from "@mui/material/styles";
-=======
 import { useStyles, theme } from "./AboutStyles"; 
 
 import { ThemeProvider } from "@mui/material/styles";
->>>>>>> 899bb4c (create page About, AboutForm & Comment)
 
 import ReplyForm from "../../components/AboutForm/AboutForm"
 
@@ -30,17 +24,6 @@ function About() {
   
 
   return (
-<<<<<<< HEAD
-    // <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" className={classes.pageContainer}>
-      {/* Перше фото */}
-      <Typography variant="h4">About us</Typography>
-      <Typography variant="h6" sx={{marginBottom:"25px"}}>Fast Fashion, And Faster Fashion</Typography>
-        <img
-          src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
-          alt="Перше фото"
-          style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
-=======
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" className={classes.pageContainer}>
         {/* Перше фото */}
@@ -48,7 +31,6 @@ function About() {
           src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
           alt="Перше фото"
           style={{ width: "100%", height: "646px", borderRadius: "8px", objectFit: "cover" }}
->>>>>>> 899bb4c (create page About, AboutForm & Comment)
         />
          <Typography variant="body1" className={classes.article1}>
           To create a unique image, you use all means to create a unique look, so sometimes it is simply necessary to buy jewelry.
@@ -74,11 +56,7 @@ function About() {
         <img 
           src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
           alt="Друге фото"
-<<<<<<< HEAD
-          style={{ display: "block", margin: "0 auto", width: "58%", borderRadius: "8px", objectFit: "cover" }}
-=======
           style={{ display: "block", margin: "0 auto", width: "58%", height: "300px",  borderRadius: "8px", objectFit: "cover" }}
->>>>>>> 899bb4c (create page About, AboutForm & Comment)
         />
 
         {/* Текст після другого фото */}
@@ -145,11 +123,7 @@ function About() {
 
 
       
-<<<<<<< HEAD
-    // </ThemeProvider>
-=======
     </ThemeProvider>
->>>>>>> 899bb4c (create page About, AboutForm & Comment)
   )
 }
 export default About;
