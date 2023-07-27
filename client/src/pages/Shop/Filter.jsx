@@ -58,15 +58,15 @@ function Filter() {
       </FormControl>
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
-          htmlFor="shop-by"
+          htmlFor="product-material"
           sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
         >
-          Shop By
+          Product material
         </InputLabel>
         <Select
-          labelId="shopBy"
-          id="shopBy"
-          label="Shop By"
+          labelId="productMaterial"
+          id="productMaterial"
+          label=" Product material"
           IconComponent={KeyboardArrowDownIcon}
           className={classes.SelectInput}
           sx={{
@@ -82,27 +82,27 @@ function Filter() {
           onChange={handleChangeSelectShop}
         >
           <MenuItem className={classes.SelectInputItem} value={10}>
-            10
+            gold
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={20}>
-            20
+            silver
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={30}>
-            30
+            platinum
           </MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
-          htmlFor="shop-by"
+          htmlFor="brand"
           sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
         >
-          Sort By
+          Brand
         </InputLabel>
         <Select
-          labelId="sortBy"
-          id="sortBy"
-          label="Sort By"
+          labelId="brand"
+          id="brand"
+          label="Brand"
           IconComponent={KeyboardArrowDownIcon}
           className={classes.SelectInput}
           value={selectedValueSort}
@@ -114,13 +114,31 @@ function Filter() {
           }}
         >
           <MenuItem className={classes.SelectInputItem} value={10}>
-            10
+            KJM
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={20}>
-            20
+            LuxJewels
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={30}>
-            30
+            Jewels
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={40}>
+            OpalCraft
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={50}>
+            OceanGems
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={60}>
+            BlueSky
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={70}>
+            AmberCraft
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={80}>
+            Glow
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={90}>
+            BlackStone
           </MenuItem>
         </Select>
       </FormControl>
