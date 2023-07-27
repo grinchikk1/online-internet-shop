@@ -13,6 +13,7 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
+    maxWidth: 1200
   },
 
   article1: {

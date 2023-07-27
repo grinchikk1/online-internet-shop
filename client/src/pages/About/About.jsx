@@ -5,7 +5,7 @@ import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 
 import { useStyles, theme } from "./AboutStyles"; 
 
-import { ThemeProvider } from "@mui/material/styles";
+// import { ThemeProvider } from "@mui/material/styles";
 
 import ReplyForm from "../../components/AboutForm/AboutForm"
 
@@ -24,13 +24,13 @@ function About() {
   
 
   return (
-    <ThemeProvider theme={theme}>
+    // <ThemeProvider theme={theme}>
       <Container maxWidth="lg" className={classes.pageContainer}>
         {/* Перше фото */}
         <img
           src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
           alt="Перше фото"
-          style={{ width: "100%", height: "646px", borderRadius: "8px", objectFit: "cover" }}
+          style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
         />
          <Typography variant="body1" className={classes.article1}>
           To create a unique image, you use all means to create a unique look, so sometimes it is simply necessary to buy jewelry.
@@ -56,7 +56,7 @@ function About() {
         <img 
           src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
           alt="Друге фото"
-          style={{ display: "block", margin: "0 auto", width: "58%", height: "300px",  borderRadius: "8px", objectFit: "cover" }}
+          style={{ display: "block", margin: "0 auto", width: "58%", borderRadius: "8px", objectFit: "cover" }}
         />
 
         {/* Текст після другого фото */}
@@ -123,7 +123,7 @@ function About() {
 
 
       
-    </ThemeProvider>
+    // </ThemeProvider>
   )
 }
 export default About;
