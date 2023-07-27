@@ -13,7 +13,10 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
+<<<<<<< HEAD
     maxWidth: 1200
+=======
+>>>>>>> 899bb4c (create page About, AboutForm & Comment)
   },
 
   article1: {
