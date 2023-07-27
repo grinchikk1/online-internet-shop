@@ -21,7 +21,7 @@ function Filter() {
   const classes = useStyles();
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([40, 100]);
+  const [valueSlider, setValueSlider] = useState([40, 180]);
 
   const handleChange = (event, newValue) => {
     setValueSlider(newValue);
@@ -130,7 +130,8 @@ function Filter() {
           value={valueSlider}
           onChange={handleChange}
           valueLabelDisplay="auto"
-          // getAriaValueText={valueText}
+          min={0}
+          max={180}
           size="small"
           sx={{
             "& .MuiSlider-thumb": {

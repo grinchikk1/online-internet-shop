@@ -28,7 +28,6 @@ export const customTheme = createTheme({
 export const useStyles = makeStyles((theme) => ({
   stackStyle: {
     paddingBottom: "250px",
-    paddingTop: "20px",
   },
   Container: {
     display: "flex",
@@ -46,6 +45,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: "35px",
     "@media (max-width : 767.98px) ": {
       paddingBottom: "10px",
+      fontSize: 20,
     },
   },
   SelectInput: {

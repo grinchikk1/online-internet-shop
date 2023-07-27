@@ -26,7 +26,9 @@ function Shop() {
       <Container maxWidth="lg">
         <Typography
           variant="h6"
-          sx={{ fontSize: "33px" }}
+          sx={{
+            fontSize: "33px",
+          }}
           className={classes.Title}
         >
           Shop The Latest
