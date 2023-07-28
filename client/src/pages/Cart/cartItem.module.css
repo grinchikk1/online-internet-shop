@@ -1,0 +1,10 @@
+.item_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.count {
+  display: flex;
+}
+
+/*# sourceMappingURL=cartItem.module.css.map */
