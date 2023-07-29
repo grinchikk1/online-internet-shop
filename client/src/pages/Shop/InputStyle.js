@@ -63,4 +63,14 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "22px",
     color: "rgba(112, 112, 112, 1)",
   },
+  ItemList: {
+    paddingTop: "100px",
+  },
+  StackStyle: {
+    paddingBottom: "250px",
+    paddingTop: "96px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "start",
+  },
 }));
