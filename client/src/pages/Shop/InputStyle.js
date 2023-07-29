@@ -26,20 +26,30 @@ export const customTheme = createTheme({
 });
 
 export const useStyles = makeStyles((theme) => ({
+  Wrapper: {
+    padding: "0px 5px",
+  },
+  stackStyle: {
+    paddingBottom: "250px",
+  },
   Container: {
     display: "flex",
     flexDirection: "column",
+    marginBottom: "16px",
   },
   searchInput: {
     width: "261px",
-    height: "35px",
+    height: "25px",
     border: "none",
     borderBottom: "1px solid rgba(216, 216, 216, 1)",
-    margin: "0px",
   },
   Title: {
     color: "rgba(0, 0, 0, 1)",
     paddingBottom: "35px",
+    "@media (max-width : 767.98px) ": {
+      paddingBottom: "10px",
+      fontSize: 20,
+    },
   },
   SelectInput: {
     fontSize: "14px",
@@ -63,14 +73,17 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "22px",
     color: "rgba(112, 112, 112, 1)",
   },
-  ItemList: {
-    paddingTop: "100px",
-  },
+
   StackStyle: {
     paddingBottom: "250px",
     paddingTop: "96px",
     display: "flex",
     justifyContent: "start",
     alignItems: "start",
+  },
+  FilterTitle: {
+    fontWeight: 400,
+    lineHeight: "20px",
+    color: "rgba(161, 138, 104, 1)",
   },
 }));

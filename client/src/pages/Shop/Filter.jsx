@@ -21,15 +21,11 @@ function Filter() {
   const classes = useStyles();
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([40, 100]);
+  const [valueSlider, setValueSlider] = useState([40, 180]);
 
   const handleChange = (event, newValue) => {
     setValueSlider(newValue);
   };
-
-  // const valueText = (value) => {
-  //   return `${value}$ - ${value}`;
-  // };
 
   // UseState for Select
 
@@ -62,15 +58,15 @@ function Filter() {
       </FormControl>
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
-          htmlFor="shop-by"
+          htmlFor="product-material"
           sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
         >
-          Shop By
+          Product material
         </InputLabel>
         <Select
-          labelId="shopBy"
-          id="shopBy"
-          label="Shop By"
+          labelId="productMaterial"
+          id="productMaterial"
+          label=" Product material"
           IconComponent={KeyboardArrowDownIcon}
           className={classes.SelectInput}
           sx={{
@@ -86,27 +82,27 @@ function Filter() {
           onChange={handleChangeSelectShop}
         >
           <MenuItem className={classes.SelectInputItem} value={10}>
-            10
+            gold
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={20}>
-            20
+            silver
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={30}>
-            30
+            platinum
           </MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
-          htmlFor="shop-by"
+          htmlFor="brand"
           sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
         >
-          Sort By
+          Brand
         </InputLabel>
         <Select
-          labelId="sortBy"
-          id="sortBy"
-          label="Sort By"
+          labelId="brand"
+          id="brand"
+          label="Brand"
           IconComponent={KeyboardArrowDownIcon}
           className={classes.SelectInput}
           value={selectedValueSort}
@@ -118,13 +114,31 @@ function Filter() {
           }}
         >
           <MenuItem className={classes.SelectInputItem} value={10}>
-            10
+            KJM
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={20}>
-            20
+            LuxJewels
           </MenuItem>
           <MenuItem className={classes.SelectInputItem} value={30}>
-            30
+            Jewels
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={40}>
+            OpalCraft
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={50}>
+            OceanGems
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={60}>
+            BlueSky
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={70}>
+            AmberCraft
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={80}>
+            Glow
+          </MenuItem>
+          <MenuItem className={classes.SelectInputItem} value={90}>
+            BlackStone
           </MenuItem>
         </Select>
       </FormControl>
@@ -134,7 +148,8 @@ function Filter() {
           value={valueSlider}
           onChange={handleChange}
           valueLabelDisplay="auto"
-          // getAriaValueText={valueText}
+          min={0}
+          max={180}
           size="small"
           sx={{
             "& .MuiSlider-thumb": {
@@ -157,7 +172,7 @@ function Filter() {
           Price: {valueSlider[0]}$ - {valueSlider[1]}$
         </Typography>
       </Box>
-      <Box className={classes.BoxSwitch} sx={{ marginBottom: "39px" }}>
+      <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>
         <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>On Sale</Typography>
         <Switch
           size="medium"
