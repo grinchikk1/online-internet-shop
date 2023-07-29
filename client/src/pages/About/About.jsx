@@ -3,7 +3,7 @@ import { Typography, Container, Box, IconButton,  Divider } from "@mui/material"
 
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 
-import { useStyles, theme } from "./AboutStyles"; 
+import { useStyles} from "./AboutStyles"; 
 
 // import { ThemeProvider } from "@mui/material/styles";
 
@@ -26,7 +26,9 @@ function About() {
   return (
     // <ThemeProvider theme={theme}>
       <Container maxWidth="lg" className={classes.pageContainer}>
-        {/* Перше фото */}
+      {/* Перше фото */}
+      <Typography variant="h4">About us</Typography>
+      <Typography variant="h6" sx={{marginBottom:"25px"}}>Fast Fashion, And Faster Fashion</Typography>
         <img
           src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
           alt="Перше фото"
