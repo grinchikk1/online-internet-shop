@@ -8,7 +8,7 @@ import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
 
-// const label = { inputProps: { "aria-label": "Switch demo" } };
+const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
@@ -16,7 +16,6 @@ function Shop() {
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
   };
-
   const classes = useStyles();
 
   const isScreenSmall = useMediaQuery("(max-width: 767.98px)");
