@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//------------- v.2 использование иконки из MUI -------------
-// import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone"; v.2
 
-// v.1 использование иконки из макета
+// const for test
 const CARTSVG = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -35,13 +33,11 @@ function Header() {
         <br />
         <Link to="/shop"> Shop</Link>
         <br />
-        <Link to="/cart">
-          {/*/!*<ShoppingCartTwoToneIcon />*!/ ----- компонент из MIU*/}
-          {CARTSVG}
-        </Link>
+        <Link to="/cart">{CARTSVG}</Link>
         <br />
         <Link to="/contact"> Contact</Link>
         <br />
+        <Link to="/about"> About</Link>
         <br />
       </nav>
     </>

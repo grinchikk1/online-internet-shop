@@ -1,13 +1,25 @@
 .cart_title {
   text-align: center;
+  font-size: 33px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 43px;
+  margin: 96px 0 64px;
 }
-.cart_wrapper {
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.wrapper_items {
   display: flex;
-  justify-content: space-between;
 }
 
 .cart_items {
   display: flex;
+  flex-direction: column;
+  gap: 78px;
 }
 
 .cart_frame {

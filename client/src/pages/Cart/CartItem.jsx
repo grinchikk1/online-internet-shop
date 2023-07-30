@@ -22,16 +22,26 @@ const CartItem = (props) => {
 
   return (
     <div className={s.item_wrapper}>
-      <img src={image} alt="#" />
-      <div>{name}</div>
-      <p>{currentPrice} $</p>
-      <div className={s.count}>
-        <button onClick={() => removeFromCart(id)}> - </button>
+      <img src={image} alt="#" className={s.item_image} />
+      <div className={s.wrapp_description}>
+        <div className={s.item_name}>{name}</div>
+        <p className={s.item_description}>
+          {productMaterial} / {brand}
+        </p>
+        <p className={s.item_price}>{currentPrice} $</p>
+      </div>
+      <div className={s.count_wrapper}>
+        <button className={s.count_button} onClick={() => removeFromCart(id)}>
+          -
+        </button>
         <input
+          className={s.count_input}
           value={cartItems[id]}
           onChange={(e) => updateCartCount(Number(e.target.value), id)}
         />
-        <button onClick={() => addToCart(id)}> + </button>
+        <button className={s.count_button} onClick={() => addToCart(id)}>
+          +
+        </button>
       </div>
     </div>
   );

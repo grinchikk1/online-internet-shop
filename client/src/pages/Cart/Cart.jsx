@@ -13,17 +13,20 @@ const Cart = () => {
   return (
     <>
       <h1 className={s.cart_title}>Shopping Cart</h1>
-      <div className={s.cart_wrapper}>
-        <div className={s.cart_items}>
-          {/* eslint-disable-next-line array-callback-return */}
-          {PRODUCTS.map((product, id) => {
-            if (cartItems[product.id] !== 0) {
-              return <CartItem data={product} key={id} />;
-            }
-          })}
+      <div className={s.wrapper}>
+        <div className={s.wrapper_items}>
+          <div className={s.cart_items}>
+            {/* eslint-disable-next-line array-callback-return */}
+            {PRODUCTS.map((product, id) => {
+              if (cartItems[product.id] !== 0) {
+                return <CartItem data={product} key={id} />;
+              }
+            })}
+          </div>
         </div>
-
-        <div className={s.cart_frame}>FRAME</div>
+        <div className={s.frame_wrapper}>
+          <div className={s.frame_title}>Cart totals</div>
+        </div>
       </div>
       {totalAmount > 0 ? (
         <div className={s.cart_checkout}>
