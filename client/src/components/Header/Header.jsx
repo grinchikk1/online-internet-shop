@@ -12,6 +12,7 @@ function Header() {
         <br />
         <Link to="/contact"> Contact</Link>
         <br />
+        <Link to="/about"> About</Link>
         <br />
       </nav>
     </>
