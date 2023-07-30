@@ -4,8 +4,15 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function MultiActionAreaCard() {
+export default function MultiActionAreaCard({ product }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   const card = {
     position: "relative",
   };
@@ -34,11 +41,11 @@ export default function MultiActionAreaCard() {
   };
   return (
     <Card style={card} sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick}>
         <CardMedia
           component="img"
           height="300"
-          image="https://img.freepik.com/premium-photo/abstract-red-background_8466-4.jpg"
+          image={product.image[0]}
           alt="green iguana"
           sx={{ pb: 3 }}
           style={img}
@@ -54,7 +61,7 @@ export default function MultiActionAreaCard() {
           component="div"
           sx={{ fontSize: 20 }}
         >
-          Product Name
+          {product.name}
         </Typography>
         <Typography
           gutterBottom
@@ -66,7 +73,7 @@ export default function MultiActionAreaCard() {
             color: "rgba(161, 138, 104, 1)",
           }}
         >
-          Product Price
+          {product.currentPrice},00
         </Typography>
       </CardActionArea>
     </Card>

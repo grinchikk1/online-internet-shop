@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Box, Typography, Container, useMediaQuery } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { theme, useStyles } from "./InputStyle";
@@ -7,9 +7,18 @@ import Filter from "./Filter";
 import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
+import getData from "../../data/index";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData().then((res) => {
+      setData(res);
+    });
+  }, []);
 
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
@@ -70,9 +79,9 @@ function Shop() {
               rowSpacing={{ xs: 3, md: 9 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              {Array.from(Array(12)).map((_, index) => (
-                <Grid item xs={12} sm={4} md={4} key={index}>
-                  <CardItem />
+              {data.map((product) => (
+                <Grid item xs={12} sm={4} md={4} key={product.id}>
+                  <CardItem product={product} />
                 </Grid>
               ))}
             </Grid>
