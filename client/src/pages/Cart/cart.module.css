@@ -33,4 +33,40 @@
   margin-top: 50px;
 }
 
+.cart_empty {
+  display: flex;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.card_subtotal_wrapper {
+  display: flex;
+  gap: 128px;
+}
+
+.cart_subtotal {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.cart_amount {
+  margin-top: 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 23px;
+}
+
+.cart_total {
+  display: flex;
+  justify-content: space-between;
+  color: #000;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 26px 0 29px;
+}
+
 /*# sourceMappingURL=cart.module.css.map */

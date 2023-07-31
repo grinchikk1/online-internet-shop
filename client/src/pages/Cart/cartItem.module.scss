@@ -8,8 +8,8 @@
   display: flex;
   width: 578px;
   height: 136px;
-  border: 1px solid grey; // TODO убрать эту строку
   align-items: center;
+  position: relative;
 }
 
 .count_wrapper {
@@ -82,8 +82,16 @@
   line-height: 27px;
 }
 
-s.line {            // TODO ?
-    height: 1px;
-    width: 580px;
-    background-color: red; // #D8D8D8;
+.cart_line {
+  border-bottom: 1px solid #d8d8d8;
+  width: 580px;
+}
+
+.close_button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff;
 }

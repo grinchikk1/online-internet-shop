@@ -8,8 +8,8 @@
   display: flex;
   width: 578px;
   height: 136px;
-  border: 1px solid grey;
   align-items: center;
+  position: relative;
 }
 
 .count_wrapper {
@@ -82,10 +82,18 @@
   line-height: 27px;
 }
 
-s.line {
-  height: 1px;
+.cart_line {
+  border-bottom: 1px solid #d8d8d8;
   width: 580px;
-  background-color: red;
+}
+
+.close_button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  cursor: pointer;
+  background-color: #ffffff;
 }
 
 /*# sourceMappingURL=cartItem.module.css.map */
