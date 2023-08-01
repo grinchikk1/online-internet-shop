@@ -41,7 +41,7 @@ export default function MultiActionAreaCard({ card }) {
         <CardMedia
           component="img"
           style={img}
-          src={card.image}
+          src={card.image[0]}
           alt={card.name}
         ></CardMedia>
         <div style={discount} className="discount">
