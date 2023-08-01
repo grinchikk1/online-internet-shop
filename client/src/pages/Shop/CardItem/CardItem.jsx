@@ -1,13 +1,16 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
-export default function MultiActionAreaCard() {
-  const card = {
-    position: "relative",
+export default function MultiActionAreaCard({ card }) {
+  const cards = {
+    height: 300,
+    width: 200,
+    boxShadow: "none",
+    paddingLeft: 0,
+    margin: "0 auto",
   };
 
   const img = {
@@ -33,15 +36,13 @@ export default function MultiActionAreaCard() {
     gap: "3px",
   };
   return (
-    <Card style={card} sx={{ maxWidth: 345 }}>
+    <Card style={cards}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="300"
-          image="https://img.freepik.com/premium-photo/abstract-red-background_8466-4.jpg"
-          alt="green iguana"
-          sx={{ pb: 3 }}
           style={img}
+          src={card.image}
+          alt={card.name}
         ></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
@@ -52,9 +53,14 @@ export default function MultiActionAreaCard() {
           gutterBottom
           variant="h5"
           component="div"
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 20,
+            fontWeight: "400",
+            color: "black",
+            marginBottom: "16px",
+          }}
         >
-          Product Name
+          {card.name}
         </Typography>
         <Typography
           gutterBottom
@@ -66,7 +72,7 @@ export default function MultiActionAreaCard() {
             color: "rgba(161, 138, 104, 1)",
           }}
         >
-          Product Price
+          ${card.currentPrice},00
         </Typography>
       </CardActionArea>
     </Card>
