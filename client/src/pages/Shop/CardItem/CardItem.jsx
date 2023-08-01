@@ -3,12 +3,12 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+
 export default function MultiActionAreaCard({ card }) {
   const cards = {
     height: 300,
     width: 200,
     boxShadow: "none",
-    paddingLeft: 0,
     margin: "0 auto",
   };
 
@@ -35,8 +35,9 @@ export default function MultiActionAreaCard({ card }) {
     gap: "3px",
   };
   return (
+    // onClick={handleClick}
     <Card style={cards}>
-      <CardActionArea>
+      <CardActionArea sx={{ marginRight: "40px" }}>
         <CardMedia
           component="img"
           style={img}

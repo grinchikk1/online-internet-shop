@@ -7,7 +7,8 @@ import Cart from "./pages/Cart/Cart";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
-
+import About from "./pages/About/About";
+import Product from "./pages/Product/Product";
 import "./styles/App.scss";
 
 function App() {
@@ -18,7 +19,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/product/:id" element={<Product />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

@@ -74,9 +74,8 @@ function Filter({ setValue }) {
             "& .MuiSelect-icon": {
               color: "rgba(0, 0, 0, 1)",
             },
-
             "&:hover": {
-              backgroundColor: "transparent", // Відключіть фон при наведенні
+              backgroundColor: "transparent",
             },
           }}
           value={selectedValueShop}

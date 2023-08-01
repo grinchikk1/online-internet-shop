@@ -13,41 +13,42 @@ import Filter from "./Filter";
 import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
-import axios from "axios";
+import getData from "../../data/index";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
-  const [card, setCard] = useState([]);
   const [value, setValue] = useState("");
 
   const handleSetValue = (value) => {
     setValue(value);
   };
 
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData().then((res) => {
+      setData(res);
+    });
+  }, []);
+
   const [cardsToShow, setCardsToShow] = useState(6);
 
   // Filter open!
+
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
   };
+
   const classes = useStyles();
 
   const isScreenSmall = useMediaQuery("(max-width: 767.98px)");
-
-  useEffect(() => {
-    async function getData() {
-      const response = await axios.get("data.json");
-      setCard(response.data);
-    }
-    getData();
-  }, []);
 
   // +6 cards
   const handleLoadMore = () => {
     setCardsToShow(cardsToShow + 6);
   };
 
-  const searchFilter = card.filter((card) => {
+  const searchFilter = data.filter((card) => {
     return card.name.toLowerCase().includes(value.toLowerCase());
   });
 
@@ -57,7 +58,7 @@ function Shop() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" className={classes.Wrapper}>
+      <Container maxWidth="lg">
         <Typography
           variant="h6"
           sx={{
@@ -109,7 +110,18 @@ function Shop() {
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
               {cardList.map((card, index) => (
-                <Grid item xs={12} sm={4} md={4} key={index}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  md={4}
+                  key={index}
+                  sx={{
+                    "@media (min-width: 900px)": {
+                      maxWidth: "100%",
+                    },
+                  }}
+                >
                   {card}
                 </Grid>
               ))}
