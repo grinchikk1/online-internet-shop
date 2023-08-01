@@ -53,7 +53,7 @@ function Shop() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" className={classes.Wrapper}>
         <Typography
           variant="h6"
           sx={{

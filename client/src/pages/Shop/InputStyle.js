@@ -26,6 +26,9 @@ export const customTheme = createTheme({
 });
 
 export const useStyles = makeStyles((theme) => ({
+  Wrapper: {
+    padding: "0px 5px",
+  },
   stackStyle: {
     paddingBottom: "250px",
   },
@@ -69,6 +72,14 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     lineHeight: "22px",
     color: "rgba(112, 112, 112, 1)",
+  },
+
+  StackStyle: {
+    paddingBottom: "250px",
+    paddingTop: "96px",
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "start",
   },
   FilterTitle: {
     fontWeight: 400,
