@@ -20,6 +20,10 @@ function Shop() {
   const [card, setCard] = useState([]);
   const [value, setValue] = useState("");
 
+  const handleSetValue = (value) => {
+    setValue(value);
+  };
+
   const [cardsToShow, setCardsToShow] = useState(6);
 
   // Filter open!
@@ -70,7 +74,7 @@ function Shop() {
           className={classes.stackStyle}
         >
           <Box className={classes.Container}>
-            {!isScreenSmall && <Filter setValue={setValue} />}
+            {!isScreenSmall && <Filter setValue={handleSetValue} />}
             {isScreenSmall && (
               <Box
                 sx={{
@@ -91,7 +95,9 @@ function Shop() {
                 </Typography>
               </Box>
             )}
-            {isScreenSmall && isOpenFilter && <Filter />}
+            {isScreenSmall && isOpenFilter && (
+              <Filter setValue={handleSetValue} />
+            )}
           </Box>
 
           <Box>
