@@ -5,6 +5,7 @@ import { useStyles, theme } from "./HomeStyles";
 import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useEffect, useState } from "react";
+import getData from "../../data/index";
 
 
 
@@ -18,10 +19,13 @@ function Home() {
     async function fetchJson() {
       //===!!== Not correct file location. Have to relocate file to client\PUBLIC.
       //===!!== But fetch request from PUBLIC doesn't work...
-      let request = await fetch("../../data.json");  
-      let response = await request.json();
-      // console.log(response);
-      setProducts(response);
+      // let request = await fetch("../../data.json");
+      
+      let request = await getData();  
+      
+      // let response = await request.json();
+      // setProducts(response);
+      setProducts(request);
     }
     fetchJson();
   }, []);
@@ -43,7 +47,7 @@ function Home() {
                   key={card.id}
                   id={card.id}
                   enabled={card.enabled}
-                  image={card.image}
+                  image={card.image[0]}
                   quantity={card.quantity}
                   name={card.name}
                   currentPrice={card.currentPrice}
