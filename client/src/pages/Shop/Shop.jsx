@@ -82,7 +82,6 @@ function Shop() {
                   display: "flex",
                   alignItems: "center",
                   gap: "10px",
-                  zIndex: "5555",
                   marginBottom: "13px",
                 }}
                 onClick={toggleFilter}

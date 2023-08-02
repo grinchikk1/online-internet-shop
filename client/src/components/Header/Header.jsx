@@ -17,7 +17,9 @@ function Header() {
           className={`nav-opener ${isBurgerMenuOpen ? "open" : ""}`}
           onClick={handleBurgerMenu}
         >
-          <span></span>
+          <span className="nav-opener__menu-line"></span>
+          <span className="nav-opener__menu-line"></span>
+          <span className="nav-opener__menu-line"></span>
         </button>
         <Link to="/">This is Logo</Link>
         <div className={`header__nav-holder ${isBurgerMenuOpen ? "open" : ""}`}>
