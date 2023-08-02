@@ -17,13 +17,13 @@ import { useStyles, customTheme } from "./InputStyle";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function Filter() {
+function Filter({ setValue }) {
   const classes = useStyles();
 
   // UseState for Slider
   const [valueSlider, setValueSlider] = useState([40, 180]);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValueSlider(newValue);
   };
 
@@ -45,6 +45,7 @@ function Filter() {
           Search
         </InputLabel>
         <Input
+          onChange={(event) => setValue(event.target.value)}
           id="search"
           name="search"
           className={classes.searchInput}
@@ -74,7 +75,7 @@ function Filter() {
               color: "rgba(0, 0, 0, 1)",
             },
             "&:hover": {
-              backgroundColor: "transparent", // Відключіть фон при наведенні
+              backgroundColor: "transparent",
             },
           }}
           value={selectedValueShop}

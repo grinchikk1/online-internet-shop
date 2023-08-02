@@ -68,7 +68,7 @@ function Home() {
                     key={card.id}
                     id={card.id}
                     enabled={card.enabled}
-                    image={card.image}
+                    image={card.image[0]}
                     quantity={card.quantity}
                     name={card.name}
                     currentPrice={card.currentPrice}

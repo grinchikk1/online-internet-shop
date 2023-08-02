@@ -1,5 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { Box, Typography, Container, useMediaQuery } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  useMediaQuery,
+  Button,
+} from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { theme, useStyles } from "./InputStyle";
 import { ThemeProvider } from "@mui/material/styles";
@@ -11,6 +17,11 @@ import getData from "../../data/index";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
+  const [value, setValue] = useState("");
+
+  const handleSetValue = (value) => {
+    setValue(value);
+  };
 
   const [data, setData] = useState([]);
 
@@ -20,6 +31,10 @@ function Shop() {
     });
   }, []);
 
+  const [cardsToShow, setCardsToShow] = useState(6);
+
+  // Filter open!
+
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
   };
@@ -27,6 +42,19 @@ function Shop() {
   const classes = useStyles();
 
   const isScreenSmall = useMediaQuery("(max-width: 767.98px)");
+
+  // +6 cards
+  const handleLoadMore = () => {
+    setCardsToShow(cardsToShow + 6);
+  };
+
+  const searchFilter = data.filter((card) => {
+    return card.name.toLowerCase().includes(value.toLowerCase());
+  });
+
+  const cardList = searchFilter
+    .slice(0, cardsToShow)
+    .map((card) => <CardItem key={card.id} card={card} />);
 
   return (
     <ThemeProvider theme={theme}>
@@ -44,11 +72,10 @@ function Shop() {
           direction={isScreenSmall ? "column" : "row"}
           spacing={{ xs: 1, sm: 4 }}
           useFlexGap
-          justifyContent={isScreenSmall ? "start" : "center"}
           className={classes.stackStyle}
         >
           <Box className={classes.Container}>
-            {!isScreenSmall && <Filter />}
+            {!isScreenSmall && <Filter setValue={handleSetValue} />}
             {isScreenSmall && (
               <Box
                 sx={{
@@ -69,21 +96,54 @@ function Shop() {
                 </Typography>
               </Box>
             )}
-            {isScreenSmall && isOpenFilter && <Filter />}
+            {isScreenSmall && isOpenFilter && (
+              <Filter setValue={handleSetValue} />
+            )}
           </Box>
 
           <Box>
             <Grid
+              justifyContent={"center"}
               container
               columnSpacing={{ xs: 2, md: 3 }}
-              rowSpacing={{ xs: 3, md: 9 }}
+              rowSpacing={{ xs: 3, md: 6 }}
               columns={{ xs: 4, sm: 8, md: 12 }}
             >
-              {data.map((product) => (
-                <Grid item xs={12} sm={4} md={4} key={product.id}>
-                  <CardItem product={product} />
+              {cardList.map((card, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  md={4}
+                  key={index}
+                  sx={{
+                    "@media (min-width: 900px)": {
+                      maxWidth: "100%",
+                    },
+                  }}
+                >
+                  {card}
                 </Grid>
               ))}
+              {searchFilter.length > cardsToShow && (
+                <Box mt={3}>
+                  <Button
+                    variant="contained"
+                    onClick={handleLoadMore}
+                    sx={{
+                      border: "1px solid rgba(0, 0, 0, 1)",
+                      background: "white",
+                      color: "black",
+                      "&:hover": {
+                        background: "black",
+                        color: "white",
+                      },
+                    }}
+                  >
+                    Load More
+                  </Button>
+                </Box>
+              )}
             </Grid>
           </Box>
         </Stack>
