@@ -54,6 +54,8 @@ const names = [
   "ring_5",
 ];
 
+
+
 // приклад виклику
 
 const urls = getImageUrls(names);
