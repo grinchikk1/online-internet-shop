@@ -1,6 +1,11 @@
 import React, { useContext, useState } from "react";
 import s from "./cartItem.module.css";
 import { ShopContext } from "../../components/context/shop-context";
+import { CardActionArea, Grid } from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
 
 const CartItem = (props) => {
   const {
@@ -44,16 +49,20 @@ const CartItem = (props) => {
   return (
     <>
       {isCardOpen && (
-        <div className={s.item_wrapper}>
-          <img src={image} alt="#" className={s.item_image} />
-          <div className={s.wrapp_description}>
+        <Grid container spacing={4} className={s.item_wrapper}>
+          <Grid item>
+            <img src={image} alt="#" className={s.item_image} />
+          </Grid>
+
+          <Grid item className={s.wrapp_description}>
             <div className={s.item_name}>{name}</div>
             <p className={s.item_description}>
               {productMaterial} / {brand}
             </p>
             <p className={s.item_price}>{currentPrice} $</p>
-          </div>
-          <div className={s.count_wrapper}>
+          </Grid>
+
+          <Grid item className={s.count_wrapper}>
             <button
               className={s.count_button}
               onClick={() => removeFromCart(id)}
@@ -68,12 +77,15 @@ const CartItem = (props) => {
             <button className={s.count_button} onClick={() => addToCart(id)}>
               +
             </button>
-          </div>
-          <button className={s.close_button} onClick={handleCloseCard}>
-            <div>{SVGCLOSEBUTTON}</div>
-          </button>
-        </div>
+          </Grid>
+          <Grid item>
+            <button className={s.close_button} onClick={handleCloseCard}>
+              {SVGCLOSEBUTTON}
+            </button>
+          </Grid>
+        </Grid>
       )}
+
       {isCardOpen && <span className={s.cart_line} />}
     </>
   );
