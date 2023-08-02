@@ -1,20 +1,15 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-export default function MultiActionAreaCard({ product }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(`/product/${product.id}`);
-  };
-
-  const card = {
-    position: "relative",
+export default function MultiActionAreaCard({ card }) {
+  const cards = {
+    height: 300,
+    width: 200,
+    boxShadow: "none",
+    margin: "0 auto",
   };
 
   const img = {
@@ -40,15 +35,14 @@ export default function MultiActionAreaCard({ product }) {
     gap: "3px",
   };
   return (
-    <Card style={card} sx={{ maxWidth: 345 }}>
-      <CardActionArea onClick={handleClick}>
+    // onClick={handleClick}
+    <Card style={cards}>
+      <CardActionArea sx={{ marginRight: "40px" }}>
         <CardMedia
           component="img"
-          height="300"
-          image={product.image[0]}
-          alt="green iguana"
-          sx={{ pb: 3 }}
           style={img}
+          src={card.image[0]}
+          alt={card.name}
         ></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
@@ -59,9 +53,14 @@ export default function MultiActionAreaCard({ product }) {
           gutterBottom
           variant="h5"
           component="div"
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 20,
+            fontWeight: "400",
+            color: "black",
+            marginBottom: "16px",
+          }}
         >
-          {product.name}
+          {card.name}
         </Typography>
         <Typography
           gutterBottom
@@ -73,7 +72,7 @@ export default function MultiActionAreaCard({ product }) {
             color: "rgba(161, 138, 104, 1)",
           }}
         >
-          {product.currentPrice},00
+          ${card.currentPrice},00
         </Typography>
       </CardActionArea>
     </Card>
