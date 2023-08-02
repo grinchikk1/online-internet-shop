@@ -153,7 +153,7 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     maxWidth: "1152px",
-    height: "120px",
+    height: "120px",    
   },
   latest: {
     fontFamily: "DM Sans, sans-serif",
@@ -163,6 +163,9 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "43px",
     color: "#000000",
     userSelect: "none",
+  },
+  link: {
+    textDecoration: "none",
   },
   container4: {
     margin: 0,
@@ -206,7 +209,7 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "normal", 
     display: "flex",
     justifyContent: "end",
-    background: "transparent",
+    background: "transparent",    
       "&:hover": {
         background: "transparent",
         color: "#000000",

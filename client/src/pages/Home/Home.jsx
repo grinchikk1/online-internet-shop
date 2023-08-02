@@ -6,6 +6,8 @@ import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useEffect, useState } from "react";
 import getData from "../../data/index";
+// import CardItem from "../Shop/CardItem/CardItem";
+import { Link } from "react-router-dom";
 
 
 
@@ -58,6 +60,7 @@ function Home() {
                   date={card.date}
                   country={card.country}
                 />
+                // <CardItem key={card.id} card={card} />
               )
             }
             else { 
@@ -79,6 +82,7 @@ function Home() {
                     date={card.date}
                     country={card.country}
                   />
+                  // <CardItem key={card.id} card={card} />
                 )
               }
               else { 
@@ -142,10 +146,12 @@ function Home() {
           <Typography className={ styles.price}>$ 68,00</Typography>
         </Container>      
         <Container className={styles.container3}>
-          { viewAll && <Typography className={styles.latest}>Shop All</Typography>}
-          { !viewAll && <Typography className={styles.latest}>Shop The Latest</Typography>}  
-          { !viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View All</Button>}
-          { viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View The Latest</Button>}
+          {/* { viewAll && <Typography className={styles.latest}>Shop All</Typography>} */}
+          {/* { !viewAll && <Typography className={styles.latest}>Shop The Latest</Typography>}   */}
+          {/* { !viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View All</Button>} */}
+          {/* { viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View The Latest</Button>} */}
+          <Typography className={styles.latest}>Shop The Latest</Typography>
+          <Link className={styles.link} to="/Shop"><Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View All</Button></Link>
         </Container>
         <Container className={styles.container4}>
           { output}
