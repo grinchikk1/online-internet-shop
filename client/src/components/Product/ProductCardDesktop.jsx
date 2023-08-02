@@ -21,20 +21,20 @@ function ProductCardDesktop({ product }) {
   const [value, setValue] = useState(1);
   const [valueTab, setValueTab] = useState("1");
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [addToCartBtn, setAddToCartBtn] = useState(false);
 
   const classes = useStyles();
 
   const handleClick = () => {
-    setOpen(true);
+    setAddToCartBtn(true);
   };
 
-  const handleClose = (event, reason) => {
+  const handleCloseAddToCartBtn = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
 
-    setOpen(false);
+    setAddToCartBtn(false);
   };
 
   const handleChange = (event, newValue) => {
@@ -176,7 +176,7 @@ function ProductCardDesktop({ product }) {
               textTransform: "capitalize",
             }}
           >
-            {`$  ${product.currentPrice}.00`}
+            {`$  ${product.currentPrice},00`}
           </Typography>
           <Box display={"flex"} sx={{ paddingTop: "44px" }}>
             <Rating
@@ -370,8 +370,16 @@ function ProductCardDesktop({ product }) {
           </TabPanel>
         )}
       </Container>
-      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+      <Snackbar
+        open={addToCartBtn}
+        autoHideDuration={3000}
+        onClose={handleCloseAddToCartBtn}
+      >
+        <Alert
+          onClose={handleCloseAddToCartBtn}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
           The item added to your Shopping bag.
         </Alert>
       </Snackbar>

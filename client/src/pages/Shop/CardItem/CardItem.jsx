@@ -3,8 +3,15 @@ import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function MultiActionAreaCard({ card }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${card.id}`);
+  };
+
   const cards = {
     height: 300,
     width: 200,
@@ -16,6 +23,7 @@ export default function MultiActionAreaCard({ card }) {
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
   };
+
   const discount = {
     position: "absolute",
     top: "16px",
@@ -34,10 +42,10 @@ export default function MultiActionAreaCard({ card }) {
     alignItems: "center",
     gap: "3px",
   };
+
   return (
-    // onClick={handleClick}
     <Card style={cards}>
-      <CardActionArea sx={{ marginRight: "40px" }}>
+      <CardActionArea onClick={handleClick} sx={{ marginRight: "40px" }}>
         <CardMedia
           component="img"
           style={img}
