@@ -21,7 +21,12 @@ function Header() {
           <span className="nav-opener__menu-line"></span>
           <span className="nav-opener__menu-line"></span>
         </button>
-        <Link to="/">This is Logo</Link>
+        <Link to="/">
+          <img
+            src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1690390156/online-internet-shop/mystery.jpg"
+            alt="Logo_image"
+          />
+        </Link>
         <div className={`header__nav-holder ${isBurgerMenuOpen ? "open" : ""}`}>
           <nav className={`header__nav ${isBurgerMenuOpen ? "open" : ""}`}>
             <ul className="header__nav-list">

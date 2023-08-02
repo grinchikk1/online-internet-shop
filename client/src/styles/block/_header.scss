@@ -46,10 +46,6 @@
     @include breakpoint("md") {
       padding: 0 0 20px;
       width: 100%;
-
-      &:last-child {
-        padding: 0;
-      }
     }
   }
 
@@ -81,15 +77,19 @@
   }
 }
 .nav-opener {
-  display: block;
-  transform: translateY(0);
-  width: 30px;
-  height: 20px;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  z-index: 3;
+  display: none;
+
+  @include breakpoint("md") {
+    display: block;
+    transform: translateY(0);
+    width: 30px;
+    height: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    z-index: 3;
+  }
 
   &__menu-line {
     content: "";
