@@ -6,12 +6,13 @@ function Header() {
       <nav>
         <Link to="/"> Home</Link>
         <br />
-        <Link to="/about"> About</Link>
+        <Link to="/shop"> Shop</Link>
         <br />
         <Link to="/cart"> Cart</Link>
         <br />
         <Link to="/contact"> Contact</Link>
         <br />
+        <Link to="/about"> About</Link>
         <br />
       </nav>
     </>
