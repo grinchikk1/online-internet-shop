@@ -47,9 +47,18 @@ function Shop() {
   const handleLoadMore = () => {
     setCardsToShow(cardsToShow + 6);
   };
+  // Select useState
+  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
 
   const searchFilter = data.filter((card) => {
-    return card.name.toLowerCase().includes(value.toLowerCase());
+    const cardName = card.name.toLowerCase().includes(value.toLowerCase());
+    const productMaterialMatch =
+      selectedProductMaterial === "" ||
+      card.productMaterial === selectedProductMaterial;
+    const brandMatch = selectedBrand === "" || card.brand === selectedBrand;
+
+    return cardName && productMaterialMatch && brandMatch;
   });
 
   const cardList = searchFilter
@@ -75,7 +84,15 @@ function Shop() {
           className={classes.stackStyle}
         >
           <Box className={classes.Container}>
-            {!isScreenSmall && <Filter setValue={handleSetValue} />}
+            {!isScreenSmall && (
+              <Filter
+                setValue={handleSetValue}
+                setSelectedProductMaterial={setSelectedProductMaterial}
+                setSelectedBrand={setSelectedBrand}
+                selectedProductMaterial={selectedProductMaterial}
+                selectedBrand={selectedBrand}
+              />
+            )}
             {isScreenSmall && (
               <Box
                 sx={{
@@ -97,7 +114,13 @@ function Shop() {
               </Box>
             )}
             {isScreenSmall && isOpenFilter && (
-              <Filter setValue={handleSetValue} />
+              <Filter
+                setValue={handleSetValue}
+                setSelectedProductMaterial={setSelectedProductMaterial}
+                setSelectedBrand={setSelectedBrand}
+                selectedProductMaterial={selectedProductMaterial}
+                selectedBrand={selectedBrand}
+              />
             )}
           </Box>
 

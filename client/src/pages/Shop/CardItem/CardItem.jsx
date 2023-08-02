@@ -2,11 +2,11 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Box } from "@mui/material";
 
 export default function MultiActionAreaCard({ card }) {
   const cards = {
-    height: 300,
+    height: 350,
     width: 200,
     boxShadow: "none",
     margin: "0 auto",
@@ -58,21 +58,56 @@ export default function MultiActionAreaCard({ card }) {
             fontWeight: "400",
             color: "black",
             marginBottom: "16px",
+            marginTop: "20px",
           }}
         >
           {card.name}
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              marginBottom: "10px",
+              fontSize: 20,
+              fontWeight: 500,
+              color: "rgba(161, 138, 104, 1)",
+            }}
+          >
+            ${card.currentPrice},00
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              fontSize: 15,
+              fontWeight: 400,
+              color: "rgba(112, 112, 112, 1)",
+            }}
+          >
+            {card.productMaterial}
+          </Typography>
+        </Box>
         <Typography
           gutterBottom
           variant="h5"
           component="div"
           sx={{
             fontSize: 20,
-            fontWeight: 500,
-            color: "rgba(161, 138, 104, 1)",
+            fontWeight: "400",
+            color: "black",
+            // color: "rgb(191 140 140)",
           }}
         >
-          ${card.currentPrice},00
+          {card.brand}
         </Typography>
       </CardActionArea>
     </Card>
