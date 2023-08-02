@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
@@ -23,11 +23,10 @@ function Filter({
   setSelectedBrand,
   selectedProductMaterial,
   selectedBrand,
+  valueSlider,
+  setValueSlider,
 }) {
   const classes = useStyles();
-
-  // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([40, 180]);
 
   const handleChange = (event) => {
     setValueSlider(event.target.value);
@@ -188,7 +187,7 @@ function Filter({
           {...label}
         />
       </Box>
-      <Box className={classes.BoxSwitch}>
+      {/* <Box className={classes.BoxSwitch}>
         <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>In Stock</Typography>
         <Switch
           size="medium"
@@ -208,7 +207,7 @@ function Filter({
             },
           }}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 }

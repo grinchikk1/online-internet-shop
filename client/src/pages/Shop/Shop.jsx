@@ -51,14 +51,20 @@ function Shop() {
   const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
 
+  // UseState for Slider
+  const [valueSlider, setValueSlider] = useState([0, 180]);
+
   const searchFilter = data.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());
     const productMaterialMatch =
       selectedProductMaterial === "" ||
       card.productMaterial === selectedProductMaterial;
     const brandMatch = selectedBrand === "" || card.brand === selectedBrand;
+    const cardPrice =
+      card.currentPrice >= valueSlider[0] &&
+      card.currentPrice <= valueSlider[1];
 
-    return cardName && productMaterialMatch && brandMatch;
+    return cardName && productMaterialMatch && brandMatch && cardPrice;
   });
 
   const cardList = searchFilter
@@ -91,6 +97,8 @@ function Shop() {
                 setSelectedBrand={setSelectedBrand}
                 selectedProductMaterial={selectedProductMaterial}
                 selectedBrand={selectedBrand}
+                valueSlider={valueSlider}
+                setValueSlider={setValueSlider}
               />
             )}
             {isScreenSmall && (
@@ -120,6 +128,8 @@ function Shop() {
                 setSelectedBrand={setSelectedBrand}
                 selectedProductMaterial={selectedProductMaterial}
                 selectedBrand={selectedBrand}
+                valueSlider={valueSlider}
+                setValueSlider={setValueSlider}
               />
             )}
           </Box>
