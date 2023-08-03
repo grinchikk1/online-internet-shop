@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { PRODUCTS } from "../../product";
+import { PRODUCTS } from "../../components/context/product";
 import { ShopContext } from "../../components/context/shop-context";
-import CartItem from "./CartItem";
+import CartItem from "../../components/CartItem/CartItem";
 
 import {
   Accordion,
@@ -32,9 +32,9 @@ const Cart = () => {
         <Container>
           <h1 className={s.cart_title}>Shopping Cart</h1>
           <Grid container className={s.wrapper_cart}>
-            <Grid item className={s.cart_items}>
+            <Grid item>
               <Grid container>
-                <Grid item className={s.cart_items}>
+                <Grid item spacing={0} className={s.cart_items}>
                   {PRODUCTS.map((product, id) => {
                     if (cartItems[product.id] !== 0) {
                       return <CartItem data={product} key={id} />;
@@ -43,46 +43,54 @@ const Cart = () => {
                   {totalAmount === 0 && (
                     <div className={s.cart_empty}>Your cart is EMPTY</div>
                   )}
+                  {totalAmount !== 0 && (
+                    <Grid
+                      container
+                      sx={{ width: "580px", justifyContent: "flex-end" }}
+                    >
+                      <Button
+                        color="inherit"
+                        style={{
+                          marginTop: "39px",
+                          height: "53px",
+                          width: "168px",
+                          fontWeight: "700",
+                        }}
+                        variant="outlined"
+                      >
+                        UPDATE CART
+                      </Button>
+                      <Grid
+                        container
+                        item
+                        sx={{ justifyContent: "space-between" }}
+                      >
+                        <TextField
+                          id="standard-basic"
+                          label="Coupon Code"
+                          variant="standard"
+                          style={{
+                            width: "336px",
+                            marginTop: "64px",
+                          }}
+                        />
+                        <Button
+                          variant="outlined"
+                          style={{
+                            marginTop: "64px",
+                            height: "53px",
+                            width: "168px",
+                            background: "black",
+                            color: "white",
+                          }}
+                          type="submit"
+                        >
+                          APPLY COUPON
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  )}
                 </Grid>
-                {totalAmount !== 0 && (
-                  <Grid item>
-                    <Button
-                      color="inherit"
-                      style={{
-                        marginTop: "39px",
-                        marginLeft: "410px",
-                        height: "53px",
-                        width: "168px",
-                        fontWeight: "700",
-                      }}
-                      variant="outlined"
-                    >
-                      UPDATE CART
-                    </Button>
-                    <TextField
-                      id="standard-basic"
-                      label="Coupon Code"
-                      variant="standard"
-                      style={{
-                        width: "336px",
-                      }}
-                    />
-                    <Button
-                      variant="outlined"
-                      style={{
-                        marginLeft: "410px",
-
-                        height: "53px",
-                        width: "168px",
-                        background: "black",
-                        color: "white",
-                      }}
-                      type="submit"
-                    >
-                      APPLY COUPON
-                    </Button>
-                  </Grid>
-                )}
               </Grid>
             </Grid>
             <Grid item className={s.cart_totals}>
@@ -91,8 +99,10 @@ const Cart = () => {
                   <h3 className={s.cart_totalsTitle}>Cart totals</h3>
                   <Grid container className={s.cart_subtotalWrapper}>
                     <Grid item className={s.cart_subtitle}>
-                      <Typography sx={{ mb: "23px" }}>SUBTOTAL</Typography>
-                      <Typography>SHIPPING</Typography>
+                      <Typography sx={{ mb: "23px", flexGrow: 1 }}>
+                        SUBTOTAL
+                      </Typography>
+                      <Typography sx={{ flexGrow: 1 }}>SHIPPING</Typography>
                     </Grid>
                     <Grid item className={s.cart_shipping}>
                       <Typography sx={{ mb: "23px" }}>

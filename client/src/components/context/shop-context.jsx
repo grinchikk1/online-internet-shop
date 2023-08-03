@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { PRODUCTS } from "../../product";
+import { PRODUCTS } from "./product";
 
 export const ShopContext = createContext(null);
 const getDefaultCart = () => {

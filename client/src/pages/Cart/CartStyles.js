@@ -27,20 +27,11 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "50%",
   },
   cart_items: {
-    marginRight: "88px",
     gap: "39px",
   },
   cart_totals: {
     padding: "39px 59px 48px",
     width: "580px",
-    // justifyContent: "space-between",
-    // color: "inherit",
-    // fontSize: "16px",
-    // fontStyle: "normal",
-    // fontWeight: "700",
-    // lineHeight: "normal",
-    // margin: "26px 0 29px",
-    // rowGap: "45px",
   },
   cart_totalsTitle: {
     marginBottom: 44,
@@ -50,14 +41,9 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "25px",
   },
   cart_subtotalWrapper: {
-    gap: "128px",
-    // display: "flex",
-    // justifyContent: "space-between",
+    justifyContent: "space-between",
   },
-  cart_subtotal: {
-    // marginTop: "44px",
-    // gap: "23px",
-  },
+  cart_subtotal: {},
   cart_shipping: {
     maxWidth: "250px",
   },
