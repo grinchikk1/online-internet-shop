@@ -42,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   cart_subtotalWrapper: {
     justifyContent: "space-between",
+    gap: "130px",
   },
   cart_subtotal: {},
   cart_shipping: {

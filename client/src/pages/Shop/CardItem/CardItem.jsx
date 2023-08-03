@@ -1,19 +1,30 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-// import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function MultiActionAreaCard() {
-  const card = {
-    position: "relative",
+
+export default function MultiActionAreaCard({ card }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${card.id}`);
+  };
+
+  const cards = {
+    height: 350,
+    width: 200,
+    boxShadow: "none",
+    margin: "0 auto",
   };
 
   const img = {
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
   };
+
   const discount = {
     position: "absolute",
     top: "16px",
@@ -32,16 +43,15 @@ export default function MultiActionAreaCard() {
     alignItems: "center",
     gap: "3px",
   };
+
   return (
-    <Card style={card} sx={{ maxWidth: 345 }}>
-      <CardActionArea>
+    <Card style={cards}>
+      <CardActionArea onClick={handleClick} sx={{ marginRight: "40px" }}>
         <CardMedia
           component="img"
-          height="300"
-          image="https://img.freepik.com/premium-photo/abstract-red-background_8466-4.jpg"
-          alt="green iguana"
-          sx={{ pb: 3 }}
           style={img}
+          src={card.image[0]}
+          alt={card.name}
         ></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
@@ -52,21 +62,61 @@ export default function MultiActionAreaCard() {
           gutterBottom
           variant="h5"
           component="div"
-          sx={{ fontSize: 20 }}
+          sx={{
+            fontSize: 20,
+            fontWeight: "400",
+            color: "black",
+            marginBottom: "16px",
+            marginTop: "20px",
+          }}
         >
-          Product Name
+          {card.name}
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              marginBottom: "10px",
+              fontSize: 20,
+              fontWeight: 500,
+              color: "rgba(161, 138, 104, 1)",
+            }}
+          >
+            ${card.currentPrice},00
+          </Typography>
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="div"
+            sx={{
+              fontSize: 15,
+              fontWeight: 400,
+              color: "rgba(112, 112, 112, 1)",
+            }}
+          >
+            {card.productMaterial}
+          </Typography>
+        </Box>
         <Typography
           gutterBottom
           variant="h5"
           component="div"
           sx={{
             fontSize: 20,
-            fontWeight: 500,
-            color: "rgba(161, 138, 104, 1)",
+            fontWeight: "400",
+            color: "black",
+            // color: "rgb(191 140 140)",
           }}
         >
-          Product Price
+          {card.brand}
         </Typography>
       </CardActionArea>
     </Card>
