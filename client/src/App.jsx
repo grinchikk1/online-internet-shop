@@ -10,20 +10,23 @@ import NotFound from "./pages/NotFound/NotFound";
 import About from "./pages/About/About";
 import Product from "./pages/Product/Product";
 import "./styles/App.scss";
+import ShopContextProvider from "./components/context/shop-context";
 
 function App() {
   return (
     <div className="wrapper">
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <ShopContextProvider>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product/:id" element={<Product />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </ShopContextProvider>
     </div>
   );
 }
