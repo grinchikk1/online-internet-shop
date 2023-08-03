@@ -16,7 +16,7 @@ export const useStyles = makeStyles((theme) => ({
     cardContainer: {
         padding: "0",
         margin: "0",
-        marginBottom: "60px",
+        marginBottom: "80px",
         width: "350px",
         height: "450px",
         "&:hover": {
@@ -38,6 +38,32 @@ export const useStyles = makeStyles((theme) => ({
         width: "350px",
         height: "350px",
     },
+    cardNameContainer: {
+        padding: "0",
+        margin: "0",
+        width: "95%",
+        display: "flex",
+        justifyContent: "space-between",
+        // alignItems: "center",
+    },
+    cardMaterial: {
+        marginTop: "20px",
+        fontFamily: "DM Sans, sans-serif",
+        fontSize: "16px",
+        fontWeight: "400",
+        fontStyle: "normal",
+        lineHeight: "26px",
+        color: "#707070",
+    },
+    cardBrand: {
+        marginTop: "10px",
+        fontFamily: "DM Sans, sans-serif",
+        fontSize: "20px",
+        fontWeight: "500",
+        fontStyle: "normal",
+        lineHeight: "26px",
+        color: "#000000",
+    },
     cardName: {
         marginTop: "20px",
         fontFamily: "DM Sans, sans-serif",
@@ -55,7 +81,7 @@ export const useStyles = makeStyles((theme) => ({
         fontStyle: "normal",
         lineHeight: "26px",
         color: "rgba(161, 138, 104, 1)",
-    },
+    },    
     cardHover: {
         position: "absolute",
         display: "flex",
@@ -89,7 +115,7 @@ export const useStyles = makeStyles((theme) => ({
   
   "@media (max-width: 579.9px)": {
     cardContainer: {
-        marginBottom: "10px",
+        marginBottom: "30px",
         width: "140px",
         height: "208px",
         "&:hover": {
@@ -103,6 +129,31 @@ export const useStyles = makeStyles((theme) => ({
         height: "136px",
         borderRadius: "4px",
     },
+    cardNameContainer: {
+        padding: "0",
+        margin: "0",
+        width: "98%",
+        display: "flex",
+        justifyContent: "space-between",
+    },
+    cardMaterial: {
+        marginTop: "8px",
+        fontFamily: "DM Sans, sans-serif",
+        fontSize: "10px",
+        fontWeight: "400",
+        fontStyle: "normal",
+        lineHeight: "26px",
+        color: "#707070",
+    },
+    cardBrand: {
+        marginTop: "0px",
+        fontFamily: "DM Sans, sans-serif",
+        fontSize: "14px",
+        fontWeight: "500",
+        fontStyle: "normal",
+        lineHeight: "26px",
+        color: "#000000",
+    },    
     cardImg: {
         width: "136px",
         height: "136px",
@@ -117,7 +168,7 @@ export const useStyles = makeStyles((theme) => ({
         color: "#000000",
     },
     cardPrice: {
-        marginTop: "5px",
+        marginTop: "0px",
         fontFamily: "DM Sans, sans-serif",
         fontSize: "12px",
         fontWeight: "400",
@@ -150,7 +201,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "@media (min-width: 580px) and (max-width: 639.9px)":{
         cardContainer: {
-            marginBottom: "40px",
+            marginBottom: "60px",
             width: "150px",
             height: "193px",
             "&:hover": {
@@ -163,6 +214,31 @@ export const useStyles = makeStyles((theme) => ({
             width: "150px",
             height: "150px",
             borderRadius: "5px",
+        },
+        cardNameContainer: {
+            padding: "0",
+            margin: "0",
+            width: "98%",
+            display: "flex",
+            justifyContent: "space-between",
+        },
+        cardMaterial: {
+            marginTop: "8px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "10px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#707070",
+        },
+        cardBrand: {
+            marginTop: "0px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "14px",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#000000",
         },
         cardImg: {
             width: "150px",
@@ -178,7 +254,7 @@ export const useStyles = makeStyles((theme) => ({
             color: "#000000",
         },
         cardPrice: {
-            marginTop: "5px",
+            marginTop: "0px",
             fontFamily: "DM Sans, sans-serif",
             fontSize: "12px",
             fontWeight: "400",
@@ -211,7 +287,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "@media (min-width: 640px) and (max-width: 768.9px)":{
         cardContainer: {
-            marginBottom: "40px",
+            marginBottom: "60px",
             width: "182px",
             height: "218px",
             "&:hover": {
@@ -225,6 +301,31 @@ export const useStyles = makeStyles((theme) => ({
             height: "170px",
             borderRadius: "5px",
         },
+        cardNameContainer: {
+            padding: "0",
+            margin: "0",
+            width: "91%",
+            display: "flex",
+            justifyContent: "space-between",
+        },
+        cardMaterial: {
+            marginTop: "8px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "12px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#707070",
+        },
+        cardBrand: {
+            marginTop: "0px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "14px",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#000000",
+        },
         cardImg: {
             width: "170px",
             height: "170px",
@@ -232,14 +333,14 @@ export const useStyles = makeStyles((theme) => ({
         cardName: {
             marginTop: "10px",
             fontFamily: "DM Sans, sans-serif",
-            fontSize: "16px",
+            fontSize: "15px",
             fontWeight: "400",
             fontStyle: "normal",
             lineHeight: "22px",
             color: "#000000",
         },
         cardPrice: {
-            marginTop: "5px",
+            marginTop: "0px",
             fontFamily: "DM Sans, sans-serif",
             fontSize: "14px",
             fontWeight: "400",
@@ -272,7 +373,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "@media (min-width: 769px) and (max-width: 899.9px)":{
         cardContainer: {
-            marginBottom: "30px",
+            marginBottom: "50px",
             width: "220px",
             height: "257px",
             "&:hover": {
@@ -285,6 +386,31 @@ export const useStyles = makeStyles((theme) => ({
             width: "200px",
             height: "200px",
             borderRadius: "5px",
+        },
+        cardNameContainer: {
+            padding: "0",
+            margin: "0",
+            width: "91%",
+            display: "flex",
+            justifyContent: "space-between",
+        },
+        cardMaterial: {
+            marginTop: "8px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "12px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#707070",
+        },
+        cardBrand: {
+            marginTop: "0px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "14px",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#000000",
         },
         cardImg: {
             width: "200px",
@@ -300,7 +426,7 @@ export const useStyles = makeStyles((theme) => ({
             color: "#000000",
         },
         cardPrice: {
-            marginTop: "5px",
+            marginTop: "0px",
             fontFamily: "DM Sans, sans-serif",
             fontSize: "14px",
             fontWeight: "400",
@@ -333,7 +459,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "@media (min-width: 900px) and (max-width: 1023.9px)":{
         cardContainer: {
-            marginBottom: "35px",
+            marginBottom: "60px",
             width: "245px",
             height: "308px",
             "&:hover": {
@@ -346,6 +472,31 @@ export const useStyles = makeStyles((theme) => ({
             width: "240px",
             height: "240px",
             borderRadius: "5px",
+        },
+        cardNameContainer: {
+        padding: "0",
+        margin: "0",
+        width: "98%",
+        display: "flex",
+        justifyContent: "space-between",
+        },
+        cardMaterial: {
+            marginTop: "14px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "16px",
+            fontWeight: "400",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#707070",
+        },
+        cardBrand: {
+            marginTop: "5px",
+            fontFamily: "DM Sans, sans-serif",
+            fontSize: "18px",
+            fontWeight: "500",
+            fontStyle: "normal",
+            lineHeight: "26px",
+            color: "#000000",
         },
         cardImg: {
             width: "240px",
@@ -361,7 +512,7 @@ export const useStyles = makeStyles((theme) => ({
             color: "#000000",
         },
         cardPrice: {
-            marginTop: "10px",
+            marginTop: "8px",
             fontFamily: "DM Sans, sans-serif",
             fontSize: "16px",
             fontWeight: "400",
@@ -394,7 +545,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   "@media (min-width: 1024px) and (max-width: 1199px)": {
     cardContainer: {
-        marginBottom: "60px",
+        marginBottom: "80px",
         width: "290px",
         height: "360px",
         "&:hover": {

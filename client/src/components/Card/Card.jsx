@@ -29,13 +29,21 @@ function Card({
             <Typography className={styles.cardHoverAdd}>ADD TO CART</Typography>
             <img src={heart} alt="heart" className={styles.cardHoverImg} />
           </Container>
-        </Container>        
-        <Typography className={ styles.cardName}>
+        </Container> 
+        < Container className={ styles.cardNameContainer}>
+          <Typography className={ styles.cardName}>
           { name }
-        </Typography>
+          </Typography>
+          <Typography className={ styles.cardMaterial}>
+            { productMaterial }
+          </Typography>
+        </Container >        
         <Typography className={ styles.cardPrice}>
-          $ { currentPrice }
-        </Typography>        
+          $ { currentPrice },00
+        </Typography>  
+        <Typography className={ styles.cardBrand}>
+          { brand }
+        </Typography>
       </Container>
     </ThemeProvider>
   );
