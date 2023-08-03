@@ -39,9 +39,12 @@ export const useStyles = makeStyles((theme) => ({
     // justifySelf: "center",
   },
   title: {
+    display: "block",
     paddingTop: 50,
     fontWeight: 400,
     paddingBottom: 20,
+    // fontSize: 50,
+    // fontWeight: 800,
   },
  
 }));
