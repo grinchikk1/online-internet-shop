@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Typography, Container, IconButton, Divider } from "@mui/material";
 
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
@@ -15,8 +16,11 @@ function About() {
   const shareUrl = "https://shoppe.com"; // треба замінити на URL свого веб-сайту
 
   return (
+
+
     <ThemeProvider theme={theme}>
     <Container maxWidth="lg" className={classes.pageContainer} >
+
       {/* Перше фото */}
       <Typography variant="h4">About us</Typography>
       <Typography variant="h6" sx={{ marginBottom: "25px" }}>
@@ -75,7 +79,6 @@ function About() {
           each piece of jewelry. Only then do we put it up for sale.
           <br />
           <br />
-       
         Each item has a sample from the State Assay Office of Ukraine and
         international quality certificates. Convenient, fast order form.
         Individual approach to each client. Our website has a lot of
@@ -86,7 +89,6 @@ function About() {
         </Typography>
         
 
-        
       {/* Кнопка для Фейсбуку */}
 
       <Container
