@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Button,
 } from "@mui/material";
+
 import Stack from "@mui/material/Stack";
 import { theme, useStyles } from "./InputStyle";
 import { ThemeProvider } from "@mui/material/styles";
@@ -47,9 +48,24 @@ function Shop() {
   const handleLoadMore = () => {
     setCardsToShow(cardsToShow + 6);
   };
+  // Select useState
+  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
+
+  // UseState for Slider
+  const [valueSlider, setValueSlider] = useState([0, 180]);
 
   const searchFilter = data.filter((card) => {
-    return card.name.toLowerCase().includes(value.toLowerCase());
+    const cardName = card.name.toLowerCase().includes(value.toLowerCase());
+    const productMaterialMatch =
+      selectedProductMaterial === "" ||
+      card.productMaterial === selectedProductMaterial;
+    const brandMatch = selectedBrand === "" || card.brand === selectedBrand;
+    const cardPrice =
+      card.currentPrice >= valueSlider[0] &&
+      card.currentPrice <= valueSlider[1];
+
+    return cardName && productMaterialMatch && brandMatch && cardPrice;
   });
 
   const cardList = searchFilter
@@ -75,14 +91,23 @@ function Shop() {
           className={classes.stackStyle}
         >
           <Box className={classes.Container}>
-            {!isScreenSmall && <Filter setValue={handleSetValue} />}
+            {!isScreenSmall && (
+              <Filter
+                setValue={handleSetValue}
+                setSelectedProductMaterial={setSelectedProductMaterial}
+                setSelectedBrand={setSelectedBrand}
+                selectedProductMaterial={selectedProductMaterial}
+                selectedBrand={selectedBrand}
+                valueSlider={valueSlider}
+                setValueSlider={setValueSlider}
+              />
+            )}
             {isScreenSmall && (
               <Box
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   gap: "10px",
-                  zIndex: "5555",
                   marginBottom: "13px",
                 }}
                 onClick={toggleFilter}
@@ -97,7 +122,15 @@ function Shop() {
               </Box>
             )}
             {isScreenSmall && isOpenFilter && (
-              <Filter setValue={handleSetValue} />
+              <Filter
+                setValue={handleSetValue}
+                setSelectedProductMaterial={setSelectedProductMaterial}
+                setSelectedBrand={setSelectedBrand}
+                selectedProductMaterial={selectedProductMaterial}
+                selectedBrand={selectedBrand}
+                valueSlider={valueSlider}
+                setValueSlider={setValueSlider}
+              />
             )}
           </Box>
 

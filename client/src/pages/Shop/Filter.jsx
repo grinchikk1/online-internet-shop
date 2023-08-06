@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
@@ -17,27 +17,21 @@ import { useStyles, customTheme } from "./InputStyle";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function Filter({ setValue }) {
+function Filter({
+  setValue,
+  setSelectedProductMaterial,
+  setSelectedBrand,
+  selectedProductMaterial,
+  selectedBrand,
+  valueSlider,
+  setValueSlider,
+}) {
   const classes = useStyles();
 
-  // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([40, 180]);
-
-  const handleChange = (newValue) => {
-    setValueSlider(newValue);
+  const handleChange = (event) => {
+    setValueSlider(event.target.value);
   };
 
-  // UseState for Select
-
-  const [selectedValueShop, setSelectedValueShop] = useState("");
-  const [selectedValueSort, setSelectedValueSort] = useState("");
-
-  const handleChangeSelectShop = (event) => {
-    setSelectedValueShop(event.target.value);
-  };
-  const handleChangeSelectSort = (event) => {
-    setSelectedValueSort(event.target.value);
-  };
   return (
     <Box className={classes.Container}>
       <FormControl sx={{ marginBottom: "40px" }}>
@@ -78,17 +72,17 @@ function Filter({ setValue }) {
               backgroundColor: "transparent",
             },
           }}
-          value={selectedValueShop}
-          onChange={handleChangeSelectShop}
+          value={selectedProductMaterial}
+          onChange={(e) => setSelectedProductMaterial(e.target.value)}
         >
-          <MenuItem className={classes.SelectInputItem} value={10}>
-            gold
+          <MenuItem className={classes.SelectInputItem} value="gold">
+            Gold
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={20}>
-            silver
+          <MenuItem className={classes.SelectInputItem} value="silver">
+            Silver
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={30}>
-            platinum
+          <MenuItem className={classes.SelectInputItem} value="platinum">
+            Platinum
           </MenuItem>
         </Select>
       </FormControl>
@@ -105,39 +99,39 @@ function Filter({ setValue }) {
           label="Brand"
           IconComponent={KeyboardArrowDownIcon}
           className={classes.SelectInput}
-          value={selectedValueSort}
-          onChange={handleChangeSelectSort}
           sx={{
             "& .MuiSelect-icon": {
               color: "rgba(0, 0, 0, 1)",
             },
           }}
+          value={selectedBrand}
+          onChange={(e) => setSelectedBrand(e.target.value)}
         >
-          <MenuItem className={classes.SelectInputItem} value={10}>
+          <MenuItem className={classes.SelectInputItem} value={"KJM"}>
             KJM
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={20}>
+          <MenuItem className={classes.SelectInputItem} value={"LuxJewels"}>
             LuxJewels
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={30}>
+          <MenuItem className={classes.SelectInputItem} value={"Jewels"}>
             Jewels
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={40}>
+          <MenuItem className={classes.SelectInputItem} value={"OpalCraft"}>
             OpalCraft
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={50}>
+          <MenuItem className={classes.SelectInputItem} value={"OceanGems"}>
             OceanGems
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={60}>
+          <MenuItem className={classes.SelectInputItem} value={"BlueSky"}>
             BlueSky
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={70}>
+          <MenuItem className={classes.SelectInputItem} value={"AmberCraft"}>
             AmberCraft
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={80}>
+          <MenuItem className={classes.SelectInputItem} value={"Glow"}>
             Glow
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={90}>
+          <MenuItem className={classes.SelectInputItem} value={"BlackStone"}>
             BlackStone
           </MenuItem>
         </Select>
@@ -193,7 +187,7 @@ function Filter({ setValue }) {
           {...label}
         />
       </Box>
-      <Box className={classes.BoxSwitch}>
+      {/* <Box className={classes.BoxSwitch}>
         <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>In Stock</Typography>
         <Switch
           size="medium"
@@ -213,7 +207,7 @@ function Filter({ setValue }) {
             },
           }}
         />
-      </Box>
+      </Box> */}
     </Box>
   );
 }

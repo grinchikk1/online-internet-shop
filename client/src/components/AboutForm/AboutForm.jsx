@@ -1,5 +1,5 @@
 import React from "react";
-import  { useState } from "react";
+import  { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import * as Yup from "yup"; 
@@ -19,9 +19,28 @@ const validationSchema = Yup.object().shape({
   comment: Yup.string().required("Comment is required"),
 });
 
+
+
 function ReplyForm() {
 
-   const [commentsData, setCommentsData] = useState([]);
+  const [commentsData, setCommentsData] = useState([]);
+  
+  
+  
+  useEffect(() => {
+    console.log("commentsData has been updated:", commentsData);
+  }, [commentsData]);
+  
+  const handlePostComment = async (submitForm) => {
+  try {
+    await submitForm(); // Викликаємо функцію submitForm для обробки форми Formik
+  } catch (error) {
+    // Обробляйте помилки тут, якщо є потреба
+    console.error(error);
+  }
+};
+  
+  
   return (
     <Container style={{ maxWidth: "720px", marginTop: "50px", textAlign: "left", justifyContent: "left" }}>
       <Typography variant="h5">Leave a reply</Typography>
@@ -48,7 +67,7 @@ function ReplyForm() {
         }}
        
       >
-        {({ isSubmitting }) => (
+        {({ isSubmitting, submitForm  }) => (
           <Form>
 
           <Field
@@ -110,7 +129,7 @@ function ReplyForm() {
              <ErrorMessage name="comment" component="div" style={{marginTop:"-55px"}} />
 
             <Box display="flex" justifyContent="flex-start" maxWidth="40%" sx={{marginTop:"55px", marginBottom:"80px"}}>
-              <CustomButton type="submit" value="POST COMMENT" disabled={isSubmitting} />
+              <CustomButton type="submit" value="POST COMMENT" onClick={() => handlePostComment(submitForm)} disabled={isSubmitting} />
             </Box>
           </Form>
         )}
@@ -130,5 +149,6 @@ function ReplyForm() {
     </Container>
   );
 }
+
 
 export default ReplyForm;
