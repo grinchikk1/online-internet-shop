@@ -29,14 +29,14 @@ export const container0 = {
   "@media (max-width: 768.9px)": {
     margin: "0",
     padding: "0",
-    paddingLeft: "16px",
-    paddingRight: "16px",
+    paddingLeft: "8px",
+    paddingRight: "8px",
   },
   "@media (min-width: 769px) and (max-width: 1199px)": {
     margin: "0",
     padding: "0",
-    paddingLeft: "16px",
-    paddingRight: "16px",
+    paddingLeft: "14px",
+    paddingRight: "14px",
     maxWidth: "1168px",
   },
   "@media (min-width: 1200px)": {
