@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
 import { ShoppingBasket } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
@@ -21,7 +22,7 @@ function Header() {
           <span className="nav-opener__menu-line"></span>
           <span className="nav-opener__menu-line"></span>
         </button>
-        <Link to="/">
+        <Link to="/" className="header__logo-image">
           <img
             src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1690390156/online-internet-shop/mystery.jpg"
             alt="Logo_image"
@@ -54,6 +55,7 @@ function Header() {
           </nav>
           <div className="header__logo-holder">
             <SearchIcon style={{ color: "black" }} className="header__icon" />
+            <FavoriteIcon className="header__icon" />
             <Link to="/cart" className="header__icon">
               <ShoppingBasket style={{ color: "black" }} />
             </Link>

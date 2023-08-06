@@ -1,13 +1,13 @@
 $grid-breakpoints: (
-        xxs: 360px,
-        xs: 568px,
-        sm: 640px,
-        md: 769px,
-        my: 1024px,
-        lg: 1110px,
-        xl: 1200px,
-        xxl: 1440px,
-        xxxl: 1920px
+  xxs: 360px,
+  xs: 568px,
+  sm: 660px,
+  md: 769px,
+  my: 1024px,
+  lg: 1110px,
+  xl: 1200px,
+  xxl: 1440px,
+  xxxl: 1920px,
 );
 
 @mixin breakpoint($size, $rule: max-width) {
