@@ -34,7 +34,7 @@ const Cart = () => {
           <Grid container className={s.wrapper_cart}>
             <Grid item>
               <Grid container>
-                <Grid item spacing={0} className={s.cart_items}>
+                <Grid item container spacing={0} className={s.cart_items}>
                   {PRODUCTS.map((product, id) => {
                     if (cartItems[product.id] !== 0) {
                       return <CartItem data={product} key={id} />;
