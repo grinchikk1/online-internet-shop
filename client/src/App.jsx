@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import About from "./pages/About/About";
 import Product from "./pages/Product/Product";
 import "./styles/App.scss";
-import ShopContextProvider from "./components/context/shop-context";
 
 import Footer from "./components/Footer/Footer";
 
@@ -18,7 +17,6 @@ function App() {
   return (
     <>
       <div className="wrapper">
-     <ShopContextProvider>
         <Header />
         <div className="main">
           <Routes>
@@ -32,10 +30,8 @@ function App() {
           </Routes>
         </div>
         <Footer />
-     </ShopContextProvider>               
       </div>
     </>
-
   );
 }
 

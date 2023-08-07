@@ -1,16 +1,16 @@
 import React from "react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { IconButton, Divider } from "@mui/material";
+import FavouriteButton from "../FavouriteButton/FavouriteButton";
 
-const SocialMediaIcons = () => {
+const SocialMediaIcons = ({ item }) => {
   return (
     <>
       <IconButton>
-        <FavoriteBorderIcon />
+        <FavouriteButton item={item} />
       </IconButton>
       <Divider
         orientation="vertical"

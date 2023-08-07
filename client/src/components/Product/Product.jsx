@@ -69,7 +69,7 @@ export default function ProductCard({ product }) {
   };
 
   const handleDecrement = () => {
-    if (value > 0) {
+    if (value > 1) {
       setValue((prevValue) => prevValue - 1);
     }
   };
@@ -681,7 +681,7 @@ export default function ProductCard({ product }) {
                 color: "#707070",
               }}
             >
-              <SocialMediaIcons />
+              <SocialMediaIcons item={product} />
             </Box>
             <Typography sx={{ paddingTop: "36px" }}>
               itemNo:

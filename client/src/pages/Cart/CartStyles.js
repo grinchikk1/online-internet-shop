@@ -15,44 +15,102 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "500",
     lineHeight: "43px",
     margin: "96px 0px 64px",
+    "@media (max-width : 768px) ": {
+      textAlign: "start",
+      margin: "24px 0px 18px",
+      fontSize: "16px",
+    },
   },
   wrapper_cart: {
     justifyContent: "space-between",
+    width: "100%",
   },
   cart_empty: {
+    display: "flex",
     fontSize: "24px",
     textTransform: "uppercase",
-    padding: "10px 30px",
-    marginTop: "50%",
-    marginBottom: "50%",
+    width: "100%",
+    justifyContent: "center",
+    "@media (max-width : 768px) ": {
+      marginBottom: "40px",
+      fontSize: "16px",
+    },
   },
   cart_items: {
-    gap: "39px",
+    display: "flex",
+    flexDirection: "column",
   },
   cart_totals: {
     padding: "39px 59px 48px",
-    width: "580px",
+    width: "100%",
+
+    "@media (max-width : 768px) ": {
+      padding: "15px 16px",
+      lineHeight: "20px",
+      backgroundColor: "#EFEFEF",
+      borderRadius: "4px",
+    },
   },
   cart_totalsTitle: {
-    marginBottom: 44,
-    fontSize: 26,
+    textAlign: "center",
+    marginBottom: "44px",
+    fontSize: "26px",
     fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: "400",
     lineHeight: "25px",
+    "@media (max-width : 768px) ": {
+      textAlign: "start",
+      marginBottom: "23px",
+      fontSize: "16px",
+      lineHeight: "27px",
+    },
   },
   cart_subtotalWrapper: {
     justifyContent: "space-between",
-    gap: "130px",
   },
   cart_subtotal: {},
   cart_shipping: {
     maxWidth: "250px",
+
+    "@media (max-width : 768px) ": {
+      maxWidth: "150px",
+    },
   },
-  cart_subtitle: {
-    marginRight: "128px",
+  cart_subtitle: {},
+  updateCartBtn: {
+    marginTop: "39px",
+    height: "53px",
+    width: "168px",
+    fontWeight: "700",
+    "@media (max-width : 768px) ": {
+      width: "100%",
+    },
   },
-  update_button: {},
-  checkout_button: {},
+  updateTotalsBtn: {
+    marginTop: "24px",
+    padding: 0,
+    fontWeight: "700px",
+    width: "100%",
+    height: "53px",
+  },
+  applyCouponBtn: {
+    marginTop: "64px",
+    height: "53px",
+    width: "168px",
+    background: "black",
+    color: "white",
+    "@media (max-width : 768px) ": {
+      width: "100%",
+      marginBottom: "30px",
+    },
+  },
+  checkoutBtn: {
+    width: "100%",
+    height: "53px",
+    "@media (max-width : 768px) ": {
+      display: "none",
+    },
+  },
   shipping_accordion: {
     color: "#707070",
     fontSize: "12px",
