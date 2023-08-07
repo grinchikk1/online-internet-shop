@@ -93,6 +93,9 @@
       padding: 0;
       transform: translateY(1px);
     }
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 .nav-opener {

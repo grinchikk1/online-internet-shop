@@ -2,6 +2,9 @@ import React from "react";
 import { Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useStyles, theme } from "./CardStyle";
+
+import FavouriteButton from "../FavouriteButton/FavouriteButton";
+
 import {
   cardContainer,
   cardImgContainer,
@@ -13,7 +16,7 @@ import {
   cardMaterial,
   cardBrand
 } from "./CardStyle";
-import heart from "./img/heart.svg";
+
 
 
 function Card({
@@ -28,10 +31,10 @@ function Card({
   brand,
   itemNo,
   date,
-  country }) {
-  
+  country,
+}) {
   const styles = useStyles();
-
+  const item = { id, image, name, brand };
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -44,6 +47,7 @@ function Card({
           sx={cardImgContainer }
         >
           <img src={image} alt="product" className={styles.cardImg} />
+
           <Container 
           // className={styles.cardHover}
           className="cardHover"
@@ -55,7 +59,7 @@ function Card({
             >
               ADD TO CART
             </Typography>
-            <img src={heart} alt="heart" className={styles.cardHoverImg} />
+          <FavouriteButton item={item} />
           </Container>
         </Container> 
         <Typography
@@ -87,6 +91,7 @@ function Card({
         >
           { brand }
         </Typography>
+        <Typography className={styles.cardBrand}>{brand}</Typography>
       </Container>
     </ThemeProvider>
   );

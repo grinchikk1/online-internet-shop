@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { PRODUCTS } from "../../components/context/product";
-import { ShopContext } from "../../components/context/shop-context";
+import React from "react";
+
 import CartItem from "../../components/CartItem/CartItem";
+import { useSelector } from "react-redux";
 
 import {
   Accordion,
@@ -21,41 +20,36 @@ import Button from "@mui/material/Button";
 import { useStyles, theme } from "./CartStyles";
 
 const Cart = () => {
-  const { cartItems, getTotalCartAmount } = useContext(ShopContext);
-  const totalAmount = getTotalCartAmount();
-  const navigate = useNavigate();
+  const cart = useSelector((state) => state.cart.cart);
   const s = useStyles();
 
   return (
     <>
       <ThemeProvider theme={theme}>
-        <Container>
+        <Container maxWidth="lg">
           <h1 className={s.cart_title}>Shopping Cart</h1>
           <Grid container className={s.wrapper_cart}>
-            <Grid item>
+            <Grid item xs={12} sm={12} md={6}>
               <Grid container>
-                <Grid item container spacing={0} className={s.cart_items}>
-                  {PRODUCTS.map((product, id) => {
-                    if (cartItems[product.id] !== 0) {
-                      return <CartItem data={product} key={id} />;
-                    }
+                <Grid
+                  item
+                  spacing={0}
+                  xs={12}
+                  sm={12}
+                  md={12}
+                  className={s.cart_items}
+                >
+                  {cart.map((product) => {
+                    return <CartItem data={product} key={product.id} />;
                   })}
-                  {totalAmount === 0 && (
+                  {cart.length === 0 && (
                     <div className={s.cart_empty}>Your cart is EMPTY</div>
                   )}
-                  {totalAmount !== 0 && (
-                    <Grid
-                      container
-                      sx={{ width: "580px", justifyContent: "flex-end" }}
-                    >
+                  {cart.length !== 0 && (
+                    <Grid container sx={{ justifyContent: "flex-end" }}>
                       <Button
+                        className={s.updateCartBtn}
                         color="inherit"
-                        style={{
-                          marginTop: "39px",
-                          height: "53px",
-                          width: "168px",
-                          fontWeight: "700",
-                        }}
                         variant="outlined"
                       >
                         UPDATE CART
@@ -63,26 +57,24 @@ const Cart = () => {
                       <Grid
                         container
                         item
-                        sx={{ justifyContent: "space-between" }}
+                        sx={{
+                          justifyContent: "space-between",
+                          "@media (max-width : 768px) ": {
+                            flexDirection: "column",
+                          },
+                        }}
                       >
                         <TextField
                           id="standard-basic"
                           label="Coupon Code"
                           variant="standard"
                           style={{
-                            width: "336px",
                             marginTop: "64px",
                           }}
                         />
                         <Button
+                          className={s.applyCouponBtn}
                           variant="outlined"
-                          style={{
-                            marginTop: "64px",
-                            height: "53px",
-                            width: "168px",
-                            background: "black",
-                            color: "white",
-                          }}
                           type="submit"
                         >
                           APPLY COUPON
@@ -93,26 +85,39 @@ const Cart = () => {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item className={s.cart_totals}>
-              <Grid container>
+            <Grid item xs={12} sm={12} md={6} className={s.cart_totals}>
+              <Grid container sx={{ display: "block", justifyContent: "end" }}>
                 <Grid item>
                   <h3 className={s.cart_totalsTitle}>Cart totals</h3>
-                  <Grid container className={s.cart_subtotalWrapper}>
+                  <Grid
+                    container
+                    xs={12}
+                    sm={12}
+                    md={12}
+                    className={s.cart_subtotalWrapper}
+                  >
                     <Grid item className={s.cart_subtitle}>
-                      <Typography sx={{ mb: "23px", flexGrow: 1 }}>
-                        SUBTOTAL
-                      </Typography>
-                      <Typography sx={{ flexGrow: 1 }}>SHIPPING</Typography>
+                      <Typography sx={{ mb: "23px" }}>SUBTOTAL</Typography>
+                      <Typography>SHIPPING</Typography>
                     </Grid>
-                    <Grid item className={s.cart_shipping}>
-                      <Typography sx={{ mb: "23px" }}>
-                        $ {totalAmount}
-                      </Typography>
+                    <Grid
+                      item
+                      sx={{ display: "content" }}
+                      className={s.cart_shipping}
+                    >
+                      <Typography sx={{ mb: "23px" }}>$ 999</Typography>
                       <Typography sx={{ mb: "39px" }}>
                         Shipping costs will be calculated once you have provided
                         address.
                       </Typography>
-                      <Accordion variant="standard">
+                      <Accordion
+                        variant="standard"
+                        sx={{
+                          "@media (max-width : 768px) ": {
+                            backgroundColor: "#EFEFEF",
+                          },
+                        }}
+                      >
                         <AccordionSummary
                           sx={{
                             padding: "0px",
@@ -123,7 +128,6 @@ const Cart = () => {
                         </AccordionSummary>
                         <Stack spacing={1}>
                           <TextField
-                            // sx={{ color: "#707070", fontSize: "12px" }}
                             id="standard-basic"
                             label="SELECT A COUNTRY"
                             variant="standard"
@@ -143,12 +147,11 @@ const Cart = () => {
                       <Button
                         color="inherit"
                         variant="outlined"
+                        className={s.updateTotalsBtn}
                         sx={{
-                          marginTop: "24px",
-                          padding: 0,
-                          fontWeight: 700,
-                          width: "100%",
-                          height: "53px",
+                          "@media (max-width : 768px) ": {
+                            background: "#FFF",
+                          },
                         }}
                       >
                         UPDATE TOTALS
@@ -158,23 +161,26 @@ const Cart = () => {
                 </Grid>
               </Grid>
 
-              <Grid item>
+              <Grid item xs={12} sm={12} md={12}>
                 <div className={s.cart_totalLine}></div>
               </Grid>
               <Grid container className={s.cart_totalAmount}>
                 <div>TOTAL</div>
-                <div>$ {totalAmount}</div>
+                <div>$ 999</div>
               </Grid>
-              <Grid item>
+              <Grid
+                item
+                sx={{
+                  "@media (max-width : 768px) ": {
+                    display: "none",
+                  },
+                }}
+              >
                 <Button
                   variant="outlined"
-                  style={{
-                    width: "100%",
-                    height: "53px",
-                    background: "black",
-                    color: "white",
-                  }}
                   type="submit"
+                  className={s.checkoutBtn}
+                  sx={{ background: "black", color: "white" }}
                 >
                   PROCEED TO CHECKOUT
                 </Button>
