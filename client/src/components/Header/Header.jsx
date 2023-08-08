@@ -3,13 +3,27 @@ import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
 import { ShoppingBasket } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useSelector } from "react-redux";
+
+import { Drawer } from "@mui/material";
+import FavouriteList from "../FavouriteList/FavouriteList";
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isFavoritesMenuOpen, setIsFavoritesMenuOpen] = useState(false);
+  // const cartItems = useSelector((state) => state.cart.cartItems);
+  const favoritesList = useSelector((state) => state.favorites.favoritesList);
 
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
   };
+  function handleFavoritesMenuOpen(event) {
+    setIsFavoritesMenuOpen(true);
+  }
+  function handleFavoritesMenuClose() {
+    setIsFavoritesMenuOpen(false);
+  }
   return (
     <header className="header">
       <div className="container flex-container">
@@ -21,7 +35,7 @@ function Header() {
           <span className="nav-opener__menu-line"></span>
           <span className="nav-opener__menu-line"></span>
         </button>
-        <Link to="/">
+        <Link to="/" className="header__logo-image">
           <img
             src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1690390156/online-internet-shop/mystery.jpg"
             alt="Logo_image"
@@ -54,6 +68,23 @@ function Header() {
           </nav>
           <div className="header__logo-holder">
             <SearchIcon style={{ color: "black" }} className="header__icon" />
+            <FavoriteIcon
+              className="header__icon"
+              onClick={handleFavoritesMenuOpen}
+            />
+            {favoritesList.length > 0 && (
+              <span style={{ transform: "translateX(-15px)" }}>
+                {/* Display the quantity of favorited items */}
+                {favoritesList.length}
+              </span>
+            )}
+            <Drawer
+              anchor="right"
+              open={isFavoritesMenuOpen}
+              onClose={handleFavoritesMenuClose}
+            >
+              <FavouriteList />
+            </Drawer>
             <Link to="/cart" className="header__icon">
               <ShoppingBasket style={{ color: "black" }} />
             </Link>

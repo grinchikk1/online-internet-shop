@@ -1,5 +1,17 @@
 import { createTheme } from "@mui/material/styles";
 
+export const Colors = {
+  accent: "#A18A68",
+  white: "#FFFFFF",
+  black: "#000000",
+
+  dark_gray: "#707070",
+  gray: "#D8D8D8",
+  light_gray: "#EFEFEF",
+
+  errors: "#D82700",
+};
+
 export const theme = createTheme({
   typography: {
     fontFamily: "DM Sans, sans-serif", // Задаємо шрифт для типографії
@@ -10,6 +22,15 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#f50057", // Задаємо допоміжний колір (вторинний колір)
+    },
+    allCollors: {
+      accent: Colors.accent,
+      white: Colors.white,
+      black: Colors.black,
+      dark_gray: Colors.dark_gray,
+      gray: Colors.gray,
+      light_gray: Colors.light_gray,
+      errors: Colors.errors,
     },
     // Інші властивості палітри, такі як success, error, warning тощо.
   },

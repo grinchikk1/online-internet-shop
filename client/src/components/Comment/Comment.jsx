@@ -2,7 +2,10 @@ import React from "react";
 import { ListItem, ListItemAvatar, ListItemText, Typography, Avatar } from "@mui/material";
 import ReplyIcon from "@mui/icons-material/Reply";
 
-function Comment ( {name, date, comment} ) {
+
+
+
+const Comment = ({ name, date, comment }) => {
   return (
     <>
       <ListItem alignItems="flex-start" sx={{ padding: 0, marginBottom: "50px", width: "auto" }}>
@@ -19,21 +22,21 @@ function Comment ( {name, date, comment} ) {
           }
           secondary={
             <React.Fragment>
-              {/* sx={{ display: "inline", position: "absolute", left: "250px", top: "10px" }} */}
-              <Typography  variant="body2" color="text.primary" sx={{marginTop: "6px"}} >
+              <Typography sx={{ display: "inline", position: "absolute", left: "300px", top: "10px" }} component="span" variant="body2" color="text.primary">
                 {date}
               </Typography>
-              <Typography   variant="body1" color="text.primary" sx={{ fontSize: "16px", fontWeight: 400, lineHeight: "27px", marginTop: "5px" , maxWidth: "576px", wordWrap: "break-word"}}>
+              <Typography component="span" variant="body1" color="text.primary" sx={{ fontSize: "16px", fontWeight: 400, lineHeight: "27px", marginTop: "40px" }}>
                 {comment}
               </Typography>
             </React.Fragment>
           }
         />
-        <ReplyIcon fontSize="large" sx={{ color: "#707070", margin: "0"}} />
-        {/* <Typography sx={{ marginTop: "6px", fontSize: "16px", fontWeight: 400 }}>Reply</Typography> */}
+        <ReplyIcon fontSize="large" sx={{ color: "#707070", marginRight: "10px" }} />
+        <Typography sx={{ marginTop: "6px", fontSize: "16px", fontWeight: 400 }}>Reply</Typography>
       </ListItem>
     </>
   );
 };
+
 
 export default Comment;

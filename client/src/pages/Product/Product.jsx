@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import fetchData from "../../data/index";
-import ProductCard from "../../components/Product/index";
+import { getProducts } from "../../data/fetchProducts";
+import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
@@ -13,8 +13,18 @@ function Product() {
   const { id } = useParams();
 
   useEffect(() => {
+    const fetchDataAsync = async () => {
+      const data = await getProducts();
+      const productById = data.find((product) => product._id === id);
+      setProduct(productById || null);
+    };
+
+    fetchDataAsync();
+  }, [id]);
+
+  useEffect(() => {
     if (products.length === 0) {
-      fetchData().then((data) => {
+      getProducts().then((data) => {
         dispatch(setProducts(data));
         const product = data.find((product) => product.id === parseInt(id));
         setProduct(product);

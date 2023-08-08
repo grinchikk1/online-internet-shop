@@ -1,11 +1,12 @@
 import React from "react";
-import { Typography, Container, Box, IconButton, Divider } from "@mui/material";
+
+import { Typography, Container, IconButton, Divider } from "@mui/material";
 
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";
 
-import { useStyles } from "./AboutStyles";
+import { useStyles, theme } from "./AboutStyles";
 
-// import { ThemeProvider } from "@mui/material/styles";
+import { ThemeProvider } from "@mui/material/styles";
 
 import ReplyForm from "../../components/AboutForm/AboutForm";
 
@@ -15,8 +16,11 @@ function About() {
   const shareUrl = "https://shoppe.com"; // треба замінити на URL свого веб-сайту
 
   return (
-    // <ThemeProvider theme={theme}>
-    <Container maxWidth="lg" className={classes.pageContainer}>
+
+
+    <ThemeProvider theme={theme}>
+    <Container maxWidth="lg" className={classes.pageContainer} >
+
       {/* Перше фото */}
       <Typography variant="h4">About us</Typography>
       <Typography variant="h6" sx={{ marginBottom: "25px" }}>
@@ -27,12 +31,13 @@ function About() {
         alt="Перше фото"
         style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
       />
-      <Typography variant="body1" className={classes.article1}>
+      <Typography variant="body1" className={classes.article1} theme={theme}>
         To create a unique image, you use all means to create a unique look, so
         sometimes it is simply necessary to buy jewelry. It is gold and silver
         jewelry that helps you show your individuality, impeccable taste, boost
         your self-confidence, and reveal your femininity.
-        <Box mt={2} />
+          <br />
+          <br />
         Jewelry made of silver and gold goes well with almost any color and skin
         tone. They can be bought and worn by people of any age and gender. Even
         large, massive pieces made of these noble metals have a graceful,
@@ -40,7 +45,8 @@ function About() {
         it is simply necessary to buy jewelry. It is gold and silver jewelry
         that helps to show your individuality, impeccable taste, boosts
         self-confidence, and reveals femininity.
-        <Box mt={2} />
+          <br />
+          <br />
         Jewelry perfectly emphasizes your personality. They can be bought and
         worn by people of any age and gender. Even large, massive pieces made of
         this noble metal have a graceful, elegant look. Our online store closely
@@ -56,6 +62,7 @@ function About() {
           display: "block",
           margin: "0 auto",
           width: "58%",
+          minWidth: "272px",
           borderRadius: "8px",
           objectFit: "cover",
         }}
@@ -63,14 +70,15 @@ function About() {
 
       {/* Текст після другого фото */}
 
-      <Typography variant="body1" className={classes.article2}>
-        <Typography variant="h5" className={classes.title}>
+      <Typography variant="body1" className={classes.article2} theme={theme}>
+        <Typography component="span" className={classes.title} sx={{fontSize: "26px", fontWeight: 400}}>
           TOP TRENDS
         </Typography>
         Individual approach to each client We offer only proven and high-quality
         products. Interesting and stylish models for you. We carefully examine
-        each piece of jewelry. Only then do we put it up for sale.
-        <Box mt={2} />
+          each piece of jewelry. Only then do we put it up for sale.
+          <br />
+          <br />
         Each item has a sample from the State Assay Office of Ukraine and
         international quality certificates. Convenient, fast order form.
         Individual approach to each client. Our website has a lot of
@@ -78,7 +86,9 @@ function About() {
         find and buy in city stores. You will be unique and inimitable. Our
         online jewelry store offers to buy only high-quality, interesting models
         of products.
-      </Typography>
+        </Typography>
+        
+
       {/* Кнопка для Фейсбуку */}
 
       <Container
@@ -127,7 +137,7 @@ function About() {
       <ReplyForm />
     </Container>
 
-    // </ThemeProvider>
+     </ThemeProvider>
   );
 }
 export default About;

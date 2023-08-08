@@ -9,6 +9,10 @@
   max-width: 1263px;
   margin: 0 auto;
   padding: 0 15px;
+
+  @include breakpoint("xxs") {
+    padding: 0 5px;
+  }
 }
 
 .flex-container {
@@ -16,6 +20,17 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+
+.grid-container {
+  display: grid;
+  // grid-template-columns: repeat(2, 1fr);
+
+  @include breakpoint("sm") {
+    grid-template-columns: none;
+    grid-template-columns: 1fr 1fr; /* Дві колонки рівної ширини */
+    grid-template-columns: "subscribe-holder nav-holder";
+  }
 }
 
 li {

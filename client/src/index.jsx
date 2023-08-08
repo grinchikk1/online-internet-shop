@@ -9,11 +9,11 @@ import { theme as globalTheme } from "./styles/GlobalTheme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={globalTheme}>
-    <Provider store={store}>
+  <Provider store={store}>
+    <ThemeProvider theme={globalTheme}>
       <Router>
         <App />
       </Router>
-    </Provider>
-  </ThemeProvider>
+    </ThemeProvider>
+  </Provider>
 );

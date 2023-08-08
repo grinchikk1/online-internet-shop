@@ -6,6 +6,7 @@ import cartReducer from "../features/cart/cartSlice";
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
   shop: shopReducer,
+  // shop: shopReducer,
   cart: cartReducer,
 });
 

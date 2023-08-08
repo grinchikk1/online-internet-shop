@@ -13,9 +13,13 @@ import Filter from "./Filter";
 import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
+<<<<<<< HEAD
 import getData from "../../data/index";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
+=======
+import { getProducts } from "../../data/fetchProducts";
+>>>>>>> 136514284bd543fef89cc5aa8cc93b457abbbf0a
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
@@ -28,8 +32,13 @@ function Shop() {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     getData().then((res) => {
       dispatch(setProducts(res));
+=======
+    getProducts().then((res) => {
+      setData(res);
+>>>>>>> 136514284bd543fef89cc5aa8cc93b457abbbf0a
     });
   }, []);
 
@@ -71,7 +80,7 @@ function Shop() {
 
   const cardList = searchFilter
     .slice(0, cardsToShow)
-    .map((card) => <CardItem key={card.id} card={card} />);
+    .map((card) => <CardItem key={card._id} card={card} />);
 
   return (
     <ThemeProvider theme={theme}>
