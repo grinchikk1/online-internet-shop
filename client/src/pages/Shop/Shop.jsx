@@ -6,7 +6,6 @@ import {
   useMediaQuery,
   Button,
 } from "@mui/material";
-
 import Stack from "@mui/material/Stack";
 import { theme, useStyles } from "./InputStyle";
 import { ThemeProvider } from "@mui/material/styles";
@@ -15,20 +14,22 @@ import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
 import getData from "../../data/index";
+import { setProducts } from "../../features/shop/shopSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
   const [value, setValue] = useState("");
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.shop.products);
 
   const handleSetValue = (value) => {
     setValue(value);
   };
 
-  const [data, setData] = useState([]);
-
   useEffect(() => {
     getData().then((res) => {
-      setData(res);
+      dispatch(setProducts(res));
     });
   }, []);
 
@@ -55,7 +56,7 @@ function Shop() {
   // UseState for Slider
   const [valueSlider, setValueSlider] = useState([0, 180]);
 
-  const searchFilter = data.filter((card) => {
+  const searchFilter = products.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());
     const productMaterialMatch =
       selectedProductMaterial === "" ||

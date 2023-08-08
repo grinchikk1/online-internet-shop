@@ -17,7 +17,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useStyles } from "./ProductCardStyles";
 
-function ProductCardDesktop({ product }) {
+function ProductCardDesktop({ product, onAddToCardClicked }) {
   const [value, setValue] = useState(1);
   const [valueTab, setValueTab] = useState("1");
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -27,6 +27,7 @@ function ProductCardDesktop({ product }) {
 
   const handleClick = () => {
     setAddToCartBtn(true);
+    onAddToCardClicked();
   };
 
   const handleCloseAddToCartBtn = (event, reason) => {

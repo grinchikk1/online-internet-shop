@@ -16,8 +16,8 @@ function Card({
   brand,
   itemNo,
   date,
-  country }) {
-  
+  country,
+}) {
   const styles = useStyles();
 
   return (
@@ -29,21 +29,17 @@ function Card({
             <Typography className={styles.cardHoverAdd}>ADD TO CART</Typography>
             <img src={heart} alt="heart" className={styles.cardHoverImg} />
           </Container>
-        </Container> 
-        < Container className={ styles.cardNameContainer}>
-          <Typography className={ styles.cardName}>
-          { name }
+        </Container>
+        <Container className={styles.cardNameContainer}>
+          <Typography className={styles.cardName}>{name}</Typography>
+          <Typography className={styles.cardMaterial}>
+            {productMaterial}
           </Typography>
-          <Typography className={ styles.cardMaterial}>
-            { productMaterial }
-          </Typography>
-        </Container >        
-        <Typography className={ styles.cardPrice}>
-          $ { currentPrice },00
-        </Typography>  
-        <Typography className={ styles.cardBrand}>
-          { brand }
+        </Container>
+        <Typography className={styles.cardPrice}>
+          $ {currentPrice},00
         </Typography>
+        <Typography className={styles.cardBrand}>{brand}</Typography>
       </Container>
     </ThemeProvider>
   );

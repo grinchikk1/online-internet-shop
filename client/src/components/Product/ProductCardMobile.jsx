@@ -16,7 +16,7 @@ import SocialMediaIcons from "./SocialMediaIcons";
 import { useStyles } from "./ProductCardStyles";
 import { useNavigate } from "react-router-dom";
 
-function ProductCardDesktop({ product }) {
+function ProductCardDesktop({ product, onAddToCardClicked }) {
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [addToCartBtn, setAddToCartBtn] = useState(false);
   const [shareBtn, setShareBtn] = useState(false);
@@ -42,6 +42,7 @@ function ProductCardDesktop({ product }) {
 
   const handleClickAddToCartBtn = () => {
     setAddToCartBtn(true);
+    onAddToCardClicked();
   };
 
   const handleClickDescriptionBtn = () => {

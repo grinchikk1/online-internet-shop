@@ -1,6 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 
-import { ShopContext } from "../context/shop-context";
 import { Grid } from "@mui/material";
 import { useStyles, theme } from "./CartItemStyles";
 import Typography from "@mui/material/Typography";
@@ -39,9 +38,6 @@ const CartItem = (props) => {
   );
   const s = useStyles();
 
-  const { cartItems, addToCart, removeFromCart, updateCartCount } =
-    useContext(ShopContext);
-
   const [isCardOpen, setIsCardOpen] = useState(true);
 
   const handleCloseCard = () => {
@@ -64,20 +60,9 @@ const CartItem = (props) => {
               <Typography className={s.item_price}>{currentPrice} $</Typography>
             </Grid>
             <Grid item className={s.count_wrapper}>
-              <button
-                className={s.count_button}
-                onClick={() => removeFromCart(id)}
-              >
-                -
-              </button>
-              <input
-                className={s.count_input}
-                value={cartItems[id]}
-                onChange={(e) => updateCartCount(Number(e.target.value), id)}
-              />
-              <button className={s.count_button} onClick={() => addToCart(id)}>
-                +
-              </button>
+              <button className={s.count_button}>-</button>
+              <input className={s.count_input} />
+              <button className={s.count_button}>+</button>
             </Grid>
             <Grid item>
               <button className={s.close_button} onClick={handleCloseCard}>
