@@ -14,7 +14,7 @@ import Filter from "./Filter";
 import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
-import getData from "../../data/index";
+import { getProducts } from "../../data/fetchProducts";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
@@ -27,7 +27,7 @@ function Shop() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getData().then((res) => {
+    getProducts().then((res) => {
       setData(res);
     });
   }, []);
@@ -70,7 +70,7 @@ function Shop() {
 
   const cardList = searchFilter
     .slice(0, cardsToShow)
-    .map((card) => <CardItem key={card.id} card={card} />);
+    .map((card) => <CardItem key={card._id} card={card} />);
 
   return (
     <ThemeProvider theme={theme}>

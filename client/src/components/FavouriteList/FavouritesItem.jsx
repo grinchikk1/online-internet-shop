@@ -8,15 +8,15 @@ import {
 } from "../../features/favorites/favoriteSlice";
 
 function FavouriteItem({ item }) {
-  const { image, name, brand } = item;
+  const { imageUrls, name, brand } = item;
 
   const dispatch = useDispatch();
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
-  const isFavorited = favoritesList.some((product) => product.id === item.id);
+  const isFavorited = favoritesList.some((product) => product._id === item._id);
 
   const handleToggleFavorite = () => {
     if (isFavorited) {
-      dispatch(removeFavorites(item.id));
+      dispatch(removeFavorites(item._id));
     } else {
       dispatch(addFavorites(item));
     }
@@ -24,7 +24,7 @@ function FavouriteItem({ item }) {
 
   return (
     <Card sx={{ maxWidth: 300, marginBottom: "20px" }}>
-      <CardMedia component="img" height="140" image={image} alt={name} />
+      <CardMedia component="img" height="140" image={imageUrls[0]} alt={name} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}
@@ -34,7 +34,7 @@ function FavouriteItem({ item }) {
             Brand: {brand}
           </Typography>
           <HeartBrokenIcon
-            sx={{ cursor: "pointer", ":hover": { color: "red" } }}
+            sx={{ cursor: "pointer", ":hover": { color: "#D82700" } }}
             onClick={handleToggleFavorite}
           />
         </div>

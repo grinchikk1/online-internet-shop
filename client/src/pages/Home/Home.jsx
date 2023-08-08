@@ -1,11 +1,11 @@
 import React from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { Container, Box, Typography, Button} from "@mui/material";
+import { Container, Box, Typography, Button } from "@mui/material";
 import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useStyles, theme } from "./HomeStyles";
 import { useEffect, useState } from "react";
-import getData from "../../data/index";
+import { getProducts } from "../../data/fetchProducts";
 // import CardItem from "../Shop/CardItem/CardItem";
 import { Link } from "react-router-dom";
 //=========================
@@ -26,7 +26,7 @@ import {
   carouselItem2,
   carouselItem3,
   carouselItem4,
-  carouselItem5
+  carouselItem5,
 } from "./HomeStyles";
 
 function Home() {
@@ -35,9 +35,9 @@ function Home() {
   const styles = useStyles();
   const output = out();
 
-  useEffect(() => { 
-    async function fetchJson() {      
-      let request = await getData(); 
+  useEffect(() => {
+    async function fetchJson() {
+      let request = await getProducts();
       setProducts(request);
     }
     fetchJson();
@@ -48,86 +48,82 @@ function Home() {
   //   setViewAll(!temp);
   // }
 
-  function out () { 
-    if (products) { 
-      return (
-        products.map(
-          (card) => { 
-            if (viewAll === true) {
-              return (
-                <Card
-                  // className={styles.card}
-                  key={card.id}
-                  id={card.id}
-                  enabled={card.enabled}
-                  image={card.image[0]}
-                  quantity={card.quantity}
-                  name={card.name}
-                  currentPrice={card.currentPrice}
-                  categories={card.categories}
-                  productMaterial={card.productMaterial}
-                  brand={card.brand}
-                  itemNo={card.itemNo}
-                  date={card.date}
-                  country={card.country}
-                />
-                // <CardItem key={card.id} card={card} />
-              )
-            }
-            else { 
-              if (card.id > products.length-6) {
-                return (
-                  <Card
-                    // className={styles.card}
-                    key={card.id}
-                    id={card.id}
-                    enabled={card.enabled}
-                    image={card.image[0]}
-                    quantity={card.quantity}
-                    name={card.name}
-                    currentPrice={card.currentPrice}
-                    categories={card.categories}
-                    productMaterial={card.productMaterial}
-                    brand={card.brand}
-                    itemNo={card.itemNo}
-                    date={card.date}
-                    country={card.country}
-                  />
-                  // <CardItem key={card.id} card={card} />
-                )
-              }
-              else { 
-                return null;
-              }
-            }
+  function out() {
+    if (products) {
+      return products.map((card) => {
+        if (viewAll === true) {
+          return (
+            <Card
+              // className={styles.card}
+              key={card._id}
+              id={card._id}
+              enabled={card.enabled}
+              image={card.imageUrls[0]}
+              quantity={card.quantity}
+              name={card.name}
+              currentPrice={card.currentPrice}
+              categories={card.categories}
+              productMaterial={card.productMaterial}
+              brand={card.brand}
+              itemNo={card.itemNo}
+              date={card.date}
+              country={card.manufacturerCountry}
+            />
+            // <CardItem key={card.id} card={card} />
+          );
+        } else {
+          if (products.length > 6) {
+            return (
+              <Card
+                // className={styles.card}
+                key={card._id}
+                id={card._id}
+                enabled={card.enabled}
+                image={card.imageUrls[0]}
+                quantity={card.quantity}
+                name={card.name}
+                currentPrice={card.currentPrice}
+                categories={card.categories}
+                productMaterial={card.productMaterial}
+                brand={card.brand}
+                itemNo={card.itemNo}
+                date={card.date}
+                country={card.manufacturerCountry}
+              />
+              // <CardItem key={card.id} card={card} />
+            );
+          } else {
+            return null;
           }
-        )
-      );
+        }
+      });
     }
-  }  
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <Container 
+      <Container
         // className={styles.container0}
-        sx={container0 }
+        sx={container0}
       >
         <Container
           // className={styles.container1}
-          sx={container1 }
+          sx={container1}
         >
           <Container
             // className={styles.container2}
-            sx={container2 }
+            sx={container2}
           >
             <Carousel
               autoPlay={false}
               // className={styles.carousel}
               sx={carousel}
-              IndicatorIcon={<Box
-                // className={styles.carouselIcon}
-                sx={carouselIcon}
-              />}
+              IndicatorIcon={
+                <Box
+                  // className={styles.carouselIcon}
+                  sx={carouselIcon}
+                />
+              }
               indicatorContainerProps={{
                 //  className: styles.carouselIconContainer,
                 style: {
@@ -143,61 +139,64 @@ function Home() {
                   height: "18px",
                   backgroundColor: "transparent",
                   color: "transparent",
-                  border: "1px solid white",                  
-                    "@media (max-width: 768.9px)": {
+                  border: "1px solid white",
+                  "@media (max-width: 768.9px)": {
                     width: "10px",
                     height: "10px",
                   },
                 },
-              //  style: {
+                //  style: {
                 //  width: "20px",
                 //  height: "20px",
                 //  backgroundColor: "transparent",
                 //  color: "transparent",
                 //  border: "1px solid white",
-              //  }
+                //  }
               }}
-              indicatorIconButtonProps={{
-              // className: styles.carouselIcon,
-                // style: {
-                //   margin: "8px",
-                //   width: "8px",
-                //   height: "8px",
-                //   color: "#FFFFFF",
-                //   backgroundColor: "#FFFFFF",
-                //   "@media (max-width: 768.9px)": {
-                //     width: "18px",
-                //   height: "18px",
-                //   },
-                // }
-             }}
-           >
+              indicatorIconButtonProps={
+                {
+                  // className: styles.carouselIcon,
+                  // style: {
+                  //   margin: "8px",
+                  //   width: "8px",
+                  //   height: "8px",
+                  //   color: "#FFFFFF",
+                  //   backgroundColor: "#FFFFFF",
+                  //   "@media (max-width: 768.9px)": {
+                  //     width: "18px",
+                  //   height: "18px",
+                  //   },
+                  // }
+                }
+              }
+            >
               <Box
                 // className={styles.carouselItem1}
-                sx={carouselItem1 }
+                sx={carouselItem1}
               />
               <Box
                 // className={styles.carouselItem2}
-                sx={carouselItem2 }
+                sx={carouselItem2}
               />
               <Box
                 // className={styles.carouselItem3}
-                sx={carouselItem3 }
+                sx={carouselItem3}
               />
               <Box
                 // className={styles.carouselItem4}
-                sx={carouselItem4 }
+                sx={carouselItem4}
               />
               <Box
                 // className={styles.carouselItem5}
-                sx={carouselItem5 }
+                sx={carouselItem5}
               />
-           </Carousel>
-         </Container>        
+            </Carousel>
+          </Container>
           <Button
             variant="outlined"
             // className={styles.btn}
-            sx={btn} >
+            sx={btn}
+          >
             View Product
           </Button>
           <Typography
@@ -212,15 +211,15 @@ function Home() {
           >
             $ 68,00
           </Typography>
-       </Container>      
+        </Container>
         <Container
           // className={styles.container3}
           sx={container3}
         >
-         {/* { viewAll && <Typography className={styles.latest}>Shop All</Typography>} */}
-         {/* { !viewAll && <Typography className={styles.latest}>Shop The Latest</Typography>}   */}
-         {/* { !viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View All</Button>} */}
-         {/* { viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View The Latest</Button>} */}
+          {/* { viewAll && <Typography className={styles.latest}>Shop All</Typography>} */}
+          {/* { !viewAll && <Typography className={styles.latest}>Shop The Latest</Typography>}   */}
+          {/* { !viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View All</Button>} */}
+          {/* { viewAll && <Button variant="text" className={styles.btnAll} onClick={viewAllProducts}>View The Latest</Button>} */}
           <Typography
             // className={styles.latest}
             sx={latest}
@@ -231,22 +230,21 @@ function Home() {
             <Button
               variant="text"
               // className={styles.btnAll}
-              sx={btnAll }
+              sx={btnAll}
               // onClick={viewAllProducts}
             >
               View All
             </Button>
           </Link>
-       </Container>
+        </Container>
         <Container
           // className={styles.container4}
           sx={container4}
         >
-         { output}
-       </Container>
-     </Container>      
-   </ThemeProvider>
+          {output}
+        </Container>
+      </Container>
+    </ThemeProvider>
   );
 }
 export default Home;
-

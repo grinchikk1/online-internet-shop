@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import fetchData from "../../data/index";
+import { getProducts } from "../../data/fetchProducts";
 import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 
@@ -9,8 +9,8 @@ function Product() {
 
   useEffect(() => {
     const fetchDataAsync = async () => {
-      const data = await fetchData();
-      const productById = data.find((product) => product.id === parseInt(id));
+      const data = await getProducts();
+      const productById = data.find((product) => product._id === id);
       setProduct(productById || null);
     };
 
@@ -20,7 +20,7 @@ function Product() {
   return (
     <>
       {product ? (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product._id} product={product} />
       ) : (
         <p>Product not found.</p>
       )}

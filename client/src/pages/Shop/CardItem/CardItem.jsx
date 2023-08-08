@@ -5,12 +5,11 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-
 export default function MultiActionAreaCard({ card }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${card.id}`);
+    navigate(`/product/${card._id}`);
   };
 
   const cards = {
@@ -50,7 +49,7 @@ export default function MultiActionAreaCard({ card }) {
         <CardMedia
           component="img"
           style={img}
-          src={card.image[0]}
+          src={card.imageUrls[0]}
           alt={card.name}
         ></CardMedia>
         <div style={discount} className="discount">

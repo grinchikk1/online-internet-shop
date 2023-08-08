@@ -10,11 +10,11 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 function FavouriteButton({ item }) {
   const dispatch = useDispatch();
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
-  const isFavorited = favoritesList.some((product) => product.id === item.id);
+  const isFavorited = favoritesList.some((product) => product._id === item._id);
 
   const handleToggleFavorite = () => {
     if (isFavorited) {
-      dispatch(removeFavorites(item.id));
+      dispatch(removeFavorites(item._id));
     } else {
       dispatch(addFavorites(item)); // Pass the entire product object as payload
     }
@@ -23,7 +23,7 @@ function FavouriteButton({ item }) {
   return (
     <FavoriteIcon
       onClick={handleToggleFavorite}
-      style={{ cursor: "pointer", color: isFavorited ? "red" : "black" }}
+      style={{ cursor: "pointer", color: isFavorited ? "#D82700" : "#707070" }}
     />
   );
 }

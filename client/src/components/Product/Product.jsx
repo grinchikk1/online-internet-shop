@@ -30,14 +30,15 @@ export default function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const {
-    image,
+    imageUrls,
     name,
     currentPrice,
+    description,
     brand,
     itemNo,
     quantity,
     productMaterial,
-    country,
+    manufacturerCountry,
     categories,
   } = product;
 
@@ -60,10 +61,10 @@ export default function ProductCard({ product }) {
     const halfWidth = img.clientWidth / 2;
 
     if (xClick >= halfWidth) {
-      setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % image.length);
+      setCurrentPhotoIndex((prevIndex) => (prevIndex + 1) % imageUrls.length);
     } else {
       setCurrentPhotoIndex((prevIndex) =>
-        prevIndex === 0 ? image.length - 1 : prevIndex - 1
+        prevIndex === 0 ? imageUrls.length - 1 : prevIndex - 1
       );
     }
   };
@@ -105,6 +106,7 @@ export default function ProductCard({ product }) {
 
   return (
     <Container
+      disableGutters={true}
       sx={{
         display: "flex",
         flexDirection: isMobile ? "row" : "column",
@@ -114,7 +116,7 @@ export default function ProductCard({ product }) {
     >
       {/* mobile */}
       {isMobile && (
-        <Box
+        <Container
           sx={{
             width: "100%",
           }}
@@ -122,7 +124,7 @@ export default function ProductCard({ product }) {
           <Container maxWidth={"sm"} disableGutters={true}>
             <Box
               sx={{
-                backgroundImage: `url(${image[currentPhotoIndex]})`,
+                backgroundImage: `url(${imageUrls[currentPhotoIndex]})`,
                 width: "100%",
                 backgroundSize: "cover",
                 backgroundPosition: "center",
@@ -135,7 +137,7 @@ export default function ProductCard({ product }) {
             <Box
               sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}
             >
-              {image.map((img, index) => (
+              {imageUrls.map((img, index) => (
                 <Box
                   key={index}
                   sx={{
@@ -195,18 +197,13 @@ export default function ProductCard({ product }) {
                   color: "#707070",
                 }}
               >
-                <SocialMediaIcons />
+                <SocialMediaIcons item={product} />
               </Box>
             )}
             <Button
               variant="contained"
+              className={classes.button_add}
               sx={{
-                background: theme.palette.allCollors.white,
-                color: theme.palette.allCollors.black,
-                height: "53px",
-                width: "100%",
-                border: "1px solid #000000",
-                borderRadius: "4px",
                 ":hover": {
                   background: theme.palette.allCollors.black,
                   color: theme.palette.allCollors.white,
@@ -312,11 +309,7 @@ export default function ProductCard({ product }) {
                   color: "#707070",
                 }}
               >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                placerat, augue a volutpat hendrerit, sapien tortor faucibus
-                augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-                facilisis consequat sed eu felis. Nunc sed porta augue. Morbi
-                porta tempor odio, in molestie diam bibendum sed.
+                {description}
               </Typography>
             )}
             <Button
@@ -358,7 +351,9 @@ export default function ProductCard({ product }) {
                   sx={{ paddingBottom: "10px" }}
                 >
                   Country:{" "}
-                  <span className={classes.text_color_mobile}>{country}</span>{" "}
+                  <span className={classes.text_color_mobile}>
+                    {manufacturerCountry}
+                  </span>{" "}
                 </Typography>
                 <Typography
                   className={classes.title_text_color_mobile}
@@ -444,6 +439,7 @@ export default function ProductCard({ product }) {
                 lineHeight: "20px",
                 color: "#A18A68",
                 marginTop: "14px",
+                marginBottom: "14px",
                 padding: "0",
                 ":hover": {
                   background: "#FFF",
@@ -456,24 +452,12 @@ export default function ProductCard({ product }) {
               <ArrowForwardIosIcon fontSize="small" sx={{ color: "#000" }} />
             </Button>
           </Container>
-        </Box>
+        </Container>
       )}
       {/* desktop */}
       {!isMobile && (
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-          }}
-        >
-          <Container
-            disableGutters={true}
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              paddingRight: "20px",
-            }}
-          >
+        <Box className={classes.container_desktop}>
+          <Container className={classes.container_image_desktop}>
             <Container
               disableGutters={true}
               sx={{
@@ -485,20 +469,13 @@ export default function ProductCard({ product }) {
                 paddingRight: "40px",
               }}
             >
-              {image.map((url, index) => {
+              {imageUrls.map((url, index) => {
                 return (
                   <Box
                     key={index}
+                    className={classes.image_list_desktop}
                     sx={{
-                      width: "120px",
-                      height: "120px",
                       backgroundImage: `url(${url})`,
-                      backgroundSize: "contain",
-                      backgroundPosition: "center",
-                      backgroundRepeat: "no-repeat",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                      transition: "all 0.2s ease-in-out",
                     }}
                     onClick={() => setCurrentPhotoIndex(index)}
                   />
@@ -513,7 +490,7 @@ export default function ProductCard({ product }) {
             >
               <Box
                 sx={{
-                  backgroundImage: `url(${image[currentPhotoIndex]})`,
+                  backgroundImage: `url(${imageUrls[currentPhotoIndex]})`,
                   width: "100%",
                   backgroundSize: "cover",
                   backgroundPosition: "center",
@@ -526,7 +503,7 @@ export default function ProductCard({ product }) {
               <Box
                 sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}
               >
-                {image.map((img, index) => (
+                {imageUrls.map((img, index) => (
                   <Box
                     key={index}
                     sx={{
@@ -543,7 +520,7 @@ export default function ProductCard({ product }) {
               </Box>
             </Container>
           </Container>
-          <Box>
+          <Box paddingRight={3}>
             <Typography
               variant="h2"
               sx={{
@@ -653,13 +630,8 @@ export default function ProductCard({ product }) {
               </Box>
               <Button
                 variant="contained"
+                className={classes.button_add}
                 sx={{
-                  background: "#FFFFFF",
-                  color: "#000000",
-                  height: "53px",
-                  minWidth: "150px",
-                  border: "1px solid #000000",
-                  borderRadius: "4px",
                   ":hover": {
                     background: "#000000",
                     color: "#FFFFFF",
@@ -671,16 +643,7 @@ export default function ProductCard({ product }) {
                 Add to cart
               </Button>
             </Box>
-            <Box
-              display={"flex"}
-              sx={{
-                alignItems: "center",
-                justifyContent: "space-between",
-                paddingTop: "50px",
-                width: "250px",
-                color: "#707070",
-              }}
-            >
+            <Box display={"flex"} className={classes.box_social_icons}>
               <SocialMediaIcons item={product} />
             </Box>
             <Typography sx={{ paddingTop: "36px" }}>
@@ -696,13 +659,9 @@ export default function ProductCard({ product }) {
       )}
       {!isMobile && (
         <Container
+          disableGutters={true}
+          className={classes.container_tabs}
           maxWidth={"lg"}
-          sx={{
-            paddingTop: "100px",
-            bottom: "0",
-            left: "0",
-            width: "100%",
-          }}
         >
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}
@@ -718,25 +677,18 @@ export default function ProductCard({ product }) {
           </Tabs>
           {valueTab === "1" && (
             <TabPanel valueTab={valueTab} index="1">
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  lineHeight: "27px",
-                  color: "#707070",
-                }}
-              >
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-                placerat, augue a volutpat hendrerit, sapien tortor faucibus
-                augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-                facilisis consequat sed eu felis. Nunc sed porta augue. Morbi
-                porta tempor odio, in molestie diam bibendum sed.
+              <Typography className={classes.description_text_desktop}>
+                {description}
               </Typography>
             </TabPanel>
           )}
           {valueTab === "2" && (
             <TabPanel valueTab={valueTab} index="2">
               <Typography sx={{ paddingBottom: "10px" }}>
-                Country: <span className={classes.text_color}>{country}</span>
+                Country:{" "}
+                <span className={classes.text_color}>
+                  {manufacturerCountry}
+                </span>
               </Typography>
               <Typography sx={{ paddingBottom: "10px" }}>
                 Brand: <span className={classes.text_color}>{brand}</span>
