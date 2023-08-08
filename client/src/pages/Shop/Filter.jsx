@@ -143,7 +143,7 @@ function Filter({
           onChange={handleChange}
           valueLabelDisplay="auto"
           min={0}
-          max={180}
+          max={1000}
           size="small"
           sx={{
             "& .MuiSlider-thumb": {

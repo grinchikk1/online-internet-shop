@@ -13,8 +13,8 @@ export default function MultiActionAreaCard({ card }) {
   };
 
   const cards = {
-    height: 350,
-    width: 200,
+    height: 400,
+    width: 250,
     boxShadow: "none",
     margin: "0 auto",
   };

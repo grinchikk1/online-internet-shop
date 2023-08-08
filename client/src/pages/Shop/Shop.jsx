@@ -27,9 +27,11 @@ function Shop() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getProducts().then((res) => {
-      setData(res);
-    });
+    async function fetchJson() {
+      let request = await getProducts();
+      setData(request);
+    }
+    fetchJson();
   }, []);
 
   const [cardsToShow, setCardsToShow] = useState(6);
@@ -53,7 +55,7 @@ function Shop() {
   const [selectedBrand, setSelectedBrand] = useState("");
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([0, 180]);
+  const [valueSlider, setValueSlider] = useState([0, 1000]);
 
   const searchFilter = data.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());

@@ -38,10 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "16px",
   },
   searchInput: {
-    width: "261px",
+    width: "250px",
     height: "25px",
     border: "none",
     borderBottom: "1px solid rgba(216, 216, 216, 1)",
+    "@media (max-width: 900px) ": {
+      width: "200px",
+    },
   },
   Title: {
     color: "rgba(0, 0, 0, 1)",
