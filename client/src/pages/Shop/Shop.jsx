@@ -53,7 +53,7 @@ function Shop() {
   const [selectedBrand, setSelectedBrand] = useState("");
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([0, 180]);
+  const [valueSlider, setValueSlider] = useState([0, 2000]);
 
   const searchFilter = data.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());
