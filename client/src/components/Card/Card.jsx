@@ -20,7 +20,7 @@ import {
 function Card({
   _id,
   enabled,
-  image,
+  imageUrls,
   quantity,
   name,
   currentPrice,
@@ -33,12 +33,12 @@ function Card({
   previousPrice,
 }) {
   const styles = useStyles();
-  const item = { _id, image, name, brand };
+  const item = { _id, imageUrls, name, brand };
   return (
     <ThemeProvider theme={theme}>
       <Container className="cardContainer" sx={cardContainer}>
         <Container sx={cardImgContainer}>
-          <img src={image} alt="product" className={styles.cardImg} />
+          <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
           <Container className="cardHover" sx={cardHover}>
             <Typography sx={cardHoverAdd}>ADD TO CART</Typography>
             <FavouriteButton item={item} />
