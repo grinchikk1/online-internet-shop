@@ -14,13 +14,11 @@ import {
   cardName,
   cardPrice,
   cardMaterial,
-  cardBrand
+  cardBrand,
 } from "./CardStyle";
 
-
-
 function Card({
-  id,
+  _id,
   enabled,
   image,
   quantity,
@@ -32,26 +30,26 @@ function Card({
   itemNo,
   date,
   country,
-  previousPrice
+  previousPrice,
 }) {
   const styles = useStyles();
-  const item = { id, image, name, brand };
+  const item = { _id, image, name, brand };
   return (
     <ThemeProvider theme={theme}>
-      <Container className="cardContainer" sx={cardContainer } >
-        <Container sx={cardImgContainer } >
+      <Container className="cardContainer" sx={cardContainer}>
+        <Container sx={cardImgContainer}>
           <img src={image} alt="product" className={styles.cardImg} />
-          <Container className="cardHover" sx={cardHover } >
-            <Typography sx={cardHoverAdd } >ADD TO CART</Typography>
+          <Container className="cardHover" sx={cardHover}>
+            <Typography sx={cardHoverAdd}>ADD TO CART</Typography>
             <FavouriteButton item={item} />
           </Container>
-        </Container> 
-        <Typography sx={ cardName} >{ name }</Typography>
-        < Container sx={ cardNameContainer} >
-          <Typography sx={ cardPrice} >$ { currentPrice },00</Typography>
-          <Typography sx={ cardMaterial} >{ productMaterial }</Typography>
-        </Container > 
-        <Typography sx={ cardBrand}>{ brand }</Typography>
+        </Container>
+        <Typography sx={cardName}>{name}</Typography>
+        <Container sx={cardNameContainer}>
+          <Typography sx={cardPrice}>$ {currentPrice},00</Typography>
+          <Typography sx={cardMaterial}>{productMaterial}</Typography>
+        </Container>
+        <Typography sx={cardBrand}>{brand}</Typography>
       </Container>
     </ThemeProvider>
   );

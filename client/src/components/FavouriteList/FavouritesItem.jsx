@@ -8,7 +8,7 @@ import {
 } from "../../features/favorites/favoriteSlice";
 
 function FavouriteItem({ item }) {
-  const { imageUrls, name, brand } = item;
+  const { image, name, brand } = item;
 
   const dispatch = useDispatch();
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
@@ -24,7 +24,7 @@ function FavouriteItem({ item }) {
 
   return (
     <Card sx={{ maxWidth: 300, marginBottom: "20px" }}>
-      <CardMedia component="img" height="140" image={imageUrls[0]} alt={name} />
+      <CardMedia component="img" height="140" image={image} alt={name} />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {name}

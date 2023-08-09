@@ -40,46 +40,44 @@ function Home() {
     fetchJson();
   }, []);
 
-  function out() {    
+  function out() {
     if (products) {
       let prodQuantity = 0;
       return products.map((card) => {
         prodQuantity++;
         // Last 6 products from DataBase..
-          if (products.length - prodQuantity < 6) {
-            return (
-              <Card
-                key={card._id}
-                id={card._id}
-                enabled={card.enabled}
-                image={card.imageUrls[0]}
-                quantity={card.quantity}
-                name={card.name}
-                currentPrice={card.currentPrice}
-                categories={card.categories}
-                productMaterial={card.productMaterial}
-                brand={card.brand}
-                itemNo={card.itemNo}
-                date={card.date}
-                country={card.manufacturerCountry}
-                previousPrice={card.previousPrice}
-              />
-            );
-          }
-          else {
-            return null;
-          }
+        if (products.length - prodQuantity < 6) {
+          return (
+            <Card
+              key={card._id}
+              _id={card._id}
+              enabled={card.enabled}
+              image={card.imageUrls[0]}
+              quantity={card.quantity}
+              name={card.name}
+              currentPrice={card.currentPrice}
+              categories={card.categories}
+              productMaterial={card.productMaterial}
+              brand={card.brand}
+              itemNo={card.itemNo}
+              date={card.date}
+              country={card.manufacturerCountry}
+              previousPrice={card.previousPrice}
+            />
+          );
+        } else {
+          return null;
         }
-      );
+      });
     }
   }
 
   return (
-    <ThemeProvider theme={theme} >
-      <Container sx={container0} >
-        <Container sx={container1} >
-          <Container sx={container2} >
-            <Carousel 
+    <ThemeProvider theme={theme}>
+      <Container sx={container0}>
+        <Container sx={container1}>
+          <Container sx={container2}>
+            <Carousel
               autoPlay={false}
               sx={carousel}
               IndicatorIcon={<Box sx={carouselIcon} />}
@@ -111,17 +109,21 @@ function Home() {
               <Box sx={carouselItem5} />
             </Carousel>
           </Container>
-          <Button variant="outlined" sx={btn} >View Product</Button>
-          <Typography sx={name} >Gold big hoops</Typography>
-          <Typography sx={price} >$ 68,00</Typography>
+          <Button variant="outlined" sx={btn}>
+            View Product
+          </Button>
+          <Typography sx={name}>Gold big hoops</Typography>
+          <Typography sx={price}>$ 68,00</Typography>
         </Container>
-        <Container sx={container3} >
-          <Typography sx={latest} >Shop The Latest</Typography>
+        <Container sx={container3}>
+          <Typography sx={latest}>Shop The Latest</Typography>
           <Link className={styles.link} to="/Shop">
-            <Button variant="text" sx={btnAll} >View All</Button>
+            <Button variant="text" sx={btnAll}>
+              View All
+            </Button>
           </Link>
         </Container>
-        <Container sx={container4} >{output}</Container>
+        <Container sx={container4}>{output}</Container>
       </Container>
     </ThemeProvider>
   );
