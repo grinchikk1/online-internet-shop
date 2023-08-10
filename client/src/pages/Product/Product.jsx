@@ -4,7 +4,10 @@ import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
-import { addProductToCart } from "../../features/cart/cartSlice";
+import {
+  addProductToCart,
+  removeProductFromCart,
+} from "../../features/cart/cartSlice";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
@@ -13,24 +16,14 @@ function Product() {
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchDataAsync = async () => {
-      const data = await getProducts();
-      const productById = data.find((product) => product._id === id);
-      setProduct(productById || null);
-    };
-
-    fetchDataAsync();
-  }, [id]);
-
-  useEffect(() => {
     if (products.length === 0) {
       getProducts().then((data) => {
         dispatch(setProducts(data));
-        const product = data.find((product) => product.id === parseInt(id));
+        const product = data.find((product) => product._id === id);
         setProduct(product);
       });
     } else {
-      const product = products.find((product) => product.id === parseInt(id));
+      const product = products.find((product) => product._id === id);
       setProduct(product);
     }
   }, [id]);
@@ -41,7 +34,10 @@ function Product() {
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCardClicked={() => dispatch(addProductToCart(product))}
+          onAddToCartClicked={() => dispatch(addProductToCart(product))}
+          onRemoveFromCartClicked={() =>
+            dispatch(removeProductFromCart(product))
+          }
         />
       ) : (
         <p>Product not found.</p>

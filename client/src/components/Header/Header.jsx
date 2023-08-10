@@ -6,14 +6,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
 
-import { Drawer } from "@mui/material";
+import { Badge, Drawer } from "@mui/material";
 import FavouriteList from "../FavouriteList/FavouriteList";
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isFavoritesMenuOpen, setIsFavoritesMenuOpen] = useState(false);
-  // const cartItems = useSelector((state) => state.cart.cartItems);
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
+  const [countProductInCart, setCountProductInCart] = useState(0);
 
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
@@ -86,7 +86,9 @@ function Header() {
               <FavouriteList />
             </Drawer>
             <Link to="/cart" className="header__icon">
-              <ShoppingBasket style={{ color: "black" }} />
+              <Badge color="neutral" badgeContent={countProductInCart}>
+                <ShoppingBasket style={{ color: "black" }} />
+              </Badge>
             </Link>
           </div>
         </div>

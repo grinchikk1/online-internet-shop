@@ -18,6 +18,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useStyles, theme } from "./CartStyles";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -30,17 +31,10 @@ const Cart = () => {
           <h1 className={s.cart_title}>Shopping Cart</h1>
           <Grid container className={s.wrapper_cart}>
             <Grid item xs={12} sm={12} md={6}>
-              <Grid container>
-                <Grid
-                  item
-                  spacing={0}
-                  xs={12}
-                  sm={12}
-                  md={12}
-                  className={s.cart_items}
-                >
+              <Grid container spacing={0}>
+                <Grid item xs={12} sm={12} md={12} className={s.cart_items}>
                   {cart.map((product) => {
-                    return <CartItem data={product} key={product.id} />;
+                    return <CartItem data={product} key={product._id} />;
                   })}
                   {cart.length === 0 && (
                     <div className={s.cart_empty}>Your cart is EMPTY</div>
@@ -74,8 +68,9 @@ const Cart = () => {
                         />
                         <Button
                           className={s.applyCouponBtn}
-                          variant="outlined"
+                          color="inherit"
                           type="submit"
+                          variant="outlined"
                         >
                           APPLY COUPON
                         </Button>
@@ -89,13 +84,7 @@ const Cart = () => {
               <Grid container sx={{ display: "block", justifyContent: "end" }}>
                 <Grid item>
                   <h3 className={s.cart_totalsTitle}>Cart totals</h3>
-                  <Grid
-                    container
-                    xs={12}
-                    sm={12}
-                    md={12}
-                    className={s.cart_subtotalWrapper}
-                  >
+                  <Grid container className={s.cart_subtotalWrapper}>
                     <Grid item className={s.cart_subtitle}>
                       <Typography sx={{ mb: "23px" }}>SUBTOTAL</Typography>
                       <Typography>SHIPPING</Typography>
@@ -149,6 +138,7 @@ const Cart = () => {
                         variant="outlined"
                         className={s.updateTotalsBtn}
                         sx={{
+                          marginTop: "24px",
                           "@media (max-width : 768px) ": {
                             background: "#FFF",
                           },
@@ -176,14 +166,19 @@ const Cart = () => {
                   },
                 }}
               >
-                <Button
-                  variant="outlined"
+                {/*<Button*/}
+                {/*  variant="outlined"*/}
+                {/*  type="submit"*/}
+                {/*  className={s.checkoutBtn}*/}
+                {/*  sx={{ background: "black", color: "white" }}*/}
+                {/*>*/}
+                {/*  PROCEED TO CHECKOUT*/}
+                {/*</Button>*/}
+                <CustomButton
                   type="submit"
                   className={s.checkoutBtn}
-                  sx={{ background: "black", color: "white" }}
-                >
-                  PROCEED TO CHECKOUT
-                </Button>
+                  value="PROCEED TO CHECKOUT"
+                />
               </Grid>
             </Grid>
           </Grid>

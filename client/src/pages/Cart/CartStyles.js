@@ -1,5 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
+import { customButtonStyle } from "../../components/CustomButton/CustomStyle";
 
 export const theme = createTheme({
   typography: {
@@ -39,11 +40,14 @@ export const useStyles = makeStyles((theme) => ({
   cart_items: {
     display: "flex",
     flexDirection: "column",
+    padding: "15px 30px",
+    "@media (max-width : 768px) ": {
+      padding: "15px",
+    },
   },
   cart_totals: {
-    padding: "39px 59px 48px",
+    padding: "40px",
     width: "100%",
-
     "@media (max-width : 768px) ": {
       padding: "15px 16px",
       lineHeight: "20px",
@@ -71,8 +75,7 @@ export const useStyles = makeStyles((theme) => ({
   cart_subtotal: {},
   cart_shipping: {
     maxWidth: "250px",
-
-    "@media (max-width : 768px) ": {
+    "@media (max-width : 450px) ": {
       maxWidth: "150px",
     },
   },
@@ -87,7 +90,6 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   updateTotalsBtn: {
-    marginTop: "24px",
     padding: 0,
     fontWeight: "700px",
     width: "100%",
@@ -105,10 +107,9 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   checkoutBtn: {
-    width: "100%",
-    height: "53px",
     "@media (max-width : 768px) ": {
       display: "none",
+      width: "100%",
     },
   },
   shipping_accordion: {

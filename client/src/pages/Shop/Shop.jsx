@@ -13,13 +13,9 @@ import Filter from "./Filter";
 import Grid from "@mui/material/Grid";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
-<<<<<<< HEAD
-import getData from "../../data/index";
+import { getProducts } from "../../data/fetchProducts";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
-=======
-import { getProducts } from "../../data/fetchProducts";
->>>>>>> 136514284bd543fef89cc5aa8cc93b457abbbf0a
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
@@ -32,13 +28,8 @@ function Shop() {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    getData().then((res) => {
-      dispatch(setProducts(res));
-=======
     getProducts().then((res) => {
-      setData(res);
->>>>>>> 136514284bd543fef89cc5aa8cc93b457abbbf0a
+      dispatch(setProducts(res));
     });
   }, []);
 
@@ -63,7 +54,7 @@ function Shop() {
   const [selectedBrand, setSelectedBrand] = useState("");
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([0, 180]);
+  const [valueSlider, setValueSlider] = useState([0, 2000]);
 
   const searchFilter = products.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());
