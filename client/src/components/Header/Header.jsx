@@ -13,7 +13,7 @@ function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isFavoritesMenuOpen, setIsFavoritesMenuOpen] = useState(false);
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
-  const [countProductInCart, setCountProductInCart] = useState(0);
+  const countProductInCart = useSelector((state) => state.cart.cart.length);
 
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
@@ -86,7 +86,7 @@ function Header() {
               <FavouriteList />
             </Drawer>
             <Link to="/cart" className="header__icon">
-              <Badge color="neutral" badgeContent={countProductInCart}>
+              <Badge badgeContent={countProductInCart}>
                 <ShoppingBasket style={{ color: "black" }} />
               </Badge>
             </Link>

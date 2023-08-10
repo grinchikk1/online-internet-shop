@@ -1,6 +1,5 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
-import { customButtonStyle } from "../../components/CustomButton/CustomStyle";
 
 export const theme = createTheme({
   typography: {

@@ -63,7 +63,7 @@ export const useStyles = makeStyles((theme) => ({
       alignSelf: "flex-start",
     },
   },
-  mywrapp: {
+  wrapp: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

@@ -8,6 +8,7 @@ import {
   addProductToCart,
   removeProductFromCart,
 } from "../../features/cart/cartSlice";
+import { addToCart } from "../../data/fetchCart";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
@@ -34,10 +35,10 @@ function Product() {
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCartClicked={() => dispatch(addProductToCart(product))}
-          onRemoveFromCartClicked={() =>
-            dispatch(removeProductFromCart(product))
-          }
+          onAddToCartClicked={() => {
+            dispatch(addProductToCart(product));
+            addToCart(product._id, "");
+          }}
         />
       ) : (
         <p>Product not found.</p>
