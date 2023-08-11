@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useStyles, theme } from "./CardStyle";
-
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
 
 import {
@@ -16,6 +15,9 @@ import {
   cardMaterial,
   cardBrand,
 } from "./CardStyle";
+import { addProductToCart } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../data/fetchCart";
 
 function Card({
   _id,
@@ -31,8 +33,11 @@ function Card({
   date,
   country,
   previousPrice,
+  product,
 }) {
   const styles = useStyles();
+  const dispatch = useDispatch();
+
   const item = { _id, imageUrls, name, brand };
   return (
     <ThemeProvider theme={theme}>
@@ -40,7 +45,15 @@ function Card({
         <Container sx={cardImgContainer}>
           <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
           <Container className="cardHover" sx={cardHover}>
-            <Typography sx={cardHoverAdd}>ADD TO CART</Typography>
+            <Typography
+              sx={cardHoverAdd}
+              onClick={() => {
+                dispatch(addProductToCart(product));
+                addToCart(product._id, "");
+              }}
+            >
+              ADD TO CART
+            </Typography>
             <FavouriteButton item={item} />
           </Container>
         </Container>

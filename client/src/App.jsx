@@ -10,7 +10,6 @@ import NotFound from "./pages/NotFound/NotFound";
 import About from "./pages/About/About";
 import Product from "./pages/Product/Product";
 import "./styles/App.scss";
-
 import Footer from "./components/Footer/Footer";
 
 function App() {

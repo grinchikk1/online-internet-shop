@@ -26,18 +26,19 @@ import {
   carouselItem4,
   carouselItem5,
 } from "./HomeStyles";
+import { setProducts } from "../../features/shop/shopSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Home() {
-  let [products, setProducts] = useState([]);
   const styles = useStyles();
+  const products = useSelector((store) => store.shop.products);
+  const dispatch = useDispatch();
   const output = out();
 
   useEffect(() => {
-    async function fetchJson() {
-      let request = await getProducts();
-      setProducts(request);
-    }
-    fetchJson();
+    getProducts().then((data) => {
+      dispatch(setProducts(data));
+    });
   }, []);
 
   function out() {
@@ -50,6 +51,7 @@ function Home() {
           return (
             <Card
               key={card._id}
+              product={card}
               _id={card._id}
               enabled={card.enabled}
               imageUrls={card.imageUrls}
