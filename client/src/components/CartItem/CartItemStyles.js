@@ -12,9 +12,16 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: "39px",
+    "@media (max-width : 768px) ": {
+      marginBottom: "24px",
+      fontSize: "12px",
+    },
   },
   count_wrapper: {
     borderRadius: "6px",
+    "@media (max-width : 500px) ": {
+      alignSelf: "flex-start",
+    },
   },
   count_button: {
     width: "30px",
@@ -23,6 +30,10 @@ export const useStyles = makeStyles((theme) => ({
     cursor: "pointer",
     color: "#707070",
     fontSize: "16px",
+    "@media (max-width : 500px) ": {
+      width: "20px",
+      height: "40px",
+    },
   },
   count_input: {
     padding: "0px",
@@ -33,6 +44,10 @@ export const useStyles = makeStyles((theme) => ({
     color: "#707070",
     fontSize: "16px",
     textAlign: "center",
+    "@media (max-width : 500px) ": {
+      width: "20px",
+      height: "40px",
+    },
   },
   item_image: {
     height: "136px",
@@ -40,9 +55,26 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "4px",
   },
   wrapp_description: {
-    minWidth: "200px",
-
+    // minWidth: "200px",
     marginLeft: "20px",
+    "@media (max-width : 768px) ": {
+      marginLeft: "0px",
+      fontSize: "12px",
+      alignSelf: "flex-start",
+    },
+  },
+  wrapp: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexGrow: "1",
+    "@media (max-width : 768px) ": {
+      marginLeft: "10px",
+    },
+    "@media (max-width : 500px) ": {
+      flexDirection: "column",
+    },
   },
   item_name: {
     fontSize: "20px",
@@ -50,6 +82,10 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: "400",
     lineHeight: "26px",
     marginBottom: "14px",
+    "@media (max-width : 500px) ": {
+      fontSize: "12px",
+      marginBottom: "0px",
+    },
   },
   item_description: {
     fontSize: "16px",
@@ -58,6 +94,9 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: "27px",
     color: "#707070",
     marginBottom: "2px",
+    "@media (max-width : 500px) ": {
+      fontSize: "12px",
+    },
   },
   item_price: {
     color: "#a18a68",
@@ -65,11 +104,17 @@ export const useStyles = makeStyles((theme) => ({
     fontStyle: "normal",
     fontWeight: "400",
     lineHeight: "27px",
+    "@media (max-width : 500px) ": {
+      fontSize: "12px",
+    },
   },
   cart_line: {
     borderBottom: "1px solid #d8d8d8",
     width: "100%",
     marginBottom: "39px",
+    "@media (max-width : 768px) ": {
+      display: "none",
+    },
   },
   close_button: {
     border: "none",

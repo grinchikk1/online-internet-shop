@@ -7,6 +7,8 @@ import {
 } from "../../features/favorites/favoriteSlice";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
+import { cardHoverFavouriteButton } from "../Card/CardStyle";
+
 function FavouriteButton({ item }) {
   const dispatch = useDispatch();
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
@@ -24,6 +26,7 @@ function FavouriteButton({ item }) {
     <FavoriteIcon
       onClick={handleToggleFavorite}
       style={{ cursor: "pointer", color: isFavorited ? "#D82700" : "#707070" }}
+      sx={ cardHoverFavouriteButton}
     />
   );
 }

@@ -24,7 +24,11 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({
+  product,
+  onAddToCartClicked,
+  onRemoveFromCartClicked,
+}) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
@@ -84,6 +88,9 @@ export default function ProductCard({ product }) {
   };
 
   const handleButtonClick = (buttonName) => {
+    if (buttonName === "addToCart") {
+      onAddToCartClicked();
+    }
     setShowButtons((prevButtons) => ({
       ...prevButtons,
       [buttonName]: !prevButtons[buttonName],

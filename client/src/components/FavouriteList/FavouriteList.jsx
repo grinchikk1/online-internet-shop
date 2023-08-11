@@ -21,7 +21,7 @@ function FavouriteList() {
   return (
     <div>
       {favoritesList.map((product) => (
-        <FavouriteItem key={product.id} item={product} />
+        <FavouriteItem key={product._id} item={product} />
       ))}
     </div>
   );

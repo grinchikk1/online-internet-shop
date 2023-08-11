@@ -6,11 +6,14 @@ import Typography from "@mui/material/Typography";
 
 import { ThemeProvider } from "@mui/material/styles";
 
+import { updateCartCount } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+
 const CartItem = (props) => {
   const {
-    id,
+    _id,
     enabled,
-    image,
+    imageUrls,
     quantity,
     name,
     currentPrice,
@@ -21,6 +24,7 @@ const CartItem = (props) => {
     date,
     country,
   } = props.data;
+  const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -37,42 +41,70 @@ const CartItem = (props) => {
     </svg>
   );
   const s = useStyles();
+  const dispath = useDispatch();
 
-  const [isCardOpen, setIsCardOpen] = useState(true);
+  const [value, setValue] = useState(1);
 
-  const handleCloseCard = () => {
-    setIsCardOpen(false);
+  const handleDecrement = () => {
+    if (amount > 1) {
+      dispath(updateCartCount({ itemID: _id, newCount: amount - 1 }));
+    }
+  };
+
+  const handleIncrement = () => {
+    dispath(updateCartCount({ itemID: _id, newCount: amount + 1 }));
+  };
+
+  const handleCloseCard = (buttonName) => {
+    if (buttonName === "removeFromCart") {
+      onRemoveFromCartClicked();
+    }
+  };
+  const handleAmountChange = (e) => {
+    const newCount = parseInt(e.target.value);
+    if (newCount > 0) {
+      dispath(updateCartCount({ itemID: _id, newCount: newCount }));
+    }
   };
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        {isCardOpen && (
-          <Grid container className={s.item_wrapper}>
-            <Grid item>
-              <img src={image} alt="#" className={s.item_image} />
-            </Grid>
-            <Grid item className={s.wrapp_description}>
-              <Typography className={s.item_name}>{name}</Typography>
-              <Typography className={s.item_description}>
-                {productMaterial} / {brand}
-              </Typography>
-              <Typography className={s.item_price}>{currentPrice} $</Typography>
-            </Grid>
-            <Grid item className={s.count_wrapper}>
-              <button className={s.count_button}>-</button>
-              <input className={s.count_input} />
-              <button className={s.count_button}>+</button>
-            </Grid>
-            <Grid item>
-              <button className={s.close_button} onClick={handleCloseCard}>
-                {SVGCLOSEBTN}
-              </button>
-            </Grid>
+      <Grid container className={s.item_wrapper}>
+        <img src={imageUrls[0]} alt={name} className={s.item_image} />
+        <Grid className={s.wrapp}>
+          <Grid item className={s.wrapp_description}>
+            <Typography className={s.item_name}>{name}</Typography>
+            <Typography className={s.item_description}>
+              {productMaterial} / {brand}
+            </Typography>
+            <Typography className={s.item_price}>{currentPrice} $</Typography>
           </Grid>
-        )}
-        <Grid item className={s.cart_line}></Grid>
-      </ThemeProvider>
+
+          <Grid item className={s.count_wrapper}>
+            <button className={s.count_button} onClick={handleDecrement}>
+              -
+            </button>
+            <input
+              className={s.count_input}
+              value={amount}
+              onChange={handleAmountChange}
+            />
+            <button className={s.count_button} onClick={handleIncrement}>
+              +
+            </button>
+          </Grid>
+        </Grid>
+
+        <Grid item>
+          <button
+            className={s.close_button}
+            onClick={() => handleCloseCard("removeFromCart")}
+          >
+            {SVGCLOSEBTN}
+          </button>
+        </Grid>
+      </Grid>
+      <Grid item className={s.cart_line}></Grid>
     </>
   );
 };

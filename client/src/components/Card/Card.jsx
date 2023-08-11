@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useStyles, theme } from "./CardStyle";
-
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
 
 import {
@@ -14,15 +13,16 @@ import {
   cardName,
   cardPrice,
   cardMaterial,
-  cardBrand
+  cardBrand,
 } from "./CardStyle";
-
-
+import { addProductToCart } from "../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../data/fetchCart";
 
 function Card({
-  id,
+  _id,
   enabled,
-  image,
+  imageUrls,
   quantity,
   name,
   currentPrice,
@@ -32,66 +32,37 @@ function Card({
   itemNo,
   date,
   country,
+  previousPrice,
+  product,
 }) {
   const styles = useStyles();
-  const item = { id, image, name, brand };
+  const dispatch = useDispatch();
+
+  const item = { _id, imageUrls, name, brand };
   return (
     <ThemeProvider theme={theme}>
-      <Container
-        // className={styles.cardContainer}
-        className="cardContainer"
-        sx={cardContainer }
-      >
-        <Container
-          // className={styles.cardImgContainer}
-          sx={cardImgContainer }
-        >
-          <img src={image} alt="product" className={styles.cardImg} />
-
-          <Container 
-          // className={styles.cardHover}
-          className="cardHover"
-          sx={cardHover }
-          >
-            <Typography 
-            // className={styles.cardHoverAdd}
-            sx={cardHoverAdd }
+      <Container className="cardContainer" sx={cardContainer}>
+        <Container sx={cardImgContainer}>
+          <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
+          <Container className="cardHover" sx={cardHover}>
+            <Typography
+              sx={cardHoverAdd}
+              onClick={() => {
+                dispatch(addProductToCart(product));
+                addToCart(product._id, "");
+              }}
             >
               ADD TO CART
             </Typography>
-          <FavouriteButton item={item} />
+            <FavouriteButton item={item} />
           </Container>
-        </Container> 
-        <Typography
-        //  className={ styles.cardName}
-         sx={ cardName}
-         >
-          { name }
-        </Typography>
-        < Container
-          // className={styles.cardNameContainer}
-          sx={ cardNameContainer}
-        >
-          <Typography
-            // className={styles.cardPrice}
-            sx={ cardPrice}
-          >
-          $ { currentPrice },00
-          </Typography>
-          <Typography
-            // className={styles.cardMaterial}
-            sx={ cardMaterial}
-          >
-            { productMaterial }
-          </Typography>
-        </Container > 
-        <Typography
-          // className={styles.cardBrand}
-          sx={ cardBrand}      
-        >
-          { brand }
-        </Typography>
-        <Typography className={styles.cardBrand}>{brand}</Typography>
+        </Container>
+        <Typography sx={cardName}>{name}</Typography>
+        <Container sx={cardNameContainer}>
+          <Typography sx={cardPrice}>$ {currentPrice},00</Typography>
+          <Typography sx={cardMaterial}>{productMaterial}</Typography>
+        </Container>
+        <Typography sx={cardBrand}>{brand}</Typography>
       </Container>
     </ThemeProvider>
   );
