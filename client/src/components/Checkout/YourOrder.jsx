@@ -11,9 +11,19 @@ import { ErrorMessage } from "formik";
 import { initalValues } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import { FaPaypal } from "react-icons/fa";
+import OrderItems from "../../pages/Cart/OrderItem";
+import { useSelector } from "react-redux";
 
-function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
+function YourOrder({
+  isSubmitting,
+  handleSubmit,
+  values,
+  setFieldValue,
+  totalAmount,
+  amounts,
+}) {
   const classes = useStyles();
+  const cart = useSelector((state) => state.cart.cart);
   return (
     <Grid item xs={12} md={6}>
       <Typography variant="h5" gutterBottom className={classes.heading}>
@@ -34,30 +44,11 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
               <div>PRICE</div>
             </div>
           </Grid>
-          <Grid item xs={12} className={classes.orderPriceItem}>
-            <div
-              style={{
-                borderBottom: "1px solid #D8D8D8",
-              }}
-            >
-              <div className={classes.orderItem}>
-                <div>Product 2</div>
-                <div>Product price 2</div>
-              </div>
-              <div className={classes.orderItem}>
-                <div>Product 3</div>
-                <div>Product price 3</div>
-              </div>
-              <div className={classes.orderItem}>
-                <div>Product 1</div>
-                <div>Product price 1</div>
-              </div>
-            </div>
-          </Grid>
+          <OrderItems cart={cart} amounts={amounts} />
           <Grid item xs={12}>
             <div className={classes.total}>
               <div>TOTAL</div>
-              <div>Total price</div>
+              <div>${totalAmount}</div>
             </div>
           </Grid>
           <Grid item xs={12}>

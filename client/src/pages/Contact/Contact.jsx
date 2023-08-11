@@ -115,18 +115,19 @@ const ContactForm = () => {
                 </Grid>
               </Grid>
               <Grid item xs={12} className={classes.buttonContainer}>
-                <CustomButton
-                  type="submit"
-                  value={"SEND"}
-                  disabled={isSubmitting}
-                  onClick={handleSubmit}
-                />
+                <div style={{ paddingBottom: "20px" }}>
+                  <CustomButton
+                    type="submit"
+                    value={"SEND"}
+                    disabled={isSubmitting}
+                    onClick={handleSubmit}
+                  />
+                </div>
               </Grid>
             </Form>
           )}
         </Formik>
       </Container>
-      <Checkout />
     </ThemeProvider>
   );
 };
