@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import CartItem from "../../components/CartItem/CartItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,7 +7,11 @@ import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import {
   Accordion,
   AccordionSummary,
+  Alert,
   Container,
+  Dialog,
+  DialogActions,
+  DialogContent,
   Grid,
   Stack,
   TextField,
@@ -19,6 +23,7 @@ import Button from "@mui/material/Button";
 import { useStyles } from "./CartStyles";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { removeProductFromCart } from "../../features/cart/cartSlice";
+import Checkout from "../../components/Checkout/Checkout";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -26,6 +31,18 @@ const Cart = () => {
   const dispatch = useDispatch();
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
+
+  const [isBillingDetailsOpen, setIsBillingDetailsOpen] = useState(false);
+  const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
+
+  const proceedToCheckout = () => {
+    console.log(cart);
+    if (cart.length > 0) {
+      setIsBillingDetailsOpen(true);
+    } else {
+      setIsCartEmptyAlertOpen(true);
+    }
+  };
 
   return (
     <Container maxWidth="lg">
@@ -170,28 +187,48 @@ const Cart = () => {
           </Grid>
           <Grid
             item
-            sx={{
-              "@media (max-width : 768px) ": {
-                display: "none",
-              },
-            }}
+            // sx={{
+            //   "@media (max-width : 768px) ": {
+            //     display: "none",
+            //   },
+            // }}
           >
-            {/*<Button*/}
-            {/*  variant="outlined"*/}
-            {/*  type="submit"*/}
-            {/*  className={s.checkoutBtn}*/}
-            {/*  sx={{ background: "black", color: "white" }}*/}
-            {/*>*/}
-            {/*  PROCEED TO CHECKOUT*/}
-            {/*</Button>*/}
             <CustomButton
               type="submit"
               className={s.checkoutBtn}
               value="PROCEED TO CHECKOUT"
+              onClick={proceedToCheckout}
             />
+            {cart.length === 0 && isCartEmptyAlertOpen && (
+              <Alert
+                onClose={() => setIsCartEmptyAlertOpen(false)}
+                severity="error"
+                sx={{ width: "100%", marginTop: "15px" }}
+              >
+                Your cart is empty
+              </Alert>
+            )}
           </Grid>
         </Grid>
       </Grid>
+      <Dialog
+        open={isBillingDetailsOpen}
+        onClose={() => setIsBillingDetailsOpen(false)}
+        fullWidth
+        maxWidth="lg"
+      >
+        <DialogContent>
+          <Checkout totalAmount={totalAmount} amounts={amounts} />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setIsBillingDetailsOpen(false)}
+            color="primary"
+          >
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };

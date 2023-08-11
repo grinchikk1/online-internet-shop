@@ -68,16 +68,24 @@ function Header() {
           </nav>
           <div className="header__logo-holder">
             <SearchIcon style={{ color: "black" }} className="header__icon" />
+
             <FavoriteIcon
               className="header__icon"
               onClick={handleFavoritesMenuOpen}
             />
             {favoritesList.length > 0 && (
-              <span style={{ transform: "translateX(-15px)" }}>
+              <span
+                style={{
+                  transform: "translate(-18px,-12px)",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                }}
+              >
                 {/* Display the quantity of favorited items */}
                 {favoritesList.length}
               </span>
             )}
+
             <Drawer
               anchor="right"
               open={isFavoritesMenuOpen}
@@ -86,8 +94,11 @@ function Header() {
               <FavouriteList />
             </Drawer>
             <Link to="/cart" className="header__icon">
-              <Badge badgeContent={countProductInCart}>
-                <ShoppingBasket style={{ color: "black" }} />
+              <Badge
+                badgeContent={countProductInCart}
+                style={{ color: "black " }}
+              >
+                <ShoppingBasket style={{ color: "black " }} />
               </Badge>
             </Link>
           </div>
