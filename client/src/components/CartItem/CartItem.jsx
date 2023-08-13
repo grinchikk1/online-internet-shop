@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Grid } from "@mui/material";
-import { useStyles, theme } from "./CartItemStyles";
+import { Container, Grid } from "@mui/material";
+import { useStyles } from "./CartItemStyles";
 import Typography from "@mui/material/Typography";
-
-import { ThemeProvider } from "@mui/material/styles";
 
 import { updateCartCount } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
+import { deleteFromCart } from "../../data/fetchCart";
+import product from "../../pages/Product/Product";
 
 const CartItem = (props) => {
   const {
@@ -41,18 +41,16 @@ const CartItem = (props) => {
     </svg>
   );
   const s = useStyles();
-  const dispath = useDispatch();
-
-  const [value, setValue] = useState(1);
+  const dispatch = useDispatch();
 
   const handleDecrement = () => {
     if (amount > 1) {
-      dispath(updateCartCount({ itemID: _id, newCount: amount - 1 }));
+      dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
     }
   };
 
   const handleIncrement = () => {
-    dispath(updateCartCount({ itemID: _id, newCount: amount + 1 }));
+    dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
   };
 
   const handleCloseCard = (buttonName) => {
@@ -63,12 +61,12 @@ const CartItem = (props) => {
   const handleAmountChange = (e) => {
     const newCount = parseInt(e.target.value);
     if (newCount > 0) {
-      dispath(updateCartCount({ itemID: _id, newCount: newCount }));
+      dispatch(updateCartCount({ itemID: _id, newCount: newCount }));
     }
   };
 
   return (
-    <>
+    <Container maxWidth="lg">
       <Grid container className={s.item_wrapper}>
         <img src={imageUrls[0]} alt={name} className={s.item_image} />
         <Grid className={s.wrapp}>
@@ -98,14 +96,17 @@ const CartItem = (props) => {
         <Grid item>
           <button
             className={s.close_button}
-            onClick={() => handleCloseCard("removeFromCart")}
+            onClick={() => {
+              handleCloseCard("removeFromCart");
+              deleteFromCart(product._id, "");
+            }}
           >
             {SVGCLOSEBTN}
           </button>
         </Grid>
       </Grid>
       <Grid item className={s.cart_line}></Grid>
-    </>
+    </Container>
   );
 };
 

@@ -21,9 +21,9 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useStyles } from "./CartStyles";
-import CustomButton from "../../components/CustomButton/CustomButton";
 import { removeProductFromCart } from "../../features/cart/cartSlice";
 import Checkout from "../../components/Checkout/Checkout";
+import { updateCart } from "../../data/fetchCart";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -72,6 +72,9 @@ const Cart = () => {
                     className={s.updateCartBtn}
                     color="inherit"
                     variant="outlined"
+                    onClick={() => {
+                      updateCart(cart, "");
+                    }}
                   >
                     UPDATE CART
                   </Button>
@@ -185,30 +188,33 @@ const Cart = () => {
             <div>TOTAL</div>
             <div>$ {totalAmount}</div>
           </Grid>
-          <Grid
-            item
-            // sx={{
-            //   "@media (max-width : 768px) ": {
-            //     display: "none",
-            //   },
-            // }}
+          <Button
+            variant="contained"
+            type="submit"
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              width: "100%",
+              height: "53px",
+              "&:hover": {
+                backgroundColor: "black",
+                color: "white",
+              },
+            }}
+            className={s.checkoutBtn}
+            onClick={proceedToCheckout}
           >
-            <CustomButton
-              type="submit"
-              className={s.checkoutBtn}
-              value="PROCEED TO CHECKOUT"
-              onClick={proceedToCheckout}
-            />
-            {cart.length === 0 && isCartEmptyAlertOpen && (
-              <Alert
-                onClose={() => setIsCartEmptyAlertOpen(false)}
-                severity="error"
-                sx={{ width: "100%", marginTop: "15px" }}
-              >
-                Your cart is empty
-              </Alert>
-            )}
-          </Grid>
+            PROCEED TO CHECKOUT
+          </Button>
+          {cart.length === 0 && isCartEmptyAlertOpen && (
+            <Alert
+              onClose={() => setIsCartEmptyAlertOpen(false)}
+              severity="error"
+              sx={{ width: "100%", marginTop: "15px" }}
+            >
+              Your cart is empty
+            </Alert>
+          )}
         </Grid>
       </Grid>
       <Dialog

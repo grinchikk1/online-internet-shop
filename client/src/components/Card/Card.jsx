@@ -19,6 +19,12 @@ import { addProductToCart } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../data/fetchCart";
 
+export const addProductToLocalStorage = (product) => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems.push(product);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
+
 function Card({
   _id,
   enabled,
@@ -39,6 +45,7 @@ function Card({
   const dispatch = useDispatch();
 
   const item = { _id, imageUrls, name, brand };
+
   return (
     <ThemeProvider theme={theme}>
       <Container className="cardContainer" sx={cardContainer}>
@@ -50,6 +57,7 @@ function Card({
               onClick={() => {
                 dispatch(addProductToCart(product));
                 addToCart(product._id, "");
+                addProductToLocalStorage(product);
               }}
             >
               ADD TO CART
@@ -67,4 +75,5 @@ function Card({
     </ThemeProvider>
   );
 }
+// export { addProductToLocalStorage };
 export default Card;

@@ -4,11 +4,9 @@ import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
-import {
-  addProductToCart,
-  removeProductFromCart,
-} from "../../features/cart/cartSlice";
+import { addProductToCart } from "../../features/cart/cartSlice";
 import { addToCart } from "../../data/fetchCart";
+import { addProductToLocalStorage } from "../../components/Card/Card";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
@@ -38,6 +36,7 @@ function Product() {
           onAddToCartClicked={() => {
             dispatch(addProductToCart(product));
             addToCart(product._id, "");
+            addProductToLocalStorage(product);
           }}
         />
       ) : (

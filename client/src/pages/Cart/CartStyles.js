@@ -1,11 +1,4 @@
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
-
-export const theme = createTheme({
-  typography: {
-    fontFamily: "DM Sans, sans-serif",
-  },
-});
 
 export const useStyles = makeStyles((theme) => ({
   cart_title: {
@@ -41,7 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     padding: "15px 30px",
     "@media (max-width : 768px) ": {
-      padding: "15px",
+      padding: "10px",
     },
   },
   cart_totals: {
@@ -100,17 +93,16 @@ export const useStyles = makeStyles((theme) => ({
     width: "168px",
     background: "black",
     color: "white",
+    "&:hover": {
+      backgroundColor: "black",
+      color: "white",
+    },
     "@media (max-width : 768px) ": {
       width: "100%",
       marginBottom: "30px",
     },
   },
-  checkoutBtn: {
-    "@media (max-width : 768px) ": {
-      display: "none",
-      width: "100%",
-    },
-  },
+  checkoutBtn: {},
   shipping_accordion: {
     color: "#707070",
     fontSize: "12px",
