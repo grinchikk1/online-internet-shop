@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useStyles } from "../../components/Checkout/CheckoutStyle";
 
 function OrderItems({ cart, amounts }) {
