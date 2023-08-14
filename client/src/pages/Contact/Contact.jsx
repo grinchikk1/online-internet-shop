@@ -10,7 +10,6 @@ import {
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, theme, fieldStyle } from "./ContactStyles";
 import { ThemeProvider } from "@mui/material/styles";
-import Checkout from "../../components/Checkout/Checkout";
 import { initialValues, validationSchema } from "./formSettings";
 
 const ContactForm = () => {
