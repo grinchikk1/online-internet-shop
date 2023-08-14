@@ -23,9 +23,9 @@ function Shop() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.shop.products);
 
-  const handleSetValue = (value) => {
-    setValue(value);
-  };
+  // const handleSetValue = (value) => {
+  //   setValue(value);
+  // };
 
   useEffect(() => {
     getProducts().then((res) => {
@@ -50,26 +50,26 @@ function Shop() {
     setCardsToShow(cardsToShow + 6);
   };
   // Select useState
-  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
-  const [selectedBrand, setSelectedBrand] = useState("");
+  // const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+  // const [selectedBrand, setSelectedBrand] = useState("");
 
   // UseState for Slider
-  const [valueSlider, setValueSlider] = useState([0, 2000]);
+  // const [valueSlider, setValueSlider] = useState([0, 2000]);
 
-  const searchFilter = products.filter((card) => {
+  const btnAddProduct = products.filter((card) => {
     const cardName = card.name.toLowerCase().includes(value.toLowerCase());
-    const productMaterialMatch =
-      selectedProductMaterial === "" ||
-      card.productMaterial === selectedProductMaterial;
-    const brandMatch = selectedBrand === "" || card.brand === selectedBrand;
-    const cardPrice =
-      card.currentPrice >= valueSlider[0] &&
-      card.currentPrice <= valueSlider[1];
+    //   const productMaterialMatch =
+    //     selectedProductMaterial === "" ||
+    //     card.productMaterial === selectedProductMaterial;
+    //   const brandMatch = selectedBrand === "" || card.brand === selectedBrand;
+    //   const cardPrice =
+    //     card.currentPrice >= valueSlider[0] &&
+    //     card.currentPrice <= valueSlider[1];
 
-    return cardName && productMaterialMatch && brandMatch && cardPrice;
+    return cardName;
   });
 
-  const cardList = searchFilter
+  const cardList = products
     .slice(0, cardsToShow)
     .map((card) => <CardItem key={card._id} card={card} />);
 
@@ -94,13 +94,13 @@ function Shop() {
           <Box className={classes.Container}>
             {!isScreenSmall && (
               <Filter
-                setValue={handleSetValue}
-                setSelectedProductMaterial={setSelectedProductMaterial}
-                setSelectedBrand={setSelectedBrand}
-                selectedProductMaterial={selectedProductMaterial}
-                selectedBrand={selectedBrand}
-                valueSlider={valueSlider}
-                setValueSlider={setValueSlider}
+              // setValue={handleSetValue}
+              // setSelectedProductMaterial={setSelectedProductMaterial}
+              // setSelectedBrand={setSelectedBrand}
+              // selectedProductMaterial={selectedProductMaterial}
+              // selectedBrand={selectedBrand}
+              // valueSlider={valueSlider}
+              // setValueSlider={setValueSlider}
               />
             )}
             {isScreenSmall && (
@@ -124,13 +124,13 @@ function Shop() {
             )}
             {isScreenSmall && isOpenFilter && (
               <Filter
-                setValue={handleSetValue}
-                setSelectedProductMaterial={setSelectedProductMaterial}
-                setSelectedBrand={setSelectedBrand}
-                selectedProductMaterial={selectedProductMaterial}
-                selectedBrand={selectedBrand}
-                valueSlider={valueSlider}
-                setValueSlider={setValueSlider}
+              // setValue={handleSetValue}
+              // setSelectedProductMaterial={setSelectedProductMaterial}
+              // setSelectedBrand={setSelectedBrand}
+              // selectedProductMaterial={selectedProductMaterial}
+              // selectedBrand={selectedBrand}
+              // valueSlider={valueSlider}
+              // setValueSlider={setValueSlider}
               />
             )}
           </Box>
@@ -159,7 +159,7 @@ function Shop() {
                   {card}
                 </Grid>
               ))}
-              {searchFilter.length > cardsToShow && (
+              {btnAddProduct.length > cardsToShow && (
                 <Box mt={3}>
                   <Button
                     variant="contained"

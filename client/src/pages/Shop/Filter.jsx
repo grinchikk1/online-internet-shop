@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   FormControl,
@@ -14,24 +14,46 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
+import { searchProducts } from "../../data/fetchProducts";
+import { getFilterByType } from "../../data/fetchFilters";
+// import { useDispatch, useSelector } from "react-redux";
+import CardItem from "./CardItem/CardItem";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function Filter({
-  setValue,
-  setSelectedProductMaterial,
-  setSelectedBrand,
-  selectedProductMaterial,
-  selectedBrand,
-  valueSlider,
-  setValueSlider,
-}) {
+function Filter() {
   const classes = useStyles();
+  // const dispatch = useDispatch();
+  // const [searchResults, setSearchResults] = useState([]);
 
-  const handleChange = (event) => {
-    setValueSlider(event.target.value);
-  };
+  // useEffect(() => {
+  // const handleSearch = async (searchText) => {
+  //   const results = await searchProducts(searchText);
+  //   setSearchResults(results);
+  // };
+  // handleSearch()
+  // }, []);
 
+  // const handleChange = (event) => {
+  //   console.log(event.target.value);
+  // };
+
+  //Brand
+
+  // const [selectedProductType, setSelectedProductType] = useState("");
+  // const [products, setProducts] = useState([]);
+
+  // const handleProductTypeChange = async (event) => {
+  //   const selectedType = event.target.value;
+  //   setSelectedProductType(selectedType);
+
+  //   try {
+  //     const productsByType = await getFilterByType(selectedType);
+  //     setProducts(productsByType);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <Box className={classes.Container}>
       <FormControl sx={{ marginBottom: "40px" }}>
@@ -39,7 +61,7 @@ function Filter({
           Search
         </InputLabel>
         <Input
-          onChange={(event) => setValue(event.target.value)}
+          // onChange={(event) => handleSearch(event.target.value)}
           id="search"
           name="search"
           className={classes.searchInput}
@@ -51,6 +73,9 @@ function Filter({
           }
         />
       </FormControl>
+      {/* {searchResults.map((product) => (
+        <div key={product.id}>{product.name}</div>
+      ))} */}
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"
@@ -72,20 +97,17 @@ function Filter({
               backgroundColor: "transparent",
             },
           }}
-          value={selectedProductMaterial}
-          onChange={(e) => setSelectedProductMaterial(e.target.value)}
+          // value={selectedProductMaterial}
+          // onChange={(e) => setSelectedProductMaterial(e.target.value)}
+          // value={selectedProductType}
+          // onChange={handleProductTypeChange}
         >
-          <MenuItem className={classes.SelectInputItem} value="gold">
-            Gold
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value="silver">
-            Silver
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value="platinum">
-            Platinum
-          </MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Gold</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Silver</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Platinum</MenuItem>
         </Select>
       </FormControl>
+
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
           htmlFor="brand"
@@ -104,43 +126,28 @@ function Filter({
               color: "rgba(0, 0, 0, 1)",
             },
           }}
-          value={selectedBrand}
-          onChange={(e) => setSelectedBrand(e.target.value)}
+          // value={selectedBrand}
+          // onChange={(e) => setSelectedBrand(e.target.value)}
+          // value={selectedProductType}
+          // onChange={handleProductTypeChange}
         >
-          <MenuItem className={classes.SelectInputItem} value={"KJM"}>
-            KJM
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"LuxJewels"}>
-            LuxJewels
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"Jewels"}>
-            Jewels
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"OpalCraft"}>
-            OpalCraft
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"OceanGems"}>
-            OceanGems
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"BlueSky"}>
-            BlueSky
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"AmberCraft"}>
-            AmberCraft
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"Glow"}>
-            Glow
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"BlackStone"}>
-            BlackStone
-          </MenuItem>
+          <MenuItem className={classes.SelectInputItem}>KJM</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>ZARINA</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>KOLO</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Boucheron</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Suarez</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Amrapali</MenuItem>
+          <MenuItem className={classes.SelectInputItem}>Messika</MenuItem>
         </Select>
+        {/* {products.map((product) => (
+          <CardItem key={product.id} />
+        ))} */}
       </FormControl>
       <Box sx={{ marginBottom: "40px" }}>
         <Slider
           getAriaLabel={() => ""}
-          value={valueSlider}
-          onChange={handleChange}
+          // value={valueSlider}
+          // onChange={handleChange}
           valueLabelDisplay="auto"
           min={0}
           max={2000}
@@ -163,7 +170,8 @@ function Filter({
           theme={customTheme}
         />
         <Typography className={classes.SliderPrice}>
-          Price: {valueSlider[0]}$ - {valueSlider[1]}$
+          {/* Price: {valueSlider[0]}$ - {valueSlider[1]}$ */}
+          price
         </Typography>
       </Box>
       <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>

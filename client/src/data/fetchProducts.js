@@ -57,7 +57,9 @@ export const updateProduct = async (product, token) => {
 // Пошук продуктів
 export const searchProducts = async (searchPhrases) => {
   try {
-    const response = await axios.get(`${url}/products/search`, searchPhrases);
+    const response = await axios.get(`${url}/products/search`, {
+      params: searchPhrases,
+    });
     return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
