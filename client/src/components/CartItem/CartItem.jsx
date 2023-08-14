@@ -1,13 +1,15 @@
 import React from "react";
 
-import { Container, Grid } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
 import { useStyles } from "./CartItemStyles";
-import Typography from "@mui/material/Typography";
 
 import { updateCartCount } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
-import { deleteFromCart } from "../../data/fetchCart";
-import product from "../../pages/Product/Product";
+import {
+  deleteFromCart,
+  removeFromCart,
+  addToCart,
+} from "../../data/fetchCart";
 
 const CartItem = (props) => {
   const {
@@ -46,18 +48,17 @@ const CartItem = (props) => {
   const handleDecrement = () => {
     if (amount > 1) {
       dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
+      removeFromCart(_id, "");
+    } else {
+      handleRemoveProductFromCart();
     }
   };
 
   const handleIncrement = () => {
     dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
+    addToCart(_id, "");
   };
 
-  const handleCloseCard = (buttonName) => {
-    if (buttonName === "removeFromCart") {
-      onRemoveFromCartClicked();
-    }
-  };
   const handleAmountChange = (e) => {
     const newCount = parseInt(e.target.value);
     if (newCount > 0) {
@@ -65,16 +66,34 @@ const CartItem = (props) => {
     }
   };
 
+  const handleRemoveCard = (buttonName) => {
+    if (buttonName === "removeFromCart") {
+      onRemoveFromCartClicked();
+    }
+  };
+
+  const removeProductFromLocalStorage = (productID) => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+    const updatedCartItems = cartItems.filter((item) => item._id !== productID);
+    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+  };
+
+  const handleRemoveProductFromCart = () => {
+    handleRemoveCard("removeFromCart");
+    removeProductFromLocalStorage(_id);
+    deleteFromCart(_id, "");
+  };
+
   return (
-    <Container maxWidth="lg">
+    <Box>
       <Grid container className={s.item_wrapper}>
         <img src={imageUrls[0]} alt={name} className={s.item_image} />
-        <Grid className={s.wrapp}>
+        <Box className={s.wrapp}>
           <Grid item className={s.wrapp_description}>
-            <Typography className={s.item_name}>{name}</Typography>
-            <Typography className={s.item_description}>
+            <p className={s.item_name}>{name}</p>
+            <p className={s.item_description}>
               {productMaterial} / {brand}
-            </Typography>
+            </p>
             <Typography className={s.item_price}>{currentPrice} $</Typography>
           </Grid>
 
@@ -91,22 +110,19 @@ const CartItem = (props) => {
               +
             </button>
           </Grid>
-        </Grid>
+        </Box>
 
         <Grid item>
           <button
             className={s.close_button}
-            onClick={() => {
-              handleCloseCard("removeFromCart");
-              deleteFromCart(product._id, "");
-            }}
+            onClick={handleRemoveProductFromCart}
           >
             {SVGCLOSEBTN}
           </button>
         </Grid>
       </Grid>
-      <Grid item className={s.cart_line}></Grid>
-    </Container>
+      <div className={s.cart_line}></div>
+    </Box>
   );
 };
 

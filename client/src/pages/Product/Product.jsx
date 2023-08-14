@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { addToCart } from "../../data/fetchCart";
+import { createCart } from "../../data/fetchCart";
 import { addProductToLocalStorage } from "../../components/Card/Card";
 
 function Product() {
@@ -27,17 +27,19 @@ function Product() {
     }
   }, [id]);
 
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(product));
+    createCart(product._id, "");
+    addProductToLocalStorage(product);
+  };
+
   return (
     <>
       {product ? (
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCartClicked={() => {
-            dispatch(addProductToCart(product));
-            addToCart(product._id, "");
-            addProductToLocalStorage(product);
-          }}
+          onAddToCartClicked={handleAddProductToCart}
         />
       ) : (
         <p>Product not found.</p>

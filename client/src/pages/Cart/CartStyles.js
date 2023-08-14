@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   wrapper_cart: {
     justifyContent: "space-between",
     width: "100%",
+    marginBottom: "50px",
   },
   cart_empty: {
     display: "flex",
@@ -34,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     padding: "15px 30px",
     "@media (max-width : 768px) ": {
-      padding: "10px",
+      padding: "10px 0",
     },
   },
   cart_totals: {
@@ -88,19 +89,19 @@ export const useStyles = makeStyles((theme) => ({
     height: "53px",
   },
   applyCouponBtn: {
-    marginTop: "64px",
-    height: "53px",
-    width: "168px",
-    background: "black",
-    color: "white",
-    "&:hover": {
-      backgroundColor: "black",
-      color: "white",
-    },
-    "@media (max-width : 768px) ": {
-      width: "100%",
-      marginBottom: "30px",
-    },
+    // marginTop: "64px",
+    // height: "53px",
+    // width: "168px",
+    // background: "black",
+    // color: "white",
+    // "&:hover": {
+    //   backgroundColor: "black",
+    //   color: "white",
+    // },
+    // "@media (max-width : 768px) ": {
+    //   width: "100%",
+    //   marginBottom: "30px",
+    // },
   },
   checkoutBtn: {},
   shipping_accordion: {

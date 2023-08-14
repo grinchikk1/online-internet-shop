@@ -17,7 +17,7 @@ import {
 } from "./CardStyle";
 import { addProductToCart } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../data/fetchCart";
+import { createCart } from "../../data/fetchCart";
 
 export const addProductToLocalStorage = (product) => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -46,20 +46,19 @@ function Card({
 
   const item = { _id, imageUrls, name, brand };
 
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(product));
+    createCart(product._id, "");
+    addProductToLocalStorage(product);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container className="cardContainer" sx={cardContainer}>
         <Container sx={cardImgContainer}>
           <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
           <Container className="cardHover" sx={cardHover}>
-            <Typography
-              sx={cardHoverAdd}
-              onClick={() => {
-                dispatch(addProductToCart(product));
-                addToCart(product._id, "");
-                addProductToLocalStorage(product);
-              }}
-            >
+            <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
               ADD TO CART
             </Typography>
             <FavouriteButton item={item} />
@@ -75,5 +74,5 @@ function Card({
     </ThemeProvider>
   );
 }
-// export { addProductToLocalStorage };
+
 export default Card;

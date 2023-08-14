@@ -16,6 +16,7 @@ import {
   Stack,
   TextField,
   Typography,
+  Box,
 } from "@mui/material";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -49,8 +50,8 @@ const Cart = () => {
       <h1 className={s.cart_title}>Shopping Cart</h1>
       <Grid container className={s.wrapper_cart}>
         <Grid item xs={12} sm={12} md={6}>
-          <Grid container spacing={0}>
-            <Grid item xs={12} sm={12} md={12} className={s.cart_items}>
+          <Box>
+            <Grid item xs={12} sm={12} md={12} /*className={s.cart_items}*/>
               {cart.map((product) => {
                 return (
                   <CartItem
@@ -97,8 +98,23 @@ const Cart = () => {
                       }}
                     />
                     <Button
-                      className={s.applyCouponBtn}
-                      color="inherit"
+                      // className={s.applyCouponBtn}
+                      // color="inherit"
+                      sx={{
+                        marginTop: "60px",
+                        height: "53px",
+                        width: "168px",
+                        background: "black",
+                        color: "white",
+                        "&:hover": {
+                          backgroundColor: "black",
+                          color: "white",
+                        },
+                        "@media (max-width : 768px) ": {
+                          width: "100%",
+                          marginBottom: "30px",
+                        },
+                      }}
                       type="submit"
                       variant="outlined"
                     >
@@ -108,7 +124,7 @@ const Cart = () => {
                 </Grid>
               )}
             </Grid>
-          </Grid>
+          </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={6} className={s.cart_totals}>
           <Grid container sx={{ display: "block", justifyContent: "end" }}>
