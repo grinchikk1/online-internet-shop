@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
@@ -15,22 +15,22 @@ import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
 import { searchProducts } from "../../data/fetchProducts";
-import { getFilterByType } from "../../data/fetchFilters";
-// import { useDispatch, useSelector } from "react-redux";
-import CardItem from "./CardItem/CardItem";
+// import { getFilterByType } from "../../data/fetchFilters";
+import { useDispatch, useSelector } from "react-redux";
+// import CardItem from "./CardItem/CardItem";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function Filter() {
   const classes = useStyles();
-  // const dispatch = useDispatch();
-  // const [searchResults, setSearchResults] = useState([]);
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.search.searchProduct);
+  const [searchResults, setSearchResults] = useState("");
 
   // useEffect(() => {
-  // const handleSearch = async (searchText) => {
-  //   const results = await searchProducts(searchText);
-  //   setSearchResults(results);
-  // };
+  const handleSearch = () => {
+    console.log(dispatch(searchProducts({ query: searchResults })));
+  };
   // handleSearch()
   // }, []);
 
@@ -61,7 +61,8 @@ function Filter() {
           Search
         </InputLabel>
         <Input
-          // onChange={(event) => handleSearch(event.target.value)}
+          onChange={(event) => setSearchResults(event.target.value)}
+          value={searchResults}
           id="search"
           name="search"
           className={classes.searchInput}
@@ -72,10 +73,9 @@ function Filter() {
             </InputAdornment>
           }
         />
+        <button onClick={handleSearch}>Search</button>
       </FormControl>
-      {/* {searchResults.map((product) => (
-        <div key={product.id}>{product.name}</div>
-      ))} */}
+
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"

@@ -1,4 +1,9 @@
 import axios from "axios";
+import {
+  fetchProductEnd,
+  fetchProductStart,
+  fetchProductSuccess,
+} from "../features/search/searchSlice";
 
 const url = "http://localhost:4000/api";
 
@@ -55,14 +60,12 @@ export const updateProduct = async (product, token) => {
 };
 
 // Пошук продуктів
-export const searchProducts = async (searchPhrases) => {
+export const searchProducts = async (searchPhrases) => async (dispatch) => {
+  dispatch(fetchProductStart());
   try {
-    const response = await axios.get(`${url}/products/search`, {
-      params: searchPhrases,
-    });
-    return response.data;
+    const response = await axios.post(`${url}/products/search`, searchPhrases);
+    dispatch(fetchProductSuccess(response.data));
   } catch (error) {
-    console.error("Error fetching data:", error);
-    return [];
+    dispatch(fetchProductEnd(error.message));
   }
 };
