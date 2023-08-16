@@ -15,7 +15,7 @@ function OrderItems({ cart, amounts }) {
             key={product._id}
             className={classes.orderPriceItem}
           >
-            <div style={{ borderBottom: "1px solid #D8D8D8" }}>
+            <div>
               <div className={classes.orderItem}>
                 <div>
                   ({amounts[product._id]}) {product.name}

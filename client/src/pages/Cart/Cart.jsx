@@ -24,6 +24,7 @@ import { useStyles } from "./CartStyles";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { removeProductFromCart } from "../../features/cart/cartSlice";
 import Checkout from "../../components/Checkout/Checkout";
+import { clearCustomer } from "../../features/customer/customerSlice";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -35,12 +36,13 @@ const Cart = () => {
   const [isBillingDetailsOpen, setIsBillingDetailsOpen] = useState(false);
   const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
 
-  const proceedToCheckout = () => {
+  const proceedToCheckout = (values) => {
     console.log(cart);
     if (cart.length > 0) {
       setIsBillingDetailsOpen(true);
     } else {
       setIsCartEmptyAlertOpen(true);
+      dispatch(clearCustomer());
     }
   };
 
@@ -218,7 +220,7 @@ const Cart = () => {
         maxWidth="lg"
       >
         <DialogContent>
-          <Checkout totalAmount={totalAmount} amounts={amounts} />
+          <Checkout />
         </DialogContent>
         <DialogActions>
           <Button
