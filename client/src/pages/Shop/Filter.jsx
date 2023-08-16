@@ -51,12 +51,14 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
           className={classes.searchInput}
           disableUnderline
           endAdornment={
-            <InputAdornment position="start" sx={{ color: "black" }}>
-              <SearchIcon fontSize="small" />
+            <InputAdornment
+              position="start"
+              sx={{ color: "black", cursor: "pointer" }}
+            >
+              <SearchIcon onClick={handleSearch} fontSize="small" />
             </InputAdornment>
           }
         />
-        <button onClick={handleSearch}>Search</button>
       </FormControl>
 
       <FormControl sx={{ marginBottom: "16px" }}>
