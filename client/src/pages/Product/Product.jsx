@@ -13,6 +13,7 @@ function Product() {
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
+  const token = "null";
 
   useEffect(() => {
     if (products.length === 0) {
@@ -29,8 +30,11 @@ function Product() {
 
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(product));
-    createCart(product._id, "");
-    addProductToLocalStorage(product);
+    if (!!token) {
+      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, "");
+    } else {
+      addProductToLocalStorage(product);
+    }
   };
 
   return (

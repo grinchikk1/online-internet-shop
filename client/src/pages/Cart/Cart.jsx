@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CartItem from "../../components/CartItem/CartItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,9 +22,9 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useStyles } from "./CartStyles";
-import { removeProductFromCart } from "../../features/cart/cartSlice";
+import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import Checkout from "../../components/Checkout/Checkout";
-import { updateCart } from "../../data/fetchCart";
+import { getCart, updateCart } from "../../data/fetchCart";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -35,7 +35,7 @@ const Cart = () => {
 
   const [isBillingDetailsOpen, setIsBillingDetailsOpen] = useState(false);
   const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
-
+  const token = "null";
   const proceedToCheckout = () => {
     console.log(cart);
     if (cart.length > 0) {
@@ -44,6 +44,30 @@ const Cart = () => {
       setIsCartEmptyAlertOpen(true);
     }
   };
+  // useEffect(() => {
+  //   if (!!token) {
+  //     getCart(token).then((data) => {
+  //       dispatch(
+  //         setCart(
+  //           data.products.reduce(
+  //             (acc, item) => {
+  //               const product = item.product;
+  //               const amount = item.cartQuantity;
+  //               return {
+  //                 cart: [...acc.cart, product],
+  //                 amount: {
+  //                   ...acc.amount,
+  //                   [product._id]: amount,
+  //                 },
+  //               };
+  //             },
+  //             { amount: {}, cart: [] }
+  //           )
+  //         )
+  //       );
+  //     });
+  //   }
+  // }, []);
 
   return (
     <Container maxWidth="lg">
@@ -51,7 +75,7 @@ const Cart = () => {
       <Grid container className={s.wrapper_cart}>
         <Grid item xs={12} sm={12} md={6}>
           <Box>
-            <Grid item xs={12} sm={12} md={12} /*className={s.cart_items}*/>
+            <Grid item xs={12} sm={12} md={12}>
               {cart.map((product) => {
                 return (
                   <CartItem
@@ -74,7 +98,7 @@ const Cart = () => {
                     color="inherit"
                     variant="outlined"
                     onClick={() => {
-                      updateCart(cart, "");
+                      updateCart({}, "");
                     }}
                   >
                     UPDATE CART
@@ -98,8 +122,6 @@ const Cart = () => {
                       }}
                     />
                     <Button
-                      // className={s.applyCouponBtn}
-                      // color="inherit"
                       sx={{
                         marginTop: "60px",
                         height: "53px",

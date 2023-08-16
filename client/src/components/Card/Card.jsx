@@ -41,6 +41,7 @@ function Card({
   previousPrice,
   product,
 }) {
+  const token = "null";
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -48,8 +49,11 @@ function Card({
 
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(product));
-    createCart(product._id, "");
-    addProductToLocalStorage(product);
+    if (!!token) {
+      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, "");
+    } else {
+      addProductToLocalStorage(product);
+    }
   };
 
   return (
