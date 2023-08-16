@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
@@ -14,21 +14,12 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
-import { searchProducts } from "../../data/fetchProducts";
-import { useDispatch, useSelector } from "react-redux";
-import CardItem from "./CardItem/CardItem";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function Filter() {
+function Filter({ handleSearch, setSearchResults, searchResults }) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  const products = useSelector((state) => state.search.searchProduct);
-  const [searchResults, setSearchResults] = useState("");
-
-  const handleSearch = () => {
-    dispatch(searchProducts({ query: searchResults }));
-  };
+  // const dispatch = useDispatch();
 
   //Brand
 
@@ -204,9 +195,6 @@ function Filter() {
           }}
         />
       </Box> */}
-      {products.map((card) => (
-        <CardItem key={card._id} card={card} />
-      ))}
     </Box>
   );
 }
