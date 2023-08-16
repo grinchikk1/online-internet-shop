@@ -43,6 +43,11 @@ export default function MultiActionAreaCard({ card }) {
     gap: "3px",
   };
 
+  const discountPrice = (
+    (card.currentPrice / card.previousPrice) *
+    100
+  ).toFixed(0);
+
   return (
     <Card style={cards}>
       <CardActionArea onClick={handleClick} sx={{ marginRight: "40px" }}>
@@ -54,7 +59,7 @@ export default function MultiActionAreaCard({ card }) {
         ></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
-          <span>21%</span>
+          <span>{discountPrice}%</span>
         </div>
 
         <Typography
