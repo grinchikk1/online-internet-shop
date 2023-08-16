@@ -15,9 +15,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
 import { searchProducts } from "../../data/fetchProducts";
-// import { getFilterByType } from "../../data/fetchFilters";
 import { useDispatch, useSelector } from "react-redux";
-// import CardItem from "./CardItem/CardItem";
+import CardItem from "./CardItem/CardItem";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -27,16 +26,9 @@ function Filter() {
   const products = useSelector((state) => state.search.searchProduct);
   const [searchResults, setSearchResults] = useState("");
 
-  // useEffect(() => {
   const handleSearch = () => {
-    console.log(dispatch(searchProducts({ query: searchResults })));
+    dispatch(searchProducts({ query: searchResults }));
   };
-  // handleSearch()
-  // }, []);
-
-  // const handleChange = (event) => {
-  //   console.log(event.target.value);
-  // };
 
   //Brand
 
@@ -97,10 +89,6 @@ function Filter() {
               backgroundColor: "transparent",
             },
           }}
-          // value={selectedProductMaterial}
-          // onChange={(e) => setSelectedProductMaterial(e.target.value)}
-          // value={selectedProductType}
-          // onChange={handleProductTypeChange}
         >
           <MenuItem className={classes.SelectInputItem}>Gold</MenuItem>
           <MenuItem className={classes.SelectInputItem}>Silver</MenuItem>
@@ -216,6 +204,9 @@ function Filter() {
           }}
         />
       </Box> */}
+      {products.map((card) => (
+        <CardItem key={card._id} card={card} />
+      ))}
     </Box>
   );
 }

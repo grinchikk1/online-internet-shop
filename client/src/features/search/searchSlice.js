@@ -10,16 +10,16 @@ const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-    fetchProductStart(state) {
+    fetchProductsStart(state) {
       state.loading = true;
       state.error = null;
     },
-    fetchProductSuccess(state, action) {
+    fetchProductsSuccess(state, action) {
       state.searchProduct = action.payload;
       state.loading = false;
       state.error = null;
     },
-    fetchProductEnd(state, action) {
+    fetchProductsFailure(state, action) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -27,9 +27,9 @@ const searchSlice = createSlice({
 });
 
 export const {
-  fetchProductStart,
-  fetchProductSuccess,
-  fetchProductEnd,
+  fetchProductsStart,
+  fetchProductsSuccess,
+  fetchProductsFailure,
 } = searchSlice.actions;
 
 export default searchSlice.reducer;
