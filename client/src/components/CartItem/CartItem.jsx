@@ -9,6 +9,7 @@ import {
   deleteFromCart,
   removeFromCart,
   addToCart,
+  updateCart,
 } from "../../data/fetchCart";
 
 const CartItem = (props) => {
@@ -49,6 +50,7 @@ const CartItem = (props) => {
     if (amount > 1) {
       dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
       removeFromCart(_id, "");
+      updateCart(_id, "");
     } else {
       handleRemoveProductFromCart();
     }
@@ -57,6 +59,7 @@ const CartItem = (props) => {
   const handleIncrement = () => {
     dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
     addToCart(_id, "");
+    updateCart(_id, "");
   };
 
   const handleAmountChange = (e) => {
