@@ -11,6 +11,7 @@ import About from "./pages/About/About";
 import Product from "./pages/Product/Product";
 import "./styles/App.scss";
 import Footer from "./components/Footer/Footer";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/product/:id" element={<Product />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/order-confirmation" element={<OrderConfirmation />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
