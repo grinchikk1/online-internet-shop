@@ -7,6 +7,7 @@ import { Container, Grid, TextField, Box } from "@mui/material";
 
 import Button from "@mui/material/Button";
 import { useStyles } from "./CartStyles";
+
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import { updateCart } from "../../data/fetchCart";
 import CartTotals from "../../components/CartTotals/CartTotals";

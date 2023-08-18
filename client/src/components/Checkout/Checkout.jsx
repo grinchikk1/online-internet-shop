@@ -6,10 +6,17 @@ import { ThemeProvider } from "@mui/material/styles";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Checkout({ totalAmount, amounts }) {
+import { useDispatch } from "react-redux";
+import { addCustomer } from "../../features/customer/customerSlice";
+
+function Checkout() {
   const classes = useStyles();
   const [isOrderPlaced, setIsOrderPlaced] = useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   return (
     <ThemeProvider theme={theme}>
@@ -18,9 +25,20 @@ function Checkout({ totalAmount, amounts }) {
           initialValues={initalValues}
           validationSchema={validationSchema}
           onSubmit={(values, { resetForm }) => {
-            console.log(values);
+            const randomOrderNumber =
+              Math.floor(Math.random() * 9000000) + 1000000;
+            const orderDate = new Date();
+            dispatch(
+              addCustomer({
+                ...values,
+                orderNumber: randomOrderNumber,
+                orderDate: orderDate.toISOString(),
+              })
+            );
+
             resetForm();
             setIsOrderPlaced(true);
+            navigate("/order-confirmation");
           }}
         >
           {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
@@ -32,8 +50,6 @@ function Checkout({ totalAmount, amounts }) {
                   handleSubmit={handleSubmit}
                   values={values}
                   setFieldValue={setFieldValue}
-                  totalAmount={totalAmount}
-                  amounts={amounts}
                 />
               </Grid>
             </Form>
