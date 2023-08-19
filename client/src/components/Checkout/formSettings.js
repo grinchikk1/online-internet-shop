@@ -16,5 +16,5 @@ export const initalValues = {
   phone: "",
   email: "",
   notes: "",
-  paymentOption: "paypal",
+  paymentOption: "Paypal",
 };
