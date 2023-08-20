@@ -13,6 +13,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import "./styles/App.scss";
 import Footer from "./components/Footer/Footer";
+import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 
 function App() {
   return (

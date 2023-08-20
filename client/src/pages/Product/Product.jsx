@@ -4,17 +4,16 @@ import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
-import {
-  addProductToCart,
-  removeProductFromCart,
-} from "../../features/cart/cartSlice";
-import { addToCart } from "../../data/fetchCart";
+import { addProductToCart } from "../../features/cart/cartSlice";
+import { createCart } from "../../data/fetchCart";
+import { addProductToLocalStorage } from "../../components/Card/Card";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
+  const token = "null";
 
   useEffect(() => {
     if (products.length === 0) {
@@ -29,16 +28,22 @@ function Product() {
     }
   }, [id]);
 
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(product));
+    if (!!token) {
+      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, "");
+    } else {
+      addProductToLocalStorage(product);
+    }
+  };
+
   return (
     <>
       {product ? (
         <ProductCard
           key={product.id}
           product={product}
-          onAddToCartClicked={() => {
-            dispatch(addProductToCart(product));
-            addToCart(product._id, "");
-          }}
+          onAddToCartClicked={handleAddProductToCart}
         />
       ) : (
         <p>Product not found.</p>
