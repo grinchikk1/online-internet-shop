@@ -24,6 +24,8 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
 import ReviewForm from "../ReviewForm/ReviewForm";
+import { addToCart, removeFromCart } from "../../data/fetchCart";
+import { getUserToken } from "../../data/fetchUsers";
 
 export default function ProductCard({
   product,
@@ -33,6 +35,7 @@ export default function ProductCard({
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
+  const token = getUserToken();
 
   const {
     _id,
@@ -49,7 +52,7 @@ export default function ProductCard({
   } = product;
 
   const isMobile = useMediaQuery("(max-width: 900px)");
-  
+
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showButtons, setShowButtons] = useState({
     addToCart: false,
@@ -79,11 +82,13 @@ export default function ProductCard({
   const handleDecrement = () => {
     if (value > 1) {
       setValue((prevValue) => prevValue - 1);
+      removeFromCart(_id, token);
     }
   };
 
   const handleIncrement = () => {
     setValue((prevValue) => prevValue + 1);
+    addToCart(_id, token);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -113,7 +118,7 @@ export default function ProductCard({
   const handleClickContinueBtn = () => {
     navigate("/shop");
   };
-console.log(product);
+  console.log(product);
   return (
     <Container
       disableGutters={true}
@@ -428,9 +433,9 @@ console.log(product);
                   padding: "10px 0",
                 }}
               >
-                {/* Reviews content */} 
+                {/* Reviews content */}
                 {/* вставила свою форму і поміняла Typografy на Container в 422 і 433 рядку, щоб не було помилок*/}
-               <ReviewForm productId={_id}/>                     
+                <ReviewForm productId={_id} />
               </Container>
             )}
             <Divider
@@ -559,7 +564,7 @@ console.log(product);
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
-                  color: "#faaf00",  // поміняла з чорного на жовтий колір
+                  color: "#faaf00", // поміняла з чорного на жовтий колір
                 }}
                 name="customized-10"
                 defaultValue={3}
@@ -674,7 +679,6 @@ console.log(product);
           disableGutters={true}
           className={classes.container_tabs}
           maxWidth={"lg"}
-         
         >
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}
@@ -716,17 +720,14 @@ console.log(product);
             </TabPanel>
           )}
           {valueTab === "3" && (
-            <TabPanel valueTab={valueTab} index="3">           
-              {/* Reviews content */}     
+            <TabPanel valueTab={valueTab} index="3">
+              {/* Reviews content */}
               {/* імпортувала свою форму з відгуками */}
-              <ReviewForm productId={_id}/>           
-             
-              
+              <ReviewForm productId={_id} />
             </TabPanel>
           )}
         </Container>
       )}
-
 
       <Snackbar
         open={showButtons.addToCart}

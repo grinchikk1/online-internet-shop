@@ -15,6 +15,7 @@ import "./styles/App.scss";
 import Footer from "./components/Footer/Footer";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
