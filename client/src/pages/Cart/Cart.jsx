@@ -45,7 +45,7 @@ const Cart = () => {
         );
       });
     }
-  }, []);
+  }, [dispatch, token]);
 
   return (
     <Container maxWidth="lg">
@@ -76,7 +76,7 @@ const Cart = () => {
                     color="inherit"
                     variant="outlined"
                     onClick={() => {
-                      updateCart([...cart], "");
+                      updateCart([...cart], token);
                     }}
                   >
                     UPDATE CART

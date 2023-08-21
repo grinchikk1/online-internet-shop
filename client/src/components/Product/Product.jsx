@@ -23,15 +23,17 @@ import { TabPanel } from "./TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
+
 import { addToCart, removeFromCart } from "../../data/fetchCart";
-import { useDispatch } from "react-redux";
-import { updateCartCount } from "../../features/cart/cartSlice";
+import ReviewForm from "../ReviewForm/ReviewForm";
+import { getUserToken } from "../../data/fetchUsers";
 
 export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
+  const token = getUserToken();
 
   const {
     _id,
@@ -76,18 +78,14 @@ export default function ProductCard({ product, onAddToCartClicked }) {
 
   const handleDecrement = () => {
     if (value > 1) {
-      const newCount = value - 1;
-      dispatch(updateCartCount({ itemID: _id, newCount }));
-      setValue(newCount);
-      removeFromCart(_id, "");
+      setValue((prevValue) => prevValue - 1);
+      removeFromCart(_id, token);
     }
   };
 
   const handleIncrement = () => {
-    const newCount = value + 1;
-    dispatch(updateCartCount({ itemID: _id, newCount }));
-    setValue(newCount);
-    addToCart(_id, "", value);
+    setValue((prevValue) => prevValue + 1);
+    addToCart(_id, token);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -424,7 +422,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               />
             </Button>
             {showButtons.reviews && (
-              <Typography
+              <Container
                 sx={{
                   fontSize: "12px",
                   lineHeight: "20px",
@@ -432,8 +430,10 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   padding: "10px 0",
                 }}
               >
-                Reviews content
-              </Typography>
+                {/* Reviews content */}
+                {/* вставила свою форму і поміняла Typografy на Container в 422 і 433 рядку, щоб не було помилок*/}
+                <ReviewForm productId={_id} />
+              </Container>
             )}
             <Divider
               sx={{
@@ -561,7 +561,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
-                  color: "#000000",
+                  color: "#faaf00", // поміняла з чорного на жовтий колір
                 }}
                 name="customized-10"
                 defaultValue={3}
@@ -718,7 +718,9 @@ export default function ProductCard({ product, onAddToCartClicked }) {
           )}
           {valueTab === "3" && (
             <TabPanel valueTab={valueTab} index="3">
-              Reviews content
+              {/* Reviews content */}
+              {/* імпортувала свою форму з відгуками */}
+              <ReviewForm productId={_id} />
             </TabPanel>
           )}
         </Container>

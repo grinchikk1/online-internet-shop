@@ -42,7 +42,7 @@ function ReplyForm() {
   
   
   return (
-    <Container style={{ maxWidth: "720px", marginTop: "50px", textAlign: "left", justifyContent: "left" }}>
+    <Container sx={{ maxWidth: "720px", marginTop: "50px", textAlign: "left", justifyContent: "left" }}>
       <Typography variant="h5">Leave a reply</Typography>
       <Formik
         initialValues={{

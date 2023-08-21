@@ -4,7 +4,7 @@ import { Container, Box, Typography, Button } from "@mui/material";
 import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useStyles, theme } from "./HomeStyles";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getProducts } from "../../data/fetchProducts";
 import { Link } from "react-router-dom";
 import {
@@ -39,7 +39,7 @@ function Home() {
     getProducts().then((data) => {
       dispatch(setProducts(data));
     });
-  }, []);
+  }, [dispatch]);
 
   function out() {
     if (products) {
