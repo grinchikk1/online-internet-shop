@@ -1,10 +1,9 @@
-
-
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { url } from "../../data/fetchCart";
+import { getUserToken } from "../../data/fetchUsers";
 
+const token = getUserToken();
 
 // const newCustomer = {
 //   firstName: "Customer",
@@ -27,9 +26,6 @@ import { url } from "../../data/fetchCart";
 //     /*Do something with error, e.g. show error to customer*/
 //   });
   
-
-
-
 // const userData = {
 //   loginOrEmail: "customer@gmail.com",
 //   password: "1111111",
@@ -44,11 +40,7 @@ import { url } from "../../data/fetchCart";
 //   });
 
 const apiHeaders = {
-  Authorization:
-    // "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZC…AyNn0.LNq_amHuQruNUBysT-ZHQQbGmz6eAkMtW9k2KNc2JlE",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0ZTBiYzQyNGRmMjM4NGE4OGI2NDNiNSIsImZpcnN0TmFtZSI6IkN1c3RvbWVyIiwibGFzdE5hbWUiOiJOZXdvbmUiLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2OTI2MjI0OTUsImV4cCI6MTY5MjY1ODQ5NX0.WOz_w8T9xG8sQk4uMsOZs0ShvApAvP4MgAKvNQtw70M",
-
-  // потім замість токена поставити змінну
+  Authorization: token,
 };
 
 export const addReview = createAsyncThunk(
@@ -83,9 +75,6 @@ export const addReview = createAsyncThunk(
   }
 ); 
 
-
-
-
 export const deleteReview = createAsyncThunk(
   "reviews/deleteReview",
   async (id, { rejectWithValue }) => {
@@ -99,14 +88,6 @@ export const deleteReview = createAsyncThunk(
     }
   }
 );
-  
-
-
-
-
-
-
-
 
 const reviewsSlice = createSlice({
   name: "reviews",
@@ -134,13 +115,7 @@ const reviewsSlice = createSlice({
   },
 );
 
-
 export default reviewsSlice.reducer;
-
-
-
-
-
 
 // export const updateReview = createAsyncThunk(
 //   "reviews/updateReview",
@@ -169,8 +144,6 @@ export default reviewsSlice.reducer;
 //   }
 // );
 
-
-
 //get +++++++++++++++++++
 // await axios //get на відгуки по продукту
 //    .get(`${url}/comments/product/${productId}`)
@@ -180,8 +153,6 @@ export default reviewsSlice.reducer;
 //    .catch((err) => {
 //      console.log("catch");
 //    });
-
-
 
       // const responsedata = await axios.put(
 
