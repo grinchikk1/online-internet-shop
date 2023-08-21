@@ -29,7 +29,7 @@ export const changePassword = async (passwords, token) => {
   try {
     const response = await axios.put(`${url}/customers/password`, passwords, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -44,7 +44,7 @@ export const updateUser = async (user, token) => {
   try {
     const response = await axios.put(`${url}/customers`, user, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -59,7 +59,7 @@ export const getUser = async (token) => {
   try {
     const response = await axios.get(`${url}/customers/customer`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -67,6 +67,11 @@ export const getUser = async (token) => {
     console.error("Error fetching data:", error);
     return [];
   }
+};
+
+//  Отримати токен Юзера
+export const getUserToken = () => {
+  return localStorage.getItem("token");
 };
 
 // Приклад отримання юзера
