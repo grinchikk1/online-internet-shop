@@ -45,6 +45,11 @@ function Shop() {
   };
 
   //Filter Search
+  // const handleSearch = () => {
+  //   dispatch(searchProducts({ query: searchResults }));
+  //   setShowSearchResults(true);
+  // };
+
   const handleSearch = () => {
     dispatch(searchProducts({ query: searchResults }));
     setShowSearchResults(true);

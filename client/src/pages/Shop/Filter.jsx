@@ -14,6 +14,8 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
+import { getFilterByType } from "../../data/fetchFilters";
+import { useState } from "react";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
@@ -23,20 +25,13 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
 
   //Brand
 
-  // const [selectedProductType, setSelectedProductType] = useState("");
+  const [selectedProductType, setSelectedProductType] = useState("");
   // const [products, setProducts] = useState([]);
 
-  // const handleProductTypeChange = async (event) => {
-  //   const selectedType = event.target.value;
-  //   setSelectedProductType(selectedType);
-
-  //   try {
-  //     const productsByType = await getFilterByType(selectedType);
-  //     setProducts(productsByType);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const handleProductTypeChange = (event) => {
+    getFilterByType("brand");
+    // setSelectedProductType(event.target.value);
+  };
   return (
     <Box className={classes.Container}>
       <FormControl sx={{ marginBottom: "40px" }}>
@@ -44,7 +39,9 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
           Search
         </InputLabel>
         <Input
-          onChange={(event) => setSearchResults(event.target.value)}
+          onChange={(event) => {
+            setSearchResults(event.target.value);
+          }}
           value={searchResults}
           id="search"
           name="search"
@@ -107,13 +104,13 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
               color: "rgba(0, 0, 0, 1)",
             },
           }}
-          // value={selectedBrand}
-          // onChange={(e) => setSelectedBrand(e.target.value)}
-          // value={selectedProductType}
-          // onChange={handleProductTypeChange}
+          value={selectedProductType}
+          onChange={handleProductTypeChange}
         >
           <MenuItem className={classes.SelectInputItem}>KJM</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>ZARINA</MenuItem>
+          <MenuItem className={classes.SelectInputItem} value="ZARINA">
+            ZARINA
+          </MenuItem>
           <MenuItem className={classes.SelectInputItem}>KOLO</MenuItem>
           <MenuItem className={classes.SelectInputItem}>Boucheron</MenuItem>
           <MenuItem className={classes.SelectInputItem}>Suarez</MenuItem>

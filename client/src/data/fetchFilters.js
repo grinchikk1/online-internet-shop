@@ -44,6 +44,9 @@ export const getFilter = async () => {
 export const getFilterByType = async (type) => {
   try {
     const response = await axios.get(`${url}/filters/${type}`);
+    const filters = response.data; // Отримати масив фільтрів з властивості data
+    const a = filters.map((filter) => filter.name); // Витягнути імена фільтрів
+    console.log(a);
     return response.data;
   } catch (error) {
     console.log(error);
