@@ -54,6 +54,16 @@ export const updateProduct = async (product, token) => {
   }
 };
 
+// Функція для запиту фільтрації
+export const filterProducts = async (params) => {
+  try {
+    const response = await axios.get(`${url}/products/filter`, { params });
+    return response.data; // Тут буде відфільтрований список продуктів
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
 // Пошук продуктів
 export const searchProducts = async (searchPhrases) => {
   try {
@@ -64,3 +74,19 @@ export const searchProducts = async (searchPhrases) => {
     return [];
   }
 };
+
+// Приклад фільтрації
+
+// const filterParams = {
+//   categories: "bracelet",
+//   brand: "ZARINA",
+//   perPage: 2,
+//   startPage: 1,
+//   sort: "-price", // Сортування за ціною у спадаючому порядку
+// };
+
+// const filterer = async () => {
+//   console.log(await filterProducts(filterParams));
+// };
+
+// filterer();
