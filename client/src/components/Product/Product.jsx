@@ -23,6 +23,7 @@ import { TabPanel } from "./TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
+import ReviewForm from "../ReviewForm/ReviewForm";
 
 export default function ProductCard({
   product,
@@ -34,6 +35,7 @@ export default function ProductCard({
   const navigate = useNavigate();
 
   const {
+    _id,
     imageUrls,
     name,
     currentPrice,
@@ -47,6 +49,7 @@ export default function ProductCard({
   } = product;
 
   const isMobile = useMediaQuery("(max-width: 900px)");
+  
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showButtons, setShowButtons] = useState({
     addToCart: false,
@@ -110,7 +113,7 @@ export default function ProductCard({
   const handleClickContinueBtn = () => {
     navigate("/shop");
   };
-
+console.log(product);
   return (
     <Container
       disableGutters={true}
@@ -417,7 +420,7 @@ export default function ProductCard({
               />
             </Button>
             {showButtons.reviews && (
-              <Typography
+              <Container
                 sx={{
                   fontSize: "12px",
                   lineHeight: "20px",
@@ -425,8 +428,10 @@ export default function ProductCard({
                   padding: "10px 0",
                 }}
               >
-                Reviews content
-              </Typography>
+                {/* Reviews content */} 
+                {/* вставила свою форму і поміняла Typografy на Container в 422 і 433 рядку, щоб не було помилок*/}
+               <ReviewForm productId={_id}/>                     
+              </Container>
             )}
             <Divider
               sx={{
@@ -554,7 +559,7 @@ export default function ProductCard({
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
-                  color: "#000000",
+                  color: "#faaf00",  // поміняла з чорного на жовтий колір
                 }}
                 name="customized-10"
                 defaultValue={3}
@@ -669,6 +674,7 @@ export default function ProductCard({
           disableGutters={true}
           className={classes.container_tabs}
           maxWidth={"lg"}
+         
         >
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}
@@ -710,12 +716,18 @@ export default function ProductCard({
             </TabPanel>
           )}
           {valueTab === "3" && (
-            <TabPanel valueTab={valueTab} index="3">
-              Reviews content
+            <TabPanel valueTab={valueTab} index="3">           
+              {/* Reviews content */}     
+              {/* імпортувала свою форму з відгуками */}
+              <ReviewForm productId={_id}/>           
+             
+              
             </TabPanel>
           )}
         </Container>
       )}
+
+
       <Snackbar
         open={showButtons.addToCart}
         autoHideDuration={3000}

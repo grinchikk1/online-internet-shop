@@ -8,7 +8,7 @@ import { useStyles, theme } from "./AboutStyles";
 
 import { ThemeProvider } from "@mui/material/styles";
 
-import ReplyForm from "../../components/AboutForm/AboutForm";
+// import ReplyForm from "../../components/AboutForm/AboutForm";
 
 function About() {
   const classes = useStyles();
@@ -22,7 +22,7 @@ function About() {
     <Container maxWidth="lg" className={classes.pageContainer} >
 
       {/* Перше фото */}
-      <Typography variant="h4">About us</Typography>
+      <Typography variant="h4" sx={{ marginTop: "50px" }}>About us</Typography>
       <Typography variant="h6" sx={{ marginBottom: "25px" }}>
         Fast Fashion, And Faster Fashion
       </Typography>
@@ -31,7 +31,7 @@ function About() {
         alt="Перше фото"
         style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
       />
-      <Typography variant="body1" className={classes.article1} theme={theme}>
+      <Typography variant="body1" className={classes.article1}>
         To create a unique image, you use all means to create a unique look, so
         sometimes it is simply necessary to buy jewelry. It is gold and silver
         jewelry that helps you show your individuality, impeccable taste, boost
@@ -70,8 +70,8 @@ function About() {
 
       {/* Текст після другого фото */}
 
-      <Typography variant="body1" className={classes.article2} theme={theme}>
-        <Typography component="span" className={classes.title} sx={{fontSize: "26px", fontWeight: 400}}>
+      <Typography variant="body1" className={classes.article2}>
+        <Typography component="span"  sx={{display: "block", paddingTop: "50px", paddingBottom: "20px", fontSize: "26px", fontWeight: 400}}>
           TOP TRENDS
         </Typography>
         Individual approach to each client We offer only proven and high-quality
@@ -92,14 +92,14 @@ function About() {
       {/* Кнопка для Фейсбуку */}
 
       <Container
-        style={{ display: "flex", justifyContent: "center", padding: "0" }}
+        sx={{ display: "flex", justifyContent: "center", padding: "0", marginBottom: "57px" }}
       >
-        <Typography style={{ marginTop: "10px", fontSize: "16px" }}>
+        <Typography sx={{ marginTop: "10px", fontSize: "16px" }}>
           Share
         </Typography>
         <Divider
           flexItem
-          style={{ flexGrow: 1, marginLeft: "8px", maxWidth: "500px" }}
+            sx={{ flexGrow: 1, marginLeft: "8px", maxWidth: "500px" }}
         />
 
         <IconButton
@@ -134,7 +134,7 @@ function About() {
       </Container>
 
       {/* Форма */}
-      <ReplyForm />
+      {/* <ReplyForm /> */}
     </Container>
 
      </ThemeProvider>
