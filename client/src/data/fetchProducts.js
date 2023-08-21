@@ -34,7 +34,7 @@ export const addProduct = async (product, token) => {
   try {
     const response = await axios.post(`${url}/api/products`, product, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -49,7 +49,7 @@ export const updateProduct = async (product, token) => {
   try {
     const response = await axios.put(`${url}/products/${product.id}`, product, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;

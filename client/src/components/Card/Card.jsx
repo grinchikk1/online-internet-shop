@@ -17,7 +17,8 @@ import {
 } from "./CardStyle";
 import { addProductToCart } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
-import { createCart } from "../../data/fetchCart";
+import { addToCart } from "../../data/fetchCart";
+import { getUserToken } from "../../data/fetchUsers";
 
 export const addProductToLocalStorage = (product) => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -41,7 +42,7 @@ function Card({
   previousPrice,
   product,
 }) {
-  const token = "null";
+  const token = getUserToken();
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -50,7 +51,7 @@ function Card({
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(product));
     if (!!token) {
-      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, "");
+      addToCart(product._id, token);
     } else {
       addProductToLocalStorage(product);
     }

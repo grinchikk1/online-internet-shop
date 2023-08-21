@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const url = "http://localhost:4000/api";
+ export const url = "http://localhost:4000/api";
 
 // Створити кошик
 export const createCart = async (cart, token) => {
   try {
     const response = await axios.post(`${url}/cart`, cart, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -21,7 +21,7 @@ export const updateCart = async (cart, token) => {
   try {
     const response = await axios.put(`${url}/cart`, cart, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -33,9 +33,9 @@ export const updateCart = async (cart, token) => {
 // Додати товар до кошика
 export const addToCart = async (productId, token) => {
   try {
-    const response = await axios.put(`${url}/cart/${productId}`, {
+    const response = await axios.put(`${url}/cart/${productId}`, null, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -47,9 +47,9 @@ export const addToCart = async (productId, token) => {
 // Зменшити кількість товару у кошику
 export const removeFromCart = async (productId, token) => {
   try {
-    const response = await axios.put(`${url}/cart/product/${productId}`, {
+    const response = await axios.delete(`${url}/cart/product/${productId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -63,7 +63,7 @@ export const deleteFromCart = async (productId, token) => {
   try {
     const response = await axios.delete(`${url}/cart/${productId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -77,7 +77,7 @@ export const getCart = async (token) => {
   try {
     const response = await axios.get(`${url}/cart`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -91,7 +91,7 @@ export const deleteCart = async (token) => {
   try {
     const response = await axios.delete(`${url}/cart`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;

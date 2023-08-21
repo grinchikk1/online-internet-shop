@@ -39,7 +39,7 @@ function Home() {
     getProducts().then((data) => {
       dispatch(setProducts(data));
     });
-  }, []);
+  }, [dispatch]);
 
   function out() {
     if (products) {

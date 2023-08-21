@@ -50,9 +50,17 @@ function Shop() {
   //   setShowSearchResults(true);
   // };
 
+  useEffect(() => {
+    setShowSearchResults(searchResults !== "");
+  }, [searchResults]);
+
   const handleSearch = () => {
-    dispatch(searchProducts({ query: searchResults }));
-    setShowSearchResults(true);
+    if (searchResults.trim() === "") {
+      getProducts();
+    } else {
+      dispatch(searchProducts({ query: searchResults }));
+      setShowSearchResults(true);
+    }
   };
   // +6 cards
   const handleLoadMore = () => {
@@ -130,7 +138,6 @@ function Shop() {
 
           <Box>
             <Grid
-              justifyContent={"center"}
               container
               columnSpacing={{ xs: 2, md: 3 }}
               rowSpacing={{ xs: 3, md: 6 }}

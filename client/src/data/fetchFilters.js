@@ -7,7 +7,7 @@ export const addFilter = async (filter, tokenAdmin) => {
   try {
     const response = await axios.post(`${url}/filters`, filter, {
       headers: {
-        Authorization: `Bearer ${tokenAdmin}`,
+        Authorization: tokenAdmin,
       },
     });
     return response.data;
@@ -21,7 +21,7 @@ export const updateFilter = async (id, filter, tokenAdmin) => {
   try {
     const response = await axios.put(`${url}/filters/${id}`, filter, {
       headers: {
-        Authorization: `Bearer ${tokenAdmin}`,
+        Authorization: tokenAdmin,
       },
     });
     return response.data;
@@ -58,7 +58,7 @@ export const deleteFilter = async (id, tokenAdmin) => {
   try {
     const response = await axios.delete(`${url}/filters/${id}`, {
       headers: {
-        Authorization: `Bearer ${tokenAdmin}`,
+        Authorization: tokenAdmin,
       },
     });
     return response.data;

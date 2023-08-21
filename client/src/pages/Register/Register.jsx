@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { addToCart } from "../../data/fetchCart";
+import { createCart } from "../../data/fetchCart";
 import { addProductToLocalStorage } from "../../components/Card/Card";
 import { getUserToken } from "../../data/fetchUsers";
 
@@ -32,7 +32,7 @@ function Product() {
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(product));
     if (!!token) {
-      addToCart(product._id, token);
+      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, token);
     } else {
       addProductToLocalStorage(product);
     }

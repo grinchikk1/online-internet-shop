@@ -9,9 +9,13 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import About from "./pages/About/About";
 import Product from "./pages/Product/Product";
+import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 import "./styles/App.scss";
 import Footer from "./components/Footer/Footer";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
@@ -27,6 +31,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/order-confirmation" element={<OrderConfirmation />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
