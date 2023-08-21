@@ -13,17 +13,13 @@ import { useStyles } from "./CheckoutStyle";
 import { FaPaypal } from "react-icons/fa";
 import OrderItems from "../../pages/Cart/OrderItem";
 import { useSelector } from "react-redux";
+import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
-function YourOrder({
-  isSubmitting,
-  handleSubmit,
-  values,
-  setFieldValue,
-  totalAmount,
-  amounts,
-}) {
+function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
   const classes = useStyles();
   const cart = useSelector((state) => state.cart.cart);
+  const totalAmount = useSelector(getTotalCartAmount);
+  const amounts = useSelector((state) => state.cart.amount);
   return (
     <Grid item xs={12} md={6}>
       <Typography variant="h5" gutterBottom className={classes.heading}>
@@ -61,22 +57,22 @@ function YourOrder({
               }
             >
               <FormControlLabel
-                value="directBankTransfer"
+                value="Direct Bank Transfer"
                 control={<Radio style={{ color: "#000000" }} />}
                 label="Direct Bank Transfer"
               />
               <FormControlLabel
-                value="checkPayments"
+                value="Card on Delivery"
                 control={<Radio style={{ color: "#000000" }} />}
-                label="Check Payments"
+                label="Card on Delivery"
               />
               <FormControlLabel
-                value="cashOnDelivery"
+                value="Cash on Delivery"
                 control={<Radio style={{ color: "#000000" }} />}
                 label="Cash on Delivery"
               />
               <FormControlLabel
-                value="paypal"
+                value="Paypal"
                 control={<Radio style={{ color: "#000000" }} />}
                 label={
                   <>
