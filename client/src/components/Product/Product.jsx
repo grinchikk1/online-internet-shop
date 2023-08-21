@@ -23,17 +23,18 @@ import { TabPanel } from "./TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
+import { addToCart, removeFromCart } from "../../data/fetchCart";
+import { useDispatch } from "react-redux";
+import { updateCartCount } from "../../features/cart/cartSlice";
 
-export default function ProductCard({
-  product,
-  onAddToCartClicked,
-  onRemoveFromCartClicked,
-}) {
+export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
+    _id,
     imageUrls,
     name,
     currentPrice,
@@ -75,12 +76,18 @@ export default function ProductCard({
 
   const handleDecrement = () => {
     if (value > 1) {
-      setValue((prevValue) => prevValue - 1);
+      const newCount = value - 1;
+      dispatch(updateCartCount({ itemID: _id, newCount }));
+      setValue(newCount);
+      removeFromCart(_id, "");
     }
   };
 
   const handleIncrement = () => {
-    setValue((prevValue) => prevValue + 1);
+    const newCount = value + 1;
+    dispatch(updateCartCount({ itemID: _id, newCount }));
+    setValue(newCount);
+    addToCart(_id, "", value);
   };
 
   const handleTabChange = (event, newValue) => {

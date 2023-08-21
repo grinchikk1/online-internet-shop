@@ -13,20 +13,8 @@ import {
 } from "../../data/fetchCart";
 
 const CartItem = (props) => {
-  const {
-    _id,
-    enabled,
-    imageUrls,
-    quantity,
-    name,
-    currentPrice,
-    categories,
-    productMaterial,
-    brand,
-    itemNo,
-    date,
-    country,
-  } = props.data;
+  const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
+    props.data;
   const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg

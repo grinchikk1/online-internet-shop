@@ -11,7 +11,6 @@ import { useStyles } from "./CartStyles";
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import { updateCart } from "../../data/fetchCart";
 import CartTotals from "../../components/CartTotals/CartTotals";
-import CartTotalsCheckout from "../../components/CartTotals/CartTotalsCheckout";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
