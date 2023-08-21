@@ -3,28 +3,38 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import "../../styles/style.scss";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../data/fetchUsers";
+import { setUser, setError } from "../../features/auth/authSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const initialValues = {
-    email: "",
+    loginOrEmail: "",
     password: "",
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Invalid email")
-      .matches(
-        /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-        "Invalid email format"
-      )
-      .required("Email is required"),
+    loginOrEmail: Yup.string().required("Login or Email is required"),
     password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
+      .min(7, "Password must be between 7 and 30 characters")
+      .max(30, "Password must be between 7 and 30 characters")
       .required("Password is required"),
   });
 
-  const handleSubmit = (values) => {
-    console.log("Form submitted with values:", values);
+  const handleSubmit = async (values) => {
+    try {
+      const user = await loginUser(values);
+      dispatch(setUser(user));
+      // Зберігання JWT в LocalStorage
+      localStorage.setItem("token", user.token);
+      navigate("/");
+    } catch (error) {
+      dispatch(setError("Error logging in"));
+    }
   };
 
   return (
@@ -37,10 +47,10 @@ const Login = () => {
       >
         <Form>
           <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <Field type="email" id="email" name="email" />
+            <label htmlFor="loginOrEmail">Login or Email</label>
+            <Field type="text" id="loginOrEmail" name="loginOrEmail" />
             <ErrorMessage
-              name="email"
+              name="loginOrEmail"
               component="div"
               className="error-message"
             />

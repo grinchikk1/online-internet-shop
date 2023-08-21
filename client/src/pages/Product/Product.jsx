@@ -7,13 +7,14 @@ import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
 import { createCart } from "../../data/fetchCart";
 import { addProductToLocalStorage } from "../../components/Card/Card";
+import { getUserToken } from "../../data/fetchUsers";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  const token = "null";
+  const token = getUserToken();
 
   useEffect(() => {
     if (products.length === 0) {
@@ -26,12 +27,12 @@ function Product() {
       const product = products.find((product) => product._id === id);
       setProduct(product);
     }
-  }, [id]);
+  }, [dispatch, id, products]);
 
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(product));
     if (!!token) {
-      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, "");
+      createCart({ products: [{ product: product._id, cartQuantity: 1 }] }, token);
     } else {
       addProductToLocalStorage(product);
     }

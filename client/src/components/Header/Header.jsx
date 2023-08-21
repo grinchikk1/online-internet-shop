@@ -5,7 +5,7 @@ import { ShoppingBasket } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Badge, Drawer } from "@mui/material";
 import FavouriteList from "../FavouriteList/FavouriteList";
 
@@ -100,6 +100,11 @@ function Header() {
               >
                 <ShoppingBasket style={{ color: "black " }} />
               </Badge>
+            </Link>
+            <Link to="/login" className="header__icon">
+              <AccountCircleIcon
+                style={{ paddingTop: "3px", color: "black" }}
+              />
             </Link>
           </div>
         </div>
