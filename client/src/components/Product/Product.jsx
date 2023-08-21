@@ -52,7 +52,6 @@ export default function ProductCard({
   } = product;
 
   const isMobile = useMediaQuery("(max-width: 900px)");
-
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [showButtons, setShowButtons] = useState({
     addToCart: false,
@@ -118,7 +117,7 @@ export default function ProductCard({
   const handleClickContinueBtn = () => {
     navigate("/shop");
   };
-  console.log(product);
+
   return (
     <Container
       disableGutters={true}
@@ -564,7 +563,7 @@ export default function ProductCard({
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
-                  color: "#faaf00", // поміняла з чорного на жовтий колір
+                  color: "#faaf00",  // поміняла з чорного на жовтий колір
                 }}
                 name="customized-10"
                 defaultValue={3}
@@ -679,6 +678,7 @@ export default function ProductCard({
           disableGutters={true}
           className={classes.container_tabs}
           maxWidth={"lg"}
+         
         >
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}
@@ -720,6 +720,7 @@ export default function ProductCard({
             </TabPanel>
           )}
           {valueTab === "3" && (
+
             <TabPanel valueTab={valueTab} index="3">
               {/* Reviews content */}
               {/* імпортувала свою форму з відгуками */}
@@ -728,7 +729,6 @@ export default function ProductCard({
           )}
         </Container>
       )}
-
       <Snackbar
         open={showButtons.addToCart}
         autoHideDuration={3000}
