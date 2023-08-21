@@ -53,7 +53,9 @@ function Footer() {
         <p className="footer__privacy-policy">
           <span className="footer__privacy-policy--text">© 2021 Shelly.</span>{" "}
           Terms of use <span className="footer__privacy-policy--text">and</span>{" "}
-          privacy policy.
+          <Link to="/privacy-policy" className="footer__privacy-policy">
+            privacy policy.
+          </Link>
         </p>
       </div>
     </footer>

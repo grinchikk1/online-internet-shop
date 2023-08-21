@@ -11,10 +11,12 @@ import {
   addToCart,
   updateCart,
 } from "../../data/fetchCart";
+import { getUserToken } from "../../data/fetchUsers";
 
 const CartItem = (props) => {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
     props.data;
+  const token = getUserToken();
   const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg
@@ -37,8 +39,8 @@ const CartItem = (props) => {
   const handleDecrement = () => {
     if (amount > 1) {
       dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
-      removeFromCart(_id, "");
-      updateCart(_id, "");
+      removeFromCart(_id, token);
+      updateCart(_id, token);
     } else {
       handleRemoveProductFromCart();
     }
@@ -46,8 +48,8 @@ const CartItem = (props) => {
 
   const handleIncrement = () => {
     dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
-    addToCart(_id, "");
-    updateCart(_id, "");
+    addToCart(_id, token);
+    updateCart(_id, token);
   };
 
   const handleAmountChange = (e) => {
@@ -72,7 +74,7 @@ const CartItem = (props) => {
   const handleRemoveProductFromCart = () => {
     handleRemoveCard("removeFromCart");
     removeProductFromLocalStorage(_id);
-    deleteFromCart(_id, "");
+    deleteFromCart(_id, token);
   };
 
   return (

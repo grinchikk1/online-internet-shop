@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import CartItem from "../../components/CartItem/CartItem";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,8 @@ import { useStyles } from "./CartStyles";
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import { updateCart } from "../../data/fetchCart";
 import CartTotals from "../../components/CartTotals/CartTotals";
+import { getUserToken } from "../../data/fetchUsers";
+import { getCart } from "../../data/fetchCart";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -18,32 +20,32 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const amounts = useSelector((state) => state.cart.amount);
-  const token = "null";
+  const token = getUserToken();
 
-  // useEffect(() => {
-  //   if (!!token) {
-  //     getCart(token).then((data) => {
-  //       dispatch(
-  //         setCart(
-  //           data.products.reduce(
-  //             (acc, item) => {
-  //               const product = item.product;
-  //               const amount = item.cartQuantity;
-  //               return {
-  //                 cart: [...acc.cart, product],
-  //                 amount: {
-  //                   ...acc.amount,
-  //                   [product._id]: amount,
-  //                 },
-  //               };
-  //             },
-  //             { amount: {}, cart: [] }
-  //           )
-  //         )
-  //       );
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!!token) {
+      getCart(token).then((data) => {
+        dispatch(
+          setCart(
+            data.products.reduce(
+              (acc, item) => {
+                const product = item.product;
+                const amount = item.cartQuantity;
+                return {
+                  cart: [...acc.cart, product],
+                  amount: {
+                    ...acc.amount,
+                    [product._id]: amount,
+                  },
+                };
+              },
+              { amount: {}, cart: [] }
+            )
+          )
+        );
+      });
+    }
+  }, []);
 
   return (
     <Container maxWidth="lg">
