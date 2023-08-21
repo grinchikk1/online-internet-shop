@@ -11,7 +11,7 @@ import { useStyles } from "./CartStyles";
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import { updateCart } from "../../data/fetchCart";
 import CartTotals from "../../components/CartTotals/CartTotals";
-import CartTotalsCheckout from "../../components/CartTotals/CartTotalsCheckout";
+// import CartTotalsCheckout from "../../components/CartTotals/CartTotalsCheckout";
 import { getUserToken } from "../../data/fetchUsers";
 import { getCart } from "../../data/fetchCart";
 
@@ -46,7 +46,7 @@ const Cart = () => {
         );
       });
     }
-  }, []);
+  }, [dispatch, token]);
 
   return (
     <Container maxWidth="lg">
@@ -77,7 +77,7 @@ const Cart = () => {
                     color="inherit"
                     variant="outlined"
                     onClick={() => {
-                      updateCart([...cart], "");
+                      updateCart([...cart], token);
                     }}
                   >
                     UPDATE CART

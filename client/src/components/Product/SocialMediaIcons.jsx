@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // Імпортуємо компонент Link з React Router
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -19,16 +20,24 @@ const SocialMediaIcons = ({ item }) => {
         sx={{ backgroundColor: "#D8D8D8", width: "1px" }}
       />
       <IconButton>
-        <MailOutlinedIcon />
+        <a href="mailto:demonchikk@i.ua" style={{ color: "inherit" }}>
+          <MailOutlinedIcon />
+        </a>
       </IconButton>
       <IconButton>
-        <FacebookOutlinedIcon />
+        <Link to="https://www.facebook.com" style={{ color: "inherit" }}>
+          <FacebookOutlinedIcon />
+        </Link>
       </IconButton>
       <IconButton>
-        <InstagramIcon />
+        <Link to="https://www.instagram.com" style={{ color: "inherit" }}>
+          <InstagramIcon />
+        </Link>
       </IconButton>
       <IconButton>
-        <TwitterIcon />
+        <Link to="https://www.twitter.com" style={{ color: "inherit" }}>
+          <TwitterIcon />
+        </Link>
       </IconButton>
     </>
   );

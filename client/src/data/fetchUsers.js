@@ -73,22 +73,3 @@ export const getUser = async (token) => {
 export const getUserToken = () => {
   return localStorage.getItem("token");
 };
-
-// Приклад отримання юзера
-
-// const [user, setUser] = useState(null);
-
-// const handleBtn = async () => {
-//   try {
-//     const loggedInUser = await loginUser({
-//       loginOrEmail: "admin",
-//       password: "admin123",
-//     });
-//     setUser(loggedInUser);
-//     console.log(user);
-//   } catch (error) {
-//     console.error("Error logging in:", error);
-//   }
-// };
-
-// <button onClick={handleBtn}>Log in</button>
