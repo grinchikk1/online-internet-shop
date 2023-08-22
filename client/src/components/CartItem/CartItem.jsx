@@ -1,10 +1,10 @@
 import React from "react";
 
+import { useDispatch } from "react-redux";
 import { Grid, Box, Typography } from "@mui/material";
 import { useStyles } from "./CartItemStyles";
 
 import { updateCartCount } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
 import {
   deleteFromCart,
   removeFromCart,
@@ -12,6 +12,13 @@ import {
   updateCart,
 } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
+import { addProductToLocalStorage } from "../Card/Card";
+
+export const removeProductFromLocalStorage = (productId) => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  const updatedCartItems = cartItems.filter((item) => item._id !== productId);
+  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
+};
 
 const CartItem = (props) => {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
@@ -39,17 +46,23 @@ const CartItem = (props) => {
   const handleDecrement = () => {
     if (amount > 1) {
       dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
-      removeFromCart(_id, token);
-      updateCart(_id, token);
-    } else {
-      handleRemoveProductFromCart();
+      if (!!token) {
+        removeFromCart(_id, token);
+        updateCart(_id, token);
+      } else {
+        removeProductFromLocalStorage({ _id: _id });
+      }
     }
   };
 
   const handleIncrement = () => {
     dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
-    addToCart(_id, token);
-    updateCart(_id, token);
+    if (!!token) {
+      addToCart(_id, token);
+      updateCart(_id, token);
+    } else {
+      addProductToLocalStorage({ _id: _id });
+    }
   };
 
   const handleAmountChange = (e) => {
@@ -65,16 +78,12 @@ const CartItem = (props) => {
     }
   };
 
-  const removeProductFromLocalStorage = (productID) => {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    const updatedCartItems = cartItems.filter((item) => item._id !== productID);
-    localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-  };
-
   const handleRemoveProductFromCart = () => {
     handleRemoveCard("removeFromCart");
-    removeProductFromLocalStorage(_id);
-    deleteFromCart(_id, token);
+    if (!!token) {
+      deleteFromCart(_id, token);
+    }
+    removeProductFromLocalStorage({ _id: _id });
   };
 
   return (

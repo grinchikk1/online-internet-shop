@@ -23,16 +23,20 @@ import { TabPanel } from "./TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
-
-import { addToCart, removeFromCart } from "../../data/fetchCart";
 import ReviewForm from "../ReviewForm/ReviewForm";
+import { addToCart, removeFromCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
+import { addProductToLocalStorage } from "../Card/Card";
+import { removeProductFromLocalStorage } from "../CartItem/CartItem";
 
-export default function ProductCard({ product, onAddToCartClicked }) {
+export default function ProductCard({
+  product,
+  onAddToCartClicked,
+  onRemoveFromCartClicked,
+}) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
-
   const token = getUserToken();
 
   const {
@@ -79,13 +83,21 @@ export default function ProductCard({ product, onAddToCartClicked }) {
   const handleDecrement = () => {
     if (value > 1) {
       setValue((prevValue) => prevValue - 1);
-      removeFromCart(_id, token);
+      if (!!token) {
+        removeFromCart(_id, token);
+      } else {
+        removeProductFromLocalStorage({ _id: _id });
+      }
     }
   };
 
   const handleIncrement = () => {
     setValue((prevValue) => prevValue + 1);
-    addToCart(_id, token);
+    if (!!token) {
+      addToCart(_id, token);
+    } else {
+      addProductToLocalStorage({ _id: _id });
+    }
   };
 
   const handleTabChange = (event, newValue) => {
