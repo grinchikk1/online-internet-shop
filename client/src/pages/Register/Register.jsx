@@ -130,7 +130,10 @@ const Registration = () => {
 
           <button type="submit">Register</button>
           <Typography sx={{ paddingTop: "15px" }}>
-            Have an account? <Link to="/login">Log In</Link>
+            Have an account?{" "}
+            <Link to="/login" style={{ color: "#707070" }}>
+              Log In
+            </Link>
           </Typography>
         </Form>
       </Formik>
