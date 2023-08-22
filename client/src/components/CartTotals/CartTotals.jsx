@@ -6,9 +6,9 @@ import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import {
   Accordion,
   AccordionSummary,
+  CardActions,
   Grid,
   Stack,
-  TextField,
   Typography,
 } from "@mui/material";
 
@@ -17,6 +17,7 @@ import Button from "@mui/material/Button";
 import { useStyles } from "./CartTotalsStyles";
 
 import CartTotalsCheckout from "./CartTotalsCheckout";
+import Card from "@mui/material/Card";
 
 const CartTotals = () => {
   const s = useStyles();
@@ -35,8 +36,8 @@ const CartTotals = () => {
             <Grid item sx={{ display: "content" }} className={s.cart_shipping}>
               <Typography sx={{ mb: "23px" }}>$ {totalAmount}</Typography>
               <Typography sx={{ mb: "39px" }}>
-                Shipping costs will be calculated once you have provided
-                address.
+                You can calculate the shipping cost after choosing a postal
+                company.
               </Typography>
               <Accordion
                 variant="standard"
@@ -52,39 +53,65 @@ const CartTotals = () => {
                   }}
                   expandIcon={<ExpandMoreIcon />}
                 >
-                  <Typography>CALCULATE SHIPPING</Typography>
+                  <Typography>POSTAL CARRIER</Typography>
                 </AccordionSummary>
                 <Stack spacing={1}>
-                  <TextField
-                    id="standard-basic"
-                    label="SELECT A COUNTRY"
-                    variant="standard"
-                  />
-                  <TextField
-                    id="standard-basic"
-                    label="CITY"
-                    variant="standard"
-                  />
-                  <TextField
-                    id="standard-basic"
-                    label="POST CODE / ZIP"
-                    variant="standard"
-                  />
+                  <Card>
+                    <CardActions
+                      sx={{
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button
+                        size="small"
+                        href="https://calc.ukrposhta.ua/domestic-calculator"
+                        target="_blank"
+                        sx={{
+                          width: "100%",
+                        }}
+                      >
+                        UKRPOSHTA
+                      </Button>
+                    </CardActions>
+                  </Card>
+                  <Card>
+                    <CardActions
+                      sx={{
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button
+                        size="small"
+                        href="https://novaposhta.ua/delivery"
+                        target="_blank"
+                        sx={{
+                          width: "100%",
+                        }}
+                      >
+                        NOVAPOSHTA
+                      </Button>
+                    </CardActions>
+                  </Card>
+                  <Card>
+                    <CardActions
+                      sx={{
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Button
+                        size="small"
+                        href="https://intime.check-track.com/ua/calc/"
+                        target="_blank"
+                        sx={{
+                          width: "100%",
+                        }}
+                      >
+                        INTIME
+                      </Button>
+                    </CardActions>
+                  </Card>
                 </Stack>
               </Accordion>
-              <Button
-                color="inherit"
-                variant="outlined"
-                className={s.updateTotalsBtn}
-                sx={{
-                  marginTop: "24px",
-                  "@media (max-width : 768px) ": {
-                    background: "#FFF",
-                  },
-                }}
-              >
-                UPDATE TOTALS
-              </Button>
             </Grid>
           </Grid>
         </Grid>
