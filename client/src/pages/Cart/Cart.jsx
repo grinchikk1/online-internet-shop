@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { Container, Grid, TextField, Box } from "@mui/material";
-import { useStyles } from "./CartStyles";
 import Button from "@mui/material/Button";
+import { useStyles } from "./CartStyles";
 
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
-import { updateCart } from "../../data/fetchCart";
+import { updateCart, getCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
-import { getCart } from "../../data/fetchCart";
+
 import CartItem from "../../components/CartItem/CartItem";
 import CartTotals from "../../components/CartTotals/CartTotals";
 
