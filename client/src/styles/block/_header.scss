@@ -10,13 +10,15 @@
 
   &__blur {
     &--open {
-      width: 100vw;
-      height: 300vh;
-      position: absolute;
-      top: 50px;
-      left: 0;
-      background-color: rgba(0, 0, 0, 0.4);
-      z-index: 20;
+      @include breakpoint("md") {
+        width: 100vw;
+        height: 300vh;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 20;
+      }
     }
   }
 
