@@ -18,10 +18,10 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#1976d2", // Задаємо основний колір (первинний колір)
+      main: Colors.black, // Задаємо основний колір (первинний колір)
     },
     secondary: {
-      main: "#f50057", // Задаємо допоміжний колір (вторинний колір)
+      main: Colors.dark_gray, // Задаємо допоміжний колір (вторинний колір)
     },
     allCollors: {
       accent: Colors.accent,
