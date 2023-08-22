@@ -63,7 +63,7 @@
     color: $black;
 
     &:hover {
-      color: green;
+      color: $dark_gray;
     }
 
     @include breakpoint("md") {
