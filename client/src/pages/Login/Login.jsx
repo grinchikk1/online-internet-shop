@@ -98,7 +98,10 @@ const Login = () => {
         </Form>
       </Formik>
       <p className="login-text">
-        Don't have an account? <Link to="/register">Create an account</Link>
+        Don't have an account?{" "}
+        <Link to="/register" style={{ color: "#707070" }}>
+          Create an account
+        </Link>
       </p>
     </div>
   );
