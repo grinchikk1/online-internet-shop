@@ -68,9 +68,9 @@ function Card({
 
   return (
     <ThemeProvider theme={theme}>
-      <Container onClick={handleClick} className="cardContainer" sx={cardContainer}>
+      <Container className="cardContainer" sx={cardContainer}>
         <Container sx={cardImgContainer}>
-          <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
+          <img src={imageUrls[0]} alt="product" onClick={handleClick} className={styles.cardImg} />
           <Container className="cardHover" sx={cardHover}>
             <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
               ADD TO CART
