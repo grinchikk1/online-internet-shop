@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Grid, TextField, Box } from "@mui/material";
-import Button from "@mui/material/Button";
+import { Container, Grid, Box } from "@mui/material";
+
 import { useStyles } from "./CartStyles";
 
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
-import { updateCart, getCart } from "../../data/fetchCart";
+import { getCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
 
 import CartItem from "../../components/CartItem/CartItem";
@@ -19,12 +19,6 @@ const Cart = () => {
 
   const amounts = useSelector((state) => state.cart.amount);
   const token = getUserToken();
-
-  const handleUpdateCart = () => {
-    if (!!token) {
-      updateCart([...cart], token);
-    }
-  };
 
   useEffect(() => {
     if (!!token) {
@@ -72,58 +66,6 @@ const Cart = () => {
               })}
               {cart.length === 0 && (
                 <div className={s.cart_empty}>Your cart is EMPTY</div>
-              )}
-              {cart.length !== 0 && (
-                <Grid container sx={{ justifyContent: "flex-end" }}>
-                  <Button
-                    className={s.updateCartBtn}
-                    color="inherit"
-                    variant="outlined"
-                    onClick={handleUpdateCart}
-                  >
-                    UPDATE CART
-                  </Button>
-                  <Grid
-                    container
-                    item
-                    sx={{
-                      justifyContent: "space-between",
-                      "@media (max-width : 768px) ": {
-                        flexDirection: "column",
-                      },
-                    }}
-                  >
-                    <TextField
-                      id="standard-basic"
-                      label="Coupon Code"
-                      variant="standard"
-                      style={{
-                        marginTop: "64px",
-                      }}
-                    />
-                    <Button
-                      sx={{
-                        marginTop: "60px",
-                        height: "53px",
-                        width: "168px",
-                        background: "black",
-                        color: "white",
-                        "&:hover": {
-                          backgroundColor: "black",
-                          color: "white",
-                        },
-                        "@media (max-width : 768px) ": {
-                          width: "100%",
-                          marginBottom: "30px",
-                        },
-                      }}
-                      type="submit"
-                      variant="outlined"
-                    >
-                      APPLY COUPON
-                    </Button>
-                  </Grid>
-                </Grid>
               )}
             </Grid>
           </Box>

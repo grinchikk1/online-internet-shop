@@ -26,14 +26,13 @@ import { useTheme } from "@mui/material/styles";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import { addToCart, removeFromCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
-import { addProductToLocalStorage } from "../Card/Card";
-import { removeProductFromLocalStorage } from "../CartItem/CartItem";
 
-export default function ProductCard({
-  product,
-  onAddToCartClicked,
-  onRemoveFromCartClicked,
-}) {
+import {
+  increaseProductCount,
+  decreaseProductCount,
+} from "../../components/CartItem/CartItem";
+
+export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
@@ -86,7 +85,8 @@ export default function ProductCard({
       if (!!token) {
         removeFromCart(_id, token);
       } else {
-        removeProductFromLocalStorage({ _id: _id });
+        // removeProductFromLocalStorage({ _id: _id });
+        decreaseProductCount(_id);
       }
     }
   };
@@ -96,7 +96,8 @@ export default function ProductCard({
     if (!!token) {
       addToCart(_id, token);
     } else {
-      addProductToLocalStorage({ _id: _id });
+      // addProductToLocalStorage({ _id: _id });
+      increaseProductCount(_id);
     }
   };
 

@@ -36,7 +36,7 @@ const CartTotals = () => {
             <Grid item sx={{ display: "content" }} className={s.cart_shipping}>
               <Typography sx={{ mb: "23px" }}>$ {totalAmount}</Typography>
               <Typography sx={{ mb: "39px" }}>
-                You can calculate the shipping cost after choosing a postal
+                You can calculate the cost of delivery when choosing a postal
                 company.
               </Typography>
               <Accordion
