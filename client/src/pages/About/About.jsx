@@ -57,6 +57,7 @@ function About() {
       {/* Друге фото  */}
       <img
         src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+       
         alt="Друге фото"
         style={{
           display: "block",
