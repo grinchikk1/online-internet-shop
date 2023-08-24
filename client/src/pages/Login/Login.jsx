@@ -6,38 +6,29 @@ import "../../styles/style.scss";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser, getUser } from "../../data/fetchUsers";
-import { setUser, setError } from "../../features/auth/authSlice";
+import { setUser, setToken, setError } from "../../features/auth/authSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const initialValues = {
     loginOrEmail: "",
     password: "",
   };
 
-  const validationSchema = Yup.object().shape({
-    loginOrEmail: Yup.string().required("Login or Email is required"),
-    password: Yup.string()
-      .min(7, "Password must be between 7 and 30 characters")
-      .max(30, "Password must be between 7 and 30 characters")
-      .required("Password is required"),
-  });
-
   const handleSubmit = async (values) => {
     try {
       const user = await loginUser(values);
-      // Перевірка, чи отриманий токен не є undefined
+
       if (user.token !== undefined) {
         const userData = await getUser(user.token);
         dispatch(setUser(userData));
-        // Зберігання JWT в LocalStorage
-        localStorage.setItem("token", user.token);
+        dispatch(setToken(user.token));
         navigate("/");
       } else {
         alert("Error logging in");
-        localStorage.removeItem("token");
         dispatch(setError("Error logging in"));
       }
     } catch (error) {
@@ -46,14 +37,11 @@ const Login = () => {
   };
 
   useEffect(() => {
-    // Перевірте, чи є інформація про вхід користувача (наприклад, збережене в LocalStorage)
-    const token = localStorage.getItem("token");
     if (token) {
-      // Якщо є інформація про вхід, перенаправте користувача на сторінку профілю
       navigate("/profile");
     }
     return;
-  }, [navigate]);
+  }, [navigate, token]);
 
   return (
     <div className="login-container">
@@ -108,3 +96,11 @@ const Login = () => {
 };
 
 export default Login;
+
+const validationSchema = Yup.object().shape({
+  loginOrEmail: Yup.string().required("Login or Email is required"),
+  password: Yup.string()
+    .min(7, "Password must be between 7 and 30 characters")
+    .max(30, "Password must be between 7 and 30 characters")
+    .required("Password is required"),
+});
