@@ -1,13 +1,34 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Box } from "@mui/material";
+import { CardActionArea, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { addProductToCart } from "../../../features/cart/cartSlice";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../data/fetchCart";
+import { getUserToken } from "../../../data/fetchUsers";
+import FavouriteButtonItem from "./FavoriteButtonItem";
+
+export const addProductToLocalStorage = (product) => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems.push(product);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
 
 export default function MultiActionAreaCard({ card }) {
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const token = getUserToken();
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   const handleClick = () => {
     navigate(`/product/${card._id}`);
   };
@@ -43,15 +64,67 @@ export default function MultiActionAreaCard({ card }) {
     gap: "3px",
   };
 
+  const cardHover = {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    top: "145px",
+    width: "100%",
+    height: "65px",
+    backgroundColor: "rgba(255, 255, 255, 0.50)",
+    transition: "all 0.5s ease",
+    opacity: 0,
+    "@media (min-width: 600px) ": {
+      paddingLeft: "15px",
+      paddingRight: "15px",
+    },
+  };
+
+  const cardHoverVisible = {
+    opacity: 1, // Показуємо елемент при наведенні
+  };
+  const cardHoverAdd = {
+    fontSize: "16px",
+    fontWeight: "700",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    color: "#000000",
+    cursor: "pointer",
+    userSelect: "none",
+    "@media (max-width: 579.9px)": {
+      fontSize: "12px",
+      fontWeight: "600",
+    },
+  };
+
   const discountPrice = (
     (card.currentPrice / card.previousPrice) *
     100
   ).toFixed(0);
 
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(card));
+    if (!!token) {
+      addToCart(card._id, token);
+    } else {
+      addProductToLocalStorage(card);
+    }
+  };
+
   return (
     <Card style={cards}>
-      <CardActionArea onClick={handleClick} sx={{ marginRight: "40px" }}>
+      <CardActionArea
+        sx={{
+          backgroundColor: "#fff",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <CardMedia
+          onClick={handleClick}
           component="img"
           style={img}
           src={card.imageUrls[0]}
@@ -61,6 +134,13 @@ export default function MultiActionAreaCard({ card }) {
           <span>-</span>
           <span>{discountPrice}%</span>
         </div>
+
+        <Container sx={{ ...cardHover, ...(isHovered && cardHoverVisible) }}>
+          <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
+            ADD TO CART
+          </Typography>
+          <FavouriteButtonItem card={card} />
+        </Container>
 
         <Typography
           gutterBottom

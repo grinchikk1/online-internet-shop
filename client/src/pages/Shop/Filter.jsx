@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControl,
@@ -10,28 +10,48 @@ import {
   MenuItem,
   Slider,
   Switch,
+  Button,
 } from "@mui/material";
+import { Btn } from "./InputStyle";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
-import { getFilterByType } from "../../data/fetchFilters";
-import { useState } from "react";
+import { filterProducts } from "../../data/fetchProducts";
+import CardItem from "./CardItem/CardItem";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function Filter({ handleSearch, setSearchResults, searchResults }) {
   const classes = useStyles();
-  // const dispatch = useDispatch();
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(2000);
 
-  //Brand
+  const handleFilter = async () => {
+    const filterParams = {
+      brand: selectedProduct,
+      productMaterial: selectedProductMaterial,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+    };
 
-  const [selectedProductType, setSelectedProductType] = useState("");
-  // const [products, setProducts] = useState([]);
+    try {
+      const filteredData = await filterProducts(filterParams);
 
-  const handleProductTypeChange = (event) => {
-    getFilterByType("brand");
-    // setSelectedProductType(event.target.value);
+      if (Array.isArray(filteredData)) {
+        setFilteredProducts(filteredData);
+      } else {
+        console.error("Filtered data is not an array:", filteredData);
+      }
+    } catch (error) {
+      console.error("Error filtering products:", error);
+    }
   };
+
+  // console.log(filteredProducts);
+
   return (
     <Box className={classes.Container}>
       <FormControl sx={{ marginBottom: "40px" }}>
@@ -79,10 +99,18 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
               backgroundColor: "transparent",
             },
           }}
+          value={selectedProductMaterial}
+          onChange={(e) => setSelectedProductMaterial(e.target.value)}
         >
-          <MenuItem className={classes.SelectInputItem}>Gold</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Silver</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Platinum</MenuItem>
+          <MenuItem key={"gold"} value={"gold"}>
+            Gold
+          </MenuItem>
+          <MenuItem key={"silver"} value={"silver"}>
+            Silver
+          </MenuItem>
+          <MenuItem key={"platinum"} value={"platinum"}>
+            Platinum
+          </MenuItem>
         </Select>
       </FormControl>
 
@@ -104,28 +132,32 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
               color: "rgba(0, 0, 0, 1)",
             },
           }}
-          value={selectedProductType}
-          onChange={handleProductTypeChange}
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value)}
         >
-          <MenuItem className={classes.SelectInputItem}>KJM</MenuItem>
-          <MenuItem className={classes.SelectInputItem} value="ZARINA">
-            ZARINA
+          <MenuItem key={"ZARINA"} value={"ZARINA"}>
+            {"ZARINA"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem}>KOLO</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Boucheron</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Suarez</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Amrapali</MenuItem>
-          <MenuItem className={classes.SelectInputItem}>Messika</MenuItem>
+          <MenuItem key={"KOLO"} value={"KOLO"}>
+            {"KOLO"}
+          </MenuItem>
+          <MenuItem key={"KJF"} value={"KJF"}>
+            {"KJF"}
+          </MenuItem>
+          <MenuItem key={"Boucheron"} value={"Boucheron"}>
+            {"Boucheron"}
+          </MenuItem>
+          <MenuItem key={"Amrapali"} value={"Amrapali"}>
+            {"Amrapali"}
+          </MenuItem>
+          <MenuItem key={"Messika"} value={"Messika"}>
+            {"Messika"}
+          </MenuItem>
         </Select>
-        {/* {products.map((product) => (
-          <CardItem key={product.id} />
-        ))} */}
       </FormControl>
       <Box sx={{ marginBottom: "40px" }}>
         <Slider
           getAriaLabel={() => ""}
-          // value={valueSlider}
-          // onChange={handleChange}
           valueLabelDisplay="auto"
           min={0}
           max={2000}
@@ -146,10 +178,14 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
             },
           }}
           theme={customTheme}
+          value={[minPrice, maxPrice]}
+          onChange={(event, newValue) => {
+            setMinPrice(newValue[0]);
+            setMaxPrice(newValue[1]);
+          }}
         />
         <Typography className={classes.SliderPrice}>
-          {/* Price: {valueSlider[0]}$ - {valueSlider[1]}$ */}
-          price
+          Price: {minPrice}$ - {maxPrice}$ price
         </Typography>
       </Box>
       <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>
@@ -173,27 +209,19 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
           {...label}
         />
       </Box>
-      {/* <Box className={classes.BoxSwitch}>
-        <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>In Stock</Typography>
-        <Switch
-          size="medium"
-          {...label}
-          sx={{
-            color: "rgba(112, 112, 112, 1)",
-            "  & .MuiSwitch-thumb": {
-              position: "relative",
-              top: "5px",
-              left: "5px",
-              width: "13px",
-              height: "13px",
-            },
-            "& .MuiSwitch-track": {
-              width: "35px",
-              height: "17px",
-            },
-          }}
-        />
-      </Box> */}
+      <Box
+        className={classes.BoxSwitch}
+        sx={{ display: "flex", justifyContent: "center" }}
+      >
+        <Button onClick={handleFilter} sx={Btn} variant="text">
+          Filter
+        </Button>
+      </Box>
+      <Box>
+        {filteredProducts.map((card) => (
+          <CardItem key={card._id} card={card} />
+        ))}
+      </Box>
     </Box>
   );
 }

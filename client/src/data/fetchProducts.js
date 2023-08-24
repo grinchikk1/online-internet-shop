@@ -63,7 +63,7 @@ export const updateProduct = async (product, token) => {
 export const filterProducts = async (params) => {
   try {
     const response = await axios.get(`${url}/products/filter`, { params });
-    return response.data; // Тут буде відфільтрований список продуктів
+    return response.data;
   } catch (error) {
     console.error("Error fetching data:", error);
   }
