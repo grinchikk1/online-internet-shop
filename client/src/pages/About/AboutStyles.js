@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
     paddingTop: 50,
     fontSize: 16,
     fontWeight: 400,
-
+    lineHeight: "27px",
     paddingBottom: 50,
     maxWidth: 670,
     textAlign: "left",
@@ -24,7 +24,7 @@ export const useStyles = makeStyles((theme) => ({
     display: "inline-block",
     fontSize: 16,
     fontWeight: 400,
-
+    lineHeight: "27px",
     paddingBottom: 50,
     maxWidth: 670,
     textAlign: "left",
