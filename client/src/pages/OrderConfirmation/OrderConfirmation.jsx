@@ -1,15 +1,26 @@
 import { Container, Typography } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
-import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import OrderItems from "../Cart/OrderItem";
 import useStyles from "./OrderConfirmationStyle";
 const OrderConfirmation = () => {
   const classes = useStyles();
-  const cart = useSelector((state) => state.cart.cart);
-  const totalAmount = useSelector(getTotalCartAmount);
-  const customer = useSelector((state) => state.customer.customer);
-  const amounts = useSelector((state) => state.cart.amount);
+  // const cart = useSelector((state) => state.cart.cart);
+  // const totalAmount = useSelector(getTotalCartAmount);
+  // const customer = useSelector((state) => state.customer.customer);
+  // const amounts = useSelector((state) => state.cart.amount);
+
+  const order = useSelector((state) => state.order.order);
+
+  const amounts = order.products;
+  const amountsArray = Object.keys(order.products).map((productId) => ({
+    productId,
+    amount: order.products[productId].amounts, // Change "amounts" to "amount"
+  }));
+  const amountsObject = {};
+  amountsArray.forEach((item) => {
+    amountsObject[item.productId] = item.amount;
+  });
   return (
     <Container maxWidth="lg">
       <div className={classes.orderHeader}>
@@ -40,14 +51,14 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.orderNumber}
+                {order.customerId}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>EMAIL</Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.email}
+                {order.email}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -56,7 +67,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.paymentOption}
+                {order.paymentInfo}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -65,7 +76,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.orderDate}
+                {order.orderDate}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -83,7 +94,9 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.streetAddress}
+                {order.deliveryAddress.country}
+                {order.deliveryAddress.city}
+                {order.deliveryAddress.address}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -92,14 +105,14 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.phone}
+                {order.mobile}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>NOTES</Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {customer.notes ? customer.notes : "-"}
+                {order.notes ? order.notes : "-"}
               </Typography>
             </div>
           </div>
@@ -112,11 +125,14 @@ const OrderConfirmation = () => {
               <div>TOTAL</div>
             </div>
             <div className={classes.orderSummaryItems}>
-              <OrderItems cart={cart} amounts={amounts} />
+              <OrderItems
+                cart={Object.values(order.products)}
+                amounts={amountsObject}
+              />
             </div>
             <div className={classes.orderSummaryTotal}>
               <div>TOTAL</div>
-              <div>${totalAmount}</div>
+              <div>${order.totalSum}</div>
             </div>
           </div>
         </div>
