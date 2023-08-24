@@ -63,7 +63,7 @@ export default function ProductCard({
 
   useEffect(() => {
     dispatch(getReviews(_id, reviews));
-  }, [_id, dispatch, reviews]);
+  }, [dispatch]);
 
   useEffect(() => {
     if (reviews.length > 0) {
