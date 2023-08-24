@@ -8,6 +8,20 @@
     border: none;
   }
 
+  &__blur {
+    &--open {
+      @include breakpoint("md") {
+        width: 100vw;
+        height: 300vh;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        z-index: 20;
+      }
+    }
+  }
+
   &__logo-image {
     transform: translateY(3px);
   }
@@ -28,7 +42,7 @@
       top: 0;
       right: 0;
       width: 100%;
-      z-index: 2;
+      z-index: 22;
       background-color: white;
       transform: translateY(-200%);
       transition: all ease-in-out 0.3s;
@@ -63,7 +77,7 @@
     color: $black;
 
     &:hover {
-      color: green;
+      color: $dark_gray;
     }
 
     @include breakpoint("md") {
@@ -110,7 +124,7 @@
     border: none;
     outline: none;
     cursor: pointer;
-    z-index: 3;
+    z-index: 23;
   }
 
   &__menu-line {

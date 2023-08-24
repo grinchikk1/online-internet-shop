@@ -5,7 +5,8 @@ import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useStyles, theme } from "./HomeStyles";
 import { useEffect } from "react";
-import { getProducts } from "../../data/fetchProducts";
+// import { getProducts } from "../../data/fetchProducts";
+import { filterProducts } from "../../data/fetchProducts";
 import { Link } from "react-router-dom";
 import {
   container0,
@@ -34,20 +35,24 @@ function Home() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const output = out();
+  //======================= 
+  // useEffect(() => {
+  //   getProducts().then((data) => {
+  //   console.log(data);
+  //     dispatch(setProducts(data));
+  //   });
+  // }, [dispatch]);
 
   useEffect(() => {
-    getProducts().then((data) => {
-      dispatch(setProducts(data));
+    filterProducts({ perPage: 6 }).then((data) => {
+      dispatch(setProducts(data.products));
     });
   }, [dispatch]);
+  //==================
 
   function out() {
     if (products) {
-      let prodQuantity = 0;
       return products.map((card) => {
-        prodQuantity++;
-        // Last 6 products from DataBase..
-        if (products.length - prodQuantity < 6) {
           return (
             <Card
               key={card._id}
@@ -67,9 +72,6 @@ function Home() {
               previousPrice={card.previousPrice}
             />
           );
-        } else {
-          return null;
-        }
       });
     }
   }
