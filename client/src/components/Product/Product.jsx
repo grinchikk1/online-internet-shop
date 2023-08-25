@@ -29,11 +29,7 @@ import { getUserToken } from "../../data/fetchUsers";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews } from "../../features/review/reviewSlice";
 
-export default function ProductCard({
-  product,
-  onAddToCartClicked,
-  onRemoveFromCartClicked,
-}) {
+export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
@@ -109,13 +105,11 @@ export default function ProductCard({
   const handleDecrement = () => {
     if (value > 1) {
       setValue((prevValue) => prevValue - 1);
-      removeFromCart(_id, token);
     }
   };
 
   const handleIncrement = () => {
     setValue((prevValue) => prevValue + 1);
-    addToCart(_id, token);
   };
 
   const handleTabChange = (event, newValue) => {
@@ -124,7 +118,7 @@ export default function ProductCard({
 
   const handleButtonClick = (buttonName) => {
     if (buttonName === "addToCart") {
-      onAddToCartClicked();
+      onAddToCartClicked(value);
     }
     setShowButtons((prevButtons) => ({
       ...prevButtons,
