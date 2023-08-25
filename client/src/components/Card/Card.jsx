@@ -21,18 +21,7 @@ import { addToCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
 
 import { useNavigate } from "react-router-dom";
-
-export const addProductToLocalStorage = (product) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  cartItems.push(product);
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-};
-
-export const removeProductFromLocalStorage = (product) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const updatedCartItems = cartItems.filter((item) => item._id !== product);
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-};
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Card({
   _id,
@@ -66,7 +55,7 @@ function Card({
     if (!!token) {
       addToCart(product._id, token);
     } else {
-      addProductToLocalStorage(product);
+      CartLocalStorageHelper.addProductToCart(product);
     }
   };
 

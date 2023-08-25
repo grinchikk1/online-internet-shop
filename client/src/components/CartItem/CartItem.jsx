@@ -11,43 +11,7 @@ import {
   addToCart,
 } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
-import {
-  addProductToLocalStorage,
-  removeProductFromLocalStorage,
-} from "../Card/Card";
-
-export const increaseProductCount = (productId) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const updatedCartItems = cartItems.map((item) => {
-    if (item._id === productId) {
-      return { ...item, quantity: item.quantity + 1 };
-    }
-    return item;
-  });
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-};
-
-export const decreaseProductCount = (productId) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const updatedCartItems = cartItems.map((item) => {
-    if (item._id === productId && item.quantity > 1) {
-      return { ...item, quantity: item.quantity - 1 };
-    }
-    return item;
-  });
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-};
-
-const updateProductInLocalStorage = (productId, updatedProduct) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const updatedCartItems = cartItems.map((item) => {
-    if (item._id === productId) {
-      return { ...item, ...updatedProduct };
-    }
-    return item;
-  });
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-};
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const CartItem = (props) => {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
@@ -78,8 +42,10 @@ const CartItem = (props) => {
       if (!!token) {
         removeFromCart(_id, token);
       } else {
-        // removeProductFromLocalStorage({ _id: _id });
-        decreaseProductCount(_id);
+        CartLocalStorageHelper.updateCartCount({
+          itemID: _id,
+          newCount: amount - 1,
+        });
       }
     }
   };
@@ -89,8 +55,10 @@ const CartItem = (props) => {
     if (!!token) {
       addToCart(_id, token);
     } else {
-      // addProductToLocalStorage({ _id: _id });
-      increaseProductCount(_id);
+      CartLocalStorageHelper.updateCartCount({
+        itemID: _id,
+        newCount: amount + 1,
+      });
     }
   };
 
@@ -111,8 +79,6 @@ const CartItem = (props) => {
     handleRemoveCard("removeFromCart");
     if (!!token) {
       deleteFromCart(_id, token);
-    } else {
-      removeProductFromLocalStorage(_id);
     }
   };
 

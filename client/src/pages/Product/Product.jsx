@@ -5,9 +5,9 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { addToCart } from "../../data/fetchCart";
-import { addProductToLocalStorage } from "../../components/Card/Card";
+import { getCart, updateCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
@@ -29,12 +29,41 @@ function Product() {
     }
   }, [dispatch, id, products]);
 
-  const handleAddProductToCart = () => {
+  const handleAddProductToCart = async (amount = 1) => {
     dispatch(addProductToCart(product));
     if (!!token) {
-      addToCart(product._id, token);
+      const cart = await getCart(token);
+
+      let products = cart?.products.map((item) => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity || 1,
+        };
+      });
+
+      if (products.find((item) => item.product === product._id)) {
+        products = products.map((item) => {
+          if (item.product === product._id) {
+            return {
+              ...item,
+              cartQuantity: item.cartQuantity + amount,
+            };
+          }
+          return item;
+        });
+      } else {
+        products = [
+          ...products,
+          {
+            product: product._id,
+            cartQuantity: amount,
+          },
+        ];
+      }
+
+      updateCart({ products }, token);
     } else {
-      addProductToLocalStorage(product);
+      CartLocalStorageHelper.addProductToCart(product, amount);
     }
   };
 

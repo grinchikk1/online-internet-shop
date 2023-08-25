@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../data/fetchUsers";
 import { setUser, setError } from "../../features/auth/authSlice";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
+import { updateCart } from "../../data/fetchCart";
 
 const Registration = () => {
   const dispatch = useDispatch();
@@ -37,6 +39,20 @@ const Registration = () => {
     try {
       const user = await createUser(values);
       dispatch(setUser(user));
+      const { cart, amount } = CartLocalStorageHelper.getCart();
+      const localStorageCartBody = cart.map((product) => {
+        return {
+          product: product._id,
+          cartQuantity: amount[product._id] || 1,
+        };
+      });
+      await updateCart(
+        {
+          products: localStorageCartBody,
+        },
+        user.token
+      );
+      CartLocalStorageHelper.resetCart();
       navigate("/login");
     } catch (error) {
       dispatch(setError("Error registering"));

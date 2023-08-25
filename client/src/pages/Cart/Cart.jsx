@@ -11,6 +11,7 @@ import { getUserToken } from "../../data/fetchUsers";
 
 import CartItem from "../../components/CartItem/CartItem";
 import CartTotals from "../../components/CartTotals/CartTotals";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
@@ -25,7 +26,7 @@ const Cart = () => {
       getCart(token).then((data) => {
         dispatch(
           setCart(
-            data.products.reduce(
+            data?.products?.reduce(
               (acc, item) => {
                 const product = item.product;
                 const amount = item.cartQuantity;
@@ -38,10 +39,12 @@ const Cart = () => {
                 };
               },
               { amount: {}, cart: [] }
-            )
+            ) || { amount: {}, cart: [] }
           )
         );
       });
+    } else {
+      dispatch(setCart(CartLocalStorageHelper.getCart()));
     }
   }, [dispatch, token]);
 
@@ -57,9 +60,10 @@ const Cart = () => {
                   <CartItem
                     data={product}
                     key={product._id}
-                    onRemoveFromCartClicked={() =>
-                      dispatch(removeProductFromCart(product._id))
-                    }
+                    onRemoveFromCartClicked={() => {
+                      dispatch(removeProductFromCart(product._id));
+                      CartLocalStorageHelper.removeProductFromCart(product._id);
+                    }}
                     amount={amounts[product._id]}
                   />
                 );

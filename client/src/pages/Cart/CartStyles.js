@@ -22,7 +22,7 @@ export const useStyles = makeStyles((theme) => ({
   cart_empty: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "40%",
+    marginTop: "25%",
     fontSize: "24px",
     textTransform: "uppercase",
     width: "100%",

@@ -82,23 +82,11 @@ export default function ProductCard({ product, onAddToCartClicked }) {
   const handleDecrement = () => {
     if (value > 1) {
       setValue((prevValue) => prevValue - 1);
-      if (!!token) {
-        removeFromCart(_id, token);
-      } else {
-        // removeProductFromLocalStorage({ _id: _id });
-        decreaseProductCount(_id);
-      }
     }
   };
 
   const handleIncrement = () => {
     setValue((prevValue) => prevValue + 1);
-    if (!!token) {
-      addToCart(_id, token);
-    } else {
-      // addProductToLocalStorage({ _id: _id });
-      increaseProductCount(_id);
-    }
   };
 
   const handleTabChange = (event, newValue) => {
@@ -107,7 +95,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
 
   const handleButtonClick = (buttonName) => {
     if (buttonName === "addToCart") {
-      onAddToCartClicked();
+      onAddToCartClicked(value);
     }
     setShowButtons((prevButtons) => ({
       ...prevButtons,

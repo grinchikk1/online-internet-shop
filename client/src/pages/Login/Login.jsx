@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser, getUser } from "../../data/fetchUsers";
 import { setUser, setError } from "../../features/auth/authSlice";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
+import { updateCart, getCart } from "../../data/fetchCart";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -32,6 +34,42 @@ const Login = () => {
       if (user.token !== undefined) {
         const userData = await getUser(user.token);
         dispatch(setUser(userData));
+        const { cart, amount } = CartLocalStorageHelper.getCart();
+        const existingCart = await getCart(user.token);
+        const localStorageCartBody = cart.map((product) => {
+          return {
+            product: product._id,
+            cartQuantity: amount[product._id] || 1,
+          };
+        });
+        const existingCartBody =
+          existingCart?.products.map((item) => {
+            return {
+              product: item.product._id,
+              cartQuantity: Number(item.cartQuantity) || 1,
+            };
+          }) || [];
+        const updateCartBody = existingCartBody.reduce((acc, item) => {
+          if (acc.find((i) => i.product === item.product)) {
+            return acc.map((i) => {
+              if (i.product === item.product) {
+                return {
+                  product: i.product,
+                  cartQuantity: i.cartQuantity + item.cartQuantity,
+                };
+              }
+              return i;
+            });
+          }
+          return [...acc, item];
+        }, localStorageCartBody);
+        await updateCart(
+          {
+            products: updateCartBody,
+          },
+          user.token
+        );
+        CartLocalStorageHelper.resetCart();
         // Зберігання JWT в LocalStorage
         localStorage.setItem("token", user.token);
         navigate("/");
