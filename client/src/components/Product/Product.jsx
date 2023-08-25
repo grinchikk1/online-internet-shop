@@ -24,8 +24,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
 import ReviewForm from "../ReviewForm/ReviewForm";
-import { addToCart, removeFromCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews } from "../../features/review/reviewSlice";
 
@@ -33,7 +31,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
-  const token = getUserToken();
 
   const {
     _id,
@@ -250,61 +247,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             >
               Add to cart
             </Button>
-            {/* Закоментувала бо на мобільній версії він не потрібен *....................................................../}
-            {/* <Typography
-              sx={{
-                paddingTop: "16px",
-                fontSize: "12px",
-                lineHeight: "20px",
-                color: "#707070",
-                // overflow: "hidden",
-                overflow: "auto",
-                width: "480px",
-                height: "100px",
-                display: "-webkit-box",
-                WebkitLineClamp: showButtons.showMore ? "unset" : 1,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              placerat, augue a volutpat hendrerit, sapien tortor faucibus
-              augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis. */}
-            {/* {lastReviewText} */}
-            {/* </Typography> */}
-            <Button
-              disableRipple
-              variant={"text"}
-              size={"small"}
-              sx={{
-                display: "flex",
-                fontSize: "12px",
-                lineHeight: "20px",
-                marginTop: "35px",
-                color: theme.palette.allCollors.accent,
-                padding: "0",
-                ":hover": {
-                  background: theme.palette.allCollors.white,
-                  transition: "all 0.2s ease-in-out",
-                },
-              }}
-              onClick={() => handleButtonClick("showMore")}
-            >
-              View more{" "}
-              <ArrowForwardIosIcon
-                fontSize="12px"
-                sx={{
-                  paddingLeft: "4px",
-                  color: showButtons.showMore
-                    ? theme.palette.allCollors.dark_gray
-                    : theme.palette.allCollors.black,
-                  transform: showButtons.showMore
-                    ? "rotate(-0.25turn)"
-                    : "rotate(0deg)",
-                  transition: "transform 0.2s ease-in-out",
-                }}
-              />
-            </Button>
             <Divider
               sx={{
                 color: "#D8D8D8",
@@ -461,7 +403,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   padding: "10px 0",
                 }}
               >
-                {/* Reviews content */}
                 {/* вставила свою форму і поміняла Typografy на Container в 422 і 433 рядку, щоб не було помилок*/}
                 <ReviewForm productId={_id} />
               </Container>
@@ -640,11 +581,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 },
               }}
             >
-              {/* Вставила останній відгук
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              placerat, augue a volutpat hendrerit, sapien tortor faucibus
-              augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis. */}
+              {/* Вставила останній відгук */}
               {lastReviewText}
             </Typography>
             <Box

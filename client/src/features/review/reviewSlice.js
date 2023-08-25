@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { url } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 
-const token = getUserToken();
+const token = localStorage.getItem("token");
 
 
 

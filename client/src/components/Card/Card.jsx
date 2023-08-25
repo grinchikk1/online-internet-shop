@@ -16,9 +16,8 @@ import {
   cardBrand,
 } from "./CardStyle";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 
 import { useNavigate } from "react-router-dom";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
@@ -44,7 +43,7 @@ function Card({
     navigate(`/product/${_id}`);
   };
 
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
   const styles = useStyles();
   const dispatch = useDispatch();
 

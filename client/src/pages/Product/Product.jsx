@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
 import { getCart, updateCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Product() {
@@ -14,7 +13,7 @@ function Product() {
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     if (products.length === 0) {
