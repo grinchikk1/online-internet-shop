@@ -51,8 +51,20 @@ const Cart = () => {
   return (
     <Container maxWidth="lg">
       <h1 className={s.cart_title}>Shopping Cart</h1>
-      <Grid container className={s.wrapper_cart}>
-        <Grid item xs={12} sm={12} md={6}>
+      <Grid
+        container
+        className={s.wrapper_cart}
+        sx={{
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Grid
+          sx={{
+            maxWidth: "500px",
+            width: "100%",
+          }}
+        >
           <Box>
             <Grid item xs={12} sm={12} md={12}>
               {cart.map((product) => {

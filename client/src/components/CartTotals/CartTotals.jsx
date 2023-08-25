@@ -1,28 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
 import {
-  Accordion,
-  AccordionSummary,
-  CardActions,
+  Alert,
+  Dialog,
+  DialogActions,
+  DialogContent,
   Grid,
-  Stack,
-  Typography,
 } from "@mui/material";
-
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import { useStyles } from "./CartTotalsStyles";
-
-import CartTotalsCheckout from "./CartTotalsCheckout";
-import Card from "@mui/material/Card";
-import CardMedia from "@mui/material/CardMedia";
+import Checkout from "../Checkout/Checkout";
 
 const CartTotals = () => {
   const s = useStyles();
   const totalAmount = useSelector(getTotalCartAmount);
+  const cart = useSelector((state) => state.cart.cart);
+  const amounts = useSelector((state) => state.cart.amount);
+
+  const [isBillingDetailsOpen, setIsBillingDetailsOpen] = useState(false);
+  const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
+
+  const proceedToCheckout = () => {
+    console.log(cart);
+    if (cart.length > 0) {
+      setIsBillingDetailsOpen(true);
+    } else {
+      setIsCartEmptyAlertOpen(true);
+    }
+  };
 
   return (
     <Grid item xs={12} sm={12} md={6} className={s.cart_totals}>
@@ -30,7 +38,57 @@ const CartTotals = () => {
         <Grid item>
           <h3 className={s.cart_totalsTitle}>Cart totals</h3>
         </Grid>
-        <CartTotalsCheckout />
+        <Grid item xs={12} sm={12} md={12}>
+          <div className={s.cart_totalLine}></div>
+        </Grid>
+        <Grid container className={s.cart_totalAmount}>
+          <div>TOTAL</div>
+          <div>$ {totalAmount}</div>
+        </Grid>
+        <Button
+          variant="contained"
+          type="submit"
+          sx={{
+            backgroundColor: "black",
+            color: "white",
+            width: "100%",
+            height: "53px",
+            "&:hover": {
+              backgroundColor: "black",
+              color: "white",
+            },
+          }}
+          onClick={proceedToCheckout}
+        >
+          PROCEED TO CHECKOUT
+        </Button>
+        {cart.length === 0 && isCartEmptyAlertOpen && (
+          <Alert
+            onClose={() => setIsCartEmptyAlertOpen(false)}
+            severity="error"
+            sx={{ width: "100%", marginTop: "15px" }}
+          >
+            Your cart is empty
+          </Alert>
+        )}
+        <Dialog
+          open={isBillingDetailsOpen}
+          onClose={() => setIsBillingDetailsOpen(false)}
+          fullWidth
+          maxWidth="lg"
+        >
+          <DialogContent>
+            <Checkout totalAmount={totalAmount} amounts={amounts} />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              onClick={() => setIsBillingDetailsOpen(false)}
+              color="primary"
+            >
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
       </Grid>
     </Grid>
   );

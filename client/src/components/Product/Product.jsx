@@ -27,11 +27,6 @@ import ReviewForm from "../ReviewForm/ReviewForm";
 import { addToCart, removeFromCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
 
-import {
-  increaseProductCount,
-  decreaseProductCount,
-} from "../../components/CartItem/CartItem";
-
 export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
