@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Container,
   Button,
@@ -26,6 +26,8 @@ import { useTheme } from "@mui/material/styles";
 import ReviewForm from "../ReviewForm/ReviewForm";
 import { addToCart, removeFromCart } from "../../data/fetchCart";
 import { getUserToken } from "../../data/fetchUsers";
+import { useSelector, useDispatch } from "react-redux";
+import { getReviews } from "../../features/review/reviewSlice";
 
 export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
@@ -46,6 +48,32 @@ export default function ProductCard({ product, onAddToCartClicked }) {
     manufacturerCountry,
     categories,
   } = product;
+
+  const dispatch = useDispatch();
+  const { reviews } = useSelector((state) => state.reviews);
+
+  const [averageRating, setAverageRating] = useState(0);
+  const [lastReviewText, setLastReviewText] = useState(
+    "На цей продукт поки що нема відгуків, залиште перший"
+  );
+
+  useEffect(() => {
+    dispatch(getReviews(_id, reviews));
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      const totalRating = reviews.reduce(
+        (sum, review) => sum + review.someCustomParam.rating,
+        0
+      );
+      const averageRating = totalRating / reviews.length;
+      setAverageRating(averageRating);
+    }
+
+    const lastReview = reviews[reviews.length - 1]?.content;
+    setLastReviewText(lastReview);
+  }, [reviews]);
 
   const isMobile = useMediaQuery("(max-width: 900px)");
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -222,23 +250,28 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             >
               Add to cart
             </Button>
-            <Typography
+            {/* Закоментувала бо на мобільній версії він не потрібен *....................................................../}
+            {/* <Typography
               sx={{
                 paddingTop: "16px",
                 fontSize: "12px",
                 lineHeight: "20px",
                 color: "#707070",
-                overflow: "hidden",
+                // overflow: "hidden",
+                overflow: "auto",
+                width: "480px",
+                height: "100px",
                 display: "-webkit-box",
                 WebkitLineClamp: showButtons.showMore ? "unset" : 1,
                 WebkitBoxOrient: "vertical",
               }}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
               placerat, augue a volutpat hendrerit, sapien tortor faucibus
               augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis.
-            </Typography>
+              facilisis consequat sed eu felis. */}
+            {/* {lastReviewText} */}
+            {/* </Typography> */}
             <Button
               disableRipple
               variant={"text"}
@@ -247,6 +280,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 display: "flex",
                 fontSize: "12px",
                 lineHeight: "20px",
+                marginTop: "35px",
                 color: theme.palette.allCollors.accent,
                 padding: "0",
                 ":hover": {
@@ -405,7 +439,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               }}
               onClick={() => handleButtonClick("reviews")}
             >
-              Reviews(0)
+              {/* вставила reviews.length замість 0  ........................................................... */}
+              Reviews({reviews.length})
               <ExpandMoreIcon
                 fontSize="small"
                 sx={{
@@ -466,8 +501,16 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       )}
       {/* desktop */}
       {!isMobile && (
-        <Box className={classes.container_desktop}>
-          <Container className={classes.container_image_desktop}>
+        // поставила sx={{ marginRight: "50px" }} ////////////////////////////////
+        <Box
+          className={classes.container_desktop}
+          sx={{ paddingRight: "20px" }}
+        >
+          {/* поставила sx={{ marginRight: "25px" }} /////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
+          <Container
+            className={classes.container_image_desktop}
+            sx={{ marginLeft: "50px", marginRight: "25px" }}
+          >
             <Container
               disableGutters={true}
               sx={{
@@ -560,8 +603,12 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   color: "#faaf00", // поміняла з чорного на жовтий колір
                 }}
                 name="customized-10"
-                defaultValue={3}
+                // defaultValue={3}
+                // max={5}
+                // поставила середній рейтинг ********************************************************************
+                value={averageRating}
                 max={5}
+                readOnly
               />
               <Typography
                 component="legend"
@@ -580,15 +627,25 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               sx={{
                 maxWidth: "480px",
                 paddingTop: "20px",
+                paddingLeft: "1px",
                 fontSize: "16px",
                 lineHeight: "27px",
                 color: "#707070",
+                wordBreak: "break-word",
+                height: "100px",
+                overflow: "auto",
+                scrollbarWidth: "thin", // добавила тонку прокрутку
+                "&::-webkit-scrollbar": {
+                  width: "5px",
+                },
               }}
             >
+              {/* Вставила останній відгук
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
               placerat, augue a volutpat hendrerit, sapien tortor faucibus
               augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis.
+              facilisis consequat sed eu felis. */}
+              {lastReviewText}
             </Typography>
             <Box
               display="flex"
@@ -683,7 +740,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
           >
             <Tab label="Description" value="1" />
             <Tab label="Additional information" value="2" />
-            <Tab label="Reviews(0)" value="3" />
+            {/* вставила довжину списку відгуків замість 0 ******************************************************************** */}
+            <Tab label={`Reviews(${reviews.length})`} value="3" />
           </Tabs>
           {valueTab === "1" && (
             <TabPanel valueTab={valueTab} index="1">
@@ -715,7 +773,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
           {valueTab === "3" && (
             <TabPanel valueTab={valueTab} index="3">
               {/* Reviews content */}
-              {/* імпортувала свою форму з відгуками */}
+              {/* імпортувала свою форму з відгуками * *****************************************************/}
               <ReviewForm productId={_id} />
             </TabPanel>
           )}
