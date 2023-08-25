@@ -25,7 +25,7 @@ import {
   carouselItem2,
   carouselItem3,
   carouselItem4,
-  carouselItem5,
+  // carouselItem5,
 } from "./HomeStyles";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -110,7 +110,7 @@ function Home() {
               <Box sx={carouselItem2} />
               <Box sx={carouselItem3} />
               <Box sx={carouselItem4} />
-              <Box sx={carouselItem5} />
+              {/* <Box sx={carouselItem5} /> */}
             </Carousel>
           </Container>
           <Button variant="outlined" sx={btn}>
