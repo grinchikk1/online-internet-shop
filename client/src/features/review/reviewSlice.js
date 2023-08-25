@@ -5,39 +5,7 @@ import { getUserToken } from "../../data/fetchUsers";
 
 const token = getUserToken();
 
-// const newCustomer = {
-//   firstName: "Customer",
-//   lastName: "Newone",
-//   login: "Customer",
-//   email: "customer@gmail.com",
-//   password: "1111111",
-//   telephone: "+380630000000",
-//   gender: "male",
-//   avatarUrl: "img/customers/023648.png",
-//   isAdmin: true
-// };
 
-// axios
-//   .post(`${url}/customers`, newCustomer)
-//   .then((savedCustomer) => {
-//     /*Do something with customer*/
-//   })
-//   .catch((err) => {
-//     /*Do something with error, e.g. show error to customer*/
-//   });
-  
-// const userData = {
-//   loginOrEmail: "customer@gmail.com",
-//   password: "1111111",
-// };
-// axios
-//   .post(`${url}/customers/login`, userData)
-//   .then((loginResult) => {
-//     console.log(loginResult);
-//   })
-//   .catch((err) => {
-//     /*Show error to customer, may be incorrect password or something else*/
-//   });
 
 const apiHeaders = {
   Authorization: token,
@@ -55,66 +23,146 @@ export const addReview = createAsyncThunk(
         }
       );
 
-      await axios.put(
+    const data =  await axios.put(
         `${url}/comments/${response.data._id}`,
         {
           someCustomParam: {
             date: new Date().toLocaleDateString(),
             rating,
+           
           },
         },
         {
           headers: apiHeaders,
         }
       );
-      // return responseData;
-      return { id: response.data._id, rating: rating }; // поставила замість   return responsedata; у формі розкоментувала
+      
+      return data.data
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
   }
 ); 
 
+
+export const getReviews = createAsyncThunk(
+  "reviews/getReviews",
+  async (productId, { rejectWithValue }) => {
+    try {
+      const responce = await axios.get(`${url}/comments/product/${productId}`,
+        {
+        headers: apiHeaders,
+      });
+       
+      
+      
+      console.log(responce.data);
+      return responce.data;
+    } catch (error) {
+      return rejectWithValue(error.response);
+    }
+  }
+);
+
+
+
+//РОБОЧИЙ ВАРІАНТ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 export const deleteReview = createAsyncThunk(
   "reviews/deleteReview",
   async (id, { rejectWithValue }) => {
     try {
-      const result = await axios.delete(`${url}/comments/${id}`, {
+       await axios.delete(`${url}/comments/${id}`, {
         headers: apiHeaders, // Передаємо apiHeaders безпосередньо в запит
-      });
-      return result.data;
+      }
+        
+      );
+      return id;
     } catch (error) {
       return rejectWithValue(error.result);
     }
   }
 );
 
+
+//*******************************************************************************************
+
+// export const deleteReview = createAsyncThunk(
+//   "reviews/deleteReview",
+//   async (id, { rejectWithValue }) => {
+//     try {
+//       const response = await axios.get(`${url}/comments/${id}`); // по цьому запиту можна отримати і id користувача і самого коментаря 
+
+//       const commentUserId = response.data.customer; 
+
+//       if (commentUserId === response.data._id) {
+
+//         await axios.delete(`${url}/comments/${id}`,
+//           {
+//           headers: apiHeaders, 
+//           }
+//         );
+//       }
+    
+//     } catch (error) {
+//       return rejectWithValue(error.result);
+//     }
+//   }
+// );
+
+
+
+
+
+      
+    
+
 const reviewsSlice = createSlice({
   name: "reviews",
   initialState: {
     productId: null,
     content: "",
-    status: false,
+    // status: false,
+    reviews: []
+    // averageRating: 0, // Додайте поле для збереження середнього рейтингу
+    // reviewCount: 0, // Додайте поле для збереження кількості відгуків
   },
-  reducers: {},
+  reducers: {
+    setReviewsData: (state, action) => {
+      state.reviews = action.payload;
+    },
+  },
   extraReducers: {
-    [addReview.fulfilled]: (state) => {
+    [addReview.fulfilled]: (state, action) => {
       console.log("fulfilled");
-      state.status = !state.status;
+      // state.status = !state.status;
+      console.log(action.payload);
+      state.reviews.push(action.payload)
     },
     [addReview.pending]: () => console.log("pending"),
     [addReview.rejected]: () => console.log("rejected"),
 
     [deleteReview.pending]: () => console.log("pending"),
-    [deleteReview.fulfilled]: (state) => {
+    [deleteReview.fulfilled]: (state, action) => {
       console.log("fulfilled");
-      state.status = !state.status; // Або якщо потрібно змінити статус
-    },
-    [deleteReview.rejected]: () => console.log("rejected")
-    },
-  },
-);
+      console.log(action.payload);
+      state.reviews = state.reviews.filter((review) => review._id !== action.payload);
 
+      // state.status = !state.status; // Або якщо потрібно змінити статус
+    },
+    [deleteReview.rejected]: () => console.log("rejected"),
+
+    [getReviews.pending]: () => console.log("pending"),
+    [getReviews.fulfilled]: (state, action) => {
+      console.log("fulfilled");
+       state.reviews = action.payload;
+      // state.status = !state.status; // Або якщо потрібно змінити статус
+    },
+    [getReviews.rejected]: () => console.log("rejected"),
+  },
+});
+
+export const { setReviewsData } = reviewsSlice.actions;
 export default reviewsSlice.reducer;
 
 // export const updateReview = createAsyncThunk(
