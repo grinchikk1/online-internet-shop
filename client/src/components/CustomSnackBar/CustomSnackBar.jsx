@@ -2,7 +2,7 @@ import React from "react";
 import { Snackbar, Alert, AlertTitle } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
-const CustomSnackbar = ({ open, onClose, text }) => {
+const CustomSnackbar = ({ open, onClose, text, titleText }) => {
   const customIconMapping = {
     success: (
       <CheckCircleIcon fontSize="inherit" style={{ color: "#A18A68" }} />
@@ -22,7 +22,7 @@ const CustomSnackbar = ({ open, onClose, text }) => {
         style={{ color: "#A18A68", backgroundColor: "#EFEFEF" }}
         iconMapping={customIconMapping}
       >
-        <AlertTitle>Success</AlertTitle>
+        <AlertTitle>{titleText}</AlertTitle>
         {text}
       </Alert>
     </Snackbar>

@@ -10,6 +10,9 @@ import * as Yup from "yup";
 
 export default function FormUpdateUser() {
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messageText, setMessageText] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
+
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
   const dispatch = useDispatch();
@@ -46,10 +49,15 @@ export default function FormUpdateUser() {
       };
 
       const response = await updateUser(updatedUser, token);
-      console.log(response);
       if (response.status === 200) {
         dispatch(setUser(response.data));
+        setMessageText("Your data has been successfully updated!");
+        setMessageTitle("Success");
         setShowSnackbar(true);
+      } else {
+        setShowSnackbar(true);
+        setMessageTitle("Error");
+        setMessageText("Something went wrong!");
       }
     } catch (error) {
       console.error("Error updating user data:", error);
@@ -118,7 +126,8 @@ export default function FormUpdateUser() {
         <CustomSnackbar
           open={showSnackbar}
           onClose={() => setShowSnackbar(false)}
-          text="Your data has been successfully updated!"
+          titleText={messageTitle}
+          text={messageText}
         />
       </Form>
     </Formik>

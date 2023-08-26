@@ -1,19 +1,23 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import "../../styles/style.scss";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser, getUser } from "../../data/fetchUsers";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 import { updateCart, getCart } from "../../data/fetchCart";
 import { setUser, setToken, setError } from "../../features/auth/authSlice";
+import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const token = useSelector((state) => state.auth.token);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messageText, setMessageText] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
 
   const initialValues = {
     loginOrEmail: "",
@@ -23,6 +27,12 @@ const Login = () => {
   const handleSubmit = async (values) => {
     try {
       const user = await loginUser(values);
+
+      if (user.success) {
+        setShowSnackbar(true);
+        setMessageText("Login Successful");
+        setMessageTitle("Success");
+      }
 
       if (user.token !== undefined) {
         const userData = await getUser(user.token);
@@ -63,12 +73,12 @@ const Login = () => {
           user.token
         );
         CartLocalStorageHelper.resetCart();
-        // Зберігання JWT в LocalStorage
-        localStorage.setItem("token", user.token);
         dispatch(setToken(user.token));
         navigate("/");
       } else {
-        alert("Error logging in");
+        setShowSnackbar(true);
+        setMessageTitle("Error");
+        setMessageText("Something went wrong!");
         dispatch(setError("Error logging in"));
       }
     } catch (error) {
@@ -122,7 +132,15 @@ const Login = () => {
             />
           </div>
 
-          <button type="submit">Login</button>
+          <button type="submit" id="lodin_btn">
+            Login
+          </button>
+          <CustomSnackbar
+            open={showSnackbar}
+            onClose={() => setShowSnackbar(false)}
+            titleText={messageTitle}
+            text={messageText}
+          />
         </Form>
       </Formik>
       <p className="login-text">
