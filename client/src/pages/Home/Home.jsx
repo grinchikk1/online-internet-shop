@@ -5,7 +5,6 @@ import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useStyles, theme } from "./HomeStyles";
 import { useEffect } from "react";
-// import { getProducts } from "../../data/fetchProducts";
 import { filterProducts } from "../../data/fetchProducts";
 import { Link } from "react-router-dom";
 import {
@@ -25,7 +24,6 @@ import {
   carouselItem2,
   carouselItem3,
   carouselItem4,
-  // carouselItem5,
 } from "./HomeStyles";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,20 +33,12 @@ function Home() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const output = out();
-  //=======================
-  // useEffect(() => {
-  //   getProducts().then((data) => {
-  //   console.log(data);
-  //     dispatch(setProducts(data));
-  //   });
-  // }, [dispatch]);
 
   useEffect(() => {
     filterProducts({ perPage: 6 }).then((data) => {
       dispatch(setProducts(data.products));
     });
   }, [dispatch]);
-  //==================
 
   function out() {
     if (products) {
@@ -109,7 +99,6 @@ function Home() {
               <Box sx={carouselItem2} />
               <Box sx={carouselItem3} />
               <Box sx={carouselItem4} />
-              {/* <Box sx={carouselItem5} /> */}
             </Carousel>
           </Container>
           <Link className={styles.link} to="/Shop">
