@@ -200,7 +200,6 @@ export default function MultiActionAreaCard({ card }) {
             color: "black",
             paddingRight: "5px",
             paddingLeft: "5px",
-            // color: "rgb(191 140 140)",
           }}>
           {card.brand}
         </Typography>
