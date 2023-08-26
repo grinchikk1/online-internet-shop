@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Box, Typography } from "@mui/material";
 import { useStyles } from "./CartItemStyles";
 
@@ -10,13 +10,12 @@ import {
   removeFromCart,
   addToCart,
 } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const CartItem = (props) => {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
     props.data;
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
   const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg
