@@ -35,7 +35,7 @@ function Home() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const output = out();
-  //======================= 
+  //=======================
   // useEffect(() => {
   //   getProducts().then((data) => {
   //   console.log(data);
@@ -53,25 +53,25 @@ function Home() {
   function out() {
     if (products) {
       return products.map((card) => {
-          return (
-            <Card
-              key={card._id}
-              product={card}
-              _id={card._id}
-              enabled={card.enabled}
-              imageUrls={card.imageUrls}
-              quantity={card.quantity}
-              name={card.name}
-              currentPrice={card.currentPrice}
-              categories={card.categories}
-              productMaterial={card.productMaterial}
-              brand={card.brand}
-              itemNo={card.itemNo}
-              date={card.date}
-              country={card.manufacturerCountry}
-              previousPrice={card.previousPrice}
-            />
-          );
+        return (
+          <Card
+            key={card._id}
+            product={card}
+            _id={card._id}
+            enabled={card.enabled}
+            imageUrls={card.imageUrls}
+            quantity={card.quantity}
+            name={card.name}
+            currentPrice={card.currentPrice}
+            categories={card.categories}
+            productMaterial={card.productMaterial}
+            brand={card.brand}
+            itemNo={card.itemNo}
+            date={card.date}
+            country={card.manufacturerCountry}
+            previousPrice={card.previousPrice}
+          />
+        );
       });
     }
   }
@@ -104,8 +104,7 @@ function Home() {
                     height: "10px",
                   },
                 },
-              }}
-            >
+              }}>
               <Box sx={carouselItem1} />
               <Box sx={carouselItem2} />
               <Box sx={carouselItem3} />
@@ -113,9 +112,11 @@ function Home() {
               {/* <Box sx={carouselItem5} /> */}
             </Carousel>
           </Container>
-          <Button variant="outlined" sx={btn}>
-            View Product
-          </Button>
+          <Link className={styles.link} to="/Shop">
+            <Button variant="outlined" sx={btn}>
+              View Product
+            </Button>
+          </Link>
           <Typography sx={name}>Gold big hoops</Typography>
           <Typography sx={price}>$ 68,00</Typography>
         </Container>
