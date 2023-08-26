@@ -52,6 +52,7 @@ export const updateProduct = async (product, token) => {
         Authorization: token,
       },
     });
+
     return response.data;
   } catch (error) {
     console.error("Error updating data:", error);

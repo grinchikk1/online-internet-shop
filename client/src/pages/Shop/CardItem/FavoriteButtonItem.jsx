@@ -24,8 +24,8 @@ function FavouriteButtonItem({ card }) {
     width: "25px",
     height: "25px",
     "@media(max-width: 769px)": {
-      width: "16px",
-      height: "16px",
+      width: "20px",
+      height: "20px",
     },
   };
 

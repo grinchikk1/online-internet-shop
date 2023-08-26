@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   FormControl,
@@ -12,45 +12,28 @@ import {
   Switch,
   Button,
 } from "@mui/material";
-import { Btn } from "./InputStyle";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
-import { filterProducts } from "../../data/fetchProducts";
-import CardItem from "./CardItem/CardItem";
+import { Btn } from "./InputStyle";
 
 const label = { inputProps: { "aria-label": "Switch demo" } };
 
-function Filter({ handleSearch, setSearchResults, searchResults }) {
+function Filter({
+  handleSearch,
+  setSearchResults,
+  searchResults,
+  selectedProductMaterial,
+  setSelectedProductMaterial,
+  selectedProduct,
+  setSelectedProduct,
+  setMinPrice,
+  minPrice,
+  maxPrice,
+  setMaxPrice,
+  handleFilter,
+}) {
   const classes = useStyles();
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState("");
-  const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
-  const [minPrice, setMinPrice] = useState(0);
-  const [maxPrice, setMaxPrice] = useState(2000);
-
-  const handleFilter = async () => {
-    const filterParams = {
-      brand: selectedProduct,
-      productMaterial: selectedProductMaterial,
-      minPrice: minPrice,
-      maxPrice: maxPrice,
-    };
-
-    try {
-      const filteredData = await filterProducts(filterParams);
-
-      if (Array.isArray(filteredData)) {
-        setFilteredProducts(filteredData);
-      } else {
-        console.error("Filtered data is not an array:", filteredData);
-      }
-    } catch (error) {
-      console.error("Error filtering products:", error);
-    }
-  };
-
-  // console.log(filteredProducts);
 
   return (
     <Box className={classes.Container}>
@@ -70,19 +53,22 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
           endAdornment={
             <InputAdornment
               position="start"
-              sx={{ color: "black", cursor: "pointer" }}
-            >
+              sx={{ color: "black", cursor: "pointer" }}>
               <SearchIcon onClick={handleSearch} fontSize="small" />
             </InputAdornment>
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </FormControl>
 
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
-        >
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
           Product material
         </InputLabel>
         <Select
@@ -100,25 +86,20 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
             },
           }}
           value={selectedProductMaterial}
-          onChange={(e) => setSelectedProductMaterial(e.target.value)}
-        >
+          onChange={(e) => setSelectedProductMaterial(e.target.value)}>
+          <MenuItem>All</MenuItem>
           <MenuItem key={"gold"} value={"gold"}>
             Gold
           </MenuItem>
           <MenuItem key={"silver"} value={"silver"}>
             Silver
           </MenuItem>
-          <MenuItem key={"platinum"} value={"platinum"}>
-            Platinum
-          </MenuItem>
         </Select>
       </FormControl>
-
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
           htmlFor="brand"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
-        >
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
           Brand
         </InputLabel>
         <Select
@@ -133,8 +114,8 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
             },
           }}
           value={selectedProduct}
-          onChange={(e) => setSelectedProduct(e.target.value)}
-        >
+          onChange={(e) => setSelectedProduct(e.target.value)}>
+          <MenuItem>All</MenuItem>
           <MenuItem key={"ZARINA"} value={"ZARINA"}>
             {"ZARINA"}
           </MenuItem>
@@ -188,39 +169,16 @@ function Filter({ handleSearch, setSearchResults, searchResults }) {
           Price: {minPrice}$ - {maxPrice}$ price
         </Typography>
       </Box>
-      <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>
-        <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>On Sale</Typography>
-        <Switch
-          size="medium"
-          sx={{
-            color: "rgba(112, 112, 112, 1)",
-            "  & .MuiSwitch-thumb": {
-              position: "relative",
-              top: "5px",
-              left: "5px",
-              width: "13px",
-              height: "13px",
-            },
-            "& .MuiSwitch-track": {
-              width: "35px",
-              height: "17px",
-            },
-          }}
-          {...label}
-        />
-      </Box>
       <Box
         className={classes.BoxSwitch}
-        sx={{ display: "flex", justifyContent: "center" }}
-      >
-        <Button onClick={handleFilter} sx={Btn} variant="text">
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <Button onClick={handleFilter} variant="container" sx={Btn}>
           Filter
         </Button>
-      </Box>
-      <Box>
-        {filteredProducts.map((card) => (
-          <CardItem key={card._id} card={card} />
-        ))}
       </Box>
     </Box>
   );

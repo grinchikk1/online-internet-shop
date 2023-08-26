@@ -34,13 +34,18 @@ export default function MultiActionAreaCard({ card }) {
   };
 
   const cards = {
+    height: 420,
     boxShadow: "none",
     margin: "0 auto",
   };
 
   const img = {
+    height: 300,
+    width: 235,
+    alignItems: "center",
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
+    position: "relative",
   };
 
   const discount = {
@@ -69,20 +74,20 @@ export default function MultiActionAreaCard({ card }) {
     alignItems: "center",
     paddingLeft: "10px",
     paddingRight: "10px",
-    top: "145px",
+    top: "235px",
     width: "100%",
     height: "65px",
     backgroundColor: "rgba(255, 255, 255, 0.50)",
     transition: "all 0.5s ease",
     opacity: 0,
-    "@media (min-width: 600px) ": {
+    "@media (max-width: 600px) ": {
       paddingLeft: "15px",
       paddingRight: "15px",
     },
   };
 
   const cardHoverVisible = {
-    opacity: 1, // Показуємо елемент при наведенні
+    opacity: 1,
   };
   const cardHoverAdd = {
     fontSize: "16px",
@@ -93,7 +98,7 @@ export default function MultiActionAreaCard({ card }) {
     cursor: "pointer",
     userSelect: "none",
     "@media (max-width: 579.9px)": {
-      fontSize: "12px",
+      fontSize: "15px",
       fontWeight: "600",
     },
   };
@@ -113,10 +118,11 @@ export default function MultiActionAreaCard({ card }) {
   };
 
   return (
-    <Card style={cards}>
+    <Container style={{ ...cards, "&:hover": "none" }}>
       <CardActionArea
         sx={{
           backgroundColor: "#fff",
+          "&:hover": "none",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -150,6 +156,8 @@ export default function MultiActionAreaCard({ card }) {
             color: "black",
             marginBottom: "16px",
             marginTop: "20px",
+            paddingRight: "5px",
+            paddingLeft: "5px",
           }}
         >
           {card.name}
@@ -159,6 +167,8 @@ export default function MultiActionAreaCard({ card }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            paddingRight: "5px",
+            paddingLeft: "5px",
           }}
         >
           <Typography
@@ -195,12 +205,14 @@ export default function MultiActionAreaCard({ card }) {
             fontSize: 20,
             fontWeight: "400",
             color: "black",
+            paddingRight: "5px",
+            paddingLeft: "5px",
             // color: "rgb(191 140 140)",
           }}
         >
           {card.brand}
         </Typography>
       </CardActionArea>
-    </Card>
+    </Container>
   );
 }
