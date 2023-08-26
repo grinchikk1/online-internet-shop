@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -9,31 +9,36 @@ import { useDispatch } from "react-redux";
 import { createUser } from "../../data/fetchUsers";
 import { setUser, setError } from "../../features/auth/authSlice";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
-import { updateCart } from "../../data/fetchCart";
+import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messageText, setMessageText] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
+
   const handleSubmit = async (values) => {
     try {
       const user = await createUser(values);
-      dispatch(setUser(user));
-      const { cart, amount } = CartLocalStorageHelper.getCart();
-      const localStorageCartBody = cart.map((product) => {
-        return {
-          product: product._id,
-          cartQuantity: amount[product._id] || 1,
-        };
-      });
-      await updateCart(
-        {
-          products: localStorageCartBody,
-        },
-        user.token
-      );
-      CartLocalStorageHelper.resetCart();
-      navigate("/login");
+
+      if (user.status === 200) {
+        setShowSnackbar(true);
+        setMessageText("Register Successful");
+        setMessageTitle("Success");
+
+        dispatch(setUser(user.data));
+
+        CartLocalStorageHelper.resetCart();
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        setShowSnackbar(true);
+        setMessageText("Something went wrong!");
+        setMessageTitle("Error");
+      }
     } catch (error) {
       dispatch(setError("Error registering"));
     }
@@ -124,7 +129,15 @@ const Registration = () => {
             />
           </div>
 
-          <button type="submit">Register</button>
+          <button type="submit" id="register_btn">
+            Register
+          </button>
+          <CustomSnackbar
+            open={showSnackbar}
+            onClose={() => setShowSnackbar(false)}
+            titleText={messageTitle}
+            text={messageText}
+          />
           <Typography sx={{ paddingTop: "15px" }}>
             Have an account?{" "}
             <Link to="/login" style={{ color: "#707070" }}>

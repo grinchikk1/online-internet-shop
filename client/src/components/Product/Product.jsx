@@ -708,6 +708,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       <CustomSnackbar
         open={showButtons.addToCart}
         onClose={handleCloseSnackbar}
+        titleText="success"
         text="The item added to your Shopping bag."
       />
     </Container>

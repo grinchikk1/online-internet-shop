@@ -45,7 +45,6 @@
       z-index: 22;
       background-color: white;
       transform: translateY(-200%);
-      transition: all ease-in-out 0.3s;
       border: none;
 
       &.open {
@@ -163,7 +162,7 @@
     opacity: 0;
   }
   .nav-opener__menu-line:nth-child(3) {
-    bottom: 50%;
+    bottom: 45%;
     transform: translate(-50%, -50%) rotate(-45deg);
   }
 }

@@ -13,6 +13,8 @@ export default function FormChangePass() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [showPasswordCurrent, setShowPasswordCurrent] = useState(false);
   const [showPasswordNew, setShowPasswordNew] = useState(false);
+  const [messageText, setMessageText] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
 
   const isMobile = useMediaQuery("(max-width: 960px)");
   const token = useSelector((state) => state.auth.token);
@@ -42,9 +44,15 @@ export default function FormChangePass() {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       const response = await changePassword(values, token);
-      if (response.status === 200) {
+      if (response.data.message !== undefined) {
+        setMessageText(response.data.message);
+        setMessageTitle("Success");
         setShowSnackbar(true);
         resetForm();
+      } else {
+        setMessageTitle("Error");
+        setMessageText(response.data.password);
+        setShowSnackbar(true);
       }
     } catch (error) {
       console.error("Error changing password:", error);
@@ -123,7 +131,8 @@ export default function FormChangePass() {
         <CustomSnackbar
           open={showSnackbar}
           onClose={() => setShowSnackbar(false)}
-          text="Your password has been successfully updated!"
+          titleText={messageTitle}
+          text={messageText}
         />
       </Form>
     </Formik>

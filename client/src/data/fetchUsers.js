@@ -6,7 +6,7 @@ const url = "http://localhost:4000/api";
 export const createUser = async (user) => {
   try {
     const response = await axios.post(`${url}/customers`, user);
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
