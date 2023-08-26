@@ -6,6 +6,7 @@ import reviewReducer from "../features/review/reviewSlice";
 import customerReducer from "../features/customer/customerSlice";
 import searchReducer from "../features/search/searchSlice";
 import authReducer from "../features/auth/authSlice";
+import orderReducer from "../features/order/orderSlice";
 
 const rootReducer = combineReducers({
   favorites: favoritesReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   customer: customerReducer,
   search: searchReducer,
   auth: authReducer,
+  order: orderReducer,
 });
 
 export default rootReducer;

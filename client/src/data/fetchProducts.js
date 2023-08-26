@@ -81,19 +81,3 @@ export const searchProducts = (searchPhrases) => async (dispatch) => {
     dispatch(fetchProductsFailure(error.message));
   }
 };
-
-// Приклад фільтрації
-
-// const filterParams = {
-//   categories: "bracelet",
-//   brand: "ZARINA",
-//   perPage: 2,
-//   startPage: 1,
-//   sort: "-price", // Сортування за ціною у спадаючому порядку
-// };
-
-// const filterer = async () => {
-//   console.log(await filterProducts(filterParams));
-// };
-
-// filterer();
