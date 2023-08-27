@@ -90,3 +90,17 @@ export const useStyles = makeStyles((theme) => ({
     color: "rgba(161, 138, 104, 1)",
   },
 }));
+
+export const Btn = {
+  width: "150px",
+  height: "50px",
+  color: "#fff",
+  fontSize: "15px",
+  fontWeight: "400",
+  textAling: "center",
+  background: "rgba(112, 112, 112, 1)",
+  "&:hover": {
+    border: "1px solid #fff",
+    color: "black",
+  },
+};

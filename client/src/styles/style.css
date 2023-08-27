@@ -106,7 +106,7 @@ a {
   color: #000000;
 }
 .header__nav-link:hover {
-  color: green;
+  color: #707070;
 }
 @media (max-width: 768px) {
   .header__nav-link {
@@ -268,6 +268,105 @@ a {
 }
 .footer__subscribe-list:last-child {
   padding: 0;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+}
+.login-container h1 {
+  margin-bottom: 20px;
+}
+.login-container .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 300px;
+}
+.login-container .form-group label {
+  margin-bottom: 5px;
+}
+.login-container .form-group input {
+  padding: 8px;
+  border: 1px solid #D8D8D8;
+  border-radius: 4px;
+}
+.login-container .form-group input:focus {
+  outline: none;
+  border: 1px solid #000000;
+}
+.login-container .form-group .error-message {
+  color: #D82700;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.login-container button {
+  padding: 10px 20px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.login-container button:hover {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+.login-container .login-text {
+  margin: 30px 0 0;
+}
+
+.registration-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+}
+.registration-container h1 {
+  margin-bottom: 20px;
+}
+.registration-container .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  width: 300px;
+}
+.registration-container .form-group label {
+  margin-bottom: 5px;
+}
+.registration-container .form-group input {
+  padding: 8px;
+  border: 1px solid #D8D8D8;
+  border-radius: 4px;
+}
+.registration-container .form-group input:focus {
+  outline: none;
+  border: 1px solid #000000;
+}
+.registration-container .form-group .error-message {
+  color: #D82700;
+  font-size: 14px;
+  margin-top: 5px;
+}
+.registration-container button {
+  padding: 10px 20px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.registration-container button:hover {
+  background-color: #000000;
+  color: #FFFFFF;
 }
 
 /*# sourceMappingURL=style.css.map */

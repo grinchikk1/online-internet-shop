@@ -16,8 +16,11 @@ import {
   cardBrand,
 } from "./CardStyle";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../data/fetchCart";
+
+import { useNavigate } from "react-router-dom";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Card({
   _id,
@@ -35,23 +38,38 @@ function Card({
   previousPrice,
   product,
 }) {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(`/product/${_id}`);
+  };
+
+  const token = useSelector((state) => state.auth.token);
   const styles = useStyles();
   const dispatch = useDispatch();
 
   const item = { _id, imageUrls, name, brand };
+
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(product));
+    if (!!token) {
+      addToCart(product._id, token);
+    } else {
+      CartLocalStorageHelper.addProductToCart(product);
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container className="cardContainer" sx={cardContainer}>
         <Container sx={cardImgContainer}>
-          <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
+          <img
+            src={imageUrls[0]}
+            alt="product"
+            onClick={handleClick}
+            className={styles.cardImg}
+          />
           <Container className="cardHover" sx={cardHover}>
-            <Typography
-              sx={cardHoverAdd}
-              onClick={() => {
-                dispatch(addProductToCart(product));
-                addToCart(product._id, "");
-              }}
-            >
+            <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
               ADD TO CART
             </Typography>
             <FavouriteButton item={item} />
@@ -67,4 +85,5 @@ function Card({
     </ThemeProvider>
   );
 }
+
 export default Card;

@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
   image_list_desktop: {
     width: "120px",
     height: "120px",
-    backgroundSize: "contain",
+    backgroundSize: "cover",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     borderRadius: "4px",

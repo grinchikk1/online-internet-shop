@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
 import { ShoppingBasket } from "@mui/icons-material";
-import SearchIcon from "@mui/icons-material/Search";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useSelector } from "react-redux";
-
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Badge, Drawer } from "@mui/material";
 import FavouriteList from "../FavouriteList/FavouriteList";
 
@@ -15,17 +14,38 @@ function Header() {
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
   const countProductInCart = useSelector((state) => state.cart.cart.length);
 
+  const links = ["Home", "Shop", "About", "Contact"];
+
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
   };
+
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setIsBurgerMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   function handleFavoritesMenuOpen(event) {
     setIsFavoritesMenuOpen(true);
   }
   function handleFavoritesMenuClose() {
     setIsFavoritesMenuOpen(false);
   }
+
   return (
     <header className="header">
+      <div
+        className={`header__blur${isBurgerMenuOpen ? "--open" : ""}`}
+        onClick={handleBurgerMenu}
+      ></div>
       <div className="container flex-container">
         <button
           className={`nav-opener ${isBurgerMenuOpen ? "open" : ""}`}
@@ -44,31 +64,23 @@ function Header() {
         <div className={`header__nav-holder ${isBurgerMenuOpen ? "open" : ""}`}>
           <nav className={`header__nav ${isBurgerMenuOpen ? "open" : ""}`}>
             <ul className="header__nav-list">
-              <li className="header__nav-item">
-                <NavLink className="header__nav-link" to="/">
-                  Home
-                </NavLink>
-              </li>
-              <li className="header__nav-item">
-                <NavLink className="header__nav-link" to="/shop">
-                  Shop
-                </NavLink>
-              </li>
-              <li className="header__nav-item">
-                <NavLink className="header__nav-link" to="/about">
-                  About
-                </NavLink>
-              </li>
-              <li className="header__nav-item">
-                <NavLink className="header__nav-link" to="/contact">
-                  Contact
-                </NavLink>
-              </li>
+              {links.map((link, index) => {
+                return (
+                  <li className="header__nav-item" key={index}>
+                    <NavLink
+                      className="header__nav-link"
+                      onClick={handleBurgerMenu}
+                      to={index === 0 ? "/" : `/${link}`}
+                      key={index}
+                    >
+                      {link}
+                    </NavLink>
+                  </li>
+                );
+              })}
             </ul>
           </nav>
           <div className="header__logo-holder">
-            <SearchIcon style={{ color: "black" }} className="header__icon" />
-
             <FavoriteIcon
               className="header__icon"
               onClick={handleFavoritesMenuOpen}
@@ -100,6 +112,11 @@ function Header() {
               >
                 <ShoppingBasket style={{ color: "black " }} />
               </Badge>
+            </Link>
+            <Link to="/login" className="header__icon">
+              <AccountCircleIcon
+                style={{ paddingTop: "3px", color: "black" }}
+              />
             </Link>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,11 +27,20 @@ function FavouriteItem({ item }) {
   const handleCardClick = () => {
     navigate(`/product/${_id}`);
   };
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Card
-      sx={{ width: "50vw", maxWidth: "400px", marginBottom: "20px" }}
+      sx={{
+        width: "50vw",
+        maxWidth: "400px",
+        marginBottom: "20px",
+        backgroundColor: isHovered ? "#EFEFEF" : "white",
+        margin: "10px",
+      }}
       onClick={handleCardClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       <div
         style={{

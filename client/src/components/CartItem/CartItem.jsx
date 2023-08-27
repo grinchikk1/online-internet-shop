@@ -1,29 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Grid } from "@mui/material";
-import { useStyles, theme } from "./CartItemStyles";
-import Typography from "@mui/material/Typography";
-
-import { ThemeProvider } from "@mui/material/styles";
+import { useDispatch, useSelector } from "react-redux";
+import { Grid, Box, Typography } from "@mui/material";
+import { useStyles } from "./CartItemStyles";
 
 import { updateCartCount } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import {
+  deleteFromCart,
+  removeFromCart,
+  addToCart,
+} from "../../data/fetchCart";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const CartItem = (props) => {
-  const {
-    _id,
-    enabled,
-    imageUrls,
-    quantity,
-    name,
-    currentPrice,
-    categories,
-    productMaterial,
-    brand,
-    itemNo,
-    date,
-    country,
-  } = props.data;
+  const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
+    props.data;
+  const token = useSelector((state) => state.auth.token);
   const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg
@@ -41,42 +33,64 @@ const CartItem = (props) => {
     </svg>
   );
   const s = useStyles();
-  const dispath = useDispatch();
-
-  const [value, setValue] = useState(1);
+  const dispatch = useDispatch();
 
   const handleDecrement = () => {
     if (amount > 1) {
-      dispath(updateCartCount({ itemID: _id, newCount: amount - 1 }));
+      dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
+      if (!!token) {
+        removeFromCart(_id, token);
+      } else {
+        CartLocalStorageHelper.updateCartCount({
+          itemID: _id,
+          newCount: amount - 1,
+        });
+      }
     }
   };
 
   const handleIncrement = () => {
-    dispath(updateCartCount({ itemID: _id, newCount: amount + 1 }));
+    dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
+    if (!!token) {
+      addToCart(_id, token);
+    } else {
+      CartLocalStorageHelper.updateCartCount({
+        itemID: _id,
+        newCount: amount + 1,
+      });
+    }
   };
 
-  const handleCloseCard = (buttonName) => {
+  const handleAmountChange = (e) => {
+    const newCount = parseInt(e.target.value);
+    if (newCount > 0) {
+      dispatch(updateCartCount({ itemID: _id, newCount: newCount }));
+    }
+  };
+
+  const handleRemoveCard = (buttonName) => {
     if (buttonName === "removeFromCart") {
       onRemoveFromCartClicked();
     }
   };
-  const handleAmountChange = (e) => {
-    const newCount = parseInt(e.target.value);
-    if (newCount > 0) {
-      dispath(updateCartCount({ itemID: _id, newCount: newCount }));
+
+  const handleRemoveProductFromCart = () => {
+    handleRemoveCard("removeFromCart");
+    if (!!token) {
+      deleteFromCart(_id, token);
     }
   };
 
   return (
-    <>
+    <Box>
       <Grid container className={s.item_wrapper}>
         <img src={imageUrls[0]} alt={name} className={s.item_image} />
-        <Grid className={s.wrapp}>
+        <Box className={s.wrapp}>
           <Grid item className={s.wrapp_description}>
-            <Typography className={s.item_name}>{name}</Typography>
-            <Typography className={s.item_description}>
+            <p className={s.item_name}>{name}</p>
+            <p className={s.item_description}>
               {productMaterial} / {brand}
-            </Typography>
+            </p>
             <Typography className={s.item_price}>{currentPrice} $</Typography>
           </Grid>
 
@@ -93,19 +107,19 @@ const CartItem = (props) => {
               +
             </button>
           </Grid>
-        </Grid>
+        </Box>
 
         <Grid item>
           <button
             className={s.close_button}
-            onClick={() => handleCloseCard("removeFromCart")}
+            onClick={handleRemoveProductFromCart}
           >
             {SVGCLOSEBTN}
           </button>
         </Grid>
       </Grid>
-      <Grid item className={s.cart_line}></Grid>
-    </>
+      <div className={s.cart_line}></div>
+    </Box>
   );
 };
 

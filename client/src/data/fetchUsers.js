@@ -6,7 +6,7 @@ const url = "http://localhost:4000/api";
 export const createUser = async (user) => {
   try {
     const response = await axios.post(`${url}/customers`, user);
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -29,10 +29,10 @@ export const changePassword = async (passwords, token) => {
   try {
     const response = await axios.put(`${url}/customers/password`, passwords, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -44,10 +44,10 @@ export const updateUser = async (user, token) => {
   try {
     const response = await axios.put(`${url}/customers`, user, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -59,7 +59,7 @@ export const getUser = async (token) => {
   try {
     const response = await axios.get(`${url}/customers/customer`, {
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: token,
       },
     });
     return response.data;
@@ -68,22 +68,3 @@ export const getUser = async (token) => {
     return [];
   }
 };
-
-// Приклад отримання юзера
-
-// const [user, setUser] = useState(null);
-
-// const handleBtn = async () => {
-//   try {
-//     const loggedInUser = await loginUser({
-//       loginOrEmail: "admin",
-//       password: "admin123",
-//     });
-//     setUser(loggedInUser);
-//     console.log(user);
-//   } catch (error) {
-//     console.error("Error logging in:", error);
-//   }
-// };
-
-// <button onClick={handleBtn}>Log in</button>
