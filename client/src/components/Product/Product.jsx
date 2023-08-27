@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
   Container,
@@ -144,15 +145,13 @@ export default function ProductCard({ product, onAddToCartClicked }) {
         flexDirection: isMobile ? "row" : "column",
         width: "100%",
         paddingTop: isMobile ? "0" : "128px",
-      }}
-    >
+      }}>
       {/* mobile */}
       {isMobile && (
         <Container
           sx={{
             width: "100%",
-          }}
-        >
+          }}>
           <Container maxWidth={"sm"} disableGutters={true}>
             <Box
               sx={{
@@ -167,8 +166,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               onClick={handleScroll}
             />
             <Box
-              sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}
-            >
+              sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}>
               {imageUrls.map((img, index) => (
                 <Box
                   key={index}
@@ -192,16 +190,14 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 fontSize: "20px",
                 fontWeight: "400",
                 lineHeight: "26px",
-              }}
-            >
+              }}>
               {name}
             </Typography>
             <Box
               display={"flex"}
               justifyContent={"space-between"}
               alignItems={"center"}
-              sx={{ paddingTop: "5px", paddingBottom: "24px" }}
-            >
+              sx={{ paddingTop: "5px", paddingBottom: "24px" }}>
               <Typography
                 variant="body1"
                 sx={{
@@ -210,8 +206,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   fontWeight: "400",
                   lineHeight: "26px",
                   textTransform: "capitalize",
-                }}
-              >
+                }}>
                 {`$  ${currentPrice},00`}
               </Typography>
               <IconButton onClick={() => handleButtonClick("share")}>
@@ -227,8 +222,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   padding: "10px 0 20px",
                   width: "250px",
                   color: "#707070",
-                }}
-              >
+                }}>
                 <SocialMediaIcons item={product} />
               </Box>
             )}
@@ -242,8 +236,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   transition: "all 0.3s ease-in-out",
                 },
               }}
-              onClick={() => handleButtonClick("addToCart")}
-            >
+              onClick={() => handleButtonClick("addToCart")}>
               Add to cart
             </Button>
             <Divider
@@ -270,8 +263,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   transition: "all 0.3s ease-in-out",
                 },
               }}
-              onClick={() => handleButtonClick("description")}
-            >
+              onClick={() => handleButtonClick("description")}>
               Description
               <ExpandMoreIcon
                 fontSize="small"
@@ -290,8 +282,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   fontSize: "12px",
                   lineHeight: "20px",
                   color: "#707070",
-                }}
-              >
+                }}>
                 {description}
               </Typography>
             )}
@@ -313,8 +304,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   transition: "all 0.3s ease-in-out",
                 },
               }}
-              onClick={() => handleButtonClick("additionalInfo")}
-            >
+              onClick={() => handleButtonClick("additionalInfo")}>
               Additional information
               <ExpandMoreIcon
                 fontSize="small"
@@ -331,8 +321,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               <>
                 <Typography
                   className={classes.title_text_color_mobile}
-                  sx={{ paddingBottom: "10px" }}
-                >
+                  sx={{ paddingBottom: "10px" }}>
                   Country:{" "}
                   <span className={classes.text_color_mobile}>
                     {manufacturerCountry}
@@ -340,15 +329,13 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 </Typography>
                 <Typography
                   className={classes.title_text_color_mobile}
-                  sx={{ paddingBottom: "10px" }}
-                >
+                  sx={{ paddingBottom: "10px" }}>
                   Brand:{" "}
                   <span className={classes.text_color_mobile}>{brand}</span>{" "}
                 </Typography>
                 <Typography
                   className={classes.title_text_color_mobile}
-                  sx={{ paddingBottom: "10px" }}
-                >
+                  sx={{ paddingBottom: "10px" }}>
                   Quantity:{" "}
                   <span className={classes.text_color_mobile}>{quantity}</span>{" "}
                 </Typography>
@@ -378,8 +365,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   transition: "all 0.3s ease-in-out",
                 },
               }}
-              onClick={() => handleButtonClick("reviews")}
-            >
+              onClick={() => handleButtonClick("reviews")}>
               Reviews({reviews.length})
               <ExpandMoreIcon
                 fontSize="small"
@@ -400,8 +386,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   lineHeight: "20px",
                   color: "#707070",
                   padding: "10px 0",
-                }}
-              >
+                }}>
                 <ReviewForm productId={_id} />
               </Container>
             )}
@@ -430,8 +415,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   transition: "all 0.3s ease-in-out",
                 },
               }}
-              onClick={handleClickContinueBtn}
-            >
+              onClick={handleClickContinueBtn}>
               Continue shopping
               <ArrowForwardIosIcon fontSize="small" sx={{ color: "#000" }} />
             </Button>
@@ -442,12 +426,10 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       {!isMobile && (
         <Box
           className={classes.container_desktop}
-          sx={{ paddingRight: "20px" }}
-        >
+          sx={{ paddingRight: "20px" }}>
           <Container
             className={classes.container_image_desktop}
-            sx={{ marginLeft: "50px", marginRight: "25px" }}
-          >
+            sx={{ marginLeft: "50px", marginRight: "25px" }}>
             <Container
               disableGutters={true}
               sx={{
@@ -457,8 +439,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 height: "100%",
                 gap: "40px",
                 paddingRight: "40px",
-              }}
-            >
+              }}>
               {imageUrls.map((url, index) => {
                 return (
                   <Box
@@ -476,8 +457,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               disableGutters={true}
               sx={{
                 minWidth: "350px",
-              }}
-            >
+              }}>
               <Box
                 sx={{
                   backgroundImage: `url(${imageUrls[currentPhotoIndex]})`,
@@ -491,8 +471,12 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 onClick={handleScroll}
               />
               <Box
-                sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 4 }}
-              >
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  mt: 2,
+                  mb: 4,
+                }}>
                 {imageUrls.map((img, index) => (
                   <Box
                     key={index}
@@ -517,8 +501,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 fontSize: "26px",
                 fontWeight: "400",
                 lineHeight: "35px",
-              }}
-            >
+              }}>
               {name}
             </Typography>
             <Typography
@@ -530,8 +513,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 fontWeight: "500",
                 lineHeight: "26px",
                 textTransform: "capitalize",
-              }}
-            >
+              }}>
               {`$  ${currentPrice},00`}
             </Typography>
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
@@ -551,8 +533,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   fontSize: "16px",
                   lineHeight: "27px",
                   color: "#707070",
-                }}
-              >
+                }}>
                 1 customer review
               </Typography>
             </Box>
@@ -572,16 +553,14 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 "&::-webkit-scrollbar": {
                   width: "5px",
                 },
-              }}
-            >
+              }}>
               {lastReviewText}
             </Typography>
             <Box
               display="flex"
               paddingTop="48px"
               gap="22px"
-              justifyContent="start"
-            >
+              justifyContent="start">
               <Box
                 display={"flex"}
                 sx={{
@@ -591,13 +570,11 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   justifyContent: "space-evenly",
                   borderRadius: "4px",
                   backgroundColor: "#EFEFEF",
-                }}
-              >
+                }}>
                 <IconButton
                   aria-label="Remove from cart"
                   color="#707070"
-                  onClick={handleDecrement}
-                >
+                  onClick={handleDecrement}>
                   <RemoveIcon
                     sx={{
                       fontSize: "16px",
@@ -608,15 +585,13 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   sx={{
                     fontSize: "16px",
                     lineHeight: "27px",
-                  }}
-                >
+                  }}>
                   {value}
                 </Typography>
                 <IconButton
                   aria-label="Add to cart"
                   color="#707070"
-                  onClick={handleIncrement}
-                >
+                  onClick={handleIncrement}>
                   <AddIcon
                     sx={{
                       fontSize: "16px",
@@ -634,8 +609,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                     transition: "all 0.3s ease-in-out",
                   },
                 }}
-                onClick={() => handleButtonClick("addToCart")}
-              >
+                onClick={() => handleButtonClick("addToCart")}>
                 Add to cart
               </Button>
             </Box>
@@ -657,16 +631,14 @@ export default function ProductCard({ product, onAddToCartClicked }) {
         <Container
           disableGutters={true}
           className={classes.container_tabs}
-          maxWidth={"lg"}
-        >
+          maxWidth={"lg"}>
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}
             value={valueTab}
             onChange={handleTabChange}
             textColor="inherit"
             indicatorColor="primary"
-            aria-label="Tabs where selection follows focus"
-          >
+            aria-label="Tabs where selection follows focus">
             <Tab label="Description" value="1" />
             <Tab label="Additional information" value="2" />
             <Tab label={`Reviews(${reviews.length})`} value="3" />

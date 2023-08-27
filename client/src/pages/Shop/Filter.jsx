@@ -84,7 +84,7 @@ function Filter({
           }}
           value={selectedProductMaterial}
           onChange={(e) => setSelectedProductMaterial(e.target.value)}>
-          <MenuItem>All</MenuItem>
+          <MenuItem value={"All"}>All</MenuItem>
           <MenuItem key={"gold"} value={"gold"}>
             Gold
           </MenuItem>
@@ -112,7 +112,7 @@ function Filter({
           }}
           value={selectedProduct}
           onChange={(e) => setSelectedProduct(e.target.value)}>
-          <MenuItem>All</MenuItem>
+          <MenuItem value={"All"}>All</MenuItem>
           <MenuItem key={"ZARINA"} value={"ZARINA"}>
             {"ZARINA"}
           </MenuItem>

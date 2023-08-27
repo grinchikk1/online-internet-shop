@@ -66,7 +66,6 @@ function ReviewForm({ productId }) {
       <Container
         sx={{
           maxWidth: "580px",
-          order: isMobile ? 2 : 1,
           padding: "0",
           order: "2",
         }}>
@@ -198,7 +197,6 @@ function ReviewForm({ productId }) {
       <Container
         sx={{
           maxWidth: "580px",
-          order: isMobile ? 1 : 2,
           padding: "0",
           order: "1",
           maxHeight: "600px",

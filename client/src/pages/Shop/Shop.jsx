@@ -23,7 +23,6 @@ import { filterProducts } from "../../data/fetchProducts";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);
-  const [value, setValue] = useState("");
   const [cardsToShow, setCardsToShow] = useState(6);
   const [searchResults, setSearchResults] = useState("");
   // Зміна стану
@@ -40,18 +39,12 @@ function Shop() {
     getProducts().then((res) => {
       dispatch(setProducts(res));
     });
-  }, []);
+  }, [dispatch]);
 
   // Filter open!
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
   };
-
-  //Filter Search
-  // const handleSearch = () => {
-  //   dispatch(searchProducts({ query: searchResults }));
-  //   setShowSearchResults(true);
-  // };
 
   useEffect(() => {
     setShowSearchResults(searchResults !== "");
@@ -74,7 +67,6 @@ function Shop() {
   const [filteredCards, setFilteredCards] = useState(null);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
 
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState("");
   const [selectedProductMaterial, setSelectedProductMaterial] = useState("");
   const [minPrice, setMinPrice] = useState(0);
@@ -82,15 +74,15 @@ function Shop() {
 
   const handleFilter = async () => {
     const filterParams = {
-      brand: selectedProduct,
-      productMaterial: selectedProductMaterial,
+      brand: selectedProduct === "All" ? null : selectedProduct,
+      productMaterial:
+        selectedProductMaterial === "All" ? null : selectedProductMaterial,
       minPrice,
       maxPrice,
     };
 
     try {
       const filteredData = await filterProducts(filterParams);
-      setFilteredProducts(filteredData.products);
       setFilteredCards(filteredData.products);
       setIsFilterApplied(true);
     } catch (error) {
@@ -98,10 +90,8 @@ function Shop() {
     }
   };
 
-  console.log(filteredProducts);
-
   const btnAddProduct = products.filter((card) => {
-    const cardName = card.name.toLowerCase().includes(value.toLowerCase());
+    const cardName = card.name.toLowerCase();
     return cardName;
   });
 
