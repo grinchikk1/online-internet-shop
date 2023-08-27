@@ -4,10 +4,10 @@
     "es2021": true,
     "jest": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": ["prettier"],
   "rules": {
     "quotes": [2, "double"],
-    "no-console": "warn"
+    "no-console": "off"
   },
   "parserOptions": {
     "sourceType": "module"

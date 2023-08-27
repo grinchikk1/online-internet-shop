@@ -42,6 +42,9 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
+  "engines": {
+    "node": "18.16.1"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
