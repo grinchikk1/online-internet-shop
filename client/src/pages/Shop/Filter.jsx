@@ -9,15 +9,12 @@ import {
   Select,
   MenuItem,
   Slider,
-  Switch,
   Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
 import { Btn } from "./InputStyle";
-
-const label = { inputProps: { "aria-label": "Switch demo" } };
 
 function Filter({
   handleSearch,
