@@ -36,6 +36,7 @@ function FavouriteItem({ item }) {
         maxWidth: "400px",
         marginBottom: "20px",
         backgroundColor: isHovered ? "#EFEFEF" : "white",
+        margin: "10px",
       }}
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
