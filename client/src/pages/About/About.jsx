@@ -6,11 +6,11 @@ import { useStyles } from "./AboutStyles";
 function About() {
   const classes = useStyles();
 
-  const shareUrl = "https://shoppe.com"; // треба замінити на URL свого веб-сайту
+  const shareUrl = "https://shoppe.com"; 
 
   return (
     <Container maxWidth="lg" className={classes.pageContainer}>
-      {/* Перше фото */}
+    
       <Typography variant="h4" sx={{ marginTop: "50px" }}>
         About us
       </Typography>
@@ -18,7 +18,7 @@ function About() {
         Fast Fashion, And Faster Fashion
       </Typography>
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001757/online-internet-shop/about/Img_01_yzmci9.jpg"
         alt="Перше фото"
         style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
       />
@@ -45,10 +45,10 @@ function About() {
         jewelry have a graceful, elegant look.
       </Typography>
 
-      {/* Друге фото  */}
+
 
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001756/online-internet-shop/about/Img_02_e8mw2w.jpg"
         alt="Друге фото"
         style={{
           display: "block",
@@ -60,7 +60,7 @@ function About() {
         }}
       />
 
-      {/* Текст після другого фото */}
+    
 
       <Typography variant="body1" className={classes.article2}>
         <Typography
@@ -89,7 +89,7 @@ function About() {
         of products.
       </Typography>
 
-      {/* Кнопка для Фейсбуку */}
+   
 
       <Container
         sx={{
@@ -115,7 +115,7 @@ function About() {
           <Facebook />
         </IconButton>
 
-        {/* Кнопка для Твіттера */}
+       
 
         <IconButton
           aria-label="Поділитися на Твіттері"
@@ -126,7 +126,7 @@ function About() {
           <Twitter />
         </IconButton>
 
-        {/* Кнопка для Інстаграму */}
+    
         <IconButton
           aria-label="Поділитися на Інстаграмі"
           component="a"

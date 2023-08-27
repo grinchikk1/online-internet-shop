@@ -25,8 +25,7 @@ function ReviewForm({ productId }) {
   const dispatch = useDispatch();
   const { reviews } = useSelector((state) => state.reviews);
   const { user } = useSelector((state) => state.auth);
-  console.log(reviews);
-  console.log(user);
+  
 
   const [ratingValue, setRatingValue] = useState(0);
 
@@ -71,7 +70,7 @@ function ReviewForm({ productId }) {
           maxWidth: "580px",
           order: isMobile ? 2 : 1,
           padding: "0",
-          order: "2",
+          // order: "2",
         }}
       >
         <Typography variant="h6" sx={{ color: "#A18A68" }}>
@@ -208,7 +207,7 @@ function ReviewForm({ productId }) {
           maxWidth: "580px",
           order: isMobile ? 1 : 2,
           padding: "0",
-          order: "1",
+          // order: "1",
           maxHeight: "600px",
           overflowY: "auto",
           "&::-webkit-scrollbar": {

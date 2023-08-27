@@ -1,9 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { url } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 
-const token = getUserToken();
+const token = localStorage.getItem("token");
 
 const apiHeaders = {
   Authorization: token,
@@ -49,7 +48,7 @@ export const getReviews = createAsyncThunk(
         headers: apiHeaders,
       });
 
-      console.log(responce.data);
+   
       return responce.data;
     } catch (error) {
       return rejectWithValue(error.response);
@@ -90,7 +89,7 @@ const reviewsSlice = createSlice({
   extraReducers: {
     [addReview.fulfilled]: (state, action) => {
       console.log("fulfilled");
-      console.log(action.payload);
+    
       state.reviews.push(action.payload);
     },
     [addReview.pending]: () => console.log("pending"),
@@ -99,7 +98,7 @@ const reviewsSlice = createSlice({
     [deleteReview.pending]: () => console.log("pending"),
     [deleteReview.fulfilled]: (state, action) => {
       console.log("fulfilled");
-      console.log(action.payload);
+   
       state.reviews = state.reviews.filter(
         (review) => review._id !== action.payload
       );
