@@ -6,7 +6,7 @@ const url = "http://localhost:4000/api";
 export const createUser = async (user) => {
   try {
     const response = await axios.post(`${url}/customers`, user);
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -32,7 +32,7 @@ export const changePassword = async (passwords, token) => {
         Authorization: token,
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -47,7 +47,7 @@ export const updateUser = async (user, token) => {
         Authorization: token,
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.error("Error fetching data:", error);
     return [];
@@ -67,9 +67,4 @@ export const getUser = async (token) => {
     console.error("Error fetching data:", error);
     return [];
   }
-};
-
-//  Отримати токен Юзера
-export const getUserToken = () => {
-  return localStorage.getItem("token");
 };

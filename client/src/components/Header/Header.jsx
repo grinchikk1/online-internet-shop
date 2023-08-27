@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
 import { ShoppingBasket } from "@mui/icons-material";
@@ -19,6 +19,20 @@ function Header() {
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
   };
+
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setIsBurgerMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   function handleFavoritesMenuOpen(event) {
     setIsFavoritesMenuOpen(true);
   }

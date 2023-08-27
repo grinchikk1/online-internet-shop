@@ -6,8 +6,6 @@ import {
   Typography,
   IconButton,
   Divider,
-  Snackbar,
-  Alert,
   Rating,
   Tabs,
   Tab,
@@ -16,6 +14,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SocialMediaIcons from "./SocialMediaIcons";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 import { useStyles } from "./ProductCardStyles";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "@mui/material";
@@ -24,8 +23,6 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
 import ReviewForm from "../ReviewForm/ReviewForm";
-import { addToCart, removeFromCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 import { useSelector, useDispatch } from "react-redux";
 import { getReviews } from "../../features/review/reviewSlice";
 
@@ -33,7 +30,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
   const theme = useTheme();
   const classes = useStyles();
   const navigate = useNavigate();
-  const token = getUserToken();
 
   const {
     _id,
@@ -250,61 +246,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             >
               Add to cart
             </Button>
-            {/* Закоментувала бо на мобільній версії він не потрібен *....................................................../}
-            {/* <Typography
-              sx={{
-                paddingTop: "16px",
-                fontSize: "12px",
-                lineHeight: "20px",
-                color: "#707070",
-                // overflow: "hidden",
-                overflow: "auto",
-                width: "480px",
-                height: "100px",
-                display: "-webkit-box",
-                WebkitLineClamp: showButtons.showMore ? "unset" : 1,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              placerat, augue a volutpat hendrerit, sapien tortor faucibus
-              augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis. */}
-            {/* {lastReviewText} */}
-            {/* </Typography> */}
-            <Button
-              disableRipple
-              variant={"text"}
-              size={"small"}
-              sx={{
-                display: "flex",
-                fontSize: "12px",
-                lineHeight: "20px",
-                marginTop: "35px",
-                color: theme.palette.allCollors.accent,
-                padding: "0",
-                ":hover": {
-                  background: theme.palette.allCollors.white,
-                  transition: "all 0.2s ease-in-out",
-                },
-              }}
-              onClick={() => handleButtonClick("showMore")}
-            >
-              View more{" "}
-              <ArrowForwardIosIcon
-                fontSize="12px"
-                sx={{
-                  paddingLeft: "4px",
-                  color: showButtons.showMore
-                    ? theme.palette.allCollors.dark_gray
-                    : theme.palette.allCollors.black,
-                  transform: showButtons.showMore
-                    ? "rotate(-0.25turn)"
-                    : "rotate(0deg)",
-                  transition: "transform 0.2s ease-in-out",
-                }}
-              />
-            </Button>
             <Divider
               sx={{
                 color: "#D8D8D8",
@@ -439,7 +380,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               }}
               onClick={() => handleButtonClick("reviews")}
             >
-              {/* вставила reviews.length замість 0  ........................................................... */}
               Reviews({reviews.length})
               <ExpandMoreIcon
                 fontSize="small"
@@ -454,6 +394,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             </Button>
             {showButtons.reviews && (
               <Container
+                disableGutters
                 sx={{
                   fontSize: "12px",
                   lineHeight: "20px",
@@ -461,8 +402,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                   padding: "10px 0",
                 }}
               >
-                {/* Reviews content */}
-                {/* вставила свою форму і поміняла Typografy на Container в 422 і 433 рядку, щоб не було помилок*/}
                 <ReviewForm productId={_id} />
               </Container>
             )}
@@ -501,12 +440,10 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       )}
       {/* desktop */}
       {!isMobile && (
-        // поставила sx={{ marginRight: "50px" }} ////////////////////////////////
         <Box
           className={classes.container_desktop}
           sx={{ paddingRight: "20px" }}
         >
-          {/* поставила sx={{ marginRight: "25px" }} /////////////////////////////////////////////////////////////////////////////////////////////////////////// */}
           <Container
             className={classes.container_image_desktop}
             sx={{ marginLeft: "50px", marginRight: "25px" }}
@@ -600,12 +537,9 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             <Box display={"flex"} sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
-                  color: "#faaf00", // поміняла з чорного на жовтий колір
+                  color: "#faaf00",
                 }}
                 name="customized-10"
-                // defaultValue={3}
-                // max={5}
-                // поставила середній рейтинг ********************************************************************
                 value={averageRating}
                 max={5}
                 readOnly
@@ -634,17 +568,12 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 wordBreak: "break-word",
                 height: "100px",
                 overflow: "auto",
-                scrollbarWidth: "thin", // добавила тонку прокрутку
+                scrollbarWidth: "thin",
                 "&::-webkit-scrollbar": {
                   width: "5px",
                 },
               }}
             >
-              {/* Вставила останній відгук
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-              placerat, augue a volutpat hendrerit, sapien tortor faucibus
-              augue, a maximus elit ex vitae libero. Sed quis mauris eget arcu
-              facilisis consequat sed eu felis. */}
               {lastReviewText}
             </Typography>
             <Box
@@ -740,7 +669,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
           >
             <Tab label="Description" value="1" />
             <Tab label="Additional information" value="2" />
-            {/* вставила довжину списку відгуків замість 0 ******************************************************************** */}
             <Tab label={`Reviews(${reviews.length})`} value="3" />
           </Tabs>
           {valueTab === "1" && (
@@ -772,26 +700,17 @@ export default function ProductCard({ product, onAddToCartClicked }) {
           )}
           {valueTab === "3" && (
             <TabPanel valueTab={valueTab} index="3">
-              {/* Reviews content */}
-              {/* імпортувала свою форму з відгуками * *****************************************************/}
               <ReviewForm productId={_id} />
             </TabPanel>
           )}
         </Container>
       )}
-      <Snackbar
+      <CustomSnackbar
         open={showButtons.addToCart}
-        autoHideDuration={3000}
         onClose={handleCloseSnackbar}
-      >
-        <Alert
-          onClose={handleCloseSnackbar}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          The item added to your Shopping bag.
-        </Alert>
-      </Snackbar>
+        titleText="success"
+        text="The item added to your Shopping bag."
+      />
     </Container>
   );
 }
