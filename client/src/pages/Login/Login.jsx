@@ -74,7 +74,6 @@ const Login = () => {
         );
         CartLocalStorageHelper.resetCart();
         dispatch(setToken(user.token));
-        navigate("/");
       } else {
         setShowSnackbar(true);
         setMessageTitle("Error");
@@ -88,7 +87,7 @@ const Login = () => {
 
   useEffect(() => {
     if (token) {
-      navigate("/profile");
+      navigate("/");
     }
     return;
   }, [navigate, token]);
