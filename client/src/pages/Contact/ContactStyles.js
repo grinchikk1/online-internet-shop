@@ -5,7 +5,7 @@ export const theme = createTheme({
     fontFamily: "DM Sans, sans-serif",
   },
 });
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   formContainer: {
     display: "flex",
     flexDirection: "column",

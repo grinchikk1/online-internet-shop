@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   text_color: {
     color: "#707070",
     paddingLeft: "10px",

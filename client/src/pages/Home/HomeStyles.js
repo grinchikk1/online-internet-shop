@@ -422,7 +422,7 @@ export const carouselItem5 = {
   }
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   link: {
     textDecoration: "none",
   }    

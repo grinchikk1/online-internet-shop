@@ -85,22 +85,14 @@ const reviewsSlice = createSlice({
     [addReview.fulfilled]: (state, action) => {
       state.reviews.push(action.payload);
     },
-    [addReview.pending]: () => console.log("pending"),
-    [addReview.rejected]: () => console.log("rejected"),
-
-    [deleteReview.pending]: () => console.log("pending"),
     [deleteReview.fulfilled]: (state, action) => {
       state.reviews = state.reviews.filter(
         (review) => review._id !== action.payload
       );
     },
-    [deleteReview.rejected]: () => console.log("rejected"),
-
-    [getReviews.pending]: () => console.log("pending"),
     [getReviews.fulfilled]: (state, action) => {
       state.reviews = action.payload;
     },
-    [getReviews.rejected]: () => console.log("rejected"),
   },
 });
 

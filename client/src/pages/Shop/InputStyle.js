@@ -25,7 +25,7 @@ export const customTheme = createTheme({
   },
 });
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   Wrapper: {
     padding: "0px 5px",
   },
