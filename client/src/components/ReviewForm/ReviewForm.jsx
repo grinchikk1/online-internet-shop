@@ -62,21 +62,19 @@ function ReviewForm({ productId }) {
         maxWidth: "100%",
         marginTop: "42px",
         padding: "0",
-      }}
-    >
+      }}>
       <Container
         sx={{
           maxWidth: "580px",
           order: isMobile ? 2 : 1,
           padding: "0",
-        }}
-      >
+          order: "2",
+        }}>
         <Typography variant="h6" sx={{ color: "#A18A68" }}>
           Add a Review
         </Typography>
         <Typography
-          sx={{ fontSize: "13px", fontWeight: "400", color: "#707070" }}
-        >
+          sx={{ fontSize: "13px", fontWeight: "400", color: "#707070" }}>
           To leave a review, you need to sign up on the site. Required fields
           are marked *
         </Typography>
@@ -94,8 +92,7 @@ function ReviewForm({ productId }) {
             } else {
               setOpenSnackbar(true);
             }
-          }}
-        >
+          }}>
           {({ isSubmitting, submitForm }) => (
             <>
               {" "}
@@ -139,7 +136,7 @@ function ReviewForm({ productId }) {
 
                     "& .MuiSnackbarContent-root": {
                       backgroundColor: "white",
-                      color: "black", 
+                      color: "black",
                       width: "300px",
                       height: "100px",
                       textAlign: "center",
@@ -151,7 +148,6 @@ function ReviewForm({ productId }) {
                   message="Before leaving a review you need to Sign up"
                   autoHideDuration={2500}
                   onClose={handleSnackbarClose}
-               
                 />
 
                 <Snackbar
@@ -185,8 +181,7 @@ function ReviewForm({ productId }) {
                     justifyContent: "flex-start",
                     marginTop: "35px",
                     marginBottom: "80px",
-                  }}
-                >
+                  }}>
                   <CustomButton
                     type="submit"
                     value="Submit"
@@ -205,13 +200,13 @@ function ReviewForm({ productId }) {
           maxWidth: "580px",
           order: isMobile ? 1 : 2,
           padding: "0",
+          order: "1",
           maxHeight: "600px",
           overflowY: "auto",
           "&::-webkit-scrollbar": {
             width: "5px",
           },
-        }}
-      >
+        }}>
         <Typography variant="h6" sx={{ textAlign: "left", color: "#A18A68" }}>
           Reviews({reviews.length})
         </Typography>
@@ -222,8 +217,7 @@ function ReviewForm({ productId }) {
             alignItems: "center",
             justifyContent: "left",
             textAlign: "left",
-          }}
-        >
+          }}>
           {reviews.map((review, index) => (
             <React.Fragment key={index}>
               <Review
