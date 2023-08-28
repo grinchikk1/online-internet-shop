@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Avatar, Container, Typography } from "@mui/material";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useMediaQuery } from "@mui/material";
+import { clearFavorites } from "../../features/favorites/favoriteSlice";
 
 export default function Profile() {
   const isMobile = useMediaQuery("(max-width: 670px)");
@@ -13,6 +14,7 @@ export default function Profile() {
   const user = useSelector((state) => state.auth.user);
 
   const handleLogOut = () => {
+    dispatch(clearFavorites());
     dispatch(logout());
     navigate("/login");
   };
@@ -34,7 +36,10 @@ export default function Profile() {
         {user.firstName[0].toUpperCase()}
         {user.lastName[0].toUpperCase()}
       </Avatar>
-      <Container maxWidth="sm" sx={{ textAlign: "start", padding: "40px 15px 0" }}>
+      <Container
+        maxWidth="sm"
+        sx={{ textAlign: "start", padding: "40px 15px 0" }}
+      >
         <Typography sx={{ fontSize: isMobile ? "18px" : "26px" }}>
           Ім'я: <span style={{ color: "#707070" }}>{user.firstName}</span>
         </Typography>

@@ -78,7 +78,7 @@ const CartTotals = () => {
           maxWidth="lg"
         >
           <DialogContent>
-            <Checkout totalAmount={totalAmount} amounts={amounts} />
+            <Checkout />
           </DialogContent>
           <DialogActions>
             <Button

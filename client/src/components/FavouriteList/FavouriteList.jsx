@@ -1,13 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import FavouriteItem from "./FavouritesItem";
 import { Typography } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import { getWishlist } from "../../data/fetchFavourite";
 
 function FavouriteList() {
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!!token) {
+      dispatch(getWishlist(token));
+    }
+  }, [token, dispatch]);
+
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
 
-  if (favoritesList.length === 0) {
+  if (
+    !!token
+      ? !favoritesList || favoritesList.length === 0
+      : favoritesList.length === 0
+  ) {
     return (
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <SentimentVeryDissatisfiedIcon fontSize="large" color="primary" />
@@ -16,15 +30,19 @@ function FavouriteList() {
         </Typography>
       </div>
     );
+  } else {
+    return (
+      <div>
+        {!!token
+          ? favoritesList.products.map((product) => (
+              <FavouriteItem key={product.itemNo} item={product} />
+            ))
+          : favoritesList.map((product) => (
+              <FavouriteItem key={product.itemNo} item={product} />
+            ))}
+      </div>
+    );
   }
-
-  return (
-    <div>
-      {favoritesList.map((product) => (
-        <FavouriteItem key={product._id} item={product} />
-      ))}
-    </div>
-  );
 }
 
 export default FavouriteList;
