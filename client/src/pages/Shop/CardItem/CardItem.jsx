@@ -124,13 +124,15 @@ export default function MultiActionAreaCard({ card }) {
           "&:hover": "none",
         }}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}>
+        onMouseLeave={handleMouseLeave}
+      >
         <CardMedia
           onClick={handleClick}
           component="img"
           style={img}
           src={card.imageUrls[0]}
-          alt={card.name}></CardMedia>
+          alt={card.name}
+        ></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
           <span>{discountPrice}%</span>
@@ -155,7 +157,8 @@ export default function MultiActionAreaCard({ card }) {
             marginTop: "20px",
             paddingRight: "5px",
             paddingLeft: "5px",
-          }}>
+          }}
+        >
           {card.name}
         </Typography>
         <Box
@@ -165,7 +168,8 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
-          }}>
+          }}
+        >
           <Typography
             gutterBottom
             variant="h5"
@@ -175,7 +179,8 @@ export default function MultiActionAreaCard({ card }) {
               fontSize: 20,
               fontWeight: 500,
               color: "rgba(161, 138, 104, 1)",
-            }}>
+            }}
+          >
             ${card.currentPrice},00
           </Typography>
           <Typography
@@ -186,7 +191,8 @@ export default function MultiActionAreaCard({ card }) {
               fontSize: 15,
               fontWeight: 400,
               color: "rgba(112, 112, 112, 1)",
-            }}>
+            }}
+          >
             {card.productMaterial}
           </Typography>
         </Box>
@@ -200,7 +206,8 @@ export default function MultiActionAreaCard({ card }) {
             color: "black",
             paddingRight: "5px",
             paddingLeft: "5px",
-          }}>
+          }}
+        >
           {card.brand}
         </Typography>
       </CardActionArea>

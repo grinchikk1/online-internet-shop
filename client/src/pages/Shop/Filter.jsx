@@ -50,7 +50,8 @@ function Filter({
           endAdornment={
             <InputAdornment
               position="start"
-              sx={{ color: "black", cursor: "pointer" }}>
+              sx={{ color: "black", cursor: "pointer" }}
+            >
               <SearchIcon onClick={handleSearch} fontSize="small" />
             </InputAdornment>
           }
@@ -65,7 +66,8 @@ function Filter({
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
+        >
           Product material
         </InputLabel>
         <Select
@@ -83,7 +85,8 @@ function Filter({
             },
           }}
           value={selectedProductMaterial}
-          onChange={(e) => setSelectedProductMaterial(e.target.value)}>
+          onChange={(e) => setSelectedProductMaterial(e.target.value)}
+        >
           <MenuItem value={"All"}>All</MenuItem>
           <MenuItem key={"gold"} value={"gold"}>
             Gold
@@ -96,7 +99,8 @@ function Filter({
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
           htmlFor="brand"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
+        >
           Brand
         </InputLabel>
         <Select
@@ -111,7 +115,8 @@ function Filter({
             },
           }}
           value={selectedProduct}
-          onChange={(e) => setSelectedProduct(e.target.value)}>
+          onChange={(e) => setSelectedProduct(e.target.value)}
+        >
           <MenuItem value={"All"}>All</MenuItem>
           <MenuItem key={"ZARINA"} value={"ZARINA"}>
             {"ZARINA"}
@@ -172,7 +177,8 @@ function Filter({
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Button onClick={handleFilter} variant="container" sx={Btn}>
           Filter
         </Button>

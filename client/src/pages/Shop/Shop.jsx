@@ -107,14 +107,16 @@ function Shop() {
           sx={{
             fontSize: "33px",
           }}
-          className={classes.Title}>
+          className={classes.Title}
+        >
           Shop The Latest
         </Typography>
         <Stack
           direction={isScreenSmall ? "column" : "row"}
           spacing={{ xs: 1, sm: 4 }}
           useFlexGap
-          className={classes.stackStyle}>
+          className={classes.stackStyle}
+        >
           <Box className={classes.Container}>
             {!isScreenSmall && (
               <Filter
@@ -140,11 +142,13 @@ function Shop() {
                   gap: "10px",
                   marginBottom: "13px",
                 }}
-                onClick={toggleFilter}>
+                onClick={toggleFilter}
+              >
                 <img src={filter} alt="filter" style={{ cursor: "pointer" }} />
                 <Typography
                   sx={{ fontSize: "12px" }}
-                  className={classes.FilterTitle}>
+                  className={classes.FilterTitle}
+                >
                   Filters
                 </Typography>
               </Box>
@@ -171,7 +175,8 @@ function Shop() {
             <Grid
               container
               rowSpacing={{ xs: 2, md: 4 }}
-              columns={{ xs: 2, sm: 8, md: 12 }}>
+              columns={{ xs: 2, sm: 8, md: 12 }}
+            >
               {showSearchResults
                 ? productsSearch.map((card) => (
                     <Grid
@@ -184,18 +189,21 @@ function Shop() {
                         "@media (min-width: 900px)": {
                           maxWidth: "100%",
                         },
-                      }}>
+                      }}
+                    >
                       <CardItem card={card} />
                       {btnAddProduct.length > cardsToShow && (
                         <Box
                           mt={3}
-                          sx={{ display: "flex", justifyContent: "center" }}>
+                          sx={{ display: "flex", justifyContent: "center" }}
+                        >
                           <Button
                             variant="contained"
                             onClick={handleLoadMore}
                             sx={{
                               display: "none",
-                            }}>
+                            }}
+                          >
                             Load More
                           </Button>
                         </Box>
@@ -214,18 +222,21 @@ function Shop() {
                         "@media (min-width: 900px)": {
                           maxWidth: "100%",
                         },
-                      }}>
+                      }}
+                    >
                       <CardItem card={card} />
                       {btnAddProduct.length > cardsToShow && (
                         <Box
                           mt={3}
-                          sx={{ display: "flex", justifyContent: "center" }}>
+                          sx={{ display: "flex", justifyContent: "center" }}
+                        >
                           <Button
                             variant="contained"
                             onClick={handleLoadMore}
                             sx={{
                               display: "none",
-                            }}>
+                            }}
+                          >
                             Load More
                           </Button>
                         </Box>
@@ -243,7 +254,8 @@ function Shop() {
                         "@media (min-width: 900px)": {
                           maxWidth: "100%",
                         },
-                      }}>
+                      }}
+                    >
                       {card}
                     </Grid>
                   ))}
@@ -263,7 +275,8 @@ function Shop() {
                         background: "black",
                         color: "white",
                       },
-                    }}>
+                    }}
+                  >
                     Load More
                   </Button>
                 </Box>

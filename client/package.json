@@ -39,8 +39,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "echo 'Running lint...' && eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "echo 'Running prettier...' && prettier --write \"src/**/*.{js,jsx,scss}\""
   },
   "engines": {
     "node": "18.16.1"

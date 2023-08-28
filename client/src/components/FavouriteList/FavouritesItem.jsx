@@ -56,7 +56,8 @@ function FavouriteItem({ item }) {
       }}
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}>
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div
         style={{
           backgroundImage: `url(${imageUrls[0]})`,

@@ -62,18 +62,21 @@ function ReviewForm({ productId }) {
         maxWidth: "100%",
         marginTop: "42px",
         padding: "0",
-      }}>
+      }}
+    >
       <Container
         sx={{
           maxWidth: "580px",
           padding: "0",
           order: "2",
-        }}>
+        }}
+      >
         <Typography variant="h6" sx={{ color: "#A18A68" }}>
           Add a Review
         </Typography>
         <Typography
-          sx={{ fontSize: "13px", fontWeight: "400", color: "#707070" }}>
+          sx={{ fontSize: "13px", fontWeight: "400", color: "#707070" }}
+        >
           To leave a review, you need to sign up on the site. Required fields
           are marked *
         </Typography>
@@ -91,7 +94,8 @@ function ReviewForm({ productId }) {
             } else {
               setOpenSnackbar(true);
             }
-          }}>
+          }}
+        >
           {({ isSubmitting, submitForm }) => (
             <>
               {" "}
@@ -180,7 +184,8 @@ function ReviewForm({ productId }) {
                     justifyContent: "flex-start",
                     marginTop: "35px",
                     marginBottom: "80px",
-                  }}>
+                  }}
+                >
                   <CustomButton
                     type="submit"
                     value="Submit"
@@ -204,7 +209,8 @@ function ReviewForm({ productId }) {
           "&::-webkit-scrollbar": {
             width: "5px",
           },
-        }}>
+        }}
+      >
         <Typography variant="h6" sx={{ textAlign: "left", color: "#A18A68" }}>
           Reviews({reviews.length})
         </Typography>
@@ -215,7 +221,8 @@ function ReviewForm({ productId }) {
             alignItems: "center",
             justifyContent: "left",
             textAlign: "left",
-          }}>
+          }}
+        >
           {reviews.map((review, index) => (
             <React.Fragment key={index}>
               <Review
