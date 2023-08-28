@@ -5,9 +5,9 @@ import { CardActionArea, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../data/fetchCart";
-import FavouriteButtonItem from "./FavoriteButtonItem";
 import { CartLocalStorageHelper } from "../../../helpers/cartLocalStorageHelper";
 import { addProductToCart } from "../../../features/cart/cartSlice";
+import FavouriteButton from "../../../components/FavouriteButton/FavouriteButton";
 
 export const addProductToLocalStorage = (product) => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -140,7 +140,7 @@ export default function MultiActionAreaCard({ card }) {
           <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
             ADD TO CART
           </Typography>
-          <FavouriteButtonItem card={card} />
+          <FavouriteButton item={card} />
         </Container>
 
         <Typography

@@ -4,12 +4,14 @@ import { logout } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Typography } from "@mui/material";
+import { clearFavorites } from "../../features/favorites/favoriteSlice";
 
 export default function ProfileTabThirdContent() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
+    dispatch(clearFavorites());
     dispatch(logout());
     navigate("/login");
   };
