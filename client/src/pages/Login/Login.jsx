@@ -10,6 +10,7 @@ import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 import { updateCart, getCart } from "../../data/fetchCart";
 import { setUser, setToken, setError } from "../../features/auth/authSlice";
 import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
+import { clearFavorites } from "../../features/favorites/favoriteSlice";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,9 @@ const Login = () => {
           user.token
         );
         CartLocalStorageHelper.resetCart();
+        // Зберігання JWT в LocalStorage
+        localStorage.setItem("token", user.token);
+        dispatch(clearFavorites());
         dispatch(setToken(user.token));
       } else {
         setShowSnackbar(true);

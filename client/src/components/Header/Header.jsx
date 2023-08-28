@@ -1,17 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
 import { ShoppingBasket } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Badge, Drawer } from "@mui/material";
 import FavouriteList from "../FavouriteList/FavouriteList";
+import { getWishlist } from "../../data/fetchFavourite";
 
 function Header() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const [isFavoritesMenuOpen, setIsFavoritesMenuOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
   const favoritesList = useSelector((state) => state.favorites.favoritesList);
+
+  useEffect(() => {
+    if (!!token) {
+      localStorage.removeItem("favorites");
+      dispatch(getWishlist(token));
+    }
+  }, [token, dispatch]);
+
   const countProductInCart = useSelector((state) => state.cart.cart.length);
 
   const links = ["Home", "Shop", "About", "Contact"];
@@ -85,7 +97,7 @@ function Header() {
               className="header__icon"
               onClick={handleFavoritesMenuOpen}
             />
-            {favoritesList.length > 0 && (
+            {favoritesList.length !== 0 && (
               <span
                 style={{
                   transform: "translate(-18px,-12px)",
@@ -93,11 +105,9 @@ function Header() {
                   fontWeight: "500",
                 }}
               >
-                {/* Display the quantity of favorited items */}
-                {favoritesList.length}
+                {!!token ? favoritesList.products.length : favoritesList.length}
               </span>
             )}
-
             <Drawer
               anchor="right"
               open={isFavoritesMenuOpen}

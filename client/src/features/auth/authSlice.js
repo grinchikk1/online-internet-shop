@@ -14,6 +14,7 @@ const authSlice = createSlice({
       state.user = action.payload;
       state.error = null;
       localStorage.setItem("user", JSON.stringify(action.payload));
+      localStorage.removeItem("favorites");
     },
     setToken(state, action) {
       state.token = action.payload;
@@ -26,7 +27,7 @@ const authSlice = createSlice({
       state.user = null;
       state.token = null;
       state.error = null;
-
+      localStorage.removeItem("favorites");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
     },

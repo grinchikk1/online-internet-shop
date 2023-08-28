@@ -5,22 +5,19 @@ import OrderItems from "../Cart/OrderItem";
 import useStyles from "./OrderConfirmationStyle";
 const OrderConfirmation = () => {
   const classes = useStyles();
-  // const cart = useSelector((state) => state.cart.cart);
-  // const totalAmount = useSelector(getTotalCartAmount);
-  // const customer = useSelector((state) => state.customer.customer);
-  // const amounts = useSelector((state) => state.cart.amount);
 
   const order = useSelector((state) => state.order.order);
 
-  const amounts = order.products;
   const amountsArray = Object.keys(order.products).map((productId) => ({
     productId,
-    amount: order.products[productId].amounts, // Change "amounts" to "amount"
+    amount: order.products[productId].amounts,
   }));
+
   const amountsObject = {};
   amountsArray.forEach((item) => {
     amountsObject[item.productId] = item.amount;
   });
+
   return (
     <Container maxWidth="lg">
       <div className={classes.orderHeader}>
@@ -51,7 +48,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.customerId}
+                {order.orderNumber}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -94,8 +91,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.deliveryAddress.country}
-                {order.deliveryAddress.city}
+                {order.deliveryAddress.country},{order.deliveryAddress.city},
                 {order.deliveryAddress.address}
               </Typography>
             </div>
