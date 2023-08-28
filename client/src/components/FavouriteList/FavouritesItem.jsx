@@ -51,14 +51,12 @@ function FavouriteItem({ item }) {
       sx={{
         width: "50vw",
         maxWidth: "400px",
-        margin: " 10px 20px",
+        margin: "10px 20px",
         backgroundColor: isHovered ? "#EFEFEF" : "white",
-        margin: "10px",
       }}
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+      onMouseLeave={() => setIsHovered(false)}>
       <div
         style={{
           backgroundImage: `url(${imageUrls[0]})`,

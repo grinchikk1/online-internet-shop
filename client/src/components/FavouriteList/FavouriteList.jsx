@@ -35,10 +35,10 @@ function FavouriteList() {
       <div>
         {!!token
           ? favoritesList.products.map((product) => (
-              <FavouriteItem key={product.itemNo} item={product} />
+              <FavouriteItem key={product._id} item={product} />
             ))
           : favoritesList.map((product) => (
-              <FavouriteItem key={product.itemNo} item={product} />
+              <FavouriteItem key={product._id} item={product} />
             ))}
       </div>
     );
