@@ -4,17 +4,10 @@
     "es2021": true,
     "jest": true
   },
-  "extends": [
-    "react-app",
-    "react-app/jest",
-    "prettier"
-  ],
- 
+  "extends": ["eslint:recommended", "react-app"],
   "rules": {
-    "quotes": [
-    2,
-    "double"
-    ]
-  },
-   "plugins": [ "prettier"]
+    "quotes": [2, "double"],
+    "no-console": "off",
+    "no-extra-boolean-cast": "off"
+  }
 }

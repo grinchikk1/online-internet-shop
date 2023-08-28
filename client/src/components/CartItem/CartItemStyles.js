@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   item_wrapper: {
     justifyContent: "space-between",
     alignItems: "center",

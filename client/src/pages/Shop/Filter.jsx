@@ -9,28 +9,28 @@ import {
   Select,
   MenuItem,
   Slider,
-  Switch,
+  Button,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useStyles, customTheme } from "./InputStyle";
-
-const label = { inputProps: { "aria-label": "Switch demo" } };
+import { Btn } from "./InputStyle";
 
 function Filter({
-  setValue,
-  setSelectedProductMaterial,
-  setSelectedBrand,
+  handleSearch,
+  setSearchResults,
+  searchResults,
   selectedProductMaterial,
-  selectedBrand,
-  valueSlider,
-  setValueSlider,
+  setSelectedProductMaterial,
+  selectedProduct,
+  setSelectedProduct,
+  setMinPrice,
+  minPrice,
+  maxPrice,
+  setMaxPrice,
+  handleFilter,
 }) {
   const classes = useStyles();
-
-  const handleChange = (event) => {
-    setValueSlider(event.target.value);
-  };
 
   return (
     <Box className={classes.Container}>
@@ -39,23 +39,33 @@ function Filter({
           Search
         </InputLabel>
         <Input
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event) => {
+            setSearchResults(event.target.value);
+          }}
+          value={searchResults}
           id="search"
           name="search"
           className={classes.searchInput}
           disableUnderline
           endAdornment={
-            <InputAdornment position="start" sx={{ color: "black" }}>
-              <SearchIcon fontSize="small" />
+            <InputAdornment
+              position="start"
+              sx={{ color: "black", cursor: "pointer" }}>
+              <SearchIcon onClick={handleSearch} fontSize="small" />
             </InputAdornment>
           }
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
       </FormControl>
+
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
-        >
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
           Product material
         </InputLabel>
         <Select
@@ -73,24 +83,20 @@ function Filter({
             },
           }}
           value={selectedProductMaterial}
-          onChange={(e) => setSelectedProductMaterial(e.target.value)}
-        >
-          <MenuItem className={classes.SelectInputItem} value="gold">
+          onChange={(e) => setSelectedProductMaterial(e.target.value)}>
+          <MenuItem value={"All"}>All</MenuItem>
+          <MenuItem key={"gold"} value={"gold"}>
             Gold
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value="silver">
+          <MenuItem key={"silver"} value={"silver"}>
             Silver
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value="platinum">
-            Platinum
           </MenuItem>
         </Select>
       </FormControl>
       <FormControl sx={{ marginBottom: "40px" }}>
         <InputLabel
           htmlFor="brand"
-          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
-        >
+          sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}>
           Brand
         </InputLabel>
         <Select
@@ -104,43 +110,32 @@ function Filter({
               color: "rgba(0, 0, 0, 1)",
             },
           }}
-          value={selectedBrand}
-          onChange={(e) => setSelectedBrand(e.target.value)}
-        >
-          <MenuItem className={classes.SelectInputItem} value={"KJM"}>
-            KJM
+          value={selectedProduct}
+          onChange={(e) => setSelectedProduct(e.target.value)}>
+          <MenuItem value={"All"}>All</MenuItem>
+          <MenuItem key={"ZARINA"} value={"ZARINA"}>
+            {"ZARINA"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"LuxJewels"}>
-            LuxJewels
+          <MenuItem key={"KOLO"} value={"KOLO"}>
+            {"KOLO"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"Jewels"}>
-            Jewels
+          <MenuItem key={"KJF"} value={"KJF"}>
+            {"KJF"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"OpalCraft"}>
-            OpalCraft
+          <MenuItem key={"Boucheron"} value={"Boucheron"}>
+            {"Boucheron"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"OceanGems"}>
-            OceanGems
+          <MenuItem key={"Amrapali"} value={"Amrapali"}>
+            {"Amrapali"}
           </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"BlueSky"}>
-            BlueSky
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"AmberCraft"}>
-            AmberCraft
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"Glow"}>
-            Glow
-          </MenuItem>
-          <MenuItem className={classes.SelectInputItem} value={"BlackStone"}>
-            BlackStone
+          <MenuItem key={"Messika"} value={"Messika"}>
+            {"Messika"}
           </MenuItem>
         </Select>
       </FormControl>
       <Box sx={{ marginBottom: "40px" }}>
         <Slider
           getAriaLabel={() => ""}
-          value={valueSlider}
-          onChange={handleChange}
           valueLabelDisplay="auto"
           min={0}
           max={2000}
@@ -161,53 +156,27 @@ function Filter({
             },
           }}
           theme={customTheme}
+          value={[minPrice, maxPrice]}
+          onChange={(event, newValue) => {
+            setMinPrice(newValue[0]);
+            setMaxPrice(newValue[1]);
+          }}
         />
         <Typography className={classes.SliderPrice}>
-          Price: {valueSlider[0]}$ - {valueSlider[1]}$
+          Price: {minPrice}$ - {maxPrice}$ price
         </Typography>
       </Box>
-      <Box className={classes.BoxSwitch} sx={{ marginBottom: "29px" }}>
-        <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>On Sale</Typography>
-        <Switch
-          size="medium"
-          sx={{
-            color: "rgba(112, 112, 112, 1)",
-            "  & .MuiSwitch-thumb": {
-              position: "relative",
-              top: "5px",
-              left: "5px",
-              width: "13px",
-              height: "13px",
-            },
-            "& .MuiSwitch-track": {
-              width: "35px",
-              height: "17px",
-            },
-          }}
-          {...label}
-        />
+      <Box
+        className={classes.BoxSwitch}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}>
+        <Button onClick={handleFilter} variant="container" sx={Btn}>
+          Filter
+        </Button>
       </Box>
-      {/* <Box className={classes.BoxSwitch}>
-        <Typography sx={{ color: "rgba(0, 0, 0, 1)" }}>In Stock</Typography>
-        <Switch
-          size="medium"
-          {...label}
-          sx={{
-            color: "rgba(112, 112, 112, 1)",
-            "  & .MuiSwitch-thumb": {
-              position: "relative",
-              top: "5px",
-              left: "5px",
-              width: "13px",
-              height: "13px",
-            },
-            "& .MuiSwitch-track": {
-              width: "35px",
-              height: "17px",
-            },
-          }}
-        />
-      </Box> */}
     </Box>
   );
 }

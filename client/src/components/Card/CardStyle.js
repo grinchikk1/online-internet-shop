@@ -532,7 +532,7 @@ export const cardBrand = {
     },
 };
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
 
     cardImg: {
         margin: "0",

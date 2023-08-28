@@ -1,27 +1,50 @@
-import * as React from "react";
-import Card from "@mui/material/Card";
+import React, { useState } from "react";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea, Box } from "@mui/material";
+import { CardActionArea, Box, Container } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../../../data/fetchCart";
+import FavouriteButtonItem from "./FavoriteButtonItem";
+import { CartLocalStorageHelper } from "../../../helpers/cartLocalStorageHelper";
+import { addProductToCart } from "../../../features/cart/cartSlice";
+
+export const addProductToLocalStorage = (product) => {
+  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+  cartItems.push(product);
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+};
 
 export default function MultiActionAreaCard({ card }) {
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   const handleClick = () => {
     navigate(`/product/${card._id}`);
   };
 
   const cards = {
-    height: 350,
-    width: 200,
+    height: 420,
     boxShadow: "none",
     margin: "0 auto",
   };
 
   const img = {
+    height: 300,
+    width: 235,
+    alignItems: "center",
     borderBottomLeftRadius: "4px",
     borderBottomRightRadius: "4px",
+    position: "relative",
   };
 
   const discount = {
@@ -43,19 +66,82 @@ export default function MultiActionAreaCard({ card }) {
     gap: "3px",
   };
 
+  const cardHover = {
+    position: "absolute",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: "10px",
+    paddingRight: "10px",
+    top: "235px",
+    width: "100%",
+    height: "65px",
+    backgroundColor: "rgba(255, 255, 255, 0.50)",
+    transition: "all 0.5s ease",
+    opacity: 0,
+    "@media (max-width: 600px) ": {
+      paddingLeft: "15px",
+      paddingRight: "15px",
+    },
+  };
+
+  const cardHoverVisible = {
+    opacity: 1,
+  };
+  const cardHoverAdd = {
+    fontSize: "16px",
+    fontWeight: "700",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    color: "#000000",
+    cursor: "pointer",
+    userSelect: "none",
+    "@media (max-width: 579.9px)": {
+      fontSize: "15px",
+      fontWeight: "600",
+    },
+  };
+
+  const discountPrice = (
+    (card.currentPrice / card.previousPrice) *
+    100
+  ).toFixed(0);
+
+  const handleAddProductToCart = () => {
+    dispatch(addProductToCart(card));
+    if (!!token) {
+      addToCart(card._id, token);
+    } else {
+      CartLocalStorageHelper.addProductToCart(card);
+    }
+  };
+
   return (
-    <Card style={cards}>
-      <CardActionArea onClick={handleClick} sx={{ marginRight: "40px" }}>
+    <Container style={{ ...cards, "&:hover": "none" }}>
+      <CardActionArea
+        sx={{
+          backgroundColor: "#fff",
+          "&:hover": "none",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}>
         <CardMedia
+          onClick={handleClick}
           component="img"
           style={img}
           src={card.imageUrls[0]}
-          alt={card.name}
-        ></CardMedia>
+          alt={card.name}></CardMedia>
         <div style={discount} className="discount">
           <span>-</span>
-          <span>21%</span>
+          <span>{discountPrice}%</span>
         </div>
+
+        <Container sx={{ ...cardHover, ...(isHovered && cardHoverVisible) }}>
+          <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
+            ADD TO CART
+          </Typography>
+          <FavouriteButtonItem card={card} />
+        </Container>
 
         <Typography
           gutterBottom
@@ -67,8 +153,9 @@ export default function MultiActionAreaCard({ card }) {
             color: "black",
             marginBottom: "16px",
             marginTop: "20px",
-          }}
-        >
+            paddingRight: "5px",
+            paddingLeft: "5px",
+          }}>
           {card.name}
         </Typography>
         <Box
@@ -76,8 +163,9 @@ export default function MultiActionAreaCard({ card }) {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-          }}
-        >
+            paddingRight: "5px",
+            paddingLeft: "5px",
+          }}>
           <Typography
             gutterBottom
             variant="h5"
@@ -87,8 +175,7 @@ export default function MultiActionAreaCard({ card }) {
               fontSize: 20,
               fontWeight: 500,
               color: "rgba(161, 138, 104, 1)",
-            }}
-          >
+            }}>
             ${card.currentPrice},00
           </Typography>
           <Typography
@@ -99,8 +186,7 @@ export default function MultiActionAreaCard({ card }) {
               fontSize: 15,
               fontWeight: 400,
               color: "rgba(112, 112, 112, 1)",
-            }}
-          >
+            }}>
             {card.productMaterial}
           </Typography>
         </Box>
@@ -112,12 +198,12 @@ export default function MultiActionAreaCard({ card }) {
             fontSize: 20,
             fontWeight: "400",
             color: "black",
-            // color: "rgb(191 140 140)",
-          }}
-        >
+            paddingRight: "5px",
+            paddingLeft: "5px",
+          }}>
           {card.brand}
         </Typography>
       </CardActionArea>
-    </Card>
+    </Container>
   );
 }

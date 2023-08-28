@@ -31,6 +31,20 @@ function Header() {
   const handleBurgerMenu = () => {
     setIsBurgerMenuOpen((prevState) => !prevState);
   };
+
+  const handleResize = () => {
+    if (window.innerWidth > 768) {
+      setIsBurgerMenuOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   function handleFavoritesMenuOpen(event) {
     setIsFavoritesMenuOpen(true);
   }

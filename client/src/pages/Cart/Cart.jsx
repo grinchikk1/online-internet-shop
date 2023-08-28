@@ -7,7 +7,6 @@ import { useStyles } from "./CartStyles";
 
 import { removeProductFromCart, setCart } from "../../features/cart/cartSlice";
 import { getCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 
 import CartItem from "../../components/CartItem/CartItem";
 import CartTotals from "../../components/CartTotals/CartTotals";
@@ -19,7 +18,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const amounts = useSelector((state) => state.cart.amount);
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     if (!!token) {

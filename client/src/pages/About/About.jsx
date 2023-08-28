@@ -18,7 +18,7 @@ function About() {
         Fast Fashion, And Faster Fashion
       </Typography>
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001757/online-internet-shop/about/Img_01_yzmci9.jpg"
         alt="Перше фото"
         style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
       />
@@ -48,7 +48,7 @@ function About() {
       {/* Друге фото  */}
 
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001756/online-internet-shop/about/Img_02_e8mw2w.jpg"
         alt="Друге фото"
         style={{
           display: "block",
@@ -71,8 +71,7 @@ function About() {
             paddingBottom: "20px",
             fontSize: "26px",
             fontWeight: 400,
-          }}
-        >
+          }}>
           TOP TRENDS
         </Typography>
         Individual approach to each client We offer only proven and high-quality
@@ -97,8 +96,7 @@ function About() {
           justifyContent: "center",
           padding: "0",
           marginBottom: "57px",
-        }}
-      >
+        }}>
         <Typography sx={{ marginTop: "10px", fontSize: "16px" }}>
           Share
         </Typography>
@@ -110,8 +108,7 @@ function About() {
           aria-label="Поділитися на Фейсбук"
           component="a"
           href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
-          target="_blank"
-        >
+          target="_blank">
           <Facebook />
         </IconButton>
 
@@ -121,8 +118,7 @@ function About() {
           aria-label="Поділитися на Твіттері"
           component="a"
           href={`https://twitter.com/intent/tweet?url=${shareUrl}`}
-          target="_blank"
-        >
+          target="_blank">
           <Twitter />
         </IconButton>
 
@@ -131,8 +127,7 @@ function About() {
           aria-label="Поділитися на Інстаграмі"
           component="a"
           href={`https://www.instagram.com/${shareUrl}`}
-          target="_blank"
-        >
+          target="_blank">
           <Instagram />
         </IconButton>
       </Container>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   cart_totals: {
     padding: "40px",
     width: "100%",

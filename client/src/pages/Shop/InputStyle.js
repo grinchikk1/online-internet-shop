@@ -25,7 +25,7 @@ export const customTheme = createTheme({
   },
 });
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   Wrapper: {
     padding: "0px 5px",
   },
@@ -38,10 +38,13 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "16px",
   },
   searchInput: {
-    width: "261px",
+    width: "250px",
     height: "25px",
     border: "none",
     borderBottom: "1px solid rgba(216, 216, 216, 1)",
+    "@media (max-width: 900px) ": {
+      width: "200px",
+    },
   },
   Title: {
     color: "rgba(0, 0, 0, 1)",
@@ -87,3 +90,17 @@ export const useStyles = makeStyles((theme) => ({
     color: "rgba(161, 138, 104, 1)",
   },
 }));
+
+export const Btn = {
+  width: "150px",
+  height: "50px",
+  color: "#fff",
+  fontSize: "15px",
+  fontWeight: "400",
+  textAling: "center",
+  background: "rgba(112, 112, 112, 1)",
+  "&:hover": {
+    border: "1px solid #fff",
+    color: "black",
+  },
+};
