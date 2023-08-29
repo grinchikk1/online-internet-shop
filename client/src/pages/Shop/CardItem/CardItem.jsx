@@ -8,6 +8,7 @@ import { addToCart } from "../../../data/fetchCart";
 import { CartLocalStorageHelper } from "../../../helpers/cartLocalStorageHelper";
 import { addProductToCart } from "../../../features/cart/cartSlice";
 import FavouriteButton from "../../../components/FavouriteButton/FavouriteButton";
+import CustomSnackbar from "../../../components/CustomSnackBar/CustomSnackBar";
 
 export const addProductToLocalStorage = (product) => {
   const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
@@ -20,6 +21,7 @@ export default function MultiActionAreaCard({ card }) {
   const [isHovered, setIsHovered] = useState(false);
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
+  const [showSnackbar, setShowSnackbar] = useState(false);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -111,8 +113,10 @@ export default function MultiActionAreaCard({ card }) {
     dispatch(addProductToCart(card));
     if (!!token) {
       addToCart(card._id, token);
+      setShowSnackbar(true);
     } else {
       CartLocalStorageHelper.addProductToCart(card);
+      setShowSnackbar(true);
     }
   };
 
@@ -211,6 +215,12 @@ export default function MultiActionAreaCard({ card }) {
           {card.brand}
         </Typography>
       </CardActionArea>
+      <CustomSnackbar
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+        titleText="success"
+        text="The item added to your Shopping bag."
+      />
     </Container>
   );
 }

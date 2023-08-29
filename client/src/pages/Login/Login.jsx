@@ -12,6 +12,14 @@ import { setUser, setToken, setError } from "../../features/auth/authSlice";
 import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
 import { clearFavorites } from "../../features/favorites/favoriteSlice";
 
+const validationSchema = Yup.object().shape({
+  loginOrEmail: Yup.string().required("Login or Email is required"),
+  password: Yup.string()
+    .min(7, "Password must be between 7 and 30 characters")
+    .max(30, "Password must be between 7 and 30 characters")
+    .required("Password is required"),
+});
+
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -157,11 +165,3 @@ const Login = () => {
 };
 
 export default Login;
-
-const validationSchema = Yup.object().shape({
-  loginOrEmail: Yup.string().required("Login or Email is required"),
-  password: Yup.string()
-    .min(7, "Password must be between 7 and 30 characters")
-    .max(30, "Password must be between 7 and 30 characters")
-    .required("Password is required"),
-});

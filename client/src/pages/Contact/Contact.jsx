@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
   Container,
@@ -11,9 +12,11 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, fieldStyle } from "./ContactStyles";
 import { initialValues, validationSchema } from "./formSettings";
 import emailjs from "emailjs-com";
+import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
 
 const ContactForm = () => {
   const classes = useStyles();
+  const [showSnackbar, setShowSnackbar] = useState(false);
   emailjs.init("hGkWN5ybqobaBvF13");
   const handleFormSubmit = async (values, { resetForm }) => {
     try {
@@ -23,6 +26,7 @@ const ContactForm = () => {
         values,
         "hGkWN5ybqobaBvF13"
       );
+      setShowSnackbar(true);
       resetForm();
     } catch (error) {
       console.error(error);
@@ -133,6 +137,12 @@ const ContactForm = () => {
           </Form>
         )}
       </Formik>
+      <CustomSnackbar
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+        titleText="success"
+        text="Your message was sent"
+      />
     </Container>
   );
 };

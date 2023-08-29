@@ -9,6 +9,17 @@ import { useMediaQuery } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
+const validationSchema = Yup.object().shape({
+  newPassword: Yup.string()
+    .min(7, "Password must be between 7 and 30 characters")
+    .max(30, "Password must be between 7 and 30 characters")
+    .required("Password is required"),
+  password: Yup.string()
+    .min(7, "Password must be between 7 and 30 characters")
+    .max(30, "Password must be between 7 and 30 characters")
+    .required("Password is required"),
+});
+
 export default function FormChangePass() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [showPasswordCurrent, setShowPasswordCurrent] = useState(false);
@@ -138,14 +149,3 @@ export default function FormChangePass() {
     </Formik>
   );
 }
-
-const validationSchema = Yup.object().shape({
-  newPassword: Yup.string()
-    .min(7, "Password must be between 7 and 30 characters")
-    .max(30, "Password must be between 7 and 30 characters")
-    .required("Password is required"),
-  password: Yup.string()
-    .min(7, "Password must be between 7 and 30 characters")
-    .max(30, "Password must be between 7 and 30 characters")
-    .required("Password is required"),
-});

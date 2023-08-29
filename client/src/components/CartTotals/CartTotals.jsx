@@ -23,7 +23,6 @@ const CartTotals = () => {
   const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
 
   const proceedToCheckout = () => {
-    console.log(cart);
     if (cart.length > 0) {
       setIsBillingDetailsOpen(true);
     } else {
