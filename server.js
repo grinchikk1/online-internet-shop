@@ -30,7 +30,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://online-internet-shop-dcf87eaec7f8.herokuapp.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
