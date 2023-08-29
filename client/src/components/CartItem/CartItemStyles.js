@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   item_wrapper: {
     justifyContent: "space-between",
     alignItems: "center",
@@ -48,7 +48,6 @@ export const useStyles = makeStyles((theme) => ({
     borderRadius: "4px",
   },
   wrapp_description: {
-    // minWidth: "200px",
     marginLeft: "20px",
     "@media (max-width : 768px) ": {
       marginLeft: "0px",
@@ -58,7 +57,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   wrapp: {
     display: "flex",
-    // flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
     flexGrow: "1",

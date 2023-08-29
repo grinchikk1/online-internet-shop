@@ -1,6 +1,6 @@
 import { makeStyles } from "@mui/styles";
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   cart_title: {
     textAlign: "center",
     fontSize: "33px",
@@ -22,8 +22,9 @@ export const useStyles = makeStyles((theme) => ({
   cart_empty: {
     display: "flex",
     justifyContent: "center",
-    marginTop: "40%",
-    fontSize: "24px",
+    marginBottom: "20%",
+    fontSize: "40px",
+    fontWeight: "600",
     textTransform: "uppercase",
     width: "100%",
     "@media (max-width : 959px) ": {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:4000/api";
+const url = "https://online-internet-shop-dcf87eaec7f8.herokuapp.com/api";
 
 // Додавання нового фільтру
 export const addFilter = async (filter, tokenAdmin) => {
@@ -44,6 +44,9 @@ export const getFilter = async () => {
 export const getFilterByType = async (type) => {
   try {
     const response = await axios.get(`${url}/filters/${type}`);
+    const filters = response.data;
+    const a = filters.map((filter) => filter.name);
+    console.log(a);
     return response.data;
   } catch (error) {
     console.log(error);

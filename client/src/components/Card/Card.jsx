@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { useStyles, theme } from "./CardStyle";
@@ -16,15 +16,12 @@ import {
   cardBrand,
 } from "./CardStyle";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
 
-export const addProductToLocalStorage = (product) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  cartItems.push(product);
-  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-};
+import { useNavigate } from "react-router-dom";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 
 function Card({
   _id,
@@ -42,7 +39,13 @@ function Card({
   previousPrice,
   product,
 }) {
-  const token = getUserToken();
+  const navigate = useNavigate();
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const handleClick = () => {
+    navigate(`/product/${_id}`);
+  };
+
+  const token = useSelector((state) => state.auth.token);
   const styles = useStyles();
   const dispatch = useDispatch();
 
@@ -52,8 +55,10 @@ function Card({
     dispatch(addProductToCart(product));
     if (!!token) {
       addToCart(product._id, token);
+      setShowSnackbar(true);
     } else {
-      addProductToLocalStorage(product);
+      CartLocalStorageHelper.addProductToCart(product);
+      setShowSnackbar(true);
     }
   };
 
@@ -61,7 +66,12 @@ function Card({
     <ThemeProvider theme={theme}>
       <Container className="cardContainer" sx={cardContainer}>
         <Container sx={cardImgContainer}>
-          <img src={imageUrls[0]} alt="product" className={styles.cardImg} />
+          <img
+            src={imageUrls[0]}
+            alt="product"
+            onClick={handleClick}
+            className={styles.cardImg}
+          />
           <Container className="cardHover" sx={cardHover}>
             <Typography sx={cardHoverAdd} onClick={handleAddProductToCart}>
               ADD TO CART
@@ -76,6 +86,12 @@ function Card({
         </Container>
         <Typography sx={cardBrand}>{brand}</Typography>
       </Container>
+      <CustomSnackbar
+        open={showSnackbar}
+        onClose={() => setShowSnackbar(false)}
+        titleText="success"
+        text="The item added to your Shopping bag."
+      />
     </ThemeProvider>
   );
 }

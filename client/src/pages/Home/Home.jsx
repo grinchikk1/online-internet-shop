@@ -5,7 +5,7 @@ import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
 import { useStyles, theme } from "./HomeStyles";
 import { useEffect } from "react";
-import { getProducts } from "../../data/fetchProducts";
+import { filterProducts } from "../../data/fetchProducts";
 import { Link } from "react-router-dom";
 import {
   container0,
@@ -24,7 +24,6 @@ import {
   carouselItem2,
   carouselItem3,
   carouselItem4,
-  carouselItem5,
 } from "./HomeStyles";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,40 +35,33 @@ function Home() {
   const output = out();
 
   useEffect(() => {
-    getProducts().then((data) => {
-      dispatch(setProducts(data));
+    filterProducts({ perPage: 6 }).then((data) => {
+      dispatch(setProducts(data.products));
     });
   }, [dispatch]);
 
   function out() {
     if (products) {
-      let prodQuantity = 0;
       return products.map((card) => {
-        prodQuantity++;
-        // Last 6 products from DataBase..
-        if (products.length - prodQuantity < 6) {
-          return (
-            <Card
-              key={card._id}
-              product={card}
-              _id={card._id}
-              enabled={card.enabled}
-              imageUrls={card.imageUrls}
-              quantity={card.quantity}
-              name={card.name}
-              currentPrice={card.currentPrice}
-              categories={card.categories}
-              productMaterial={card.productMaterial}
-              brand={card.brand}
-              itemNo={card.itemNo}
-              date={card.date}
-              country={card.manufacturerCountry}
-              previousPrice={card.previousPrice}
-            />
-          );
-        } else {
-          return null;
-        }
+        return (
+          <Card
+            key={card._id}
+            product={card}
+            _id={card._id}
+            enabled={card.enabled}
+            imageUrls={card.imageUrls}
+            quantity={card.quantity}
+            name={card.name}
+            currentPrice={card.currentPrice}
+            categories={card.categories}
+            productMaterial={card.productMaterial}
+            brand={card.brand}
+            itemNo={card.itemNo}
+            date={card.date}
+            country={card.manufacturerCountry}
+            previousPrice={card.previousPrice}
+          />
+        );
       });
     }
   }
@@ -108,12 +100,13 @@ function Home() {
               <Box sx={carouselItem2} />
               <Box sx={carouselItem3} />
               <Box sx={carouselItem4} />
-              <Box sx={carouselItem5} />
             </Carousel>
           </Container>
-          <Button variant="outlined" sx={btn}>
-            View Product
-          </Button>
+          <Link className={styles.link} to="/Shop">
+            <Button variant="outlined" sx={btn}>
+              View Product
+            </Button>
+          </Link>
           <Typography sx={name}>Gold big hoops</Typography>
           <Typography sx={price}>$ 68,00</Typography>
         </Container>

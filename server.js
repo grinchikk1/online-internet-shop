@@ -30,7 +30,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://online-internet-shop-dcf87eaec7f8.herokuapp.com",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   })
 );
@@ -44,8 +44,13 @@ const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
 mongoose
-  .connect(db, { useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
+  .connect(db, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+  })
+  .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log(err));
 
 // Passport middleware
