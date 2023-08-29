@@ -14,7 +14,7 @@ import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart.cart);
-  const s = useStyles();
+  const styles = useStyles();
   const dispatch = useDispatch();
 
   const amounts = useSelector((state) => state.cart.amount);
@@ -49,21 +49,19 @@ const Cart = () => {
 
   return (
     <Container maxWidth="lg">
-      <h1 className={s.cart_title}>Shopping Cart</h1>
+      <h1 className={styles.cart_title}>Shopping Cart</h1>
       <Grid
         container
-        className={s.wrapper_cart}
+        className={styles.wrapper_cart}
         sx={{
           flexDirection: "column",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Grid
           sx={{
             maxWidth: "500px",
             width: "100%",
-          }}
-        >
+          }}>
           <Box>
             <Grid item xs={12} sm={12} md={12}>
               {cart.map((product) => {
@@ -80,7 +78,7 @@ const Cart = () => {
                 );
               })}
               {cart.length === 0 && (
-                <div className={s.cart_empty}>Your cart is EMPTY</div>
+                <div className={styles.cart_empty}>Your cart is EMPTY</div>
               )}
             </Grid>
           </Box>

@@ -12,7 +12,7 @@ export const useStyles = makeStyles(() => ({
   },
   count_wrapper: {
     borderRadius: "6px",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       alignSelf: "flex-start",
     },
   },
@@ -23,7 +23,7 @@ export const useStyles = makeStyles(() => ({
     cursor: "pointer",
     color: "#707070",
     fontSize: "16px",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       width: "20px",
       height: "40px",
     },
@@ -37,7 +37,7 @@ export const useStyles = makeStyles(() => ({
     color: "#707070",
     fontSize: "16px",
     textAlign: "center",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       width: "20px",
       height: "40px",
     },
@@ -61,9 +61,9 @@ export const useStyles = makeStyles(() => ({
     justifyContent: "space-around",
     flexGrow: "1",
     "@media (max-width : 768px) ": {
-      marginLeft: "10px",
+      marginLeft: "30px",
     },
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       flexDirection: "column",
     },
   },
@@ -73,7 +73,7 @@ export const useStyles = makeStyles(() => ({
     fontWeight: "400",
     lineHeight: "26px",
     marginBottom: "14px",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       fontSize: "12px",
       marginBottom: "0px",
     },
@@ -85,7 +85,7 @@ export const useStyles = makeStyles(() => ({
     lineHeight: "27px",
     color: "#707070",
     marginBottom: "2px",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       fontSize: "12px",
     },
   },
@@ -95,7 +95,7 @@ export const useStyles = makeStyles(() => ({
     fontStyle: "normal",
     fontWeight: "400",
     lineHeight: "27px",
-    "@media (max-width : 500px) ": {
+    "@media (max-width : 420px) ": {
       fontSize: "12px",
     },
   },

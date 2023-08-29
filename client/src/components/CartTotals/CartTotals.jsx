@@ -15,7 +15,7 @@ import { useStyles } from "./CartTotalsStyles";
 import Checkout from "../Checkout/Checkout";
 
 const CartTotals = () => {
-  const s = useStyles();
+  const styles = useStyles();
   const totalAmount = useSelector(getTotalCartAmount);
   const cart = useSelector((state) => state.cart.cart);
   const amounts = useSelector((state) => state.cart.amount);
@@ -24,7 +24,6 @@ const CartTotals = () => {
   const [isCartEmptyAlertOpen, setIsCartEmptyAlertOpen] = useState(false);
 
   const proceedToCheckout = () => {
-    console.log(cart);
     if (cart.length > 0) {
       setIsBillingDetailsOpen(true);
     } else {
@@ -33,15 +32,15 @@ const CartTotals = () => {
   };
 
   return (
-    <Grid item xs={12} sm={12} md={6} className={s.cart_totals}>
+    <Grid item xs={12} sm={12} md={6} className={styles.cart_totals}>
       <Grid container sx={{ display: "block", justifyContent: "end" }}>
         <Grid item>
-          <h3 className={s.cart_totalsTitle}>Cart totals</h3>
+          <h3 className={styles.cart_totalsTitle}>Cart totals</h3>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <div className={s.cart_totalLine}></div>
+          <div className={styles.cart_totalLine}></div>
         </Grid>
-        <Grid container className={s.cart_totalAmount}>
+        <Grid container className={styles.cart_totalAmount}>
           <div>TOTAL</div>
           <div>$ {totalAmount}</div>
         </Grid>
@@ -58,16 +57,14 @@ const CartTotals = () => {
               color: "white",
             },
           }}
-          onClick={proceedToCheckout}
-        >
+          onClick={proceedToCheckout}>
           PROCEED TO CHECKOUT
         </Button>
         {cart.length === 0 && isCartEmptyAlertOpen && (
           <Alert
             onClose={() => setIsCartEmptyAlertOpen(false)}
             severity="error"
-            sx={{ width: "100%", marginTop: "15px" }}
-          >
+            sx={{ width: "100%", marginTop: "15px" }}>
             Your cart is empty
           </Alert>
         )}
@@ -75,16 +72,14 @@ const CartTotals = () => {
           open={isBillingDetailsOpen}
           onClose={() => setIsBillingDetailsOpen(false)}
           fullWidth
-          maxWidth="lg"
-        >
+          maxWidth="lg">
           <DialogContent>
             <Checkout totalAmount={totalAmount} amounts={amounts} />
           </DialogContent>
           <DialogActions>
             <Button
               onClick={() => setIsBillingDetailsOpen(false)}
-              color="primary"
-            >
+              color="primary">
               Close
             </Button>
           </DialogActions>

@@ -23,8 +23,7 @@ const CartItem = (props) => {
       width="14"
       height="14"
       viewBox="0 0 14 14"
-      fill="none"
-    >
+      fill="none">
       <path
         d="M1 1.18344L12.8166 13M1 12.8166L12.8166 1"
         stroke="black"
@@ -32,7 +31,7 @@ const CartItem = (props) => {
       />
     </svg>
   );
-  const s = useStyles();
+  const styles = useStyles();
   const dispatch = useDispatch();
 
   const handleDecrement = () => {
@@ -83,27 +82,29 @@ const CartItem = (props) => {
 
   return (
     <Box>
-      <Grid container className={s.item_wrapper}>
-        <img src={imageUrls[0]} alt={name} className={s.item_image} />
-        <Box className={s.wrapp}>
-          <Grid item className={s.wrapp_description}>
-            <p className={s.item_name}>{name}</p>
-            <p className={s.item_description}>
+      <Grid container className={styles.item_wrapper}>
+        <img src={imageUrls[0]} alt={name} className={styles.item_image} />
+        <Box className={styles.wrapp}>
+          <Grid item className={styles.wrapp_description}>
+            <p className={styles.item_name}>{name}</p>
+            <p className={styles.item_description}>
               {productMaterial} / {brand}
             </p>
-            <Typography className={s.item_price}>{currentPrice} $</Typography>
+            <Typography className={styles.item_price}>
+              {currentPrice} $
+            </Typography>
           </Grid>
 
-          <Grid item className={s.count_wrapper}>
-            <button className={s.count_button} onClick={handleDecrement}>
+          <Grid item className={styles.count_wrapper}>
+            <button className={styles.count_button} onClick={handleDecrement}>
               -
             </button>
             <input
-              className={s.count_input}
+              className={styles.count_input}
               value={amount}
               onChange={handleAmountChange}
             />
-            <button className={s.count_button} onClick={handleIncrement}>
+            <button className={styles.count_button} onClick={handleIncrement}>
               +
             </button>
           </Grid>
@@ -111,14 +112,13 @@ const CartItem = (props) => {
 
         <Grid item>
           <button
-            className={s.close_button}
-            onClick={handleRemoveProductFromCart}
-          >
+            className={styles.close_button}
+            onClick={handleRemoveProductFromCart}>
             {SVGCLOSEBTN}
           </button>
         </Grid>
       </Grid>
-      <div className={s.cart_line}></div>
+      <div className={styles.cart_line}></div>
     </Box>
   );
 };

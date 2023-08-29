@@ -54,6 +54,17 @@ a {
     border: none;
   }
 }
+@media (max-width: 768px) {
+  .header__blur--open {
+    width: 100vw;
+    height: 300vh;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 20;
+  }
+}
 .header__logo-image {
   transform: translateY(3px);
 }
@@ -73,10 +84,9 @@ a {
     top: 0;
     right: 0;
     width: 100%;
-    z-index: 2;
+    z-index: 22;
     background-color: white;
     transform: translateY(-200%);
-    transition: all ease-in-out 0.3s;
     border: none;
   }
   .header__nav.open {
@@ -153,7 +163,7 @@ a {
     border: none;
     outline: none;
     cursor: pointer;
-    z-index: 3;
+    z-index: 23;
   }
 }
 .nav-opener__menu-line {
@@ -189,7 +199,7 @@ a {
   opacity: 0;
 }
 .open .nav-opener__menu-line:nth-child(3) {
-  bottom: 50%;
+  bottom: 45%;
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
@@ -304,7 +314,7 @@ a {
   font-size: 14px;
   margin-top: 5px;
 }
-.login-container button {
+.login-container #lodin_btn {
   padding: 10px 20px;
   background-color: #FFFFFF;
   color: #000000;
@@ -313,7 +323,7 @@ a {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.login-container button:hover {
+.login-container #lodin_btn:hover {
   background-color: #000000;
   color: #FFFFFF;
 }
@@ -355,7 +365,7 @@ a {
   font-size: 14px;
   margin-top: 5px;
 }
-.registration-container button {
+.registration-container #register_btn {
   padding: 10px 20px;
   background-color: #FFFFFF;
   color: #000000;
@@ -364,7 +374,7 @@ a {
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
-.registration-container button:hover {
+.registration-container #register_btn:hover {
   background-color: #000000;
   color: #FFFFFF;
 }
