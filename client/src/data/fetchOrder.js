@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "https://online-internet-shop-dcf87eaec7f8.herokuapp.com/api";
+const url = "http://localhost:4000/api";
 
 // Створити замовлення
 export const createOrder = async (newOrder) => {

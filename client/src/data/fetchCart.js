@@ -1,7 +1,6 @@
 import axios from "axios";
 
-export const url =
-  "https://online-internet-shop-dcf87eaec7f8.herokuapp.com/api";
+export const url = "http://localhost:4000/api";
 
 // Створити кошик
 export const createCart = async (cart, token) => {

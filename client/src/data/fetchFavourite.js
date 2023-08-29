@@ -1,8 +1,7 @@
 import axios from "axios";
 import { fetchFavoritesSuccess } from "../features/favorites/favoriteSlice";
 
-export const url =
-  "https://online-internet-shop-dcf87eaec7f8.herokuapp.com/api";
+export const url = "http://localhost:4000/api";
 
 export const createWishlist = async (token, newWishlist) => {
   try {
