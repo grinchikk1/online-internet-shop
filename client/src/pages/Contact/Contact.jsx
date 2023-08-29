@@ -11,10 +11,24 @@ import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, theme, fieldStyle } from "./ContactStyles";
 import { ThemeProvider } from "@mui/material/styles";
 import { initialValues, validationSchema } from "./formSettings";
+import emailjs from "emailjs-com";
 
 const ContactForm = () => {
   const classes = useStyles();
-
+  emailjs.init("hGkWN5ybqobaBvF13");
+  const handleFormSubmit = async (values, { resetForm }) => {
+    try {
+      await emailjs.send(
+        "service_ka9z14d",
+        "template_f4bb6o9",
+        values,
+        "hGkWN5ybqobaBvF13"
+      );
+      resetForm();
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <ThemeProvider theme={theme}>
       <Container maxWidth="lg" className={classes.formContainer}>
@@ -28,10 +42,7 @@ const ContactForm = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={(values, { resetForm }) => {
-            console.log(values);
-            resetForm();
-          }}>
+          onSubmit={handleFormSubmit}>
           {({ isSubmitting, handleSubmit }) => (
             <Form>
               <Grid container spacing={5}>
