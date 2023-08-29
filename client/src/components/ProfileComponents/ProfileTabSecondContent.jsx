@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Divider, Typography } from "@mui/material";
 import { getOrder } from "../../data/fetchOrder";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../../features/auth/authSlice";
 
 export default function ProfileTabSecondContent() {
   const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getOrder(token);
-        setOrders(response);
+        if (response.status === 200) {
+          setOrders(response.data);
+        }
       } catch (error) {
-        console.error("Error fetching orders:", error);
+        alert("Your session has expired. Please log in again.");
+        dispatch(logout());
+        navigate("/login");
       }
     };
 
     fetchData();
-  }, [token]);
+  }, [dispatch, navigate, token]);
 
   if (orders.length === 0) {
     return (

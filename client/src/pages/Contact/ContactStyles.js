@@ -1,10 +1,5 @@
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
-export const theme = createTheme({
-  typography: {
-    fontFamily: "DM Sans, sans-serif",
-  },
-});
+
 export const useStyles = makeStyles(() => ({
   formContainer: {
     display: "flex",

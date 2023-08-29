@@ -1,8 +1,7 @@
 import { Grid, Container, Alert } from "@mui/material";
 import { Formik, Form } from "formik";
 import { initalValues, validationSchema } from "./formSettings";
-import { useStyles, theme } from "./CheckoutStyle";
-import { ThemeProvider } from "@mui/material/styles";
+import { useStyles } from "./CheckoutStyle";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
 import { useState } from "react";
@@ -119,34 +118,32 @@ function Checkout() {
     await dispatch(clearCart());
   };
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" className={classes.formContainer}>
-        <Formik
-          initialValues={initalValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
-            <Form>
-              <Grid container spacing={4}>
-                <BillingDetails />
-                <YourOrder
-                  isSubmitting={isSubmitting}
-                  handleSubmit={handleSubmit}
-                  values={values}
-                  setFieldValue={setFieldValue}
-                />
-              </Grid>
-            </Form>
-          )}
-        </Formik>
-        {isOrderPlaced && (
-          <Alert severity="success" sx={{ width: "100%", marginTop: "15px" }}>
-            Your order has been successfully placed
-          </Alert>
+    <Container maxWidth="lg" className={classes.formContainer}>
+      <Formik
+        initialValues={initalValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
+          <Form>
+            <Grid container spacing={4}>
+              <BillingDetails />
+              <YourOrder
+                isSubmitting={isSubmitting}
+                handleSubmit={handleSubmit}
+                values={values}
+                setFieldValue={setFieldValue}
+              />
+            </Grid>
+          </Form>
         )}
-      </Container>
-    </ThemeProvider>
+      </Formik>
+      {isOrderPlaced && (
+        <Alert severity="success" sx={{ width: "100%", marginTop: "15px" }}>
+          Your order has been successfully placed
+        </Alert>
+      )}
+    </Container>
   );
 }
 

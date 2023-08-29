@@ -10,8 +10,7 @@ import {
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
-import { ThemeProvider } from "@mui/material/styles";
-import { theme, useStyles } from "./InputStyle";
+import { useStyles } from "./InputStyle";
 import Filter from "./Filter";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
@@ -100,191 +99,189 @@ function Shop() {
     .map((card) => <CardItem key={card._id} card={card} />);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h6"
-          sx={{
-            fontSize: "33px",
-          }}
-          className={classes.Title}
-        >
-          Shop The Latest
-        </Typography>
-        <Stack
-          direction={isScreenSmall ? "column" : "row"}
-          spacing={{ xs: 1, sm: 4 }}
-          useFlexGap
-          className={classes.stackStyle}
-        >
-          <Box className={classes.Container}>
-            {!isScreenSmall && (
-              <Filter
-                selectedProduct={selectedProduct}
-                setSelectedProduct={setSelectedProduct}
-                minPrice={minPrice}
-                setMinPrice={setMinPrice}
-                maxPrice={maxPrice}
-                setMaxPrice={setMaxPrice}
-                handleSearch={handleSearch}
-                setSearchResults={setSearchResults}
-                searchResults={searchResults}
-                selectedProductMaterial={selectedProductMaterial}
-                setSelectedProductMaterial={setSelectedProductMaterial}
-                handleFilter={handleFilter}
-              />
-            )}
-            {isScreenSmall && (
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                  marginBottom: "13px",
-                }}
-                onClick={toggleFilter}
-              >
-                <img src={filter} alt="filter" style={{ cursor: "pointer" }} />
-                <Typography
-                  sx={{ fontSize: "12px" }}
-                  className={classes.FilterTitle}
-                >
-                  Filters
-                </Typography>
-              </Box>
-            )}
-            {isScreenSmall && isOpenFilter && (
-              <Filter
-                selectedProduct={selectedProduct}
-                setSelectedProduct={setSelectedProduct}
-                minPrice={minPrice}
-                setMinPrice={setMinPrice}
-                maxPrice={maxPrice}
-                setMaxPrice={setMaxPrice}
-                handleSearch={handleSearch}
-                setSearchResults={setSearchResults}
-                searchResults={searchResults}
-                selectedProductMaterial={selectedProductMaterial}
-                setSelectedProductMaterial={setSelectedProductMaterial}
-                handleFilter={handleFilter}
-              />
-            )}
-          </Box>
-
-          <Box>
-            <Grid
-              container
-              rowSpacing={{ xs: 2, md: 4 }}
-              columns={{ xs: 2, sm: 8, md: 12 }}
+    <Container maxWidth="lg">
+      <Typography
+        variant="h6"
+        sx={{
+          fontSize: "33px",
+        }}
+        className={classes.Title}
+      >
+        Shop The Latest
+      </Typography>
+      <Stack
+        direction={isScreenSmall ? "column" : "row"}
+        spacing={{ xs: 1, sm: 4 }}
+        useFlexGap
+        className={classes.stackStyle}
+      >
+        <Box className={classes.Container}>
+          {!isScreenSmall && (
+            <Filter
+              selectedProduct={selectedProduct}
+              setSelectedProduct={setSelectedProduct}
+              minPrice={minPrice}
+              setMinPrice={setMinPrice}
+              maxPrice={maxPrice}
+              setMaxPrice={setMaxPrice}
+              handleSearch={handleSearch}
+              setSearchResults={setSearchResults}
+              searchResults={searchResults}
+              selectedProductMaterial={selectedProductMaterial}
+              setSelectedProductMaterial={setSelectedProductMaterial}
+              handleFilter={handleFilter}
+            />
+          )}
+          {isScreenSmall && (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginBottom: "13px",
+              }}
+              onClick={toggleFilter}
             >
-              {showSearchResults
-                ? productsSearch.map((card) => (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={4}
-                      md={4}
-                      key={card._id}
-                      sx={{
-                        "@media (min-width: 900px)": {
-                          maxWidth: "100%",
-                        },
-                      }}
-                    >
-                      <CardItem card={card} />
-                      {btnAddProduct.length > cardsToShow && (
-                        <Box
-                          mt={3}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <Button
-                            variant="contained"
-                            onClick={handleLoadMore}
-                            sx={{
-                              display: "none",
-                            }}
-                          >
-                            Load More
-                          </Button>
-                        </Box>
-                      )}
-                    </Grid>
-                  ))
-                : isFilterApplied
-                ? filteredCards.map((card) => (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={4}
-                      md={4}
-                      key={card._id}
-                      sx={{
-                        "@media (min-width: 900px)": {
-                          maxWidth: "100%",
-                        },
-                      }}
-                    >
-                      <CardItem card={card} />
-                      {btnAddProduct.length > cardsToShow && (
-                        <Box
-                          mt={3}
-                          sx={{ display: "flex", justifyContent: "center" }}
-                        >
-                          <Button
-                            variant="contained"
-                            onClick={handleLoadMore}
-                            sx={{
-                              display: "none",
-                            }}
-                          >
-                            Load More
-                          </Button>
-                        </Box>
-                      )}
-                    </Grid>
-                  ))
-                : cardList.map((card, index) => (
-                    <Grid
-                      item
-                      xs={12}
-                      sm={4}
-                      md={4}
-                      key={index}
-                      sx={{
-                        "@media (min-width: 900px)": {
-                          maxWidth: "100%",
-                        },
-                      }}
-                    >
-                      {card}
-                    </Grid>
-                  ))}
-            </Grid>
-            {btnAddProduct.length > cardsToShow &&
-              !showSearchResults &&
-              !isFilterApplied && (
-                <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    variant="contained"
-                    onClick={handleLoadMore}
+              <img src={filter} alt="filter" style={{ cursor: "pointer" }} />
+              <Typography
+                sx={{ fontSize: "12px" }}
+                className={classes.FilterTitle}
+              >
+                Filters
+              </Typography>
+            </Box>
+          )}
+          {isScreenSmall && isOpenFilter && (
+            <Filter
+              selectedProduct={selectedProduct}
+              setSelectedProduct={setSelectedProduct}
+              minPrice={minPrice}
+              setMinPrice={setMinPrice}
+              maxPrice={maxPrice}
+              setMaxPrice={setMaxPrice}
+              handleSearch={handleSearch}
+              setSearchResults={setSearchResults}
+              searchResults={searchResults}
+              selectedProductMaterial={selectedProductMaterial}
+              setSelectedProductMaterial={setSelectedProductMaterial}
+              handleFilter={handleFilter}
+            />
+          )}
+        </Box>
+
+        <Box>
+          <Grid
+            container
+            rowSpacing={{ xs: 2, md: 4 }}
+            columns={{ xs: 2, sm: 8, md: 12 }}
+          >
+            {showSearchResults
+              ? productsSearch.map((card) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={4}
+                    md={4}
+                    key={card._id}
                     sx={{
-                      border: "1px solid rgba(0, 0, 0, 1)",
-                      background: "white",
-                      color: "black",
-                      "&:hover": {
-                        background: "black",
-                        color: "white",
+                      "@media (min-width: 900px)": {
+                        maxWidth: "100%",
                       },
                     }}
                   >
-                    Load More
-                  </Button>
-                </Box>
-              )}
-          </Box>
-        </Stack>
-      </Container>
-    </ThemeProvider>
+                    <CardItem card={card} />
+                    {btnAddProduct.length > cardsToShow && (
+                      <Box
+                        mt={3}
+                        sx={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <Button
+                          variant="contained"
+                          onClick={handleLoadMore}
+                          sx={{
+                            display: "none",
+                          }}
+                        >
+                          Load More
+                        </Button>
+                      </Box>
+                    )}
+                  </Grid>
+                ))
+              : isFilterApplied
+              ? filteredCards.map((card) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={4}
+                    md={4}
+                    key={card._id}
+                    sx={{
+                      "@media (min-width: 900px)": {
+                        maxWidth: "100%",
+                      },
+                    }}
+                  >
+                    <CardItem card={card} />
+                    {btnAddProduct.length > cardsToShow && (
+                      <Box
+                        mt={3}
+                        sx={{ display: "flex", justifyContent: "center" }}
+                      >
+                        <Button
+                          variant="contained"
+                          onClick={handleLoadMore}
+                          sx={{
+                            display: "none",
+                          }}
+                        >
+                          Load More
+                        </Button>
+                      </Box>
+                    )}
+                  </Grid>
+                ))
+              : cardList.map((card, index) => (
+                  <Grid
+                    item
+                    xs={12}
+                    sm={4}
+                    md={4}
+                    key={index}
+                    sx={{
+                      "@media (min-width: 900px)": {
+                        maxWidth: "100%",
+                      },
+                    }}
+                  >
+                    {card}
+                  </Grid>
+                ))}
+          </Grid>
+          {btnAddProduct.length > cardsToShow &&
+            !showSearchResults &&
+            !isFilterApplied && (
+              <Box mt={3} sx={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  variant="contained"
+                  onClick={handleLoadMore}
+                  sx={{
+                    border: "1px solid rgba(0, 0, 0, 1)",
+                    background: "white",
+                    color: "black",
+                    "&:hover": {
+                      background: "black",
+                      color: "white",
+                    },
+                  }}
+                >
+                  Load More
+                </Button>
+              </Box>
+            )}
+        </Box>
+      </Stack>
+    </Container>
   );
 }
 export default Shop;

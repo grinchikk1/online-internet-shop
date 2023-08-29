@@ -62,7 +62,7 @@ export const getOrder = async (token) => {
         Authorization: token,
       },
     });
-    return response.data;
+    return response;
   } catch (error) {
     console.log(error);
   }
