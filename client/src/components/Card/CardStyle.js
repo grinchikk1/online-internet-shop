@@ -538,6 +538,7 @@ export const useStyles = makeStyles(() => ({
     padding: "0",
     width: "350px",
     height: "350px",
+    cursor: "pointer",
   },
   "@media (max-width: 579.9px)": {
     cardImg: {
