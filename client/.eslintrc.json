@@ -8,6 +8,22 @@
   "rules": {
     "quotes": [2, "double"],
     "no-console": "off",
-    "no-extra-boolean-cast": "off"
+    "no-extra-boolean-cast": "off",
+    "no-unused-expressions": "off",
+    "no-sequences": "off",
+    "no-restricted-globals": "off",
+    "no-undef": "off",
+    "no-prototype-builtins": "warn",
+    "no-empty": "warn",
+    "no-useless-catch": "warn",
+    "no-unsafe-finally": "warn",
+    "no-misleading-character-class": "warn",
+    "no-mixed-operators": "off",
+    "default-case": "off",
+    "no-fallthrough": "off",
+    "no-useless-escape": "off",
+    "no-template-curly-in-string": "off",
+    "eqeqeq": "off",
+    "no-use-before-define": "off"
   }
 }

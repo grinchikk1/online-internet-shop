@@ -1,12 +1,34 @@
 import React, { useState } from "react";
-import { updateUser } from "../../data/fetchUsers";
-import { setUser } from "../../features/auth/authSlice";
-import { Button } from "@mui/material";
-import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
-import { useMediaQuery } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { updateUser } from "../../data/fetchUsers";
+import { setUser } from "../../features/auth/authSlice";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "First Name must be between 2 and 25 characters")
+    .max(25, "First Name must be between 2 and 25 characters")
+    .required("First Name is required"),
+  lastName: Yup.string()
+    .min(2, "Last Name must be between 2 and 25 characters")
+    .max(25, "Last Name must be between 2 and 25 characters")
+    .required("Last Name is required"),
+  login: Yup.string()
+    .min(3, "Login must be between 3 and 10 characters")
+    .max(10, "Login must be between 3 and 10 characters")
+    .required("Login is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  telephone: Yup.string().test(
+    "is-phone-valid",
+    "That is not a valid phone number.",
+    (value) => {
+      return /^\+380\d{3}\d{2}\d{2}\d{2}$/.test(value);
+    }
+  ),
+});
 
 export default function FormUpdateUser() {
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -46,6 +68,7 @@ export default function FormUpdateUser() {
         lastName: values.lastName,
         login: values.login,
         email: values.email,
+        telephone: values.telephone,
       };
 
       const response = await updateUser(updatedUser, token);
@@ -73,6 +96,7 @@ export default function FormUpdateUser() {
         lastName: user.lastName,
         login: user.login,
         email: user.email,
+        telephone: user.telephone,
       }}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
@@ -102,6 +126,16 @@ export default function FormUpdateUser() {
           <label htmlFor="email">Email:</label>
           <Field type="email" id="email" name="email" style={fieldStyle} />
           <ErrorMessage name="email" component="div" style={errorStyle} />
+        </div>
+        <div style={fieldContainerStyle}>
+          <label htmlFor="login">Telephone:</label>
+          <Field
+            type="phone"
+            id="telephone"
+            name="telephone"
+            style={fieldStyle}
+          />
+          <ErrorMessage name="telephone" component="div" style={errorStyle} />
         </div>
         <Button
           variant="contained"
@@ -133,19 +167,3 @@ export default function FormUpdateUser() {
     </Formik>
   );
 }
-
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, "First Name must be between 2 and 25 characters")
-    .max(25, "First Name must be between 2 and 25 characters")
-    .required("First Name is required"),
-  lastName: Yup.string()
-    .min(2, "Last Name must be between 2 and 25 characters")
-    .max(25, "Last Name must be between 2 and 25 characters")
-    .required("Last Name is required"),
-  login: Yup.string()
-    .min(3, "Login must be between 3 and 10 characters")
-    .max(10, "Login must be between 3 and 10 characters")
-    .required("Login is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-});

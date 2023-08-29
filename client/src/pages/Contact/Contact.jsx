@@ -43,6 +43,7 @@ const ContactForm = () => {
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={handleFormSubmit}>
+
           {({ isSubmitting, handleSubmit }) => (
             <Form>
               <Grid container spacing={5}>
@@ -96,7 +97,8 @@ const ContactForm = () => {
                         borderRadius: "0px",
                         marginRight: "5vw",
                       },
-                    }}>
+                    }}
+                  >
                     <MenuItem value="">
                       <span>Subject</span>
                     </MenuItem>

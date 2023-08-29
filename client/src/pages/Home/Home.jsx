@@ -94,7 +94,8 @@ function Home() {
                     height: "10px",
                   },
                 },
-              }}>
+              }}
+            >
               <Box sx={carouselItem1} />
               <Box sx={carouselItem2} />
               <Box sx={carouselItem3} />

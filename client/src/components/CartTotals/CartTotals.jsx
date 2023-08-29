@@ -57,14 +57,16 @@ const CartTotals = () => {
               color: "white",
             },
           }}
-          onClick={proceedToCheckout}>
+          onClick={proceedToCheckout}
+        >
           PROCEED TO CHECKOUT
         </Button>
         {cart.length === 0 && isCartEmptyAlertOpen && (
           <Alert
             onClose={() => setIsCartEmptyAlertOpen(false)}
             severity="error"
-            sx={{ width: "100%", marginTop: "15px" }}>
+            sx={{ width: "100%", marginTop: "15px" }}
+          >
             Your cart is empty
           </Alert>
         )}
@@ -72,14 +74,16 @@ const CartTotals = () => {
           open={isBillingDetailsOpen}
           onClose={() => setIsBillingDetailsOpen(false)}
           fullWidth
-          maxWidth="lg">
+          maxWidth="lg"
+        >
           <DialogContent>
             <Checkout />
           </DialogContent>
           <DialogActions>
             <Button
               onClick={() => setIsBillingDetailsOpen(false)}
-              color="primary">
+              color="primary"
+            >
               Close
             </Button>
           </DialogActions>
