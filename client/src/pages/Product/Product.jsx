@@ -18,8 +18,8 @@ function Product() {
   useEffect(() => {
     if (products.length === 0) {
       getProducts().then((data) => {
-        dispatch(setProducts(data));
-        const product = data.find((product) => product._id === id);
+        dispatch(setProducts(data.data));
+        const product = data.data.find((product) => product._id === id);
         setProduct(product);
       });
     } else {
@@ -33,7 +33,7 @@ function Product() {
     if (!!token) {
       const cart = await getCart(token);
 
-      let products = cart?.products.map((item) => {
+      let products = cart.data?.products.map((item) => {
         return {
           product: item.product._id,
           cartQuantity: item.cartQuantity || 1,

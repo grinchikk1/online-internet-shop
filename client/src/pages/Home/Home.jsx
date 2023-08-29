@@ -36,7 +36,7 @@ function Home() {
 
   useEffect(() => {
     filterProducts({ perPage: 6 }).then((data) => {
-      dispatch(setProducts(data.products));
+      dispatch(setProducts(data.data.products));
     });
   }, [dispatch]);
 

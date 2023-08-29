@@ -25,7 +25,7 @@ const Cart = () => {
       getCart(token).then((data) => {
         dispatch(
           setCart(
-            data?.products?.reduce(
+            data.data?.products?.reduce(
               (acc, item) => {
                 const product = item.product;
                 const amount = item.cartQuantity;

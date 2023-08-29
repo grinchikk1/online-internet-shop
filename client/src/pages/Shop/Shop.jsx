@@ -36,7 +36,7 @@ function Shop() {
 
   useEffect(() => {
     getProducts().then((res) => {
-      dispatch(setProducts(res));
+      dispatch(setProducts(res.data));
     });
   }, [dispatch]);
 
@@ -82,7 +82,7 @@ function Shop() {
 
     try {
       const filteredData = await filterProducts(filterParams);
-      setFilteredCards(filteredData.products);
+      setFilteredCards(filteredData.data.products);
       setIsFilterApplied(true);
     } catch (error) {
       console.error("Error filtering products:", error);
