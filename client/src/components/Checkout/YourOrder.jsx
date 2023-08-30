@@ -11,15 +11,15 @@ import { ErrorMessage } from "formik";
 import { initalValues } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import { FaPaypal } from "react-icons/fa";
-// import OrderItems from "../../pages/Cart/OrderItem";
+import OrderItemsCart from "../../pages/Cart/OrderItemCart";
 import { useSelector } from "react-redux";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
 function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
   const classes = useStyles();
-  // const cart = useSelector((state) => state.cart.cart);
+  const cart = useSelector((state) => state.cart.cart);
   const totalAmount = useSelector(getTotalCartAmount);
-  // const amounts = useSelector((state) => state.cart.amount);
+  const amounts = useSelector((state) => state.cart.amount);
   return (
     <Grid item xs={12} md={6}>
       <Typography variant="h5" gutterBottom className={classes.heading}>
@@ -40,7 +40,7 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
               <div>PRICE</div>
             </div>
           </Grid>
-          {/* <OrderItems cart={cart} amounts={amounts} /> */}
+          <OrderItemsCart cart={cart} amounts={amounts} />
           <Grid item xs={12}>
             <div className={classes.total}>
               <div>TOTAL</div>

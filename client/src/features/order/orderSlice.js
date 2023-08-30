@@ -23,6 +23,7 @@ export const orderSlice = createSlice({
       .addCase(createOrder.fulfilled, (state, action) => {
         const newOrder = action.payload;
         state.order.push(newOrder);
+        localStorage.setItem("order", JSON.stringify(state.order));
         state.status = "succeeded";
       })
       .addCase(updateOrder.fulfilled, (state, action) => {

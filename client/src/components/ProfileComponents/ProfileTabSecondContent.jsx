@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
-import { Divider, Typography } from "@mui/material";
+import {
+  Divider,
+  Typography,
+  CircularProgress,
+  Container,
+} from "@mui/material";
 import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
+import CustomButton from "../../components/CustomButton/CustomButton";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -22,15 +28,19 @@ export default function ProfileTabSecondContent() {
   }, [dispatch, token]);
 
   if (orderStatus === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <CircularProgress />
+      </Container>
+    );
   }
 
   if (orderStatus === "failed") {
     return (
-      <div>
-        Error
-        <button onClick={() => dispatch(logout())}>Logout</button>
-      </div>
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h6">Error</Typography>
+        <CustomButton value="Logout" onClick={() => dispatch(logout())} />
+      </Container>
     );
   }
 

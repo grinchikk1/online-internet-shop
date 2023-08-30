@@ -2,12 +2,12 @@ import React from "react";
 import { Grid } from "@mui/material";
 import { useStyles } from "../../components/Checkout/CheckoutStyle";
 
-function OrderItems({ cart, amounts }) {
+function OrderItemsCart({ cart, amounts }) {
   const classes = useStyles();
   return (
     <Grid item xs={12} className={classes.orderPriceItem}>
       <div style={{ borderBottom: "1px solid #D8D8D8" }}>
-        {cart.products.map((product) => (
+        {cart.map((product) => (
           <Grid
             item
             xs={12}
@@ -17,9 +17,9 @@ function OrderItems({ cart, amounts }) {
             <div>
               <div className={classes.orderItem}>
                 <div>
-                  ({amounts[product._id]}) {product.product.name}
+                  ({amounts[product._id]}) {product.name}
                 </div>
-                <div>${product.product.currentPrice}</div>
+                <div>${product.currentPrice}</div>
               </div>
             </div>
           </Grid>
@@ -29,4 +29,4 @@ function OrderItems({ cart, amounts }) {
   );
 }
 
-export default OrderItems;
+export default OrderItemsCart;

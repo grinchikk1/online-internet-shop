@@ -1,8 +1,8 @@
-import { Container, Typography } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../features/order/orderSlice";
-// import OrderItems from "../Cart/OrderItem";
+import OrderItems from "../Cart/OrderItem";
 import useStyles from "./OrderConfirmationStyle";
 
 const OrderConfirmation = () => {
@@ -10,52 +10,60 @@ const OrderConfirmation = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const [orders, setOrder] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const fetch = async () => {
       await new Promise((resolve) => setTimeout(resolve, 3000));
       const response = await dispatch(getOrder(token));
       setOrder(response.payload);
-      setLoading(false);
+      setLoading(true);
     };
-    fetch();
+    if (token) {
+      fetch();
+    } else {
+      setError(true);
+    }
   }, [dispatch, token]);
 
-  if (loading) {
+  if (error) {
     return (
-      <Container maxWidth="lg">
-        <Typography>Loading...</Typography>
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h5">Не вдалося завантажити ордер.</Typography>
       </Container>
     );
   }
 
-  if (!orders) {
+  if (!loading) {
     return (
-      <Container maxWidth="lg">
-        <Typography>Не вдалося завантажити ордер.</Typography>
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <CircularProgress />
       </Container>
     );
   }
 
-  // let order = orders.map((orderItem) => orderItem);
   const order = orders[orders.length - 1];
-  console.log(order);
-  // order = order[order.length - 1];
 
-  // const amountsArray = orders.products.map((productId) => ({
-  //   productId: productId._id,
-  //   amount: productId.cartQuantity,
-  // }));
+  const amountsArray = order.products.map((productId) => ({
+    productId: productId._id,
+    amount: productId.cartQuantity,
+  }));
 
-  // const amountsObject = {};
+  const amountsObject = {};
+  amountsArray.forEach((item) => {
+    amountsObject[item.productId] = item.amount;
+  });
 
-  // amountsArray.forEach((item) => {
-  //   amountsObject[item.productId] = item.amount;
-  // });
-
-  // console.log(amountsArray);
-  // console.log(amountsObject);
+  const date = new Date(order.date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const formattedDate = date.toLocaleDateString(undefined, options);
 
   return (
     <Container maxWidth="lg">
@@ -97,7 +105,7 @@ const OrderConfirmation = () => {
                 {order.email}
               </Typography>
             </div>
-            <div className={classes.orderDetailsItem}>
+            {/* <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>
                 PAYMENT METHOD
               </Typography>
@@ -105,14 +113,14 @@ const OrderConfirmation = () => {
               <Typography className={classes.detailsSubtitle}>
                 {order.paymentInfo}
               </Typography>
-            </div>
+            </div> */}
             <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>
                 ORDER DATE
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.orderDate}
+                {formattedDate}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -160,7 +168,7 @@ const OrderConfirmation = () => {
               <div>TOTAL</div>
             </div>
             <div className={classes.orderSummaryItems}>
-              {/* <OrderItems cart={order} amounts={amountsObject} /> */}
+              <OrderItems cart={order} amounts={amountsObject} />
             </div>
             <div className={classes.orderSummaryTotal}>
               <div>TOTAL</div>
