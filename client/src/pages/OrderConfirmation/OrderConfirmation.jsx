@@ -12,25 +12,47 @@ const OrderConfirmation = () => {
   const [orders, setOrder] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [local, setLocal] = useState(false);
+  const [localOrder, setLocalOrder] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
-      const response = await dispatch(getOrder(token));
-      setOrder(response.payload);
-      setLoading(true);
+      await new Promise((resolve) => setTimeout(resolve, 4000));
+
+      if (token) {
+        const response = await dispatch(getOrder(token));
+        setOrder(response.payload);
+        setLoading(true);
+      } else {
+        const loc = JSON.parse(localStorage.getItem("order"));
+        if (loc !== null) {
+          setLocalOrder(loc.map((order) => order.order));
+          setLocal(true);
+        } else {
+          setError(true);
+        }
+      }
     };
-    if (token) {
-      fetch();
-    } else {
-      setError(true);
-    }
+
+    fetch();
   }, [dispatch, token]);
 
   if (error) {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
-        <Typography variant="h5">Не вдалося завантажити ордер.</Typography>
+        <Typography variant="h5">Your Order Is Empty</Typography>
+      </Container>
+    );
+  }
+
+  if (local) {
+    const numberOrder = localOrder.map((order) => order.orderNo);
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h5">Order Number Order: {numberOrder}</Typography>
+        <Typography variant="h6" sx={{ p: 3 }}>
+          Check your email or register
+        </Typography>
       </Container>
     );
   }
