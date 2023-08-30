@@ -45,10 +45,6 @@ function Shop() {
     setOpenFilter(!isOpenFilter);
   };
 
-  useEffect(() => {
-    setShowSearchResults(searchResults !== "");
-  }, [searchResults]);
-
   const handleSearch = () => {
     if (searchResults.trim() === "") {
       getProducts();
