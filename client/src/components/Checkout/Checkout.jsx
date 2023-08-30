@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomer } from "../../features/customer/customerSlice";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { clearCart } from "../../features/cart/cartSlice";
-import { setOrder } from "../../features/order/orderSlice";
+// import { setOrder } from "../../features/order/orderSlice";
 import { createOrder } from "../../data/fetchOrder";
 
 import { deleteCart } from "../../data/fetchCart";
@@ -105,7 +105,7 @@ function Checkout() {
 
     resetForm();
     setIsOrderPlaced(true);
-    await dispatch(setOrder(newOrderForHTML));
+    // await dispatch(setOrder(newOrderForHTML));
 
     if (!!token) {
       await createOrder(newOrderToServer);

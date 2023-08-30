@@ -1,34 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Divider, Typography } from "@mui/material";
-import { getOrder } from "../../data/fetchOrder";
+import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
+
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
 
 export default function ProfileTabSecondContent() {
   const token = useSelector((state) => state.auth.token);
+  const orders = useSelector((state) => state.order.order);
+  const orderStatus = useSelector((state) => state.order.status);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getOrder(token);
-        if (response.status === 200) {
-          setOrders(response.data);
-        }
-      } catch (error) {
-        alert("Your session has expired. Please log in again.");
-        dispatch(logout());
-        navigate("/login");
-      }
-    };
+    if (token) {
+      dispatch(getOrder(token));
+    }
+  }, [dispatch, token]);
 
-    fetchData();
-  }, [dispatch, navigate, token]);
+  if (orderStatus === "loading") {
+    return <div>Loading...</div>;
+  }
 
-  if (orders.length === 0) {
+  if (orderStatus === "failed") {
+    return (
+      <div>
+        Error
+        <button onClick={() => dispatch(logout())}>Logout</button>
+      </div>
+    );
+  }
+
+  if (!orders || orders.length === 0) {
     return (
       <Typography variant="h4" sx={{ fontSize: { xs: 24, md: 33 } }}>
         No order has been made yet.
@@ -68,9 +74,4 @@ export default function ProfileTabSecondContent() {
       <Divider sx={{ pt: 2 }} />
     </>
   );
-}
-
-function formatDate(dateString) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return new Date(dateString).toLocaleDateString(undefined, options);
 }
