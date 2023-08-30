@@ -10,14 +10,22 @@ import {
 } from "@mui/material";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, fieldStyle } from "./ContactStyles";
-import { initialValues, validationSchema } from "./formSettings";
+import { getInitialValues, validationSchema } from "./formSettings";
 import emailjs from "emailjs-com";
 import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
+import { useSelector } from "react-redux";
 
 const ContactForm = () => {
   const classes = useStyles();
   const [showSnackbar, setShowSnackbar] = useState(false);
   emailjs.init("hGkWN5ybqobaBvF13");
+
+  const token = useSelector((state) => state.auth.token);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const initialValues = getInitialValues(token, user);
+
   const handleFormSubmit = async (values, { resetForm }) => {
     try {
       await emailjs.send(

@@ -1,6 +1,6 @@
 import { Grid, Container, Alert } from "@mui/material";
 import { Formik, Form } from "formik";
-import { initalValues, validationSchema } from "./formSettings";
+import { getInitialValues, validationSchema } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
@@ -28,6 +28,8 @@ function Checkout() {
   const cart = useSelector((state) => state.cart.cart);
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
+
+  const initialValues = getInitialValues(token, user);
 
   const handleSubmit = async (values, { resetForm }) => {
     const customer = await dispatch(
@@ -120,7 +122,7 @@ function Checkout() {
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <Formik
-        initialValues={initalValues}
+        initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
       >
