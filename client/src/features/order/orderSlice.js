@@ -21,8 +21,8 @@ export const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(createOrder.fulfilled, (state, action) => {
-        state.order = action.payload;
-        localStorage.setItem("order", JSON.stringify(state.order));
+        const newOrder = action.payload;
+        state.order.push(newOrder);
         state.status = "succeeded";
       })
       .addCase(updateOrder.fulfilled, (state, action) => {
