@@ -1,22 +1,61 @@
 import { Container, Typography } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
-import OrderItems from "../Cart/OrderItem";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrder } from "../../features/order/orderSlice";
+// import OrderItems from "../Cart/OrderItem";
 import useStyles from "./OrderConfirmationStyle";
+
 const OrderConfirmation = () => {
+  const token = useSelector((state) => state.auth.token);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [orders, setOrder] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const order = useSelector((state) => state.order.order);
+  useEffect(() => {
+    const fetch = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      const response = await dispatch(getOrder(token));
+      setOrder(response.payload);
+      setLoading(false);
+    };
+    fetch();
+  }, [dispatch, token]);
 
-  const amountsArray = Object.keys(order.products).map((productId) => ({
-    productId,
-    amount: order.products[productId].amounts,
-  }));
+  if (loading) {
+    return (
+      <Container maxWidth="lg">
+        <Typography>Loading...</Typography>
+      </Container>
+    );
+  }
 
-  const amountsObject = {};
-  amountsArray.forEach((item) => {
-    amountsObject[item.productId] = item.amount;
-  });
+  if (!orders) {
+    return (
+      <Container maxWidth="lg">
+        <Typography>Не вдалося завантажити ордер.</Typography>
+      </Container>
+    );
+  }
+
+  // let order = orders.map((orderItem) => orderItem);
+  const order = orders[orders.length - 1];
+  console.log(order);
+  // order = order[order.length - 1];
+
+  // const amountsArray = orders.products.map((productId) => ({
+  //   productId: productId._id,
+  //   amount: productId.cartQuantity,
+  // }));
+
+  // const amountsObject = {};
+
+  // amountsArray.forEach((item) => {
+  //   amountsObject[item.productId] = item.amount;
+  // });
+
+  // console.log(amountsArray);
+  // console.log(amountsObject);
 
   return (
     <Container maxWidth="lg">
@@ -48,7 +87,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.orderNumber}
+                {order.orderNo}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -121,10 +160,7 @@ const OrderConfirmation = () => {
               <div>TOTAL</div>
             </div>
             <div className={classes.orderSummaryItems}>
-              <OrderItems
-                cart={Object.values(order.products)}
-                amounts={amountsObject}
-              />
+              {/* <OrderItems cart={order} amounts={amountsObject} /> */}
             </div>
             <div className={classes.orderSummaryTotal}>
               <div>TOTAL</div>

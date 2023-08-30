@@ -10,8 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addCustomer } from "../../features/customer/customerSlice";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { clearCart } from "../../features/cart/cartSlice";
-import { setOrder } from "../../features/order/orderSlice";
-import { createOrder } from "../../data/fetchOrder";
+import { createOrder } from "../../features/order/orderSlice";
 
 import { deleteCart } from "../../data/fetchCart";
 
@@ -30,7 +29,7 @@ function Checkout() {
   const amounts = useSelector((state) => state.cart.amount);
 
   const handleSubmit = async (values, { resetForm }) => {
-    const customer = await dispatch(
+    const customer = dispatch(
       addCustomer({
         ...values,
       })
@@ -105,17 +104,17 @@ function Checkout() {
 
     resetForm();
     setIsOrderPlaced(true);
-    await dispatch(setOrder(newOrderForHTML));
+    // await dispatch(setOrder(newOrderForHTML));
 
     if (!!token) {
-      await createOrder(newOrderToServer);
+      dispatch(createOrder(newOrderToServer));
       await deleteCart(token);
     } else {
-      await createOrder(newOrderLocal);
+      dispatch(createOrder(newOrderLocal));
     }
 
     navigate("/order-confirmation");
-    await dispatch(clearCart());
+    dispatch(clearCart());
   };
   return (
     <Container maxWidth="lg" className={classes.formContainer}>

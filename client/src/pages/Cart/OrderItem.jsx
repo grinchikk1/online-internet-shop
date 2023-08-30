@@ -7,7 +7,7 @@ function OrderItems({ cart, amounts }) {
   return (
     <Grid item xs={12} className={classes.orderPriceItem}>
       <div style={{ borderBottom: "1px solid #D8D8D8" }}>
-        {cart.map((product) => (
+        {cart.products.map((product) => (
           <Grid
             item
             xs={12}

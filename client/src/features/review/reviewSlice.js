@@ -1,36 +1,32 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { url } from "../../data/fetchCart";
+import sendRequest from "../../data/sendRequest";
 
 const token = localStorage.getItem("token");
-
-const apiHeaders = {
-  Authorization: token,
-};
 
 export const addReview = createAsyncThunk(
   "reviews/addReview",
   async ([productId, content, rating], { rejectWithValue }) => {
     try {
-      const response = await axios.post(
-        `${url}/comments`,
-        { product: productId, content: content },
+      const response = await sendRequest(
+        "post",
+        "/comments",
         {
-          headers: apiHeaders,
-        }
+          product: productId,
+          content,
+        },
+        token
       );
 
-      const data = await axios.put(
-        `${url}/comments/${response.data._id}`,
+      const data = await sendRequest(
+        "put",
+        `/comments/${response.data._id}`,
         {
           someCustomParam: {
             date: new Date().toLocaleDateString(),
             rating,
           },
         },
-        {
-          headers: apiHeaders,
-        }
+        token
       );
 
       return data.data;
@@ -44,11 +40,13 @@ export const getReviews = createAsyncThunk(
   "reviews/getReviews",
   async (productId, { rejectWithValue }) => {
     try {
-      const responce = await axios.get(`${url}/comments/product/${productId}`, {
-        headers: apiHeaders,
-      });
-
-      return responce.data;
+      const response = await sendRequest(
+        "get",
+        `/comments/product/${productId}`,
+        null,
+        token
+      );
+      return response.data;
     } catch (error) {
       return rejectWithValue(error.response);
     }
@@ -59,9 +57,7 @@ export const deleteReview = createAsyncThunk(
   "reviews/deleteReview",
   async (id, { rejectWithValue }) => {
     try {
-      await axios.delete(`${url}/comments/${id}`, {
-        headers: apiHeaders,
-      });
+      await sendRequest("delete", `/comments/${id}`, null, token);
       return id;
     } catch (error) {
       return rejectWithValue(error.result);
