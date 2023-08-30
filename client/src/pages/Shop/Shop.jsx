@@ -80,8 +80,13 @@ function Shop() {
       maxPrice,
     };
 
+    const queryString = Object.keys(filterParams)
+      .filter((key) => filterParams[key] !== null)
+      .map((key) => `${key}=${encodeURIComponent(filterParams[key])}`)
+      .join("&");
+
     try {
-      const filteredData = await filterProducts(filterParams);
+      const filteredData = await filterProducts(queryString);
       setFilteredCards(filteredData.data.products);
       setIsFilterApplied(true);
     } catch (error) {

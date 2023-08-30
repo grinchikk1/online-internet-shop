@@ -27,8 +27,8 @@ export const updateProduct = async (product, token) => {
 };
 
 // Функція для запиту фільтрації
-export const filterProducts = async (params) => {
-  return sendRequest("get", "/products/filter", { params });
+export const filterProducts = async (querystring) => {
+  return sendRequest("get", `/products/filter?${querystring}`);
 };
 
 // Пошук продуктів
