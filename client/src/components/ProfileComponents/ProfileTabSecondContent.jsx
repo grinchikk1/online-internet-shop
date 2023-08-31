@@ -9,6 +9,7 @@ import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import CustomButton from "../../components/CustomButton/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -20,12 +21,18 @@ export default function ProfileTabSecondContent() {
   const orders = useSelector((state) => state.order.order);
   const orderStatus = useSelector((state) => state.order.status);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
       dispatch(getOrder(token));
     }
   }, [dispatch, token]);
+
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
   if (orderStatus === "loading") {
     return (
@@ -39,7 +46,7 @@ export default function ProfileTabSecondContent() {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
         <Typography variant="h6">Error</Typography>
-        <CustomButton value="Logout" onClick={() => dispatch(logout())} />
+        <CustomButton value="Logout" onClick={handleLogOut} />
       </Container>
     );
   }
@@ -63,7 +70,7 @@ export default function ProfileTabSecondContent() {
             height: "50px",
           }}
         >
-          <tr>
+          <tr style={{ fontSize: "16px" }}>
             <th>Order Number</th>
             <th>Date</th>
             <th>Status</th>
@@ -72,7 +79,7 @@ export default function ProfileTabSecondContent() {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order._id}>
+            <tr key={order._id} style={{ fontSize: "14px" }}>
               <td>{order.orderNo}</td>
               <td>{formatDate(order.date)}</td>
               <td>{order.status}</td>
