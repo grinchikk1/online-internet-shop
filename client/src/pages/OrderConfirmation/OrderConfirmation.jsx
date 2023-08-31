@@ -40,7 +40,7 @@ const OrderConfirmation = () => {
   if (error) {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
-        <Typography variant="h5">Your Order Is Empty</Typography>
+        <Typography variant="h5">No order has been made yet</Typography>
       </Container>
     );
   }
@@ -49,7 +49,7 @@ const OrderConfirmation = () => {
     const numberOrder = localOrder.map((order) => order.orderNo);
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
-        <Typography variant="h5">Order Number Order: {numberOrder}</Typography>
+        <Typography variant="h5">Your Order Number: {numberOrder}</Typography>
         <Typography variant="h6" sx={{ p: 3 }}>
           Check your email or register
         </Typography>
