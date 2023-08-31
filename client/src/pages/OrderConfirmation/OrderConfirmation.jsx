@@ -2,34 +2,25 @@ import { CircularProgress, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrder } from "../../features/order/orderSlice";
-import OrderItems from "../Cart/OrderItem";
+import OrderItemsConfirm from "./OrderItemConfirm";
 import useStyles from "./OrderConfirmationStyle";
 
 const OrderConfirmation = () => {
   const token = useSelector((state) => state.auth.token);
+  const orders = useSelector((state) => state.order.order);
+  const orderStatus = useSelector((state) => state.order.status);
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [orders, setOrder] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [localUser, setLocalUser] = useState(false);
   const [localOrder, setLocalOrder] = useState([]);
 
   useEffect(() => {
     const fetch = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 4000));
-
       if (token) {
-        const response = await dispatch(getOrder(token));
-        setOrder(response.payload);
-        setLoading(true);
+        await dispatch(getOrder(token));
       } else {
         const getLocal = JSON.parse(localStorage.getItem("order"));
         if (getLocal !== null) {
-          setLocalOrder(getLocal.map((order) => order.order));
-          setLocalUser(true);
-        } else {
-          setError(true);
+          setLocalOrder(getLocal);
         }
       }
     };
@@ -37,7 +28,7 @@ const OrderConfirmation = () => {
     fetch();
   }, [dispatch, token]);
 
-  if (error) {
+  if (orderStatus === "failed") {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
         <Typography variant="h5">No order has been made yet</Typography>
@@ -45,20 +36,7 @@ const OrderConfirmation = () => {
     );
   }
 
-  if (localUser) {
-    const lastOrderLocal = localOrder[localOrder.length - 1];
-    const numberOrder = lastOrderLocal.orderNo;
-    return (
-      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
-        <Typography variant="h5">Your Order Number: {numberOrder}</Typography>
-        <Typography variant="h6" sx={{ p: 3 }}>
-          Check your email or register
-        </Typography>
-      </Container>
-    );
-  }
-
-  if (!loading) {
+  if (orderStatus === "loading") {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
         <CircularProgress />
@@ -66,7 +44,9 @@ const OrderConfirmation = () => {
     );
   }
 
-  const order = orders[orders.length - 1];
+  const order = orders
+    ? orders[orders.length - 1]
+    : localOrder[localOrder.length - 1];
 
   const amountsArray = order.products.map((productId) => ({
     productId: productId._id,
@@ -191,7 +171,7 @@ const OrderConfirmation = () => {
               <div>TOTAL</div>
             </div>
             <div className={classes.orderSummaryItems}>
-              <OrderItems cart={order} amounts={amountsObject} />
+              <OrderItemsConfirm cart={order} amounts={amountsObject} />
             </div>
             <div className={classes.orderSummaryTotal}>
               <div>TOTAL</div>

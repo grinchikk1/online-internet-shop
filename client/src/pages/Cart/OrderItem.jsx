@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { useStyles } from "../../components/Checkout/CheckoutStyle";
 
 function OrderItems({ cart, amounts }) {
   const classes = useStyles();
+  const [curremtProducts, setCurrentProducts] = useState([]);
+
+  useEffect(() => {
+    if (cart) {
+      setCurrentProducts(cart);
+    }
+  }, [cart]);
+
   return (
     <Grid item xs={12} className={classes.orderPriceItem}>
       <div style={{ borderBottom: "1px solid #D8D8D8" }}>
-        {cart.products.map((product) => (
+        {curremtProducts.map((product) => (
           <Grid
             item
             xs={12}
@@ -17,9 +25,9 @@ function OrderItems({ cart, amounts }) {
             <div>
               <div className={classes.orderItem}>
                 <div>
-                  ({amounts[product._id]}) {product.product.name}
+                  ({amounts[product._id]}) {product.name}
                 </div>
-                <div>${product.product.currentPrice}</div>
+                <div>${product.currentPrice}</div>
               </div>
             </div>
           </Grid>
