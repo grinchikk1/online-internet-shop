@@ -46,7 +46,8 @@ const OrderConfirmation = () => {
   }
 
   if (local) {
-    const numberOrder = localOrder.map((order) => order.orderNo);
+    const lastOrderLocal = localOrder[localOrder.length - 1];
+    const numberOrder = lastOrderLocal.orderNo;
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
         <Typography variant="h5">Your Order Number: {numberOrder}</Typography>
