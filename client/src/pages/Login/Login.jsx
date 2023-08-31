@@ -37,17 +37,17 @@ const Login = () => {
     try {
       const user = await loginUser(values);
 
-      if (user.success) {
+      if (user.data.success) {
         setShowSnackbar(true);
         setMessageText("Login Successful");
         setMessageTitle("Success");
       }
 
-      if (user.token !== undefined) {
-        const userData = await getUser(user.token);
-        dispatch(setUser(userData));
+      if (user.data.token !== undefined) {
+        const userData = await getUser(user.data.token);
+        dispatch(setUser(userData.data));
         const { cart, amount } = CartLocalStorageHelper.getCart();
-        const existingCart = await getCart(user.token);
+        const existingCart = await getCart(user.data.token);
         const localStorageCartBody = cart.map((product) => {
           return {
             product: product._id,
@@ -55,7 +55,7 @@ const Login = () => {
           };
         });
         const existingCartBody =
-          existingCart?.products.map((item) => {
+          existingCart.data?.products.map((item) => {
             return {
               product: item.product._id,
               cartQuantity: Number(item.cartQuantity) || 1,
@@ -79,13 +79,13 @@ const Login = () => {
           {
             products: updateCartBody,
           },
-          user.token
+          user.data.token
         );
         CartLocalStorageHelper.resetCart();
         // Зберігання JWT в LocalStorage
-        localStorage.setItem("token", user.token);
+        localStorage.setItem("token", user.data.token);
         dispatch(clearFavorites());
-        dispatch(setToken(user.token));
+        dispatch(setToken(user.data.token));
       } else {
         setShowSnackbar(true);
         setMessageTitle("Error");

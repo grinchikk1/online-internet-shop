@@ -36,7 +36,7 @@ function Shop() {
 
   useEffect(() => {
     getProducts().then((res) => {
-      dispatch(setProducts(res));
+      dispatch(setProducts(res.data));
     });
   }, [dispatch]);
 
@@ -44,10 +44,6 @@ function Shop() {
   const toggleFilter = () => {
     setOpenFilter(!isOpenFilter);
   };
-
-  useEffect(() => {
-    setShowSearchResults(searchResults !== "");
-  }, [searchResults]);
 
   const handleSearch = () => {
     if (searchResults.trim() === "") {
@@ -80,9 +76,14 @@ function Shop() {
       maxPrice,
     };
 
+    const queryString = Object.keys(filterParams)
+      .filter((key) => filterParams[key] !== null)
+      .map((key) => `${key}=${encodeURIComponent(filterParams[key])}`)
+      .join("&");
+
     try {
-      const filteredData = await filterProducts(filterParams);
-      setFilteredCards(filteredData.products);
+      const filteredData = await filterProducts(queryString);
+      setFilteredCards(filteredData.data.products);
       setIsFilterApplied(true);
     } catch (error) {
       console.error("Error filtering products:", error);
