@@ -28,6 +28,17 @@ function Checkout() {
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
 
+  const products = JSON.parse(localStorage.getItem("cart"));
+  const product = products
+    ? products.map((product) => {
+        return {
+          _id: null,
+          product: product,
+          cartQuantity: Object.values(amounts)[0],
+        };
+      })
+    : null;
+
   const handleSubmit = async (values, { resetForm }) => {
     const customer = dispatch(
       addCustomer({
@@ -63,6 +74,7 @@ function Checkout() {
       mobile: customer.payload.phone,
 
       products: [],
+      productsOrderLocal: product,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: letterHtml,
       totalSum: totalAmount,

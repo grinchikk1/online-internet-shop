@@ -12,7 +12,7 @@ const OrderConfirmation = () => {
   const [orders, setOrder] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [local, setLocal] = useState(false);
+  const [localUser, setLocalUser] = useState(false);
   const [localOrder, setLocalOrder] = useState([]);
 
   useEffect(() => {
@@ -24,10 +24,10 @@ const OrderConfirmation = () => {
         setOrder(response.payload);
         setLoading(true);
       } else {
-        const loc = JSON.parse(localStorage.getItem("order"));
-        if (loc !== null) {
-          setLocalOrder(loc.map((order) => order.order));
-          setLocal(true);
+        const getLocal = JSON.parse(localStorage.getItem("order"));
+        if (getLocal !== null) {
+          setLocalOrder(getLocal.map((order) => order.order));
+          setLocalUser(true);
         } else {
           setError(true);
         }
@@ -45,7 +45,7 @@ const OrderConfirmation = () => {
     );
   }
 
-  if (local) {
+  if (localUser) {
     const lastOrderLocal = localOrder[localOrder.length - 1];
     const numberOrder = lastOrderLocal.orderNo;
     return (
