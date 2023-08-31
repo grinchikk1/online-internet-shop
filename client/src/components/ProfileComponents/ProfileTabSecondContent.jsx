@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Divider,
   Typography,
@@ -22,12 +22,10 @@ export default function ProfileTabSecondContent() {
   const orderStatus = useSelector((state) => state.order.status);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (token) {
       dispatch(getOrder(token));
-      setLoading(true);
     }
   }, [dispatch, token]);
 
@@ -36,7 +34,7 @@ export default function ProfileTabSecondContent() {
     navigate("/login");
   };
 
-  if (!loading) {
+  if (orderStatus === "loading") {
     return (
       <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
         <CircularProgress />
