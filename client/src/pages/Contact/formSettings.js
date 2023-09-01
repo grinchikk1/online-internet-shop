@@ -8,10 +8,22 @@ export const validationSchema = Yup.object().shape({
   message: Yup.string().required("Message is required"),
 });
 
-export const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  subject: "",
-  message: "",
+export const getInitialValues = (token, user) => {
+  if (!!token) {
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      subject: "",
+      message: "",
+    };
+  } else {
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      subject: "",
+      message: "",
+    };
+  }
 };

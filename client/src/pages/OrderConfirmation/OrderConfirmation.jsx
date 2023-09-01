@@ -1,22 +1,72 @@
-import { Container, Typography } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
-import OrderItems from "../Cart/OrderItem";
+import { CircularProgress, Container, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getOrder } from "../../features/order/orderSlice";
+import OrderItemsConfirm from "./OrderItemConfirm";
 import useStyles from "./OrderConfirmationStyle";
+
 const OrderConfirmation = () => {
+  const token = useSelector((state) => state.auth.token);
+  const orders = useSelector((state) => state.order.order);
+  const orderStatus = useSelector((state) => state.order.status);
   const classes = useStyles();
+  const dispatch = useDispatch();
+  const [localOrder, setLocalOrder] = useState([]);
 
-  const order = useSelector((state) => state.order.order);
+  useEffect(() => {
+    const fetch = async () => {
+      if (token) {
+        await dispatch(getOrder(token));
+      } else {
+        const getLocal = JSON.parse(localStorage.getItem("order"));
+        if (getLocal !== null) {
+          setLocalOrder(getLocal);
+        }
+      }
+    };
 
-  const amountsArray = Object.keys(order.products).map((productId) => ({
-    productId,
-    amount: order.products[productId].amounts,
+    fetch();
+  }, [dispatch, token]);
+
+  if (orderStatus === "failed") {
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h5">No order has been made yet</Typography>
+      </Container>
+    );
+  }
+
+  if (orderStatus === "loading") {
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  const order = orders
+    ? orders[orders.length - 1]
+    : localOrder[localOrder.length - 1];
+
+  const amountsArray = order.products.map((productId) => ({
+    productId: productId._id,
+    amount: productId.cartQuantity,
   }));
 
   const amountsObject = {};
   amountsArray.forEach((item) => {
     amountsObject[item.productId] = item.amount;
   });
+
+  const date = new Date(order.date);
+  const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  };
+  const formattedDate = date.toLocaleDateString(undefined, options);
 
   return (
     <Container maxWidth="lg">
@@ -48,7 +98,7 @@ const OrderConfirmation = () => {
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.orderNumber}
+                {order.orderNo}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -58,7 +108,7 @@ const OrderConfirmation = () => {
                 {order.email}
               </Typography>
             </div>
-            <div className={classes.orderDetailsItem}>
+            {/* <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>
                 PAYMENT METHOD
               </Typography>
@@ -66,14 +116,14 @@ const OrderConfirmation = () => {
               <Typography className={classes.detailsSubtitle}>
                 {order.paymentInfo}
               </Typography>
-            </div>
+            </div> */}
             <div className={classes.orderDetailsItem}>
               <Typography className={classes.detailsTitle}>
                 ORDER DATE
               </Typography>
 
               <Typography className={classes.detailsSubtitle}>
-                {order.orderDate}
+                {formattedDate}
               </Typography>
             </div>
             <div className={classes.orderDetailsItem}>
@@ -121,10 +171,7 @@ const OrderConfirmation = () => {
               <div>TOTAL</div>
             </div>
             <div className={classes.orderSummaryItems}>
-              <OrderItems
-                cart={Object.values(order.products)}
-                amounts={amountsObject}
-              />
+              <OrderItemsConfirm cart={order} amounts={amountsObject} />
             </div>
             <div className={classes.orderSummaryTotal}>
               <div>TOTAL</div>

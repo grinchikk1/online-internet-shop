@@ -1,34 +1,57 @@
-import React, { useEffect, useState } from "react";
-import { Divider, Typography } from "@mui/material";
-import { getOrder } from "../../data/fetchOrder";
+import React, { useEffect } from "react";
+import {
+  Divider,
+  Typography,
+  CircularProgress,
+  Container,
+} from "@mui/material";
+import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { logout } from "../../features/auth/authSlice";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import { useNavigate } from "react-router-dom";
+
+function formatDate(dateString) {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+}
 
 export default function ProfileTabSecondContent() {
   const token = useSelector((state) => state.auth.token);
+  const orders = useSelector((state) => state.order.order);
+  const orderStatus = useSelector((state) => state.order.status);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getOrder(token);
-        if (response.status === 200) {
-          setOrders(response.data);
-        }
-      } catch (error) {
-        alert("Your session has expired. Please log in again.");
-        dispatch(logout());
-        navigate("/login");
-      }
-    };
+    if (token) {
+      dispatch(getOrder(token));
+    }
+  }, [dispatch, token]);
 
-    fetchData();
-  }, [dispatch, navigate, token]);
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
 
-  if (orders.length === 0) {
+  if (orderStatus === "loading") {
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
+  if (orderStatus === "failed") {
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h6">Error</Typography>
+        <CustomButton value="Logout" onClick={handleLogOut} />
+      </Container>
+    );
+  }
+
+  if (!orders || orders.length === 0) {
     return (
       <Typography variant="h4" sx={{ fontSize: { xs: 24, md: 33 } }}>
         No order has been made yet.
@@ -47,7 +70,7 @@ export default function ProfileTabSecondContent() {
             height: "50px",
           }}
         >
-          <tr>
+          <tr style={{ fontSize: "16px" }}>
             <th>Order Number</th>
             <th>Date</th>
             <th>Status</th>
@@ -56,7 +79,7 @@ export default function ProfileTabSecondContent() {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order._id}>
+            <tr key={order._id} style={{ fontSize: "14px" }}>
               <td>{order.orderNo}</td>
               <td>{formatDate(order.date)}</td>
               <td>{order.status}</td>
@@ -68,9 +91,4 @@ export default function ProfileTabSecondContent() {
       <Divider sx={{ pt: 2 }} />
     </>
   );
-}
-
-function formatDate(dateString) {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  return new Date(dateString).toLocaleDateString(undefined, options);
 }
