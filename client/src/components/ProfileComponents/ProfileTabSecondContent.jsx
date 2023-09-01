@@ -1,8 +1,15 @@
 import React, { useEffect } from "react";
-import { Divider, Typography } from "@mui/material";
+import {
+  Divider,
+  Typography,
+  CircularProgress,
+  Container,
+} from "@mui/material";
 import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
+import CustomButton from "../../components/CustomButton/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -14,6 +21,7 @@ export default function ProfileTabSecondContent() {
   const orders = useSelector((state) => state.order.order);
   const orderStatus = useSelector((state) => state.order.status);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -21,16 +29,25 @@ export default function ProfileTabSecondContent() {
     }
   }, [dispatch, token]);
 
+  const handleLogOut = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   if (orderStatus === "loading") {
-    return <div>Loading...</div>;
+    return (
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <CircularProgress />
+      </Container>
+    );
   }
 
   if (orderStatus === "failed") {
     return (
-      <div>
-        Error
-        <button onClick={() => dispatch(logout())}>Logout</button>
-      </div>
+      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
+        <Typography variant="h6">Error</Typography>
+        <CustomButton value="Logout" onClick={handleLogOut} />
+      </Container>
     );
   }
 
@@ -53,7 +70,7 @@ export default function ProfileTabSecondContent() {
             height: "50px",
           }}
         >
-          <tr>
+          <tr style={{ fontSize: "16px" }}>
             <th>Order Number</th>
             <th>Date</th>
             <th>Status</th>
@@ -62,7 +79,7 @@ export default function ProfileTabSecondContent() {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order._id}>
+            <tr key={order._id} style={{ fontSize: "14px" }}>
               <td>{order.orderNo}</td>
               <td>{formatDate(order.date)}</td>
               <td>{order.status}</td>

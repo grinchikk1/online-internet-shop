@@ -28,6 +28,17 @@ function Checkout() {
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
 
+  const products = JSON.parse(localStorage.getItem("cart"));
+  const product = products
+    ? products.map((product, index) => {
+        return {
+          _id: null,
+          product: product,
+          cartQuantity: Object.values(amounts)[index],
+        };
+      })
+    : null;
+  
   const initialValues = getInitialValues(token, user);
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -64,7 +75,7 @@ function Checkout() {
       email: customer.payload.email,
       mobile: customer.payload.phone,
 
-      products: [],
+      products: product,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: letterHtml,
       totalSum: totalAmount,

@@ -11,7 +11,7 @@ import { ErrorMessage } from "formik";
 import { getInitialValues } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import { FaPaypal } from "react-icons/fa";
-import OrderItemsCart from "../../pages/Cart/OrderItemCart";
+import OrderItems from "../../pages/Cart/OrderItem";
 import { useSelector } from "react-redux";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
@@ -44,7 +44,7 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
               <div>PRICE</div>
             </div>
           </Grid>
-          <OrderItemsCart cart={cart} amounts={amounts} />
+          <OrderItems cart={cart} amounts={amounts} />
           <Grid item xs={12}>
             <div className={classes.total}>
               <div>TOTAL</div>
