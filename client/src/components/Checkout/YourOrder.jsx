@@ -8,7 +8,7 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { ErrorMessage } from "formik";
-import { initalValues } from "./formSettings";
+import { getInitialValues } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import { FaPaypal } from "react-icons/fa";
 import OrderItems from "../../pages/Cart/OrderItem";
@@ -20,6 +20,10 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
   const cart = useSelector((state) => state.cart.cart);
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
+  const token = useSelector((state) => state.auth.token);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const initialValues = getInitialValues(token, user);
+
   return (
     <Grid item xs={12} md={6}>
       <Typography variant="h5" gutterBottom className={classes.heading}>
@@ -50,7 +54,7 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
           <Grid item xs={12}>
             <RadioGroup
               name="paymentOption"
-              defaultValue={initalValues.paymentOption}
+              defaultValue={initialValues.paymentOption}
               value={values.paymentOption}
               onChange={(event) =>
                 setFieldValue("paymentOption", event.target.value)
