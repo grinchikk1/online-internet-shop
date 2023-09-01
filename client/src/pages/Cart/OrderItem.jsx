@@ -4,7 +4,7 @@ import { useStyles } from "../../components/Checkout/CheckoutStyle";
 
 function OrderItems({ cart, amounts }) {
   const classes = useStyles();
-  const [curremtProducts, setCurrentProducts] = useState([]);
+  const [currentProducts, setCurrentProducts] = useState([]);
 
   useEffect(() => {
     if (cart) {
@@ -15,7 +15,7 @@ function OrderItems({ cart, amounts }) {
   return (
     <Grid item xs={12} className={classes.orderPriceItem}>
       <div style={{ borderBottom: "1px solid #D8D8D8" }}>
-        {curremtProducts.map((product) => (
+        {currentProducts.map((product) => (
           <Grid
             item
             xs={12}

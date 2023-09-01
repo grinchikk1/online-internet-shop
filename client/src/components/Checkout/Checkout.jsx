@@ -30,11 +30,11 @@ function Checkout() {
 
   const products = JSON.parse(localStorage.getItem("cart"));
   const product = products
-    ? products.map((product) => {
+    ? products.map((product, index) => {
         return {
           _id: null,
           product: product,
-          cartQuantity: Object.values(amounts)[0],
+          cartQuantity: Object.values(amounts)[index],
         };
       })
     : null;
@@ -73,8 +73,7 @@ function Checkout() {
       email: customer.payload.email,
       mobile: customer.payload.phone,
 
-      products: [],
-      productsOrderLocal: product,
+      products: product,
       letterSubject: "Thank you for order! You are welcome!",
       letterHtml: letterHtml,
       totalSum: totalAmount,
