@@ -27,6 +27,7 @@ import {
 } from "./HomeStyles";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CircularLoader from "../../components/Loader/Loader";
 
 function Home() {
   const styles = useStyles();
@@ -35,6 +36,7 @@ function Home() {
   const output = out();
 
   useEffect(() => {
+    dispatch(setProducts(null));
     filterProducts("perPage=6").then((data) => {
       dispatch(setProducts(data.data.products));
     });
@@ -63,6 +65,11 @@ function Home() {
           />
         );
       });
+    }
+    else { 
+      return (
+        <CircularLoader />
+      );
     }
   }
 
