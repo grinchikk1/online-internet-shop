@@ -65,11 +65,8 @@ function Home() {
           />
         );
       });
-    }
-    else { 
-      return (
-        <CircularLoader />
-      );
+    } else {
+      return <CircularLoader />;
     }
   }
 
