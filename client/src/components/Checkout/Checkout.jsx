@@ -1,22 +1,20 @@
-import { Grid, Container, Alert } from "@mui/material";
+import React from "react";
+import { Grid, Container } from "@mui/material";
 import { Formik, Form } from "formik";
 import { getInitialValues, validationSchema } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomer } from "../../features/customer/customerSlice";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { clearCart } from "../../features/cart/cartSlice";
 import { createOrder } from "../../features/order/orderSlice";
-
 import { deleteCart } from "../../data/fetchCart";
 
 function Checkout() {
   const classes = useStyles();
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token);
@@ -32,13 +30,13 @@ function Checkout() {
   const product = products
     ? products.map((product, index) => {
         return {
-          _id: null,
+          _id: index,
           product: product,
           cartQuantity: Object.values(amounts)[index],
         };
       })
     : null;
-  
+
   const initialValues = getInitialValues(token, user);
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -116,8 +114,6 @@ function Checkout() {
     });
 
     resetForm();
-    setIsOrderPlaced(true);
-    // await dispatch(setOrder(newOrderForHTML));
 
     if (!!token) {
       dispatch(createOrder(newOrderToServer));
@@ -129,6 +125,7 @@ function Checkout() {
     navigate("/order-confirmation");
     dispatch(clearCart());
   };
+
   return (
     <Container maxWidth="lg" className={classes.formContainer}>
       <Formik
@@ -150,11 +147,6 @@ function Checkout() {
           </Form>
         )}
       </Formik>
-      {isOrderPlaced && (
-        <Alert severity="success" sx={{ width: "100%", marginTop: "15px" }}>
-          Your order has been successfully placed
-        </Alert>
-      )}
     </Container>
   );
 }

@@ -1,15 +1,11 @@
 import React, { useEffect } from "react";
-import {
-  Divider,
-  Typography,
-  CircularProgress,
-  Container,
-} from "@mui/material";
+import { Divider, Typography, Container } from "@mui/material";
 import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import CircularLoader from "../Loader/Loader";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -35,11 +31,7 @@ export default function ProfileTabSecondContent() {
   };
 
   if (orderStatus === "loading") {
-    return (
-      <Container maxWidth="lg" sx={{ textAlign: "center", pt: 4 }}>
-        <CircularProgress />
-      </Container>
-    );
+    return <CircularLoader />;
   }
 
   if (orderStatus === "failed") {
