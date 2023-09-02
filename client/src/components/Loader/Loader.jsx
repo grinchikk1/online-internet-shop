@@ -6,7 +6,7 @@ function CircularLoader() {
   const thickness = 2;
   const size = 60;
   return (
-    <Container sx={{ m: "0 auto", mb: "50px" }}>
+    <Container sx={{ m: "0 auto", mb: "50px", textAlign: "center" }}>
       <CircularProgress
         sx={{ color: "#707070" }}
         size={size}
