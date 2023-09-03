@@ -16,8 +16,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addReview, deleteReview } from "../../features/review/reviewSlice";
 import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 
-
-
 const validationSchema = Yup.object().shape({
   review: Yup.string().required("Review is required"),
 });
@@ -33,10 +31,8 @@ function ReviewForm({ productId }) {
     setRatingValue(newValue);
   };
 
-  
   const [SnackbarDel, setSnackbarDel] = useState(false);
   const [SnackbarSignUp, setSnackbarSignUp] = useState(false);
-
 
   const handlePostReview = async (submitForm) => {
     try {
@@ -49,19 +45,18 @@ function ReviewForm({ productId }) {
   const isMobile = useMediaQuery("(max-width: 900px)");
 
   const buttonStyles = isMobile
-  ? {
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "35px",
-      marginBottom: "80px",
-    }
-  : {
-      display: "flex",
-      justifyContent: "flex-start",
-      marginTop: "35px",
-      marginBottom: "80px",
-    };
-
+    ? {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "35px",
+        marginBottom: "80px",
+      }
+    : {
+        display: "flex",
+        justifyContent: "flex-start",
+        marginTop: "35px",
+        marginBottom: "80px",
+      };
 
   return (
     <Container
@@ -103,7 +98,7 @@ function ReviewForm({ productId }) {
               setSubmitting(false);
             } else {
               // setOpenSnackbar(true);
-              setSnackbarSignUp(true)
+              setSnackbarSignUp(true);
             }
           }}
         >
@@ -133,22 +128,20 @@ function ReviewForm({ productId }) {
                   style={{ marginTop: "-55px" }}
                 />
 
-                 <Rating
+                <Rating
                   sx={{ marginTop: "46px" }}
                   name="rating"
                   value={ratingValue}
                   onChange={handleRatingChange}
                   precision={0.5}
                 />
-               
 
-               
                 <CustomSnackbar
-                 open={SnackbarSignUp}
-                 onClose={() => setSnackbarSignUp(false)}
-                 titleText="Info"
-                 text="Before leaving a review you need to Sign up"
-               />
+                  open={SnackbarSignUp}
+                  onClose={() => setSnackbarSignUp(false)}
+                  titleText="Info"
+                  text="Before leaving a review you need to Sign up"
+                />
                 <CustomSnackbar
                   open={SnackbarDel}
                   onClose={() => setSnackbarDel(false)}
@@ -165,7 +158,6 @@ function ReviewForm({ productId }) {
                   //   marginBottom: "80px",
                   // }}
                   sx={buttonStyles}
-          
                 >
                   <CustomButton
                     type="submit"
@@ -219,7 +211,7 @@ function ReviewForm({ productId }) {
                     dispatch(deleteReview(review._id));
                   } else {
                     // setOpenDel(true);
-                    setSnackbarDel(true)
+                    setSnackbarDel(true);
                   }
                 }}
               />

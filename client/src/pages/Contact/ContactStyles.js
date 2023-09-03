@@ -7,13 +7,11 @@ export const useStyles = makeStyles(() => ({
     alignItems: "center",
     justifyContent: "center",
     textAlign: "center",
-   
   },
   field: {
     width: "100%",
     fontFamily: "DM Sans, sans-serif",
     display: "flex",
-  
   },
   buttonContainer: {
     paddingTop: 30,
@@ -35,7 +33,6 @@ export const useStyles = makeStyles(() => ({
     textAlign: "center",
     justifySelf: "center",
   },
-  
 }));
 
 export const fieldStyle = {
@@ -45,9 +42,5 @@ export const fieldStyle = {
     borderRadius: "0px",
     // marginRight: "5vw",
     // maxWidth: "500px"
-    
   },
-  
 };
-
-

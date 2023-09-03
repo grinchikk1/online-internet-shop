@@ -44,7 +44,7 @@ export const useStyles = makeStyles(() => ({
     color: "rgba(0, 0, 0, 1)",
     paddingBottom: "35px",
     "@media (max-width : 767.98px) ": {
-     paddingBottom: "10px",
+      paddingBottom: "10px",
       fontSize: 20,
     },
   },

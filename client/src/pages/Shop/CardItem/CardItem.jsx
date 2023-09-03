@@ -42,13 +42,12 @@ export default function MultiActionAreaCard({ card }) {
 
   const img = {
     height: 300,
-    maxWidth: 239,    // змінила ширину з 235 на 239
+    maxWidth: 239, // змінила ширину з 235 на 239
     alignItems: "center",
     // borderBottomLeftRadius: "4px",
     // borderBottomRightRadius: "4px",
     borderRadius: "6px", // бордер по всій картці
     position: "relative",
-
   };
 
   const discount = {
@@ -68,7 +67,6 @@ export default function MultiActionAreaCard({ card }) {
     justifyContent: "center",
     alignItems: "center",
     gap: "3px",
-    
   };
 
   const cardHover = {
@@ -87,7 +85,7 @@ export default function MultiActionAreaCard({ card }) {
     "@media (max-width: 600px) ": {
       paddingLeft: "15px",
       paddingRight: "15px",
-      maxWidth : "240px"
+      maxWidth: "240px",
     },
   };
 
@@ -102,12 +100,11 @@ export default function MultiActionAreaCard({ card }) {
     color: "#000000",
     cursor: "pointer",
     userSelect: "none",
-    
+
     // "@media (max-width: 579.9px)": {                  //////////////////////////////////////////////////////////
-      "@media (max-width: 600px)": {
+    "@media (max-width: 600px)": {
       fontSize: "15px",
       fontWeight: "600",
-    
     },
   };
 
@@ -132,10 +129,10 @@ export default function MultiActionAreaCard({ card }) {
       <CardActionArea
         sx={{
           backgroundColor: "#fff",
-          "&:hover": "none", 
-          maxWidth : "240px",                           ////////// вирівнювання ховерної частини
-          marginLeft: "auto",                           //////////  центровка
-          marginRight: "auto"                           //////////  центровка 
+          "&:hover": "none",
+          maxWidth: "240px", ////////// вирівнювання ховерної частини
+          marginLeft: "auto", //////////  центровка
+          marginRight: "auto", //////////  центровка
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -182,7 +179,7 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
-            maxWidth: "235px"        ///////////////////////////////////////////////////////////////////////
+            maxWidth: "235px", ///////////////////////////////////////////////////////////////////////
           }}
         >
           <Typography

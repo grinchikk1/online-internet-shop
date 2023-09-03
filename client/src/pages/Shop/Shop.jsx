@@ -170,7 +170,7 @@ function Shop() {
           )}
         </Box>
 
-        <Box> 
+        <Box>
           <Grid
             container
             rowSpacing={{ xs: 2, md: 4 }}
@@ -185,7 +185,7 @@ function Shop() {
                     md={4}
                     key={card._id}
                     sx={{
-                       "@media (min-width: 900px)": {   
+                      "@media (min-width: 900px)": {
                         maxWidth: "100%",
                       },
                     }}
@@ -218,8 +218,8 @@ function Shop() {
                     md={4}
                     key={card._id}
                     sx={{
-                      "@media (min-width: 900px)": {  
-                          maxWidth: "100%",
+                      "@media (min-width: 900px)": {
+                        maxWidth: "100%",
                       },
                     }}
                   >
@@ -250,9 +250,8 @@ function Shop() {
                     md={4}
                     key={index}
                     sx={{
-                      "@media (min-width: 900px)": {  
-                            maxWidth: "100%",
-                       
+                      "@media (min-width: 900px)": {
+                        maxWidth: "100%",
                       },
                     }}
                   >
