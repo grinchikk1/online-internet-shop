@@ -42,10 +42,11 @@ export default function MultiActionAreaCard({ card }) {
 
   const img = {
     height: 300,
-    width: 235,
+    maxWidth: 239, // змінила ширину з 235 на 239
     alignItems: "center",
-    borderBottomLeftRadius: "4px",
-    borderBottomRightRadius: "4px",
+    // borderBottomLeftRadius: "4px",
+    // borderBottomRightRadius: "4px",
+    borderRadius: "6px", // бордер по всій картці
     position: "relative",
   };
 
@@ -76,7 +77,7 @@ export default function MultiActionAreaCard({ card }) {
     paddingLeft: "10px",
     paddingRight: "10px",
     top: "235px",
-    width: "100%",
+    // width: "100%",                                 //////////////////////////////////////////////////
     height: "65px",
     backgroundColor: "rgba(255, 255, 255, 0.50)",
     transition: "all 0.5s ease",
@@ -84,6 +85,7 @@ export default function MultiActionAreaCard({ card }) {
     "@media (max-width: 600px) ": {
       paddingLeft: "15px",
       paddingRight: "15px",
+      maxWidth: "240px",
     },
   };
 
@@ -98,7 +100,9 @@ export default function MultiActionAreaCard({ card }) {
     color: "#000000",
     cursor: "pointer",
     userSelect: "none",
-    "@media (max-width: 579.9px)": {
+
+    // "@media (max-width: 579.9px)": {                  //////////////////////////////////////////////////////////
+    "@media (max-width: 600px)": {
       fontSize: "15px",
       fontWeight: "600",
     },
@@ -126,6 +130,9 @@ export default function MultiActionAreaCard({ card }) {
         sx={{
           backgroundColor: "#fff",
           "&:hover": "none",
+          maxWidth: "240px", ////////// вирівнювання ховерної частини
+          marginLeft: "auto", //////////  центровка
+          marginRight: "auto", //////////  центровка
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -172,6 +179,7 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
+            maxWidth: "235px", ///////////////////////////////////////////////////////////////////////
           }}
         >
           <Typography

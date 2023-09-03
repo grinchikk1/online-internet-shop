@@ -57,8 +57,12 @@ const ContactForm = () => {
       >
         {({ isSubmitting, handleSubmit }) => (
           <Form>
-            <Grid container spacing={5}>
-              <Grid item xs={6}>
+            <Grid
+              container
+              spacing={5}
+              sx={{ marginBottom: "50px", paddingLeft: "25px" }}
+            >
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="firstName"
@@ -66,9 +70,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="firstName" component="div" />
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  style={{ fontSize: "12px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="lastName"
@@ -76,9 +84,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="lastName" component="div" />
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  style={{ fontSize: "12px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="email"
@@ -86,9 +98,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="email" component="div" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  style={{ fontSize: "12px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={Select}
                   label="Subject*"
@@ -102,11 +118,16 @@ const ContactForm = () => {
                     "& .MuiMenuItem-root": {
                       textAlign: "left",
                     },
+                    // "& fieldset": {
+                    //   border: "none",
+                    //   borderBottom: `1px solid ${"#D8D8D8"}`,
+                    //   borderRadius: "0px",
+                    //   marginRight: "5vw",
+                    // },
                     "& fieldset": {
                       border: "none",
                       borderBottom: `1px solid ${"#D8D8D8"}`,
                       borderRadius: "0px",
-                      marginRight: "5vw",
                     },
                   }}
                 >
@@ -120,7 +141,8 @@ const ContactForm = () => {
                 </Field>
                 <ErrorMessage name="subject" component="div" />
               </Grid>
-              <Grid item xs={12}>
+              {/* <Grid item xs={12}> */}
+              <Grid item xs={12} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="message"
@@ -130,11 +152,16 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="message" component="div" />
+                <ErrorMessage
+                  name="message"
+                  component="div"
+                  style={{ fontSize: "12px" }}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.buttonContainer}>
-              <div style={{ paddingBottom: "20px" }}>
+              {/* <div style={{ paddingBottom: "20px" }}> */}
+              <div style={{ paddingBottom: "20px", marginBottom: "250px" }}>
                 <CustomButton
                   type="submit"
                   value={"SEND"}

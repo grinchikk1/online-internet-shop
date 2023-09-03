@@ -13,7 +13,8 @@ function BillingDetails() {
 
       <Paper elevation={0} sx={{}}>
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}> */}
+          <Grid item xs={12} sm={6}>
             <Field
               as={TextField}
               type="text"
@@ -29,7 +30,8 @@ function BillingDetails() {
               component="div"
             />
           </Grid>
-          <Grid item xs={6}>
+          {/* <Grid item xs={6}> */}
+          <Grid item xs={12} sm={6}>
             <Field
               as={TextField}
               type="text"

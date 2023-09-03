@@ -40,6 +40,7 @@ export const fieldStyle = {
     border: "none",
     borderBottom: `1px solid ${"#D8D8D8"}`,
     borderRadius: "0px",
-    marginRight: "5vw",
+    // marginRight: "5vw",
+    // maxWidth: "500px"
   },
 };

@@ -14,8 +14,7 @@ import Rating from "@mui/material/Rating";
 import { useMediaQuery } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { addReview, deleteReview } from "../../features/review/reviewSlice";
-
-import { Snackbar } from "@mui/material";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 
 const validationSchema = Yup.object().shape({
   review: Yup.string().required("Review is required"),
@@ -32,16 +31,8 @@ function ReviewForm({ productId }) {
     setRatingValue(newValue);
   };
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [openDel, setOpenDel] = useState(false);
-
-  const handleSnackbarClose = () => {
-    setOpenSnackbar(false);
-  };
-
-  const handleCloseSnackDel = () => {
-    setOpenDel(false);
-  };
+  const [SnackbarDel, setSnackbarDel] = useState(false);
+  const [SnackbarSignUp, setSnackbarSignUp] = useState(false);
 
   const handlePostReview = async (submitForm) => {
     try {
@@ -52,6 +43,20 @@ function ReviewForm({ productId }) {
   };
 
   const isMobile = useMediaQuery("(max-width: 900px)");
+
+  const buttonStyles = isMobile
+    ? {
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "35px",
+        marginBottom: "80px",
+      }
+    : {
+        display: "flex",
+        justifyContent: "flex-start",
+        marginTop: "35px",
+        marginBottom: "80px",
+      };
 
   return (
     <Container
@@ -92,7 +97,8 @@ function ReviewForm({ productId }) {
               dispatch(addReview([productId, values.review, ratingValue]));
               setSubmitting(false);
             } else {
-              setOpenSnackbar(true);
+              // setOpenSnackbar(true);
+              setSnackbarSignUp(true);
             }
           }}
         >
@@ -127,64 +133,31 @@ function ReviewForm({ productId }) {
                   name="rating"
                   value={ratingValue}
                   onChange={handleRatingChange}
-                  precision={1}
-                />
-                <Snackbar
-                  sx={{
-                    width: "270px",
-                    height: "80px",
-                    backgroundColor: "white",
-                    marginLeft: "15px",
-                    marginTop: "80px",
-
-                    "& .MuiSnackbarContent-root": {
-                      backgroundColor: "white",
-                      color: "black",
-                      width: "300px",
-                      height: "100px",
-                      textAlign: "center",
-                      fontSize: "20px",
-                    },
-                  }}
-                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                  open={openSnackbar}
-                  message="Before leaving a review you need to Sign up"
-                  autoHideDuration={2500}
-                  onClose={handleSnackbarClose}
+                  precision={0.5}
                 />
 
-                <Snackbar
-                  sx={{
-                    width: "270px",
-                    height: "80px",
-                    backgroundColor: "white",
-                    marginLeft: "15px",
-                    marginTop: "80px",
-
-                    "& .MuiSnackbarContent-root": {
-                      backgroundColor: "white", // Колір фону внутрішнього контенту Snackbar
-                      color: "black", // Колір тексту внутрішнього контенту Snackbar
-                      width: "300px",
-                      height: "100px",
-                      textAlign: "center",
-                      fontSize: "20px",
-                    },
-                  }}
-                  anchorOrigin={{ vertical: "top", horizontal: "center" }}
-                  open={openDel}
-                  message="It`s not yours review, you can`t delete it"
-                  autoHideDuration={2500}
-                  onClose={handleCloseSnackDel}
+                <CustomSnackbar
+                  open={SnackbarSignUp}
+                  onClose={() => setSnackbarSignUp(false)}
+                  titleText="Info"
+                  text="Before leaving a review you need to Sign up"
+                />
+                <CustomSnackbar
+                  open={SnackbarDel}
+                  onClose={() => setSnackbarDel(false)}
+                  titleText="Info"
+                  text="It`s not yours review, you can`t delete it"
                 />
 
                 <Box
-                  sx={{
-                    display: "flex",
-                    maxWidth: "40%",
-                    justifyContent: "flex-start",
-                    marginTop: "35px",
-                    marginBottom: "80px",
-                  }}
+                  // sx={{
+                  //   display: "flex",
+                  //   maxWidth: "40%",
+                  //   justifyContent: "flex-start",
+                  //   marginTop: "35px",
+                  //   marginBottom: "80px",
+                  // }}
+                  sx={buttonStyles}
                 >
                   <CustomButton
                     type="submit"
@@ -237,7 +210,8 @@ function ReviewForm({ productId }) {
                   ) {
                     dispatch(deleteReview(review._id));
                   } else {
-                    setOpenDel(true);
+                    // setOpenDel(true);
+                    setSnackbarDel(true);
                   }
                 }}
               />

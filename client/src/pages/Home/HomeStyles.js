@@ -74,6 +74,7 @@ export const container2 = {
   height: "646px",
   borderRadius: "16px",
   overflow: "hidden",
+
   "@media (max-width: 768.9px)": {
     margin: "0",
     padding: "0",
@@ -90,6 +91,7 @@ export const container2 = {
     padding: "0",
   },
 };
+
 export const btn = {
   margin: 0,
   padding: 0,
@@ -138,9 +140,9 @@ export const btn = {
 };
 export const carousel = {
   position: "relative",
-  margin: "0",
+  margin: "0 auto", /////////////////////////////////////////////
   padding: "0",
-  width: "100%",
+  width: "98.5%", ////////////////////////////////////////////
   height: "775px",
   "@media (max-width: 768.9px)": {
     height: "450px",
@@ -219,6 +221,7 @@ export const container3 = {
   justifyContent: "space-between",
   alignItems: "center",
   height: "120px",
+  width: "100%",
   "@media (max-width: 768.9px)": {
     margin: "0",
     padding: "0",
@@ -243,6 +246,7 @@ export const latest = {
   lineHeight: "43px",
   color: "#000000",
   userSelect: "none",
+  margin: "0 8px", /////////////////////////////////////////////////////////
   "@media (max-width: 768.9px)": {
     fontSize: "16px",
     fontWeight: "400",
@@ -267,6 +271,7 @@ export const btnAll = {
   display: "flex",
   justifyContent: "end",
   background: "transparent",
+  margin: "0 8px", //////////////////////////////////////////////////////////////////
   "&:hover": {
     background: "transparent",
     color: "#000000",

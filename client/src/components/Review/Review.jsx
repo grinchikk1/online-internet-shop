@@ -41,6 +41,7 @@ const Review = ({ name, date, review, rating, onDelete }) => {
                 value={rating}
                 readOnly
                 sx={{ marginTop: "5px" }}
+                precision={0.5}
               />
               <Typography
                 component="span"
