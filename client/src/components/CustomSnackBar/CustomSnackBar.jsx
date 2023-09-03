@@ -15,6 +15,7 @@ const CustomSnackbar = ({ open, onClose, text, titleText }) => {
       open={open}
       autoHideDuration={3000}
       onClose={onClose}
+      sx={{marginTop: "50px"}}
     >
       <Alert
         onClose={onClose}

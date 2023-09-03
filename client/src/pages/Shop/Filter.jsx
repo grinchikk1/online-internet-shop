@@ -66,6 +66,7 @@ function Filter({
       <FormControl sx={{ marginBottom: "16px" }}>
         <InputLabel
           htmlFor="product-material"
+       
           sx={{ fontSize: "14px", color: "rgba(0, 0, 0, 1)" }}
         >
           Product material
@@ -78,10 +79,10 @@ function Filter({
           className={classes.SelectInput}
           sx={{
             "& .MuiSelect-icon": {
-              color: "rgba(0, 0, 0, 1)",
+              color: "rgba(0, 0, 0, 1)", 
             },
             "&:hover": {
-              backgroundColor: "transparent",
+              backgroundColor: "transparent", 
             },
           }}
           value={selectedProductMaterial}

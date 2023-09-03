@@ -54,7 +54,8 @@ function About() {
           display: "block",
           margin: "0 auto",
           width: "58%",
-          minWidth: "272px",
+          minWidth: "288px",
+          minHeight: "149px",
           borderRadius: "8px",
           objectFit: "cover",
         }}
@@ -96,7 +97,7 @@ function About() {
           display: "flex",
           justifyContent: "center",
           padding: "0",
-          marginBottom: "57px",
+          marginBottom: "100px",
         }}
       >
         <Typography sx={{ marginTop: "10px", fontSize: "16px" }}>

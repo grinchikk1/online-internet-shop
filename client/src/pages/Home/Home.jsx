@@ -34,6 +34,8 @@ function Home() {
   const dispatch = useDispatch();
   const output = out();
 
+
+
   useEffect(() => {
     filterProducts("perPage=6").then((data) => {
       dispatch(setProducts(data.data.products));

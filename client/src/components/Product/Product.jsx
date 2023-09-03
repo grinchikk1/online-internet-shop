@@ -549,6 +549,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 value={averageRating}
                 max={5}
                 readOnly
+                precision={0.5}
               />
               <Typography
                 component="legend"

@@ -47,6 +47,7 @@ export default function FormUpdateUser() {
     border: "none",
     borderBottom: "1px solid #D8D8D8",
     outline: "none",
+    
   };
 
   const fieldContainerStyle = {
@@ -55,6 +56,7 @@ export default function FormUpdateUser() {
     justifyContent: "space-between",
     padding: "10px",
     flexWrap: "wrap",
+  
   };
 
   const errorStyle = {

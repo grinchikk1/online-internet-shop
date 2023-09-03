@@ -44,13 +44,13 @@ export const useStyles = makeStyles(() => ({
     color: "rgba(0, 0, 0, 1)",
     paddingBottom: "35px",
     "@media (max-width : 767.98px) ": {
-      paddingBottom: "10px",
+     paddingBottom: "10px",
       fontSize: 20,
     },
   },
   SelectInput: {
     fontSize: "14px",
-    border: "1px solid rgba(216, 216, 216, 1)",
+    // border: "1px solid rgba(216, 216, 216, 1)", // прибрала закреслення тексту при фокусі
     height: "53px",
     padding: "15px 12px",
   },
