@@ -42,9 +42,9 @@ export default function MultiActionAreaCard({ card }) {
 
   const img = {
     height: 300,
-    width: 239, 
+    width: 239,
     alignItems: "center",
-    borderRadius: "6px", 
+    borderRadius: "6px",
     position: "relative",
   };
 
@@ -74,7 +74,8 @@ export default function MultiActionAreaCard({ card }) {
     alignItems: "center",
     paddingLeft: "10px",
     paddingRight: "10px",
-    top: "235px",
+    top: "260px",
+    bottom: "0px",
     height: "65px",
     backgroundColor: "rgba(255, 255, 255, 0.50)",
     transition: "all 0.5s ease",
@@ -87,6 +88,7 @@ export default function MultiActionAreaCard({ card }) {
   };
 
   const cardHoverVisible = {
+    top: "235px",
     opacity: 1,
   };
   const cardHoverAdd = {
@@ -125,9 +127,9 @@ export default function MultiActionAreaCard({ card }) {
         sx={{
           backgroundColor: "#fff",
           "&:hover": "none",
-          maxWidth: "240px", 
+          maxWidth: "240px",
           marginLeft: "auto",
-          marginRight: "auto", 
+          marginRight: "auto",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
