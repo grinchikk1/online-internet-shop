@@ -45,6 +45,10 @@ function Shop() {
     setOpenFilter(!isOpenFilter);
   };
 
+  useEffect(() => {
+    setShowSearchResults(searchResults !== "");
+  }, [searchResults]);
+
   const handleSearch = () => {
     if (searchResults.trim() === "") {
       getProducts();
@@ -176,8 +180,9 @@ function Shop() {
             rowSpacing={{ xs: 2, md: 4 }}
             columns={{ xs: 2, sm: 8, md: 12 }}
           >
-            {showSearchResults
-              ? productsSearch.map((card) => (
+            {showSearchResults ? (
+              productsSearch.length > 0 ? (
+                productsSearch.map((card) => (
                   <Grid
                     item
                     xs={12}
@@ -209,8 +214,14 @@ function Shop() {
                     )}
                   </Grid>
                 ))
-              : isFilterApplied
-              ? filteredCards.map((card) => (
+              ) : (
+                <Grid item xs={12}>
+                  <Typography variant="h6">No products found!</Typography>
+                </Grid>
+              )
+            ) : isFilterApplied ? (
+              filteredCards.length > 0 ? (
+                filteredCards.map((card) => (
                   <Grid
                     item
                     xs={12}
@@ -242,22 +253,29 @@ function Shop() {
                     )}
                   </Grid>
                 ))
-              : cardList.map((card, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={4}
-                    md={4}
-                    key={index}
-                    sx={{
-                      "@media (min-width: 900px)": {
-                        maxWidth: "100%",
-                      },
-                    }}
-                  >
-                    {card}
-                  </Grid>
-                ))}
+              ) : (
+                <Grid item xs={12}>
+                  <Typography variant="h6">No products found!</Typography>
+                </Grid>
+              )
+            ) : (
+              cardList.map((card, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  md={4}
+                  key={index}
+                  sx={{
+                    "@media (min-width: 900px)": {
+                      maxWidth: "100%",
+                    },
+                  }}
+                >
+                  {card}
+                </Grid>
+              ))
+            )}
           </Grid>
           {btnAddProduct.length > cardsToShow &&
             !showSearchResults &&

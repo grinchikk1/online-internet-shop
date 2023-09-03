@@ -42,11 +42,9 @@ export default function MultiActionAreaCard({ card }) {
 
   const img = {
     height: 300,
-    maxWidth: 239, // змінила ширину з 235 на 239
+    width: 239, 
     alignItems: "center",
-    // borderBottomLeftRadius: "4px",
-    // borderBottomRightRadius: "4px",
-    borderRadius: "6px", // бордер по всій картці
+    borderRadius: "6px", 
     position: "relative",
   };
 
@@ -77,7 +75,6 @@ export default function MultiActionAreaCard({ card }) {
     paddingLeft: "10px",
     paddingRight: "10px",
     top: "235px",
-    // width: "100%",                                 //////////////////////////////////////////////////
     height: "65px",
     backgroundColor: "rgba(255, 255, 255, 0.50)",
     transition: "all 0.5s ease",
@@ -100,9 +97,7 @@ export default function MultiActionAreaCard({ card }) {
     color: "#000000",
     cursor: "pointer",
     userSelect: "none",
-
-    // "@media (max-width: 579.9px)": {                  //////////////////////////////////////////////////////////
-    "@media (max-width: 600px)": {
+    "@media (max-width: 579.9px)": {
       fontSize: "15px",
       fontWeight: "600",
     },
@@ -130,9 +125,9 @@ export default function MultiActionAreaCard({ card }) {
         sx={{
           backgroundColor: "#fff",
           "&:hover": "none",
-          maxWidth: "240px", ////////// вирівнювання ховерної частини
-          marginLeft: "auto", //////////  центровка
-          marginRight: "auto", //////////  центровка
+          maxWidth: "240px", 
+          marginLeft: "auto",
+          marginRight: "auto", 
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
