@@ -17,7 +17,7 @@ export const getInitialValues = (token, user) => {
       lastName: user.lastName,
       city: "",
       streetAddress: "",
-      phone: "",
+      phone: user.telephone,
       email: user.email,
       notes: "",
       paymentOption: "Paypal",
