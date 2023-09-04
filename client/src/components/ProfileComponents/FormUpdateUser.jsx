@@ -58,7 +58,8 @@ export default function FormUpdateUser() {
   };
 
   const errorStyle = {
-    color: "#D82700",
+    color: "#000000",
+    marginLeft: "50%",
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {

@@ -73,7 +73,7 @@ const ContactForm = () => {
                 <ErrorMessage
                   name="firstName"
                   component="div"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "18px" }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
@@ -87,7 +87,7 @@ const ContactForm = () => {
                 <ErrorMessage
                   name="lastName"
                   component="div"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "18px" }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
@@ -101,7 +101,7 @@ const ContactForm = () => {
                 <ErrorMessage
                   name="email"
                   component="div"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "18px" }}
                 />
               </Grid>
               <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
@@ -118,12 +118,7 @@ const ContactForm = () => {
                     "& .MuiMenuItem-root": {
                       textAlign: "left",
                     },
-                    // "& fieldset": {
-                    //   border: "none",
-                    //   borderBottom: `1px solid ${"#D8D8D8"}`,
-                    //   borderRadius: "0px",
-                    //   marginRight: "5vw",
-                    // },
+
                     "& fieldset": {
                       border: "none",
                       borderBottom: `1px solid ${"#D8D8D8"}`,
@@ -139,9 +134,13 @@ const ContactForm = () => {
                   <MenuItem value="Feedback">Feedback</MenuItem>
                   <MenuItem value="Another question">Another question</MenuItem>
                 </Field>
-                <ErrorMessage name="subject" component="div" />
+                <ErrorMessage
+                  name="subject"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
-              {/* <Grid item xs={12}> */}
+
               <Grid item xs={12} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
@@ -155,7 +154,7 @@ const ContactForm = () => {
                 <ErrorMessage
                   name="message"
                   component="div"
-                  style={{ fontSize: "12px" }}
+                  style={{ fontSize: "18px" }}
                 />
               </Grid>
             </Grid>

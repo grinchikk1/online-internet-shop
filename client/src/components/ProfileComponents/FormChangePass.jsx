@@ -49,7 +49,7 @@ export default function FormChangePass() {
   };
 
   const errorStyle = {
-    color: "#D82700",
+    color: "#000000",
   };
 
   const handleSubmit = async (values, { resetForm }) => {
