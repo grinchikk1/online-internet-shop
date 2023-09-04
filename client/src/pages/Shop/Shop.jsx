@@ -199,7 +199,7 @@ function Shop() {
                     {btnAddProduct.length > cardsToShow && (
                       <Box
                         mt={3}
-                        sx={{ display: "flex", justifyContent: "center" }}
+                        sx={{ display: "flex", justifyContent: "center" }} 
                       >
                         <Button
                           variant="contained"
@@ -216,7 +216,14 @@ function Shop() {
                 ))
               ) : (
                 <Grid item xs={12}>
-                  <Typography variant="h6">No products found!</Typography>
+                  {/* <Typography variant="h6">No products found!</Typography> */}
+                  <Typography 
+                  sx={{fontSize: "18px", 
+                  fontStyle: "italic", 
+                  textAlign: "center", 
+                  margin: "20px auto 0 10px"}}>
+                    No results found for your search...
+                    </Typography>
                 </Grid>
               )
             ) : isFilterApplied ? (
@@ -238,7 +245,7 @@ function Shop() {
                     {btnAddProduct.length > cardsToShow && (
                       <Box
                         mt={3}
-                        sx={{ display: "flex", justifyContent: "center" }}
+                        sx={{ display: "flex", justifyContent: "center"}}
                       >
                         <Button
                           variant="contained"
@@ -255,7 +262,13 @@ function Shop() {
                 ))
               ) : (
                 <Grid item xs={12}>
-                  <Typography variant="h6">No products found!</Typography>
+                  {/* <Typography variant="h6">No products found!</Typography> */}
+                  <Typography 
+                  sx={{fontSize: "18px", 
+                  fontStyle: "italic", 
+                  textAlign: "center"}}>
+                    No results found for your search...
+                  </Typography>
                 </Grid>
               )
             ) : (
