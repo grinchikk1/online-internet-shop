@@ -35,7 +35,7 @@ export const orderSlice = createSlice({
         localStorage.setItem("order", JSON.stringify(state.order));
         state.status = "succeeded";
       })
-      .addCase(deleteOrder.fulfilled, (state, action) => {
+      .addCase(deleteOrder.fulfilled, (state) => {
         state.order = [];
         localStorage.removeItem("order");
         state.status = "succeeded";

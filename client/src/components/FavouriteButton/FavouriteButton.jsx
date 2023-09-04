@@ -1,10 +1,13 @@
+/* eslint-disable no-console */
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   addFavorites,
   removeFavorites,
 } from "../../features/favorites/favoriteSlice";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 import { cardHoverFavouriteButton } from "../Card/CardStyle";
 import {
@@ -45,12 +48,10 @@ function FavouriteButton({ item }) {
       } catch (error) {
         console.log(error);
       }
+    } else if (isFavorited) {
+      dispatch(removeFavorites(item._id));
     } else {
-      if (isFavorited) {
-        dispatch(removeFavorites(item._id));
-      } else {
-        dispatch(addFavorites(item)); // Pass the entire product object as payload
-      }
+      dispatch(addFavorites(item));
     }
   };
 

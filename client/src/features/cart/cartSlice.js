@@ -1,3 +1,4 @@
+/* eslint-disable operator-assignment */
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

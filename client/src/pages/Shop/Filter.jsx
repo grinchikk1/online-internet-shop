@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import {
   Box,
@@ -13,8 +14,7 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import { useStyles, customTheme } from "./InputStyle";
-import { Btn } from "./InputStyle";
+import { useStyles, customTheme, Btn } from "./InputStyle";
 
 function Filter({
   handleSearch,
@@ -87,11 +87,11 @@ function Filter({
           value={selectedProductMaterial}
           onChange={(e) => setSelectedProductMaterial(e.target.value)}
         >
-          <MenuItem value={"All"}>All</MenuItem>
-          <MenuItem key={"gold"} value={"gold"}>
+          <MenuItem value="All">All</MenuItem>
+          <MenuItem key="gold" value="gold">
             Gold
           </MenuItem>
-          <MenuItem key={"silver"} value={"silver"}>
+          <MenuItem key="silver" value="silver">
             Silver
           </MenuItem>
         </Select>
@@ -117,24 +117,24 @@ function Filter({
           value={selectedProduct}
           onChange={(e) => setSelectedProduct(e.target.value)}
         >
-          <MenuItem value={"All"}>All</MenuItem>
-          <MenuItem key={"ZARINA"} value={"ZARINA"}>
-            {"ZARINA"}
+          <MenuItem value="All">All</MenuItem>
+          <MenuItem key="ZARINA" value="ZARINA">
+            ZARINA
           </MenuItem>
-          <MenuItem key={"KOLO"} value={"KOLO"}>
-            {"KOLO"}
+          <MenuItem key="KOLO" value="KOLO">
+            KOLO
           </MenuItem>
-          <MenuItem key={"KJF"} value={"KJF"}>
-            {"KJF"}
+          <MenuItem key="KJF" value="KJF">
+            KJF
           </MenuItem>
-          <MenuItem key={"Boucheron"} value={"Boucheron"}>
-            {"Boucheron"}
+          <MenuItem key="Boucheron" value="Boucheron">
+            Boucheron
           </MenuItem>
-          <MenuItem key={"Amrapali"} value={"Amrapali"}>
-            {"Amrapali"}
+          <MenuItem key="Amrapali" value="Amrapali">
+            Amrapali
           </MenuItem>
-          <MenuItem key={"Messika"} value={"Messika"}>
-            {"Messika"}
+          <MenuItem key="Messika" value="Messika">
+            Messika
           </MenuItem>
         </Select>
       </FormControl>

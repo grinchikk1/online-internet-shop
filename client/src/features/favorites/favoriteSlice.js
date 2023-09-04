@@ -22,7 +22,7 @@ export const favoritesSlice = createSlice({
       state.favoritesList = action.payload;
       localStorage.setItem("favorites", JSON.stringify(action.payload));
     },
-    clearFavorites: (state, action) => {
+    clearFavorites: (state) => {
       state.favoritesList = [];
       localStorage.removeItem("favorites");
     },

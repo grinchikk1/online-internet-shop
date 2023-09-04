@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { Divider, Typography, Container } from "@mui/material";
-import { getOrder } from "../../features/order/orderSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../../features/auth/authSlice";
-import CustomButton from "../../components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
+import { getOrder } from "../../features/order/orderSlice";
+import { logout } from "../../features/auth/authSlice";
+import CustomButton from "../CustomButton/CustomButton";
 import CircularLoader from "../Loader/Loader";
 
 function formatDate(dateString) {
@@ -75,7 +75,7 @@ export default function ProfileTabSecondContent() {
               <td>{order.orderNo}</td>
               <td>{formatDate(order.date)}</td>
               <td>{order.status}</td>
-              <td>{order.totalSum + "$"}</td>
+              <td>{`${order.totalSum}$`}</td>
             </tr>
           ))}
         </tbody>

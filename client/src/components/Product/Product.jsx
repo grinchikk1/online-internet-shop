@@ -1,3 +1,7 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/jsx-boolean-value */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import {
@@ -10,21 +14,21 @@ import {
   Rating,
   Tabs,
   Tab,
+  useMediaQuery,
 } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import SocialMediaIcons from "./SocialMediaIcons";
-import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
-import { useStyles } from "./ProductCardStyles";
 import { useNavigate } from "react-router-dom";
-import { useMediaQuery } from "@mui/material";
-import { TabPanel } from "./TabPanel";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useTheme } from "@mui/material/styles";
-import ReviewForm from "../ReviewForm/ReviewForm";
 import { useSelector, useDispatch } from "react-redux";
+import SocialMediaIcons from "./SocialMediaIcons";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
+import { useStyles } from "./ProductCardStyles";
+import { TabPanel } from "./TabPanel";
+import ReviewForm from "../ReviewForm/ReviewForm";
 import { getReviews } from "../../features/review/reviewSlice";
 
 export default function ProductCard({ product, onAddToCartClicked }) {
@@ -154,7 +158,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             width: "100%",
           }}
         >
-          <Container maxWidth={"sm"} disableGutters={true}>
+          <Container maxWidth="sm" disableGutters={true}>
             <Box
               sx={{
                 backgroundImage: `url(${imageUrls[currentPhotoIndex]})`,
@@ -186,7 +190,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               ))}
             </Box>
           </Container>
-          <Container maxWidth={"sm"} disableGutters={true}>
+          <Container maxWidth="sm" disableGutters={true}>
             <Typography
               variant="h2"
               sx={{
@@ -198,9 +202,9 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               {name}
             </Typography>
             <Box
-              display={"flex"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
               sx={{ paddingTop: "5px", paddingBottom: "24px" }}
             >
               <Typography
@@ -221,7 +225,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             </Box>
             {showButtons.share && (
               <Box
-                display={"flex"}
+                display="flex"
                 sx={{
                   alignItems: "center",
                   justifyContent: "space-between",
@@ -255,8 +259,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             />
             <Button
               disableRipple
-              variant={"text"}
-              size={"small"}
+              variant="text"
+              size="small"
               sx={{
                 display: "flex",
                 width: "100%",
@@ -298,8 +302,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             )}
             <Button
               disableRipple
-              variant={"text"}
-              size={"small"}
+              variant="text"
+              size="small"
               sx={{
                 display: "flex",
                 width: "100%",
@@ -363,8 +367,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             )}
             <Button
               disableRipple
-              variant={"text"}
-              size={"small"}
+              variant="text"
+              size="small"
               sx={{
                 display: "flex",
                 width: "100%",
@@ -414,8 +418,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             />
             <Button
               disableRipple
-              variant={"text"}
-              size={"small"}
+              variant="text"
+              size="small"
               sx={{
                 display: "flex",
                 width: "100%",
@@ -460,18 +464,16 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 paddingRight: "40px",
               }}
             >
-              {imageUrls.map((url, index) => {
-                return (
-                  <Box
-                    key={index}
-                    className={classes.image_list_desktop}
-                    sx={{
-                      backgroundImage: `url(${url})`,
-                    }}
-                    onClick={() => setCurrentPhotoIndex(index)}
-                  />
-                );
-              })}
+              {imageUrls.map((url, index) => (
+                <Box
+                  key={index}
+                  className={classes.image_list_desktop}
+                  sx={{
+                    backgroundImage: `url(${url})`,
+                  }}
+                  onClick={() => setCurrentPhotoIndex(index)}
+                />
+              ))}
             </Container>
             <Container
               disableGutters={true}
@@ -540,7 +542,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             >
               {`$  ${currentPrice},00`}
             </Typography>
-            <Box display={"flex"} sx={{ paddingTop: "44px" }}>
+            <Box display="flex" sx={{ paddingTop: "44px" }}>
               <Rating
                 sx={{
                   color: "#faaf00",
@@ -590,7 +592,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               justifyContent="start"
             >
               <Box
-                display={"flex"}
+                display="flex"
                 sx={{
                   width: "102px",
                   height: "54px",
@@ -646,7 +648,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 Add to cart
               </Button>
             </Box>
-            <Box display={"flex"} className={classes.box_social_icons}>
+            <Box display="flex" className={classes.box_social_icons}>
               <SocialMediaIcons item={product} />
             </Box>
             <Typography sx={{ paddingTop: "36px" }}>
@@ -664,7 +666,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
         <Container
           disableGutters={true}
           className={classes.container_tabs}
-          maxWidth={"lg"}
+          maxWidth="lg"
         >
           <Tabs
             sx={{ borderBottom: 1, borderColor: "divider" }}

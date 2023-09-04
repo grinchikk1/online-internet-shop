@@ -1,4 +1,5 @@
-import CustomButton from "../CustomButton/CustomButton";
+/* eslint-disable react/prop-types */
+import React from "react";
 import {
   Grid,
   Paper,
@@ -8,11 +9,12 @@ import {
   RadioGroup,
 } from "@mui/material";
 import { ErrorMessage } from "formik";
+import { FaPaypal } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import CustomButton from "../CustomButton/CustomButton";
 import { getInitialValues } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
-import { FaPaypal } from "react-icons/fa";
 import OrderItems from "../../pages/Cart/OrderItem";
-import { useSelector } from "react-redux";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
 function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
@@ -97,7 +99,7 @@ function YourOrder({ isSubmitting, handleSubmit, values, setFieldValue }) {
           <Grid item xs={12}>
             <CustomButton
               type="submit"
-              value={"PLACE ORDER"}
+              value="PLACE ORDER"
               disabled={isSubmitting}
               onClick={handleSubmit}
             />

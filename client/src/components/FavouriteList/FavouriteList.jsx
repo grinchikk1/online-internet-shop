@@ -1,8 +1,9 @@
+/* eslint-disable no-extra-boolean-cast */
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import FavouriteItem from "./FavouritesItem";
 import { Typography } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
+import FavouriteItem from "./FavouritesItem";
 import { getWishlist } from "../../data/fetchFavourite";
 
 function FavouriteList() {
@@ -30,19 +31,18 @@ function FavouriteList() {
         </Typography>
       </div>
     );
-  } else {
-    return (
-      <div>
-        {!!token
-          ? favoritesList.products.map((product) => (
-              <FavouriteItem key={product._id} item={product} />
-            ))
-          : favoritesList.map((product) => (
-              <FavouriteItem key={product._id} item={product} />
-            ))}
-      </div>
-    );
   }
+  return (
+    <div>
+      {!!token
+        ? favoritesList.products.map((product) => (
+            <FavouriteItem key={product._id} item={product} />
+          ))
+        : favoritesList.map((product) => (
+            <FavouriteItem key={product._id} item={product} />
+          ))}
+    </div>
+  );
 }
 
 export default FavouriteList;

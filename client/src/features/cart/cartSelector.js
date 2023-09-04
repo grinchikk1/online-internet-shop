@@ -1,3 +1,5 @@
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable import/prefer-default-export */
 export const getTotalCartAmount = (state) => {
   let totalAmount = 0;
 

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import axios from "axios";
 
 const baseApiUrl = "/api";
@@ -19,9 +20,8 @@ const sendRequest = async (method, endpoint, data = null, token = null) => {
 
     if (response.status === 200) {
       return response;
-    } else {
-      throw new Error(`Request failed with status ${response.status}`);
     }
+    throw new Error(`Request failed with status ${response.status}`);
   } catch (error) {
     console.error("Request error:", error);
     throw error;

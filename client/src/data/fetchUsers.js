@@ -1,26 +1,21 @@
 import sendRequest from "./sendRequest";
 
 // Реєстрація нового юзера
-export const createUser = async (user) => {
-  return sendRequest("post", "/customers", user);
-};
+export const createUser = async (user) =>
+  sendRequest("post", "/customers", user);
 
 // Логін юзера
-export const loginUser = async (user) => {
-  return sendRequest("post", "/customers/login", user);
-};
+export const loginUser = async (user) =>
+  sendRequest("post", "/customers/login", user);
 
 // Змінити пароль юзера
-export const changePassword = async (passwords, token) => {
-  return sendRequest("put", "/customers/password", passwords, token);
-};
+export const changePassword = async (passwords, token) =>
+  sendRequest("put", "/customers/password", passwords, token);
 
 // Змінити дані юзера
-export const updateUser = async (user, token) => {
-  return sendRequest("put", "/customers", user, token);
-};
+export const updateUser = async (user, token) =>
+  sendRequest("put", "/customers", user, token);
 
 // Отримати дані юзера
-export const getUser = async (token) => {
-  return sendRequest("get", "/customers/customer", null, token);
-};
+export const getUser = async (token) =>
+  sendRequest("get", "/customers/customer", null, token);

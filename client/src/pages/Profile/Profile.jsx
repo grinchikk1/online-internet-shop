@@ -1,6 +1,6 @@
 import React from "react";
-import ProfileTabs from "../../components/ProfileComponents/ProfileTabs";
 import { Container } from "@mui/material";
+import ProfileTabs from "../../components/ProfileComponents/ProfileTabs";
 
 export default function Profile() {
   return (

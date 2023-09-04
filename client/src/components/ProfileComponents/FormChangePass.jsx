@@ -1,13 +1,13 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
-import { Button, IconButton } from "@mui/material";
+import { Button, IconButton, useMediaQuery } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useSelector } from "react-redux";
-import { changePassword } from "../../data/fetchUsers";
-import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
-import { useMediaQuery } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { changePassword } from "../../data/fetchUsers";
+import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 
 const validationSchema = Yup.object().shape({
   newPassword: Yup.string()

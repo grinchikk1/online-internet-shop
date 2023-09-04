@@ -50,7 +50,6 @@ export const useStyles = makeStyles(() => ({
   },
   SelectInput: {
     fontSize: "14px",
-    // border: "1px solid rgba(216, 216, 216, 1)", // прибрала закреслення тексту при фокусі
     height: "53px",
     padding: "15px 12px",
   },

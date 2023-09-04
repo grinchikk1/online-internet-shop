@@ -1,9 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/style.scss";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, getUser } from "../../data/fetchUsers";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
@@ -20,7 +21,7 @@ const validationSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-const Login = () => {
+function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const token = useSelector((state) => state.auth.token);
@@ -48,19 +49,15 @@ const Login = () => {
         dispatch(setUser(userData.data));
         const { cart, amount } = CartLocalStorageHelper.getCart();
         const existingCart = await getCart(user.data.token);
-        const localStorageCartBody = cart.map((product) => {
-          return {
-            product: product._id,
-            cartQuantity: amount[product._id] || 1,
-          };
-        });
+        const localStorageCartBody = cart.map((product) => ({
+          product: product._id,
+          cartQuantity: amount[product._id] || 1,
+        }));
         const existingCartBody =
-          existingCart.data?.products.map((item) => {
-            return {
-              product: item.product._id,
-              cartQuantity: Number(item.cartQuantity) || 1,
-            };
-          }) || [];
+          existingCart.data?.products.map((item) => ({
+            product: item.product._id,
+            cartQuantity: Number(item.cartQuantity) || 1,
+          })) || [];
         const updateCartBody = existingCartBody.reduce((acc, item) => {
           if (acc.find((i) => i.product === item.product)) {
             return acc.map((i) => {
@@ -82,7 +79,6 @@ const Login = () => {
           user.data.token
         );
         CartLocalStorageHelper.resetCart();
-        // Зберігання JWT в LocalStorage
         localStorage.setItem("token", user.data.token);
         dispatch(clearFavorites());
         dispatch(setToken(user.data.token));
@@ -101,7 +97,6 @@ const Login = () => {
     if (token) {
       navigate("/profile");
     }
-    return;
   }, [navigate, token]);
 
   return (
@@ -162,6 +157,6 @@ const Login = () => {
       </p>
     </div>
   );
-};
+}
 
 export default Login;

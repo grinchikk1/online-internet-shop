@@ -1,8 +1,10 @@
+/* eslint-disable react/jsx-no-useless-fragment */
+/* eslint-disable no-shadow */
 import React, { useState, useEffect } from "react";
-import { getProducts } from "../../data/fetchProducts";
-import ProductCard from "../../components/Product/Product";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { getProducts } from "../../data/fetchProducts";
+import ProductCard from "../../components/Product/Product";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
 import { getCart, updateCart } from "../../data/fetchCart";
@@ -30,15 +32,13 @@ function Product() {
 
   const handleAddProductToCart = async (amount = 1) => {
     dispatch(addProductToCart(product));
-    if (!!token) {
+    if (token) {
       const cart = await getCart(token);
 
-      let products = cart.data?.products.map((item) => {
-        return {
-          product: item.product._id,
-          cartQuantity: item.cartQuantity || 1,
-        };
-      });
+      let products = cart.data?.products.map((item) => ({
+        product: item.product._id,
+        cartQuantity: item.cartQuantity || 1,
+      }));
 
       if (products.find((item) => item.product === product._id)) {
         products = products.map((item) => {

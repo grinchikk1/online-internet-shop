@@ -1,10 +1,10 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import "../../styles/style.scss";
 import { Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../data/fetchUsers";
 import { setUser, setError } from "../../features/auth/authSlice";
@@ -31,7 +31,7 @@ const validationSchema = Yup.object().shape({
     .required("Login is required"),
 });
 
-const Registration = () => {
+function Registration() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -168,6 +168,6 @@ const Registration = () => {
       </Formik>
     </div>
   );
-};
+}
 
 export default Registration;

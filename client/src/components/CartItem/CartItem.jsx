@@ -1,3 +1,6 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +15,7 @@ import {
 } from "../../data/fetchCart";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
-const CartItem = (props) => {
+function CartItem(props) {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
     props.data;
   const token = useSelector((state) => state.auth.token);
@@ -62,9 +65,9 @@ const CartItem = (props) => {
   };
 
   const handleAmountChange = (e) => {
-    const newCount = parseInt(e.target.value);
+    const newCount = parseInt(e.target.value, 10);
     if (newCount > 0) {
-      dispatch(updateCartCount({ itemID: _id, newCount: newCount }));
+      dispatch(updateCartCount({ itemID: _id, newCount }));
     }
   };
 
@@ -95,7 +98,11 @@ const CartItem = (props) => {
           </Grid>
 
           <Grid item className={s.count_wrapper}>
-            <button className={s.count_button} onClick={handleDecrement}>
+            <button
+              type="button"
+              className={s.count_button}
+              onClick={handleDecrement}
+            >
               -
             </button>
             <input
@@ -103,7 +110,11 @@ const CartItem = (props) => {
               value={amount}
               onChange={handleAmountChange}
             />
-            <button className={s.count_button} onClick={handleIncrement}>
+            <button
+              type="button"
+              className={s.count_button}
+              onClick={handleIncrement}
+            >
               +
             </button>
           </Grid>
@@ -111,6 +122,7 @@ const CartItem = (props) => {
 
         <Grid item>
           <button
+            type="button"
             className={s.close_button}
             onClick={handleRemoveProductFromCart}
           >
@@ -118,9 +130,9 @@ const CartItem = (props) => {
           </button>
         </Grid>
       </Grid>
-      <div className={s.cart_line}></div>
+      <div className={s.cart_line} />
     </Box>
   );
-};
+}
 
 export default CartItem;

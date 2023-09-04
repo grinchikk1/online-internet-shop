@@ -1,5 +1,6 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import { Link } from "react-router-dom"; // Імпортуємо компонент Link з React Router
+import { Link } from "react-router-dom";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -7,7 +8,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import { IconButton, Divider } from "@mui/material";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
 
-const SocialMediaIcons = ({ item }) => {
+function SocialMediaIcons({ item }) {
   return (
     <>
       <IconButton>
@@ -44,6 +45,6 @@ const SocialMediaIcons = ({ item }) => {
       </IconButton>
     </>
   );
-};
+}
 
 export default SocialMediaIcons;

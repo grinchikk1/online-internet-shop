@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import { Button, useMediaQuery } from "@mui/material";
 import { Formik, Form, Field, ErrorMessage } from "formik";
@@ -24,9 +26,7 @@ const validationSchema = Yup.object().shape({
   telephone: Yup.string().test(
     "is-phone-valid",
     "That is not a valid phone number.",
-    (value) => {
-      return /^\+380\d{3}\d{2}\d{2}\d{2}$/.test(value);
-    }
+    (value) => /^\+380\d{3}\d{2}\d{2}\d{2}$/.test(value)
   ),
 });
 

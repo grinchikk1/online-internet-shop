@@ -2,21 +2,17 @@ import axios from "axios";
 import sendRequest from "./sendRequest";
 import { fetchFavoritesSuccess } from "../features/favorites/favoriteSlice";
 
-export const createWishlist = async (token, newWishlist) => {
-  return sendRequest("post", "/wishlist", newWishlist, token);
-};
+export const createWishlist = async (token, newWishlist) =>
+  sendRequest("post", "/wishlist", newWishlist, token);
 
-export const updateWishlist = async (token, updatedWishlist) => {
-  return sendRequest("put", "/wishlist", updatedWishlist, token);
-};
+export const updateWishlist = async (token, updatedWishlist) =>
+  sendRequest("put", "/wishlist", updatedWishlist, token);
 
-export const addProductToWishlist = async (token, productId) => {
-  return sendRequest("put", `/wishlist/${productId}`, null, token);
-};
+export const addProductToWishlist = async (token, productId) =>
+  sendRequest("put", `/wishlist/${productId}`, null, token);
 
-export const deleteProductFromWishlist = async (token, productId) => {
-  return sendRequest("delete", `/wishlist/${productId}`, null, token);
-};
+export const deleteProductFromWishlist = async (token, productId) =>
+  sendRequest("delete", `/wishlist/${productId}`, null, token);
 
 export const getWishlist = (token) => async (dispatch) => {
   try {
@@ -32,11 +28,11 @@ export const getWishlist = (token) => async (dispatch) => {
     );
     return response.data;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Request error:", error);
     throw error;
   }
 };
 
-export const deleteWishlist = async (token) => {
-  return sendRequest("delete", "/wishlist", null, token);
-};
+export const deleteWishlist = async (token) =>
+  sendRequest("delete", "/wishlist", null, token);

@@ -1,12 +1,14 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Card, CardContent, Typography } from "@mui/material";
 import HeartBrokenIcon from "@mui/icons-material/HeartBroken";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   addFavorites,
   removeFavorites,
 } from "../../features/favorites/favoriteSlice";
-import { useNavigate } from "react-router-dom";
 import {
   addProductToWishlist,
   deleteProductFromWishlist,
@@ -31,12 +33,10 @@ function FavouriteItem({ item }) {
         await addProductToWishlist(token, item._id);
         await dispatch(getWishlist(token));
       }
+    } else if (isFavorited) {
+      dispatch(removeFavorites(item._id));
     } else {
-      if (isFavorited) {
-        dispatch(removeFavorites(item._id));
-      } else {
-        dispatch(addFavorites(item));
-      }
+      dispatch(addFavorites(item));
     }
   };
   const navigate = useNavigate();

@@ -1,3 +1,8 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-extra-boolean-cast */
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "../../styles/style.scss";
@@ -45,7 +50,7 @@ function Header() {
     };
   }, []);
 
-  function handleFavoritesMenuOpen(event) {
+  function handleFavoritesMenuOpen() {
     setIsFavoritesMenuOpen(true);
   }
   function handleFavoritesMenuClose() {
@@ -57,15 +62,16 @@ function Header() {
       <div
         className={`header__blur${isBurgerMenuOpen ? "--open" : ""}`}
         onClick={handleBurgerMenu}
-      ></div>
+      />
       <div className="container flex-container">
         <button
+          type="button"
           className={`nav-opener ${isBurgerMenuOpen ? "open" : ""}`}
           onClick={handleBurgerMenu}
         >
-          <span className="nav-opener__menu-line"></span>
-          <span className="nav-opener__menu-line"></span>
-          <span className="nav-opener__menu-line"></span>
+          <span className="nav-opener__menu-line" />
+          <span className="nav-opener__menu-line" />
+          <span className="nav-opener__menu-line" />
         </button>
         <Link to="/" className="header__logo-image">
           <img
@@ -76,20 +82,18 @@ function Header() {
         <div className={`header__nav-holder ${isBurgerMenuOpen ? "open" : ""}`}>
           <nav className={`header__nav ${isBurgerMenuOpen ? "open" : ""}`}>
             <ul className="header__nav-list">
-              {links.map((link, index) => {
-                return (
-                  <li className="header__nav-item" key={index}>
-                    <NavLink
-                      className="header__nav-link"
-                      onClick={handleBurgerMenu}
-                      to={index === 0 ? "/" : `/${link}`}
-                      key={index}
-                    >
-                      {link}
-                    </NavLink>
-                  </li>
-                );
-              })}
+              {links.map((link, index) => (
+                <li className="header__nav-item" key={index}>
+                  <NavLink
+                    className="header__nav-link"
+                    onClick={handleBurgerMenu}
+                    to={index === 0 ? "/" : `/${link}`}
+                    key={index}
+                  >
+                    {link}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </nav>
           <div className="header__logo-holder">

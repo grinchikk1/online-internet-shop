@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 import { useSelector } from "react-redux";
-import { getTotalCartAmount } from "../../features/cart/cartSelector";
 
 import {
   Alert,
@@ -11,10 +10,11 @@ import {
   Grid,
 } from "@mui/material";
 import Button from "@mui/material/Button";
+import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { useStyles } from "./CartTotalsStyles";
 import Checkout from "../Checkout/Checkout";
 
-const CartTotals = () => {
+function CartTotals() {
   const s = useStyles();
   const totalAmount = useSelector(getTotalCartAmount);
   const cart = useSelector((state) => state.cart.cart);
@@ -37,7 +37,7 @@ const CartTotals = () => {
           <h3 className={s.cart_totalsTitle}>Cart totals</h3>
         </Grid>
         <Grid item xs={12} sm={12} md={12}>
-          <div className={s.cart_totalLine}></div>
+          <div className={s.cart_totalLine} />
         </Grid>
         <Grid container className={s.cart_totalAmount}>
           <div>TOTAL</div>
@@ -90,6 +90,6 @@ const CartTotals = () => {
       </Grid>
     </Grid>
   );
-};
+}
 
 export default CartTotals;

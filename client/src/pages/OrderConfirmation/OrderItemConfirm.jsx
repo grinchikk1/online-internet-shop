@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import { Grid } from "@mui/material";
 import { useStyles } from "../../components/Checkout/CheckoutStyle";
@@ -20,7 +21,7 @@ function OrderItemsConfirm({ cart, amounts }) {
       <Grid item xs={12} className={classes.orderPriceItem}>
         <div style={{ borderBottom: "1px solid #D8D8D8" }}>
           {cartData.map((cartProduct) => {
-            const product = cartProduct.product;
+            const { product } = cartProduct;
             const productId = cartProduct._id;
             const amount = amountsData[productId] || 0;
 

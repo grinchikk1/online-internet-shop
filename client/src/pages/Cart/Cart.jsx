@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import React, { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +13,7 @@ import CartItem from "../../components/CartItem/CartItem";
 import CartTotals from "../../components/CartTotals/CartTotals";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
-const Cart = () => {
+function Cart() {
   const cart = useSelector((state) => state.cart.cart);
   const s = useStyles();
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const Cart = () => {
           setCart(
             data.data?.products?.reduce(
               (acc, item) => {
-                const product = item.product;
+                const { product } = item;
                 const amount = item.cartQuantity;
                 return {
                   cart: [...acc.cart, product],
@@ -66,19 +67,17 @@ const Cart = () => {
         >
           <Box>
             <Grid item xs={12} sm={12} md={12}>
-              {cart.map((product) => {
-                return (
-                  <CartItem
-                    data={product}
-                    key={product._id}
-                    onRemoveFromCartClicked={() => {
-                      dispatch(removeProductFromCart(product._id));
-                      CartLocalStorageHelper.removeProductFromCart(product._id);
-                    }}
-                    amount={amounts[product._id]}
-                  />
-                );
-              })}
+              {cart.map((product) => (
+                <CartItem
+                  data={product}
+                  key={product._id}
+                  onRemoveFromCartClicked={() => {
+                    dispatch(removeProductFromCart(product._id));
+                    CartLocalStorageHelper.removeProductFromCart(product._id);
+                  }}
+                  amount={amounts[product._id]}
+                />
+              ))}
               {cart.length === 0 && (
                 <div className={s.cart_empty}>Your cart is EMPTY</div>
               )}
@@ -89,6 +88,6 @@ const Cart = () => {
       </Grid>
     </Container>
   );
-};
+}
 
 export default Cart;

@@ -1,8 +1,7 @@
 import React from "react";
-import { Typography, Box } from "@mui/material";
-import { useMediaQuery } from "@mui/material";
+import { Typography, Box, useMediaQuery } from "@mui/material";
 
-const PrivacyPolicy = () => {
+function PrivacyPolicy() {
   const isMobile = useMediaQuery("(max-width: 670px)");
 
   const fontSizeTitle = isMobile ? "20px" : "33px";
@@ -46,7 +45,7 @@ const PrivacyPolicy = () => {
       <Typography
         variant="h2"
         sx={{
-          fontSize: fontSize,
+          fontSize,
           fontWeight: 400,
           paddingTop: "22px",
         }}
@@ -64,7 +63,7 @@ const PrivacyPolicy = () => {
       <Typography
         variant="h2"
         sx={{
-          fontSize: fontSize,
+          fontSize,
           fontWeight: 400,
           paddingTop: "22px",
         }}
@@ -81,6 +80,6 @@ const PrivacyPolicy = () => {
       </Typography>
     </div>
   );
-};
+}
 
 export default PrivacyPolicy;

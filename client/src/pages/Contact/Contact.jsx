@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import {
@@ -8,14 +9,14 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import emailjs from "emailjs-com";
+import { useSelector } from "react-redux";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, fieldStyle } from "./ContactStyles";
 import { getInitialValues, validationSchema } from "./formSettings";
-import emailjs from "emailjs-com";
 import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
-import { useSelector } from "react-redux";
 
-const ContactForm = () => {
+function ContactForm() {
   const classes = useStyles();
   const [showSnackbar, setShowSnackbar] = useState(false);
 
@@ -164,7 +165,7 @@ const ContactForm = () => {
               <div style={{ paddingBottom: "20px", marginBottom: "250px" }}>
                 <CustomButton
                   type="submit"
-                  value={"SEND"}
+                  value="SEND"
                   disabled={isSubmitting}
                   onClick={handleSubmit}
                 />
@@ -181,6 +182,6 @@ const ContactForm = () => {
       />
     </Container>
   );
-};
+}
 
 export default ContactForm;

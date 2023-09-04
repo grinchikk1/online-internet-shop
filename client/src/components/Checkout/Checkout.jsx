@@ -1,12 +1,14 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable no-shadow */
 import React from "react";
 import { Grid, Container } from "@mui/material";
 import { Formik, Form } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { getInitialValues, validationSchema } from "./formSettings";
 import { useStyles } from "./CheckoutStyle";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { addCustomer } from "../../features/customer/customerSlice";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { clearCart } from "../../features/cart/cartSlice";
@@ -28,13 +30,11 @@ function Checkout() {
 
   const products = JSON.parse(localStorage.getItem("cart"));
   const product = products
-    ? products.map((product, index) => {
-        return {
-          _id: index,
-          product: product,
-          cartQuantity: Object.values(amounts)[index],
-        };
-      })
+    ? products.map((product, index) => ({
+        _id: index,
+        product,
+        cartQuantity: Object.values(amounts)[index],
+      }))
     : null;
 
   const initialValues = getInitialValues(token, user);
@@ -75,7 +75,7 @@ function Checkout() {
 
       products: product,
       letterSubject: "Thank you for order! You are welcome!",
-      letterHtml: letterHtml,
+      letterHtml,
       totalSum: totalAmount,
     };
 
@@ -84,7 +84,7 @@ function Checkout() {
       mobile: customer.payload.phone,
       email: customer.payload.email,
       letterSubject: "Thank you for order! You are welcome!",
-      letterHtml: letterHtml,
+      letterHtml,
       deliveryAddress: {
         country: "Ukraine",
         city: customer.payload.city,

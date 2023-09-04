@@ -1,3 +1,5 @@
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
@@ -140,7 +142,7 @@ export default function MultiActionAreaCard({ card }) {
           style={img}
           src={card.imageUrls[0]}
           alt={card.name}
-        ></CardMedia>
+        />
         <div style={discount} className="discount">
           <span>-</span>
           <span>{discountPrice}%</span>
@@ -176,7 +178,7 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
-            maxWidth: "235px", ///////////////////////////////////////////////////////////////////////
+            maxWidth: "235px",
           }}
         >
           <Typography

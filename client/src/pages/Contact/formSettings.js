@@ -9,7 +9,7 @@ export const validationSchema = Yup.object().shape({
 });
 
 export const getInitialValues = (token, user) => {
-  if (!!token) {
+  if (token) {
     return {
       firstName: user.firstName,
       lastName: user.lastName,
@@ -17,13 +17,12 @@ export const getInitialValues = (token, user) => {
       subject: "",
       message: "",
     };
-  } else {
-    return {
-      firstName: "",
-      lastName: "",
-      email: "",
-      subject: "",
-      message: "",
-    };
   }
+  return {
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  };
 };

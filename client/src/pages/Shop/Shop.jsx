@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from "react";
@@ -10,15 +12,17 @@ import {
 } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
+import { useDispatch, useSelector } from "react-redux";
 import { useStyles } from "./InputStyle";
 import Filter from "./Filter";
 import CardItem from "./CardItem/CardItem";
 import filter from "./filter.svg";
-import { getProducts } from "../../data/fetchProducts";
+import {
+  getProducts,
+  searchProducts,
+  filterProducts,
+} from "../../data/fetchProducts";
 import { setProducts } from "../../features/shop/shopSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { searchProducts } from "../../data/fetchProducts";
-import { filterProducts } from "../../data/fetchProducts";
 
 function Shop() {
   const [isOpenFilter, setOpenFilter] = useState(true);

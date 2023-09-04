@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { Typography, Container, IconButton, Divider } from "@mui/material";
 import { Facebook, Twitter, Instagram } from "@mui/icons-material";

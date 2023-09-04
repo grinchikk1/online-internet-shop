@@ -1,18 +1,26 @@
-import React from "react";
-import { useState } from "react";
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable no-console */
+/* eslint-disable react/prop-types */
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import * as Yup from "yup";
 
-import { Typography, Container, Box, List } from "@mui/material";
-import { TextField, Divider } from "@mui/material";
+import {
+  Typography,
+  Container,
+  Box,
+  List,
+  TextField,
+  Divider,
+  useMediaQuery,
+} from "@mui/material";
 
+import Rating from "@mui/material/Rating";
+import { useDispatch, useSelector } from "react-redux";
 import CustomButton from "../CustomButton/CustomButton";
 
 import Review from "../Review/Review";
-import Rating from "@mui/material/Rating";
-import { useMediaQuery } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
 import { addReview, deleteReview } from "../../features/review/reviewSlice";
 import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 

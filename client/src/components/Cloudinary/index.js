@@ -2,7 +2,7 @@ import cloudinary from "cloudinary-core";
 
 // Функція отримання URL картинок з хмари
 
-export function getImageUrls(names) {
+function getImageUrls(names) {
   const ml = new cloudinary.Cloudinary({
     cloud_name: "ddh4awlkr",
     secure: true,
@@ -11,6 +11,8 @@ export function getImageUrls(names) {
     ml.url(`v1689947205/online-internet-shop/${name}.png`)
   );
 }
+
+export default getImageUrls;
 
 // назви всіх картинок з хмари
 

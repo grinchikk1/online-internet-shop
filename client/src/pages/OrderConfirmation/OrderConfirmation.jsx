@@ -6,7 +6,7 @@ import OrderItemsConfirm from "./OrderItemConfirm";
 import useStyles from "./OrderConfirmationStyle";
 import CircularLoader from "../../components/Loader/Loader";
 
-const OrderConfirmation = () => {
+function OrderConfirmation() {
   const token = useSelector((state) => state.auth.token);
   const orders = useSelector((state) => state.order.order);
   const orderStatus = useSelector((state) => state.order.status);
@@ -171,6 +171,6 @@ const OrderConfirmation = () => {
       </div>
     </Container>
   );
-};
+}
 
 export default OrderConfirmation;

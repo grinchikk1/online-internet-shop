@@ -1,5 +1,5 @@
-import sendRequest from "./sendRequest";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import sendRequest from "./sendRequest";
 
 // Створити замовлення
 export const createOrder = createAsyncThunk(
@@ -13,11 +13,11 @@ export const createOrder = createAsyncThunk(
 // Оновити замовлення
 export const updateOrder = createAsyncThunk(
   "order/updateOrder",
-  async (id, updateOrder, token) => {
+  async (id, updatedOrder, token) => {
     const response = await sendRequest(
       "put",
       `/orders/${id}`,
-      updateOrder,
+      updatedOrder,
       token
     );
     return response.data;

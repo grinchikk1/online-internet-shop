@@ -1,13 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { Container, Box, Typography, Button } from "@mui/material";
-import Card from "../../components/Card/Card";
 import Carousel from "react-material-ui-carousel";
-import { useStyles, theme } from "./HomeStyles";
-import { useEffect } from "react";
-import { filterProducts } from "../../data/fetchProducts";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Card from "../../components/Card/Card";
 import {
+  useStyles,
+  theme,
   container0,
   container1,
   container2,
@@ -25,15 +25,14 @@ import {
   carouselItem3,
   carouselItem4,
 } from "./HomeStyles";
+import { filterProducts } from "../../data/fetchProducts";
 import { setProducts } from "../../features/shop/shopSlice";
-import { useDispatch, useSelector } from "react-redux";
 import CircularLoader from "../../components/Loader/Loader";
 
 function Home() {
   const styles = useStyles();
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
-  const output = out();
 
   useEffect(() => {
     dispatch(setProducts(null));
@@ -44,31 +43,30 @@ function Home() {
 
   function out() {
     if (products) {
-      return products.map((card) => {
-        return (
-          <Card
-            key={card._id}
-            product={card}
-            _id={card._id}
-            enabled={card.enabled}
-            imageUrls={card.imageUrls}
-            quantity={card.quantity}
-            name={card.name}
-            currentPrice={card.currentPrice}
-            categories={card.categories}
-            productMaterial={card.productMaterial}
-            brand={card.brand}
-            itemNo={card.itemNo}
-            date={card.date}
-            country={card.manufacturerCountry}
-            previousPrice={card.previousPrice}
-          />
-        );
-      });
-    } else {
-      return <CircularLoader />;
+      return products.map((card) => (
+        <Card
+          key={card._id}
+          product={card}
+          _id={card._id}
+          enabled={card.enabled}
+          imageUrls={card.imageUrls}
+          quantity={card.quantity}
+          name={card.name}
+          currentPrice={card.currentPrice}
+          categories={card.categories}
+          productMaterial={card.productMaterial}
+          brand={card.brand}
+          itemNo={card.itemNo}
+          date={card.date}
+          country={card.manufacturerCountry}
+          previousPrice={card.previousPrice}
+        />
+      ));
     }
+    return <CircularLoader />;
   }
+
+  const output = out();
 
   return (
     <ThemeProvider theme={theme}>

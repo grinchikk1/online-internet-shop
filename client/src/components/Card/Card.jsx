@@ -1,10 +1,15 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-extra-boolean-cast */
+/* eslint-disable react/prop-types */
 import React, { useState } from "react";
 import { Container, Typography } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import { useStyles, theme } from "./CardStyle";
-import FavouriteButton from "../FavouriteButton/FavouriteButton";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
+  useStyles,
+  theme,
   cardContainer,
   cardImgContainer,
   cardNameContainer,
@@ -15,28 +20,21 @@ import {
   cardMaterial,
   cardBrand,
 } from "./CardStyle";
+import FavouriteButton from "../FavouriteButton/FavouriteButton";
+
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../data/fetchCart";
 
-import { useNavigate } from "react-router-dom";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 
 function Card({
   _id,
-  enabled,
   imageUrls,
-  quantity,
   name,
   currentPrice,
-  categories,
   productMaterial,
   brand,
-  itemNo,
-  date,
-  country,
-  previousPrice,
   product,
 }) {
   const navigate = useNavigate();

@@ -1,9 +1,9 @@
 import React from "react";
-import CustomButton from "../CustomButton/CustomButton";
-import { logout } from "../../features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Typography } from "@mui/material";
+import { logout } from "../../features/auth/authSlice";
+import CustomButton from "../CustomButton/CustomButton";
 import { clearFavorites } from "../../features/favorites/favoriteSlice";
 
 export default function ProfileTabThirdContent() {

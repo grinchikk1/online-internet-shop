@@ -1,11 +1,11 @@
-// FavouriteButton.js
+/* eslint-disable react/prop-types */
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import {
   addFavorites,
   removeFavorites,
 } from "../../../features/favorites/favoriteSlice";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 
 function FavouriteButtonItem({ card }) {
   const dispatch = useDispatch();
