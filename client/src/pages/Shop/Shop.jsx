@@ -192,6 +192,7 @@ function Shop() {
                     sx={{
                       "@media (min-width: 900px)": {
                         maxWidth: "100%",
+
                       },
                     }}
                   >
@@ -307,6 +308,7 @@ function Shop() {
                     border: "1px solid rgba(0, 0, 0, 1)",
                     background: "white",
                     color: "black",
+                    marginTop: "50px",
                     "&:hover": {
                       background: "black",
                       color: "white",

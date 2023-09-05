@@ -140,9 +140,9 @@ export const btn = {
 };
 export const carousel = {
   position: "relative",
-  margin: "0 auto", /////////////////////////////////////////////
+  margin: "0 auto", 
   padding: "0",
-  width: "98.5%", ////////////////////////////////////////////
+  width: "98.5%", 
   height: "775px",
   "@media (max-width: 768.9px)": {
     height: "450px",
@@ -246,10 +246,10 @@ export const latest = {
   lineHeight: "43px",
   color: "#000000",
   userSelect: "none",
-  margin: "0 8px", /////////////////////////////////////////////////////////
+  margin: "0 8px",
   "@media (max-width: 768.9px)": {
     fontSize: "16px",
-    fontWeight: "400",
+    fontWeight: "800",
     fontStyle: "normal",
     lineHeight: "27px",
   },
@@ -271,7 +271,7 @@ export const btnAll = {
   display: "flex",
   justifyContent: "end",
   background: "transparent",
-  margin: "0 8px", //////////////////////////////////////////////////////////////////
+  margin: "20px 8px 0 8px",
   "&:hover": {
     background: "transparent",
     color: "#000000",
