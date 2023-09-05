@@ -75,8 +75,10 @@ export const useStyles = makeStyles(() => ({
     paddingBottom: "250px",
     paddingTop: "96px",
     display: "flex",
-    justifyContent: "start",
-    alignItems: "start",
+    // justifyContent: "start",
+    // alignItems: "start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   FilterTitle: {
     fontWeight: 400,
