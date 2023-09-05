@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "cloudinary-core": "^2.13.0",
+    "emailjs-com": "^3.2.0",
     "formik": "^2.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -39,14 +40,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "echo 'Running lint...' && eslint .",
+    "lint:fix": "eslint --fix .",
+    "format": "echo 'Running prettier...' && prettier --write \"src/**/*.{js,jsx,scss}\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "engines": {
+    "node": "18.16.1"
   },
   "browserslist": {
     "production": [
@@ -60,8 +59,10 @@
       "last 1 safari version"
     ]
   },
+  "proxy": "http://localhost:4000",
   "devDependencies": {
-    "eslint": "^8.45.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^8.48.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",

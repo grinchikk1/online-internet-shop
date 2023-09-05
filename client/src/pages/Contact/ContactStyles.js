@@ -1,11 +1,6 @@
 import { makeStyles } from "@mui/styles";
-import { createTheme } from "@mui/material/styles";
-export const theme = createTheme({
-  typography: {
-    fontFamily: "DM Sans, sans-serif",
-  },
-});
-export const useStyles = makeStyles((theme) => ({
+
+export const useStyles = makeStyles(() => ({
   formContainer: {
     display: "flex",
     flexDirection: "column",
@@ -45,6 +40,7 @@ export const fieldStyle = {
     border: "none",
     borderBottom: `1px solid ${"#D8D8D8"}`,
     borderRadius: "0px",
-    marginRight: "5vw",
+    // marginRight: "5vw",
+    // maxWidth: "500px"
   },
 };

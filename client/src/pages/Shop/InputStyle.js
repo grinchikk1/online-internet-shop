@@ -1,12 +1,6 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 
-export const theme = createTheme({
-  typography: {
-    fontFamily: "DM Sans, sans-serif",
-  },
-});
-
 export const customTheme = createTheme({
   components: {
     MuiSlider: {
@@ -25,7 +19,7 @@ export const customTheme = createTheme({
   },
 });
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
   Wrapper: {
     padding: "0px 5px",
   },
@@ -38,10 +32,13 @@ export const useStyles = makeStyles((theme) => ({
     marginBottom: "16px",
   },
   searchInput: {
-    width: "261px",
+    width: "250px",
     height: "25px",
     border: "none",
     borderBottom: "1px solid rgba(216, 216, 216, 1)",
+    "@media (max-width: 900px) ": {
+      width: "200px",
+    },
   },
   Title: {
     color: "rgba(0, 0, 0, 1)",
@@ -53,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   SelectInput: {
     fontSize: "14px",
-    border: "1px solid rgba(216, 216, 216, 1)",
+    // border: "1px solid rgba(216, 216, 216, 1)", // прибрала закреслення тексту при фокусі
     height: "53px",
     padding: "15px 12px",
   },
@@ -78,8 +75,10 @@ export const useStyles = makeStyles((theme) => ({
     paddingBottom: "250px",
     paddingTop: "96px",
     display: "flex",
-    justifyContent: "start",
-    alignItems: "start",
+    // justifyContent: "start",
+    // alignItems: "start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   FilterTitle: {
     fontWeight: 400,
@@ -87,3 +86,17 @@ export const useStyles = makeStyles((theme) => ({
     color: "rgba(161, 138, 104, 1)",
   },
 }));
+
+export const Btn = {
+  width: "150px",
+  height: "50px",
+  color: "#fff",
+  fontSize: "15px",
+  fontWeight: "400",
+  textAling: "center",
+  background: "rgba(112, 112, 112, 1)",
+  "&:hover": {
+    border: "1px solid #fff",
+    color: "black",
+  },
+};

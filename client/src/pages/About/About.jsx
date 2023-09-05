@@ -18,7 +18,7 @@ function About() {
         Fast Fashion, And Faster Fashion
       </Typography>
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001757/online-internet-shop/about/Img_01_yzmci9.jpg"
         alt="Перше фото"
         style={{ width: "100%", borderRadius: "8px", objectFit: "cover" }}
       />
@@ -48,13 +48,14 @@ function About() {
       {/* Друге фото  */}
 
       <img
-        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1689947205/online-internet-shop/main_picture.png"
+        src="https://res.cloudinary.com/ddh4awlkr/image/upload/v1693001756/online-internet-shop/about/Img_02_e8mw2w.jpg"
         alt="Друге фото"
         style={{
           display: "block",
           margin: "0 auto",
           width: "58%",
-          minWidth: "272px",
+          minWidth: "288px",
+          minHeight: "149px",
           borderRadius: "8px",
           objectFit: "cover",
         }}
@@ -96,7 +97,7 @@ function About() {
           display: "flex",
           justifyContent: "center",
           padding: "0",
-          marginBottom: "57px",
+          marginBottom: "100px",
         }}
       >
         <Typography sx={{ marginTop: "10px", fontSize: "16px" }}>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Grid, Box, Typography } from "@mui/material";
 import { useStyles } from "./CartItemStyles";
 
@@ -9,21 +9,13 @@ import {
   deleteFromCart,
   removeFromCart,
   addToCart,
-  updateCart,
 } from "../../data/fetchCart";
-import { getUserToken } from "../../data/fetchUsers";
-import { addProductToLocalStorage } from "../Card/Card";
-
-export const removeProductFromLocalStorage = (productId) => {
-  const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-  const updatedCartItems = cartItems.filter((item) => item._id !== productId);
-  localStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
-};
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 const CartItem = (props) => {
   const { _id, imageUrls, name, currentPrice, productMaterial, brand } =
     props.data;
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
   const { onRemoveFromCartClicked, amount } = props;
   const SVGCLOSEBTN = (
     <svg
@@ -48,9 +40,11 @@ const CartItem = (props) => {
       dispatch(updateCartCount({ itemID: _id, newCount: amount - 1 }));
       if (!!token) {
         removeFromCart(_id, token);
-        updateCart(_id, token);
       } else {
-        removeProductFromLocalStorage({ _id: _id });
+        CartLocalStorageHelper.updateCartCount({
+          itemID: _id,
+          newCount: amount - 1,
+        });
       }
     }
   };
@@ -59,9 +53,11 @@ const CartItem = (props) => {
     dispatch(updateCartCount({ itemID: _id, newCount: amount + 1 }));
     if (!!token) {
       addToCart(_id, token);
-      updateCart(_id, token);
     } else {
-      addProductToLocalStorage({ _id: _id });
+      CartLocalStorageHelper.updateCartCount({
+        itemID: _id,
+        newCount: amount + 1,
+      });
     }
   };
 
@@ -83,7 +79,6 @@ const CartItem = (props) => {
     if (!!token) {
       deleteFromCart(_id, token);
     }
-    removeProductFromLocalStorage({ _id: _id });
   };
 
   return (

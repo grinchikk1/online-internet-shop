@@ -32,13 +32,13 @@
     }
 
     .error-message {
-      color: $errors;
+      color: black;
       font-size: 14px;
       margin-top: 5px;
     }
   }
 
-  button {
+  #register_btn {
     padding: 10px 20px;
     background-color: $white;
     color: $black;

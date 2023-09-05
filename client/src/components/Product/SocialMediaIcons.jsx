@@ -20,7 +20,10 @@ const SocialMediaIcons = ({ item }) => {
         sx={{ backgroundColor: "#D8D8D8", width: "1px" }}
       />
       <IconButton>
-        <a href="mailto:demonchikk@i.ua" style={{ color: "inherit" }}>
+        <a
+          href="mailto:mystery.shop.original@gmail.com"
+          style={{ color: "inherit" }}
+        >
           <MailOutlinedIcon />
         </a>
       </IconButton>

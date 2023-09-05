@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
@@ -8,16 +8,57 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../data/fetchUsers";
 import { setUser, setError } from "../../features/auth/authSlice";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
+import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
+
+const validationSchema = Yup.object().shape({
+  firstName: Yup.string()
+    .min(2, "First Name must be between 2 and 25 characters")
+    .max(25, "First Name must be between 2 and 25 characters")
+    .required("First name is required"),
+  lastName: Yup.string()
+    .min(2, "Last Name must be between 2 and 25 characters")
+    .max(25, "Last Name must be between 2 and 25 characters")
+    .required("Last name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(7, "Password must be between 7 and 30 characters")
+    .max(30, "Password must be between 7 and 30 characters")
+    .required("Password is required"),
+  login: Yup.string()
+    .min(3, "Login must be between 3 and 10 characters")
+    .max(10, "Login must be between 3 and 10 characters")
+    .required("Login is required"),
+});
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [messageText, setMessageText] = useState("");
+  const [messageTitle, setMessageTitle] = useState("");
+
   const handleSubmit = async (values) => {
     try {
       const user = await createUser(values);
-      dispatch(setUser(user));
-      navigate("/login");
+
+      if (user.status === 200) {
+        setShowSnackbar(true);
+        setMessageText("Register Successful");
+        setMessageTitle("Success");
+
+        dispatch(setUser(user.data));
+
+        CartLocalStorageHelper.resetCart();
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
+      } else {
+        setShowSnackbar(true);
+        setMessageText("Something went wrong!");
+        setMessageTitle("Error");
+      }
     } catch (error) {
       dispatch(setError("Error registering"));
     }
@@ -108,7 +149,15 @@ const Registration = () => {
             />
           </div>
 
-          <button type="submit">Register</button>
+          <button type="submit" id="register_btn">
+            Register
+          </button>
+          <CustomSnackbar
+            open={showSnackbar}
+            onClose={() => setShowSnackbar(false)}
+            titleText={messageTitle}
+            text={messageText}
+          />
           <Typography sx={{ paddingTop: "15px" }}>
             Have an account?{" "}
             <Link to="/login" style={{ color: "#707070" }}>
@@ -122,23 +171,3 @@ const Registration = () => {
 };
 
 export default Registration;
-
-const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(2, "First Name must be between 2 and 25 characters")
-    .max(25, "First Name must be between 2 and 25 characters")
-    .required("First name is required"),
-  lastName: Yup.string()
-    .min(2, "Last Name must be between 2 and 25 characters")
-    .max(25, "Last Name must be between 2 and 25 characters")
-    .required("Last name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
-  password: Yup.string()
-    .min(7, "Password must be between 7 and 30 characters")
-    .max(30, "Password must be between 7 and 30 characters")
-    .required("Password is required"),
-  login: Yup.string()
-    .min(3, "Login must be between 3 and 10 characters")
-    .max(10, "Login must be between 3 and 10 characters")
-    .required("Login is required"),
-});

@@ -5,22 +5,21 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { addToCart } from "../../data/fetchCart";
-import { addProductToLocalStorage } from "../../components/Card/Card";
-import { getUserToken } from "../../data/fetchUsers";
+import { getCart, updateCart } from "../../data/fetchCart";
+import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Product() {
   const products = useSelector((store) => store.shop.products);
   const dispatch = useDispatch();
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  const token = getUserToken();
+  const token = useSelector((state) => state.auth.token);
 
   useEffect(() => {
     if (products.length === 0) {
       getProducts().then((data) => {
-        dispatch(setProducts(data));
-        const product = data.find((product) => product._id === id);
+        dispatch(setProducts(data.data));
+        const product = data.data.find((product) => product._id === id);
         setProduct(product);
       });
     } else {
@@ -29,12 +28,41 @@ function Product() {
     }
   }, [dispatch, id, products]);
 
-  const handleAddProductToCart = () => {
+  const handleAddProductToCart = async (amount = 1) => {
     dispatch(addProductToCart(product));
     if (!!token) {
-      addToCart(product._id, token);
+      const cart = await getCart(token);
+
+      let products = cart.data?.products.map((item) => {
+        return {
+          product: item.product._id,
+          cartQuantity: item.cartQuantity || 1,
+        };
+      });
+
+      if (products.find((item) => item.product === product._id)) {
+        products = products.map((item) => {
+          if (item.product === product._id) {
+            return {
+              ...item,
+              cartQuantity: item.cartQuantity + amount,
+            };
+          }
+          return item;
+        });
+      } else {
+        products = [
+          ...products,
+          {
+            product: product._id,
+            cartQuantity: amount,
+          },
+        ];
+      }
+
+      updateCart({ products }, token);
     } else {
-      addProductToLocalStorage(product);
+      CartLocalStorageHelper.addProductToCart(product, amount);
     }
   };
 

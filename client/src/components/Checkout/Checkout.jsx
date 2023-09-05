@@ -1,96 +1,109 @@
-import { Grid, Container, Alert } from "@mui/material";
+import React from "react";
+import { Grid, Container } from "@mui/material";
 import { Formik, Form } from "formik";
-import { initalValues, validationSchema } from "./formSettings";
-import { useStyles, theme } from "./CheckoutStyle";
-import { ThemeProvider } from "@mui/material/styles";
+import { getInitialValues, validationSchema } from "./formSettings";
+import { useStyles } from "./CheckoutStyle";
 import BillingDetails from "./BillingDetails";
 import YourOrder from "./YourOrder";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addCustomer } from "../../features/customer/customerSlice";
 import { getTotalCartAmount } from "../../features/cart/cartSelector";
 import { clearCart } from "../../features/cart/cartSlice";
-import { setOrder } from "../../features/order/orderSlice";
-// import nodemailer from "nodemailer";
+import { createOrder } from "../../features/order/orderSlice";
+import { deleteCart } from "../../data/fetchCart";
 
 function Checkout() {
-  // const nodemailer = require("nodemailer");
   const classes = useStyles();
-  const [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
 
-  // async function sendEmail(to, subject, text) {
-  //   let transporter = nodemailer.createTransport({
-  //     service: "Gmail", // например, "Gmail"
-  //     auth: {
-  //       user: "your-email@example.com", // ваш адрес электронной почты
-  //       pass: "your-email-password", // ваш пароль от почты
-  //     },
-  //   });
-
-  //   let info = await transporter.sendMail({
-  //     from: "your-email@example.com", // ваш адрес электронной почты
-  //     to: "email user", // адрес получателя
-  //     subject: "subject", // тема письма
-  //     text: "text", // текст письма
-  //   });
-
-  //   console.log("Message sent: %s", info.messageId);
-  // }
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user ? user._id : null;
 
   const cart = useSelector((state) => state.cart.cart);
   const totalAmount = useSelector(getTotalCartAmount);
   const amounts = useSelector((state) => state.cart.amount);
 
+  const products = JSON.parse(localStorage.getItem("cart"));
+  const product = products
+    ? products.map((product, index) => {
+        return {
+          _id: index,
+          product: product,
+          cartQuantity: Object.values(amounts)[index],
+        };
+      })
+    : null;
+
+  const initialValues = getInitialValues(token, user);
+
   const handleSubmit = async (values, { resetForm }) => {
-    const randomOrderNumber = Math.floor(Math.random() * 9000000) + 1000000;
-    const orderDate = new Date();
-
-    // const customerEmail = values.email;
-    // const orderConfirmationSubject = "Order Confirmation";
-    // const orderConfirmationText =
-    //   "Your order has been successfully placed. Order details..."; // Здесь может быть более подробное сообщение о заказе
-
-    // await sendEmail(
-    //   customerEmail,
-    //   orderConfirmationSubject,
-    //   orderConfirmationText
-    // );
-    // const yourEmail = "your-email@example.com";
-    // const orderDetailsSubject = "New Order";
-    // const orderDetailsText = "A new order has been placed. Order details..."; // Здесь может быть более подробное сообщение о заказе
-
-    // await sendEmail(yourEmail, orderDetailsSubject, orderDetailsText);
-
-    const customer = await dispatch(
+    const customer = dispatch(
       addCustomer({
         ...values,
-        orderNumber: randomOrderNumber,
-        orderDate: orderDate.toISOString(),
       })
     );
-    const newOrder = {
-      customerId: customer.payload.orderNumber,
+    const productNames = cart.map(
+      (product) =>
+        `<img src="${product.imageUrls[0]}" width="150" height="150" /> ${product.name} $ ${product.currentPrice}`
+    );
+    const productNamesList = productNames.join("</li><li>");
+
+    const letterHtml = `
+    <h1>Your order is placed.</h1>
+    <h2>Hello, ${values.firstName}, ${values.lastName}</h2>
+    <h3>Your products:</h3>
+    <ul>
+      <li >${productNamesList}</li>
+    </ul>
+    <h3>Your total summ: $ ${totalAmount}</h3>
+    <h4>Your address: ${values.city}, ${values.streetAddress}</h4>
+  `;
+
+    const newOrderLocal = {
+      customerId: userId,
       deliveryAddress: {
         country: "Ukraine",
         city: customer.payload.city,
         address: customer.payload.streetAddress,
       },
-      paymentInfo: customer.payload.paymentOption,
-      status: "New order",
+      status: "not shipped",
       email: customer.payload.email,
       mobile: customer.payload.phone,
-      firstName: customer.payload.firstName,
-      lastName: customer.payload.lastName,
-      orderDate: customer.payload.orderDate,
-      notes: customer.payload.notes,
-      products: {},
+
+      products: product,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml: letterHtml,
       totalSum: totalAmount,
     };
-    await cart.forEach((product) => {
-      newOrder.products[product._id] = {
+
+    const newOrderToServer = {
+      customerId: userId,
+      mobile: customer.payload.phone,
+      email: customer.payload.email,
+      letterSubject: "Thank you for order! You are welcome!",
+      letterHtml: letterHtml,
+      deliveryAddress: {
+        country: "Ukraine",
+        city: customer.payload.city,
+        address: customer.payload.streetAddress,
+      },
+      status: "not shipped",
+    };
+
+    const newOrderForHTML = {
+      ...newOrderLocal,
+      orderNumber: Math.floor(Math.random() * 100),
+      paymentInfo: customer.payload.paymentOption,
+      notes: customer.payload.notes,
+      orderDate: new Date().toLocaleString(),
+      products: [],
+    };
+
+    cart.forEach((product) => {
+      newOrderForHTML.products[product._id] = {
         name: product.name,
         currentPrice: product.currentPrice,
         amounts: amounts[product._id],
@@ -99,42 +112,42 @@ function Checkout() {
         _id: product._id,
       };
     });
+
     resetForm();
-    setIsOrderPlaced(true);
-    await dispatch(setOrder(newOrder));
+
+    if (!!token) {
+      dispatch(createOrder(newOrderToServer));
+      await deleteCart(token);
+    } else {
+      dispatch(createOrder(newOrderLocal));
+    }
+
     navigate("/order-confirmation");
     dispatch(clearCart());
   };
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container maxWidth="lg" className={classes.formContainer}>
-        <Formik
-          initialValues={initalValues}
-          validationSchema={validationSchema}
-          onSubmit={handleSubmit}
-        >
-          {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
-            <Form>
-              <Grid container spacing={4}>
-                <BillingDetails />
-                <YourOrder
-                  isSubmitting={isSubmitting}
-                  handleSubmit={handleSubmit}
-                  values={values}
-                  setFieldValue={setFieldValue}
-                />
-              </Grid>
-            </Form>
-          )}
-        </Formik>
-        {isOrderPlaced && (
-          <Alert severity="success" sx={{ width: "100%", marginTop: "15px" }}>
-            Your order has been successfully placed
-          </Alert>
+    <Container maxWidth="lg" className={classes.formContainer}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting, handleSubmit, values, setFieldValue }) => (
+          <Form>
+            <Grid container spacing={4}>
+              <BillingDetails />
+              <YourOrder
+                isSubmitting={isSubmitting}
+                handleSubmit={handleSubmit}
+                values={values}
+                setFieldValue={setFieldValue}
+              />
+            </Grid>
+          </Form>
         )}
-      </Container>
-    </ThemeProvider>
+      </Formik>
+    </Container>
   );
 }
 
