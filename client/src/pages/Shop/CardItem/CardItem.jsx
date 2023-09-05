@@ -105,10 +105,8 @@ export default function MultiActionAreaCard({ card }) {
     },
   };
 
-
   const discountPrice = Math.ceil(
-    ((card.previousPrice - card.currentPrice) / card.previousPrice) *
-    100
+    ((card.previousPrice - card.currentPrice) / card.previousPrice) * 100
   );
 
   const handleAddProductToCart = () => {
@@ -177,42 +175,40 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
-            maxWidth: "235px", 
+            maxWidth: "235px",
           }}
-        > 
-  
-       < Box>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{
-              textDecoration: "line-through",
-              marginBottom: "5px",
-              fontSize: 14,
-              fontWeight: 500,
-              color: "rgba(161, 138, 104, 1)",
-            }}
-          >
-            ${card.previousPrice},00
-          </Typography>
+        >
+          <Box>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{
+                textDecoration: "line-through",
+                marginBottom: "5px",
+                fontSize: 14,
+                fontWeight: 500,
+                color: "rgba(161, 138, 104, 1)",
+              }}
+            >
+              ${card.previousPrice},00
+            </Typography>
 
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{
-              marginBottom: "5px",
-              fontSize: 18,
-              fontWeight: 500,
-              color: "rgba(161, 138, 104, 1)",
-              
-            }}
-          >
-            ${card.currentPrice},00
-          </Typography>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{
+                marginBottom: "5px",
+                fontSize: 18,
+                fontWeight: 500,
+                color: "rgba(161, 138, 104, 1)",
+              }}
+            >
+              ${card.currentPrice},00
+            </Typography>
           </Box>
-       
+
           <Typography
             gutterBottom
             variant="h5"

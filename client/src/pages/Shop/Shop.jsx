@@ -192,7 +192,6 @@ function Shop() {
                     sx={{
                       "@media (min-width: 900px)": {
                         maxWidth: "100%",
-
                       },
                     }}
                   >

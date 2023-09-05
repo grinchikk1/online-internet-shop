@@ -140,9 +140,9 @@ export const btn = {
 };
 export const carousel = {
   position: "relative",
-  margin: "0 auto", 
+  margin: "0 auto",
   padding: "0",
-  width: "98.5%", 
+  width: "98.5%",
   height: "775px",
   "@media (max-width: 768.9px)": {
     height: "450px",

@@ -204,34 +204,34 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               alignItems={"center"}
               sx={{ paddingTop: "5px", paddingBottom: "24px" }}
             >
-          <Box>
-            <Typography                         
-              variant="body1"
-              sx={{
-                textDecoration: "line-through",
-                color: "#A18A68",
-                fontSize: "14px",
-                fontWeight: "400",
-                lineHeight: "26px",
-                textTransform: "capitalize",
-              }}
-            >
-              {`$  ${previousPrice},00`}           
-            </Typography>
+              <Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    textDecoration: "line-through",
+                    color: "#A18A68",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    lineHeight: "26px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {`$  ${previousPrice},00`}
+                </Typography>
 
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "#A18A68",
-                  fontSize: "16px",
-                  fontWeight: "400",
-                  lineHeight: "26px",
-                  textTransform: "capitalize",
-                }}
-              >
-                {`$  ${currentPrice},00`}
-              </Typography>
-          </Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#A18A68",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "26px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {`$  ${currentPrice},00`}
+                </Typography>
+              </Box>
               <IconButton onClick={() => handleButtonClick("share")}>
                 <ShareIcon fontSize="small" sx={{ color: "#000" }} />
               </IconButton>
@@ -545,7 +545,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               {name}
             </Typography>
 
-            <Typography                            
+            <Typography
               variant="body1"
               sx={{
                 textDecoration: "line-through",
@@ -554,10 +554,10 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 fontWeight: "500",
                 lineHeight: "26px",
                 textTransform: "capitalize",
-                marginTop: "20px"
+                marginTop: "20px",
               }}
             >
-              {`$  ${previousPrice},00`}           
+              {`$  ${previousPrice},00`}
             </Typography>
 
             <Typography
@@ -569,7 +569,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 fontWeight: "500",
                 lineHeight: "26px",
                 textTransform: "capitalize",
-                marginBottom: "-20px"
+                marginBottom: "-20px",
               }}
             >
               {`$  ${currentPrice},00`}
@@ -615,11 +615,9 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 },
               }}
             >
-              {reviews.length > 0 ? (
-               lastReviewText
-              ) : (
-             "Your review can be the first..."
-             )}
+              {reviews.length > 0
+                ? lastReviewText
+                : "Your review can be the first..."}
             </Typography>
             <Box
               display="flex"
