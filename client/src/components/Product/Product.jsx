@@ -36,6 +36,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
     _id,
     imageUrls,
     name,
+    previousPrice,      
     currentPrice,
     description,
     brand,
@@ -203,18 +204,34 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               alignItems={"center"}
               sx={{ paddingTop: "5px", paddingBottom: "24px" }}
             >
-              <Typography
-                variant="body1"
-                sx={{
-                  color: "#A18A68",
-                  fontSize: "16px",
-                  fontWeight: "400",
-                  lineHeight: "26px",
-                  textTransform: "capitalize",
-                }}
-              >
-                {`$  ${currentPrice},00`}
-              </Typography>
+              <Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    textDecoration: "line-through",
+                    color: "#A18A68",
+                    fontSize: "14px",
+                    fontWeight: "400",
+                    lineHeight: "26px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {`$  ${previousPrice},00`}
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: "#A18A68",
+                    fontSize: "16px",
+                    fontWeight: "400",
+                    lineHeight: "26px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {`$  ${currentPrice},00`}
+                </Typography>
+              </Box>
               <IconButton onClick={() => handleButtonClick("share")}>
                 <ShareIcon fontSize="small" sx={{ color: "#000" }} />
               </IconButton>
@@ -527,15 +544,32 @@ export default function ProductCard({ product, onAddToCartClicked }) {
             >
               {name}
             </Typography>
+
             <Typography
               variant="body1"
               sx={{
-                paddingTop: "22px",
+                textDecoration: "line-through",
+                color: "#A18A68",
+                fontSize: "18px",
+                fontWeight: "500",
+                lineHeight: "26px",
+                textTransform: "capitalize",
+                marginTop: "20px",
+              }}
+            >
+              {`$  ${previousPrice},00`}
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                paddingTop: "8px",
                 color: "#A18A68",
                 fontSize: "20px",
                 fontWeight: "500",
                 lineHeight: "26px",
                 textTransform: "capitalize",
+                marginBottom: "-20px",
               }}
             >
               {`$  ${currentPrice},00`}
@@ -581,7 +615,9 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 },
               }}
             >
-              {lastReviewText}
+              {reviews.length > 0
+                ? lastReviewText
+                : "Your review can be the first..."}
             </Typography>
             <Box
               display="flex"
