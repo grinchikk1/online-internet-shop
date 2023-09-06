@@ -21,7 +21,7 @@ export const cardContainer = {
     },
   },
   "@media (max-width: 437.9px)": {
-   padding: "0",
+    padding: "0",
     margin: "0 0px 60px 0px",
     width: "150px",
     height: "193px",
@@ -129,7 +129,7 @@ export const cardImgContainer = {
     margin: "0",
     width: "136px",
     height: "136px",
-    borderRadius: "4px", 
+    borderRadius: "4px",
   },
   "@media (min-width: 576px) and (max-width: 639.9px)": {
     padding: "0",
@@ -573,10 +573,10 @@ export const useStyles = makeStyles(() => ({
     },
   },
   "@media (min-width: 438px) and (max-width: 575.9px)": {
-   cardImg: {
+    cardImg: {
       width: "136px",
       height: "136px",
-    }, 
+    },
   },
   "@media (min-width: 576px) and (max-width: 639.9px)": {
     cardImg: {

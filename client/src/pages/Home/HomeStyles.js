@@ -275,7 +275,7 @@ export const discounts = {
   "@media (min-width: 769px) and (max-width: 1199.9px)": {
     marginTop: "4px",
     fontSize: "16px",
-  },  
+  },
 };
 export const btnAll = {
   width: "193px",

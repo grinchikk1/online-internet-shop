@@ -116,9 +116,11 @@ function Home() {
           <Typography sx={price}>$ 68,00</Typography>
         </Container>
         <Container sx={container3}>
-          <Box sx={{marginBottom: "8px"}}>
-          <Typography sx={latest}>Shop The Latest</Typography>
-          <Typography sx={discounts}>All products with discounts: &rarr;</Typography>
+          <Box sx={{ marginBottom: "8px" }}>
+            <Typography sx={latest}>Shop The Latest</Typography>
+            <Typography sx={discounts}>
+              All products with discounts: &rarr;
+            </Typography>
           </Box>
           <Link className={styles.link} to="/Shop">
             <Button variant="text" sx={btnAll}>
