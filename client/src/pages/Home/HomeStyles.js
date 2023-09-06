@@ -260,6 +260,23 @@ export const latest = {
     lineHeight: "43px",
   },
 };
+export const discounts = {
+  minWidth: "175px",
+  fontSize: "16px",
+  fontWeight: "500",
+  fontStyle: "normal",
+  color: "rgba(161, 138, 104, 1)",
+  userSelect: "none",
+  margin: "10px 0 0 8px",
+  "@media (max-width: 768.9px)": {
+    marginTop: "0px",
+    fontSize: "12px",
+  },
+  "@media (min-width: 769px) and (max-width: 1199.9px)": {
+    marginTop: "4px",
+    fontSize: "16px",
+  },  
+};
 export const btnAll = {
   width: "193px",
   height: "53px",
@@ -299,7 +316,12 @@ export const container4 = {
   display: "flex",
   flexWrap: "wrap",
   justifyContent: "space-between",
-  "@media (max-width: 768.9px)": {
+  "@media (max-width: 437.9px)": {
+    margin: "0",
+    padding: "0",
+    justifyContent: "space-around",
+  },
+  "@media (min-width: 438px) and (max-width: 768.9px)": {
     margin: "0",
     padding: "0",
   },
