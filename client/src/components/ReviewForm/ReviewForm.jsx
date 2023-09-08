@@ -148,9 +148,7 @@ function ReviewForm({ productId }) {
                   text="It`s not yours review, you can`t delete it"
                 />
 
-                <Box
-                  sx={buttonStyles}
-                >
+                <Box sx={buttonStyles}>
                   <CustomButton
                     type="submit"
                     value="Submit"
@@ -176,56 +174,61 @@ function ReviewForm({ productId }) {
           },
         }}
       >
-        <Typography variant="h6" 
-          sx={{ 
-          textAlign: "left", 
-          color: "#A18A68" }}>
+        <Typography
+          variant="h6"
+          sx={{
+            textAlign: "left",
+            color: "#A18A68",
+          }}
+        >
           Reviews({reviews.length})
         </Typography>
         {reviews.length === 0 ? (
-        
-        <Typography 
-          sx={{ 
-          textAlign: "left", 
-          color: "#707070", 
-          marginTop: "20px", 
-          fontStyle: "italic" }}>
-          Your review can be the first...
-        </Typography>
+          <Typography
+            sx={{
+              textAlign: "left",
+              color: "#707070",
+              marginTop: "20px",
+              fontStyle: "italic",
+            }}
+          >
+            Your review can be the first...
+          </Typography>
         ) : (
-        <List
-          sx={{
-            maxWidth: "510px",
-            margin: "0 auto",
-            alignItems: "center",
-            justifyContent: "left",
-            textAlign: "left",
-          }}
-        >
-          {reviews.map((review, index) => (
-            <React.Fragment key={index}>
-              <Review
-                name={review.customer.firstName}
-                date={review?.someCustomParam?.date}
-                review={review.content}
-                rating={review?.someCustomParam?.rating}
-                onDelete={() => {
-                  if (
-                    user &&
-                    (user.isAdmin || user._id === review.customer._id)
-                  ) {
-                    dispatch(deleteReview(review._id));
-                  } else {
-                    setSnackbarDel(true);
-                  }
-                }}
-              />
-              {index !== reviews.length - 1 && (
-                <Divider sx={{ width: "auto", marginBottom: "40px" }} />
-              )}
-            </React.Fragment>
-          ))}
-        </List>)}
+          <List
+            sx={{
+              maxWidth: "510px",
+              margin: "0 auto",
+              alignItems: "center",
+              justifyContent: "left",
+              textAlign: "left",
+            }}
+          >
+            {reviews.map((review, index) => (
+              <React.Fragment key={index}>
+                <Review
+                  name={review.customer.firstName}
+                  date={review?.someCustomParam?.date}
+                  review={review.content}
+                  rating={review?.someCustomParam?.rating}
+                  onDelete={() => {
+                    if (
+                      user &&
+                      (user.isAdmin || user._id === review.customer._id)
+                    ) {
+                      dispatch(deleteReview(review._id));
+                    } else {
+                      setSnackbarDel(true);
+                    }
+                  }}
+                />
+                {index !== reviews.length - 1 && (
+                  <Divider sx={{ width: "auto", marginBottom: "40px" }} />
+                )}
+              </React.Fragment>
+            ))}
+          </List>
+        )}
       </Container>
     </Container>
   );

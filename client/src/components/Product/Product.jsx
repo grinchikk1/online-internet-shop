@@ -36,7 +36,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
     _id,
     imageUrls,
     name,
-    previousPrice,      
+    previousPrice,
     currentPrice,
     description,
     brand,
@@ -59,7 +59,6 @@ export default function ProductCard({ product, onAddToCartClicked }) {
     dispatch(getReviews(_id, reviews));
   }, [dispatch]);
 
-  
   useEffect(() => {
     if (reviews.length > 0) {
       const totalRating = reviews.reduce(
@@ -69,14 +68,12 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       const averageRating = totalRating / reviews.length;
       setAverageRating(averageRating);
     } else {
-     
       setAverageRating(0);
     }
-  
+
     const lastReview = reviews[reviews.length - 1]?.content;
     setLastReviewText(lastReview);
   }, [reviews]);
-  
 
   const isMobile = useMediaQuery("(max-width: 900px)");
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
@@ -583,7 +580,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               <Rating
                 sx={{
                   color: "#faaf00",
-                  marginLeft: "-5px"
+                  marginLeft: "-5px",
                 }}
                 name="customized-10"
                 value={averageRating}
@@ -619,7 +616,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 "&::-webkit-scrollbar": {
                   width: "5px",
                 },
-                fontStyle: reviews.length === 0 ? "italic" : "normal", 
+                fontStyle: reviews.length === 0 ? "italic" : "normal",
               }}
             >
               {reviews.length > 0
