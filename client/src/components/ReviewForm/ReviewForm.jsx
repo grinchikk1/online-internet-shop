@@ -97,7 +97,6 @@ function ReviewForm({ productId }) {
               dispatch(addReview([productId, values.review, ratingValue]));
               setSubmitting(false);
             } else {
-              // setOpenSnackbar(true);
               setSnackbarSignUp(true);
             }
           }}
@@ -150,13 +149,6 @@ function ReviewForm({ productId }) {
                 />
 
                 <Box
-                  // sx={{
-                  //   display: "flex",
-                  //   maxWidth: "40%",
-                  //   justifyContent: "flex-start",
-                  //   marginTop: "35px",
-                  //   marginBottom: "80px",
-                  // }}
                   sx={buttonStyles}
                 >
                   <CustomButton
@@ -184,9 +176,23 @@ function ReviewForm({ productId }) {
           },
         }}
       >
-        <Typography variant="h6" sx={{ textAlign: "left", color: "#A18A68" }}>
+        <Typography variant="h6" 
+          sx={{ 
+          textAlign: "left", 
+          color: "#A18A68" }}>
           Reviews({reviews.length})
         </Typography>
+        {reviews.length === 0 ? (
+        
+        <Typography 
+          sx={{ 
+          textAlign: "left", 
+          color: "#707070", 
+          marginTop: "20px", 
+          fontStyle: "italic" }}>
+          Your review can be the first...
+        </Typography>
+        ) : (
         <List
           sx={{
             maxWidth: "510px",
@@ -210,7 +216,6 @@ function ReviewForm({ productId }) {
                   ) {
                     dispatch(deleteReview(review._id));
                   } else {
-                    // setOpenDel(true);
                     setSnackbarDel(true);
                   }
                 }}
@@ -220,7 +225,7 @@ function ReviewForm({ productId }) {
               )}
             </React.Fragment>
           ))}
-        </List>
+        </List>)}
       </Container>
     </Container>
   );
