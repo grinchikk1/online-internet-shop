@@ -36,7 +36,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
     _id,
     imageUrls,
     name,
-    previousPrice,      
+    previousPrice,
     currentPrice,
     description,
     brand,
