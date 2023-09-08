@@ -18,6 +18,7 @@ import {
   name,
   price,
   latest,
+  discounts,
   btnAll,
   carouselIcon,
   carouselItem1,
@@ -117,7 +118,9 @@ function Home() {
         <Container sx={container3}>
           <Box sx={{ marginBottom: "8px" }}>
             <Typography sx={latest}>Shop The Latest</Typography>
-            <Typography sx={{ fontSize: "15px", marginLeft: "8px" }}>
+
+            <Typography sx={discounts}>
+
               All products with discounts: &rarr;
             </Typography>
           </Box>
