@@ -118,7 +118,9 @@ function Home() {
         <Container sx={container3}>
           <Box sx={{ marginBottom: "8px" }}>
             <Typography sx={latest}>Shop The Latest</Typography>
+
             <Typography sx={discounts}>
+
               All products with discounts: &rarr;
             </Typography>
           </Box>

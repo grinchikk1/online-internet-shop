@@ -17,7 +17,12 @@ const Review = ({ name, date, review, rating, onDelete }) => {
           primary={
             <React.Fragment>
               <Typography
-                sx={{ fontSize: "20px", fontWeight: 400, lineHeight: "26px" }}
+                sx={{
+                  fontSize: "20px",
+                  fontWeight: 400,
+                  lineHeight: "26px",
+                  marginLeft: "-2px",
+                }}
                 component="span"
                 variant="body1"
                 color="text.primary"
@@ -40,7 +45,7 @@ const Review = ({ name, date, review, rating, onDelete }) => {
                 name="read-only"
                 value={rating}
                 readOnly
-                sx={{ marginTop: "5px" }}
+                sx={{ marginTop: "7px", marginLeft: "-5px" }}
                 precision={0.5}
               />
               <Typography

@@ -52,7 +52,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
 
   const [averageRating, setAverageRating] = useState(0);
   const [lastReviewText, setLastReviewText] = useState(
-    "На цей продукт поки що нема відгуків, залиште перший"
+    "Your review can be the first..."
   );
 
   useEffect(() => {
@@ -67,6 +67,8 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       );
       const averageRating = totalRating / reviews.length;
       setAverageRating(averageRating);
+    } else {
+      setAverageRating(0);
     }
 
     const lastReview = reviews[reviews.length - 1]?.content;
@@ -578,6 +580,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
               <Rating
                 sx={{
                   color: "#faaf00",
+                  marginLeft: "-5px",
                 }}
                 name="customized-10"
                 value={averageRating}
@@ -613,6 +616,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
                 "&::-webkit-scrollbar": {
                   width: "5px",
                 },
+                fontStyle: reviews.length === 0 ? "italic" : "normal",
               }}
             >
               {reviews.length > 0
