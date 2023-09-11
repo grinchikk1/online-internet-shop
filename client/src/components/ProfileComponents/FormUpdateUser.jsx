@@ -6,7 +6,6 @@ import * as Yup from "yup";
 import { updateUser } from "../../data/fetchUsers";
 import { setUser } from "../../features/auth/authSlice";
 import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
-import { values } from "lodash";
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()

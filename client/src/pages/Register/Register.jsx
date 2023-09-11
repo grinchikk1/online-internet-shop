@@ -43,7 +43,6 @@ const Registration = () => {
   const [messageTitle, setMessageTitle] = useState("");
 
   const handleSubmit = async (values) => {
-    console.log(values);
     try {
       const user = await createUser(values);
 
