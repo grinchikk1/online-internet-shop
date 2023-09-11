@@ -120,7 +120,6 @@ function Home() {
             <Typography sx={latest}>Shop The Latest</Typography>
 
             <Typography sx={discounts}>
-
               All products with discounts: &rarr;
             </Typography>
           </Box>
