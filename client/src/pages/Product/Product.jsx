@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setProducts } from "../../features/shop/shopSlice";
 import { addProductToCart } from "../../features/cart/cartSlice";
-import { getCart, updateCart } from "../../data/fetchCart";
+import { getCart, updateCart, createCart } from "../../data/fetchCart";
 import { CartLocalStorageHelper } from "../../helpers/cartLocalStorageHelper";
 
 function Product() {
@@ -32,35 +32,41 @@ function Product() {
     dispatch(addProductToCart(product));
     if (!!token) {
       const cart = await getCart(token);
-
-      let products = cart.data?.products.map((item) => {
-        return {
-          product: item.product._id,
-          cartQuantity: item.cartQuantity || 1,
+      if (cart.data === null) {
+        const prod = {
+          products: [{ product: product._id, cartQuantity: amount }],
         };
-      });
-
-      if (products.find((item) => item.product === product._id)) {
-        products = products.map((item) => {
-          if (item.product === product._id) {
-            return {
-              ...item,
-              cartQuantity: item.cartQuantity + amount,
-            };
-          }
-          return item;
-        });
+        await createCart(prod, token);
       } else {
-        products = [
-          ...products,
-          {
-            product: product._id,
-            cartQuantity: amount,
-          },
-        ];
-      }
+        let products = cart.data?.products.map((item) => {
+          return {
+            product: item.product._id,
+            cartQuantity: item.cartQuantity || 1,
+          };
+        });
 
-      updateCart({ products }, token);
+        if (products.find((item) => item.product === product._id)) {
+          products = products.map((item) => {
+            if (item.product === product._id) {
+              return {
+                ...item,
+                cartQuantity: item.cartQuantity + amount,
+              };
+            }
+            return item;
+          });
+        } else {
+          products = [
+            ...products,
+            {
+              product: product._id,
+              cartQuantity: amount,
+            },
+          ];
+        }
+
+        await updateCart({ products }, token);
+      }
     } else {
       CartLocalStorageHelper.addProductToCart(product, amount);
     }
