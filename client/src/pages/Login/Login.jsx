@@ -27,6 +27,7 @@ const Login = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const initialValues = {
     loginOrEmail: "",
@@ -39,8 +40,9 @@ const Login = () => {
 
       if (user.data.success) {
         setShowSnackbar(true);
-        setMessageText("Login Successful");
+        setMessageSeverenity("success");
         setMessageTitle("Success");
+        setMessageText("Login Successfull");
       }
 
       if (user.data.token !== undefined) {
@@ -82,17 +84,17 @@ const Login = () => {
           user.data.token
         );
         CartLocalStorageHelper.resetCart();
-        // Зберігання JWT в LocalStorage
         localStorage.setItem("token", user.data.token);
         dispatch(clearFavorites());
         dispatch(setToken(user.data.token));
-      } else {
-        setShowSnackbar(true);
-        setMessageTitle("Error");
-        setMessageText("Something went wrong!");
-        dispatch(setError("Error logging in"));
       }
     } catch (error) {
+      setShowSnackbar(true);
+      setMessageSeverenity("error");
+      setMessageTitle("Error");
+      setMessageText(
+        error.response.data.password || error.response.data.loginOrEmail
+      );
       dispatch(setError("Error logging in"));
     }
   };
@@ -148,6 +150,7 @@ const Login = () => {
           </button>
           <CustomSnackbar
             open={showSnackbar}
+            severity={messageSeverenity}
             onClose={() => setShowSnackbar(false)}
             titleText={messageTitle}
             text={messageText}

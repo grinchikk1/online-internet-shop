@@ -46,6 +46,7 @@ function OrderItemsConfirm({ cart, amounts }) {
         <CustomSnackbar
           open={isOrderPlaced}
           onClose={() => setIsOrderPlaced(false)}
+          severity="success"
           titleText="success"
           text="Your order has been successfully placed"
         />

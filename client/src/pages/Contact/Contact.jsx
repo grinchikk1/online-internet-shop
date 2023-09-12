@@ -175,6 +175,7 @@ const ContactForm = () => {
       <CustomSnackbar
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
+        severity="success"
         titleText="success"
         text="Your message was sent"
       />

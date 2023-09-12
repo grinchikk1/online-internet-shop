@@ -38,6 +38,7 @@ const Registration = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const handleSubmit = async (values) => {
     try {
@@ -45,6 +46,7 @@ const Registration = () => {
 
       if (user.status === 200) {
         setShowSnackbar(true);
+        setMessageSeverenity("success");
         setMessageText("Register Successful");
         setMessageTitle("Success");
 
@@ -54,12 +56,12 @@ const Registration = () => {
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else {
-        setShowSnackbar(true);
-        setMessageText("Something went wrong!");
-        setMessageTitle("Error");
       }
     } catch (error) {
+      setShowSnackbar(true);
+      setMessageSeverenity("error");
+      setMessageText(error.response.data.message);
+      setMessageTitle("Error");
       dispatch(setError("Error registering"));
     }
   };
@@ -154,6 +156,7 @@ const Registration = () => {
           </button>
           <CustomSnackbar
             open={showSnackbar}
+            severity={messageSeverenity}
             onClose={() => setShowSnackbar(false)}
             titleText={messageTitle}
             text={messageText}

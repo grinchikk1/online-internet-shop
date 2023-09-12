@@ -89,6 +89,7 @@ function Card({
       <CustomSnackbar
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
+        severity="success"
         titleText="success"
         text="The item added to your Shopping bag."
       />

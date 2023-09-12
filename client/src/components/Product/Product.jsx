@@ -755,6 +755,7 @@ export default function ProductCard({ product, onAddToCartClicked }) {
       <CustomSnackbar
         open={showButtons.addToCart}
         onClose={handleCloseSnackbar}
+        severity="success"
         titleText="success"
         text="The item added to your Shopping bag."
       />

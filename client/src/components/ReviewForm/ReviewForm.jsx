@@ -138,12 +138,14 @@ function ReviewForm({ productId }) {
                 <CustomSnackbar
                   open={SnackbarSignUp}
                   onClose={() => setSnackbarSignUp(false)}
+                  severity="info"
                   titleText="Info"
                   text="Before leaving a review you need to Sign up"
                 />
                 <CustomSnackbar
                   open={SnackbarDel}
                   onClose={() => setSnackbarDel(false)}
+                  severity="info"
                   titleText="Info"
                   text="It`s not yours review, you can`t delete it"
                 />
