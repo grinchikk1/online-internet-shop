@@ -6,8 +6,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { IconButton, Divider } from "@mui/material";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
+import { useStyles } from "./ProductCardStyles";
 
 const SocialMediaIcons = ({ item }) => {
+  const styles = useStyles();
   return (
     <>
       <IconButton>
@@ -24,22 +26,22 @@ const SocialMediaIcons = ({ item }) => {
           href="mailto:mystery.shop.original@gmail.com"
           style={{ color: "inherit" }}
         >
-          <MailOutlinedIcon />
+          <MailOutlinedIcon className={styles.styleIcons} />
         </a>
       </IconButton>
       <IconButton>
         <Link to="https://www.facebook.com" style={{ color: "inherit" }}>
-          <FacebookOutlinedIcon />
+          <FacebookOutlinedIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
         <Link to="https://www.instagram.com" style={{ color: "inherit" }}>
-          <InstagramIcon />
+          <InstagramIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
         <Link to="https://www.twitter.com" style={{ color: "inherit" }}>
-          <TwitterIcon />
+          <TwitterIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
     </>
