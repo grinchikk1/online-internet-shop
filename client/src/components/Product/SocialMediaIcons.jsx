@@ -19,7 +19,7 @@ const SocialMediaIcons = ({ item }) => {
         orientation="vertical"
         variant="middle"
         flexItem
-        sx={{ backgroundColor: "#D8D8D8", width: "1px" }}
+        sx={{ backgroundColor: "#D8D8D8" }}
       />
       <IconButton>
         <a
@@ -30,17 +30,29 @@ const SocialMediaIcons = ({ item }) => {
         </a>
       </IconButton>
       <IconButton>
-        <Link to="https://www.facebook.com" style={{ color: "inherit" }}>
+        <Link
+          to="https://www.facebook.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
           <FacebookOutlinedIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
-        <Link to="https://www.instagram.com" style={{ color: "inherit" }}>
+        <Link
+          to="https://www.instagram.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
           <InstagramIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
-        <Link to="https://www.twitter.com" style={{ color: "inherit" }}>
+        <Link
+          to="https://www.twitter.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
           <TwitterIcon className={styles.styleIcons} />
         </Link>
       </IconButton>

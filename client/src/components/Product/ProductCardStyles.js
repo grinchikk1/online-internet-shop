@@ -58,6 +58,10 @@ export const useStyles = makeStyles(() => ({
     color: "#707070",
   },
   styleIcons: {
+    "@media (max-width: 575.9px)": {
+      width: "16px",
+      height: "16px",
+    },
     "@media (min-width: 576px) and (max-width: 769px)": {
       width: "20px",
       height: "20px",
