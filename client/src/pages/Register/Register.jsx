@@ -29,6 +29,9 @@ const validationSchema = Yup.object().shape({
     .min(3, "Login must be between 3 and 10 characters")
     .max(10, "Login must be between 3 and 10 characters")
     .required("Login is required"),
+  telephone: Yup.string()
+    .matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, "Invalid phone number")
+    .required("Phone number is required"),
 });
 
 const Registration = () => {
@@ -76,6 +79,7 @@ const Registration = () => {
           email: "",
           password: "",
           login: "",
+          telephone: "",
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -121,6 +125,21 @@ const Registration = () => {
             />
             <ErrorMessage
               name="login"
+              component="div"
+              className="error-message"
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="telephone">Phone Number</label>
+            <Field
+              type="text"
+              id="telephone"
+              name="telephone"
+              autoComplete="tel"
+            />
+            <ErrorMessage
+              name="telephone"
               component="div"
               className="error-message"
             />
