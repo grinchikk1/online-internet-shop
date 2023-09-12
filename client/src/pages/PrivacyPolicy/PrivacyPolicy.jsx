@@ -37,11 +37,9 @@ const PrivacyPolicy = () => {
         variant="body1"
         sx={{ fontSize: fontSizeBody, paddingTop: "40px" }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-        placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a
-        maximus elit ex vitae libero. Sed quis mauris eget arcu facilisis
-        consequat sed eu felis. Nunc sed porta augue. Morbi porta tempor odio,
-        in molestie diam bibendum sed.
+        We understand the importance of your privacy and are committed to
+        protecting your personal data. This document describes how we collect,
+        use, process, and safeguard your information.
       </Typography>
       <Typography
         variant="h2"
@@ -57,9 +55,9 @@ const PrivacyPolicy = () => {
         variant="body1"
         sx={{ fontSize: fontSizeBody, paddingTop: "14px" }}
       >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-        placerat, augue a volutpat hendrerit, sapien tortor faucibus augue, a
-        maximus elit ex vitae libero. Sed quis mauris eget .
+        We make every effort to ensure the security of your information. We
+        utilize advanced technologies and security measures to protect your data
+        from unauthorized access and use.
       </Typography>
       <Typography
         variant="h2"
@@ -77,7 +75,15 @@ const PrivacyPolicy = () => {
         sollicitudin ante a, gravida arcume
       </Typography>
       <Typography sx={{ fontSize: fontSizeBody, padding: "10px" }}>
+        ● We use cookies to enhance the functionality of our website. They help
+        us provide a convenient online experience for you.
+      </Typography>
+      <Typography sx={{ fontSize: fontSizeBody, padding: "10px" }}>
         ● Nam fringilla molestie velit, eget pellentesque risus scelerisque
+      </Typography>
+      <Typography sx={{ fontSize: fontSizeBody, padding: "10px" }}>
+        ● We also use cookies to analyze website usage data and improve its
+        functionality.
       </Typography>
     </div>
   );
