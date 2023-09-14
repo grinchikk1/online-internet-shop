@@ -6,6 +6,7 @@ import { logout } from "../../features/auth/authSlice";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useNavigate } from "react-router-dom";
 import CircularLoader from "../Loader/Loader";
+import { useMediaQuery } from "@mui/material";
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -16,6 +17,7 @@ export default function ProfileTabSecondContent() {
   const token = useSelector((state) => state.auth.token);
   const orders = useSelector((state) => state.order.order);
   const orderStatus = useSelector((state) => state.order.status);
+  const isMobile = useMediaQuery("(max-width: 960px)");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -62,7 +64,7 @@ export default function ProfileTabSecondContent() {
             height: "50px",
           }}
         >
-          <tr style={{ fontSize: "16px" }}>
+          <tr style={{ fontSize: isMobile ? "10px" : "16px" }}>
             <th>Order Number</th>
             <th>Date</th>
             <th>Status</th>
@@ -71,7 +73,10 @@ export default function ProfileTabSecondContent() {
         </thead>
         <tbody>
           {orders.map((order) => (
-            <tr key={order._id} style={{ fontSize: "14px" }}>
+            <tr
+              key={order._id}
+              style={{ fontSize: isMobile ? "10px" : "14px" }}
+            >
               <td>{order.orderNo}</td>
               <td>{formatDate(order.date)}</td>
               <td>{order.status}</td>

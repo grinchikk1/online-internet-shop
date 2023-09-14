@@ -47,6 +47,7 @@ export default function FormUpdateUser() {
     color: "#707070",
     border: "none",
     borderBottom: "1px solid #D8D8D8",
+    borderRadius: "0",
     outline: "none",
   };
 
