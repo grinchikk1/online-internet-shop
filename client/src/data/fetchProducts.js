@@ -23,7 +23,7 @@ export const addProduct = async (product, token) => {
 
 // Редагування продукту
 export const updateProduct = async (product, token) => {
-  return sendRequest("put", `/products/${product.id}`, product, token);
+  return sendRequest("put", `/products/${product._id}`, product, token);
 };
 
 // Функція для запиту фільтрації

@@ -16,6 +16,7 @@ import Footer from "./components/Footer/Footer";
 import OrderConfirmation from "./pages/OrderConfirmation/OrderConfirmation";
 import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import Profile from "./pages/Profile/Profile";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/admin" element={<AdminPanel />} />
           </Routes>
         </div>
         <Footer />

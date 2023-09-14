@@ -135,7 +135,7 @@ export default function FormUpdateUser() {
           <ErrorMessage name="email" component="div" style={errorStyle} />
         </div>
         <div style={fieldContainerStyle}>
-          <label htmlFor="login">Telephone:</label>
+          <label htmlFor="telephone">Telephone:</label>
           <Field
             type="phone"
             id="telephone"
