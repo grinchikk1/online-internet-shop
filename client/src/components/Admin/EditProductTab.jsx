@@ -10,12 +10,15 @@ import {
 import { getProducts } from "../../data/fetchProducts";
 import CircularLoader from "../Loader/Loader";
 import EditProductModal from "./EditProductModal";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../../features/product/productSlice";
 
 export default function EditProductTab() {
-  const [products, setProducts] = useState(null);
+  const products = useSelector((state) => state.products.products);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -30,11 +33,11 @@ export default function EditProductTab() {
     const fetchProducts = async () => {
       setIsLoading(true);
       const res = await getProducts();
-      setProducts(res.data);
+      dispatch(getProduct(res.data));
       setIsLoading(false);
     };
     fetchProducts();
-  }, []);
+  }, [dispatch]);
 
   if (isLoading) {
     return <CircularLoader />;
@@ -81,7 +84,7 @@ export default function EditProductTab() {
         >
           edit
         </Button>
-        {isModalOpen && selectedProduct === product && (
+        {isModalOpen && (
           <EditProductModal
             product={selectedProduct}
             onClose={handleCloseModal}

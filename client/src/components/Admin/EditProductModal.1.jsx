@@ -33,6 +33,7 @@ export default function EditProductModal({ product, onClose }) {
     };
 
     const res = await updateProduct(productEdit, token);
+    console.log(res);
 
     if (res.status === 200) {
       dispatch(editProduct(res.data));
@@ -40,9 +41,9 @@ export default function EditProductModal({ product, onClose }) {
       setMessageSeverenity("success");
       setMessageTitle("Success");
       setMessageText("Product updated successfully");
-      setTimeout(() => {
-        onClose();
-      }, 1500);
+      // setTimeout(() => {
+      //   onClose();
+      // }, 1200);
     } else {
       setShowSnackbar(true);
       setMessageSeverenity("error");
@@ -64,8 +65,7 @@ export default function EditProductModal({ product, onClose }) {
         zIndex: 1000,
         backgroundColor: "rgb(255, 255, 255)",
         p: 2,
-        boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.1)",
-        borderRadius: "4px",
+        boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       }}
     >
       <Box
