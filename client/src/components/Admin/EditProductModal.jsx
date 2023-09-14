@@ -179,7 +179,7 @@ export default function EditProductModal({ product, onClose }) {
               />
             </div>
             <div style={fieldContainerStyle}>
-              <label htmlFor="productMaterial">Product Material:</label>
+              <label htmlFor="productMaterial">Material:</label>
               <Field
                 type="text"
                 id="productMaterial"

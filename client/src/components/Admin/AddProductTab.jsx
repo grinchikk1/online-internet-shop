@@ -133,7 +133,7 @@ export default function AddProductTab() {
             />
           </div>
           <div style={fieldContainerStyle}>
-            <label htmlFor="productMaterial">Product Material:</label>
+            <label htmlFor="productMaterial">Material:</label>
             <Field
               type="text"
               id="productMaterial"
@@ -152,7 +152,7 @@ export default function AddProductTab() {
             <ErrorMessage name="brand" component="div" style={errorStyle} />
           </div>
           <div style={fieldContainerStyle}>
-            <label htmlFor="manufacturerCountry">Manufacturer Country:</label>
+            <label htmlFor="manufacturerCountry">Country:</label>
             <Field
               type="text"
               id="manufacturerCountry"
