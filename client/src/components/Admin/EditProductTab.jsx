@@ -7,17 +7,23 @@ import {
   CardMedia,
   Button,
 } from "@mui/material";
-import { getProducts, updateProduct } from "../../data/fetchProducts";
+import { getProducts } from "../../data/fetchProducts";
 import CircularLoader from "../Loader/Loader";
-import { useSelector } from "react-redux";
+import EditProductModal from "./EditProductModal";
 
 export default function EditProductTab() {
   const [products, setProducts] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const token = useSelector((state) => state.auth.token);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleUpdateProduct = async (product) => {
-    await updateProduct(product, token);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   useEffect(() => {
@@ -57,11 +63,12 @@ export default function EditProductTab() {
           {product.name}
         </Typography>
         <Typography variant="body2" color="secondary" sx={{ p: 1 }}>
-          {product.productMaterial} / {product.brand}
+          {product.productMaterial} / {product.brand} / {product.itemNo}
         </Typography>
         <Typography variant="body2" color="#A18A68" sx={{ p: 1 }}>
           {product.currentPrice} $
         </Typography>
+
         <Button
           type="button"
           sx={{
@@ -70,10 +77,16 @@ export default function EditProductTab() {
             right: 0,
             textTransform: "lowercase",
           }}
-          onClick={() => handleUpdateProduct(product)}
+          onClick={() => handleEditClick(product)}
         >
           edit
         </Button>
+        {isModalOpen && selectedProduct === product && (
+          <EditProductModal
+            product={selectedProduct}
+            onClose={handleCloseModal}
+          />
+        )}
       </CardContent>
     </Card>
   ));

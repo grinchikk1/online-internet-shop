@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import CustomSnackbar from "../CustomSnackBar/CustomSnackBar";
 import { addProduct } from "../../data/fetchProducts";
 import validationSchema from "./formSettings";
+import { fieldStyle, fieldContainerStyle, errorStyle } from "./style";
 
 export default function AddProductTab() {
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -12,28 +13,6 @@ export default function AddProductTab() {
   const [messageTitle, setMessageTitle] = useState("");
   const [messageSeverenity, setMessageSeverenity] = useState("success");
   const token = useSelector((state) => state.auth.token);
-
-  const fieldStyle = {
-    width: "50%",
-    fontSize: { xs: "18px", md: "22px" },
-    color: "#707070",
-    border: "none",
-    borderBottom: "1px solid #D8D8D8",
-    outline: "none",
-  };
-
-  const fieldContainerStyle = {
-    display: "flex",
-    fontSize: { xs: "18px", md: "22px" },
-    justifyContent: "space-between",
-    padding: "10px",
-    flexWrap: "wrap",
-  };
-
-  const errorStyle = {
-    color: "#000000",
-    marginLeft: "50%",
-  };
 
   const handleSubmit = async (values, { resetForm }) => {
     const product = {
