@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen } from "@testing-library/react";
 import CircularLoader from "./Loader";
 
@@ -23,5 +24,11 @@ describe("CircularLoader", () => {
     expect(progress).toHaveStyle({
       color: "#707070",
     });
+  });
+
+
+  test("Snapshot Test CircularLoader", () => {
+    const { container } = render(<CircularLoader />);
+    expect(container.firstChild).toMatchSnapshot();
   });
 });
