@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const path = require('path');
 require('dotenv').config();
-const cors = require("cors");
 
 const globalConfigs = require('./routes/globalConfigs');
 const customers = require('./routes/customers');
@@ -27,13 +26,6 @@ const partners = require('./routes/partners');
 // const mainRoute = require('./routes/index');
 
 const app = express();
-
-app.use(
-  cors({
-    origin: "https://online-internet-shop-dcf87eaec7f8.herokuapp.com",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  })
-);
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));

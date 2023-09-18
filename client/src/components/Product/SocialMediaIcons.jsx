@@ -6,8 +6,10 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { IconButton, Divider } from "@mui/material";
 import FavouriteButton from "../FavouriteButton/FavouriteButton";
+import { useStyles } from "./ProductCardStyles";
 
 const SocialMediaIcons = ({ item }) => {
+  const styles = useStyles();
   return (
     <>
       <IconButton>
@@ -17,29 +19,41 @@ const SocialMediaIcons = ({ item }) => {
         orientation="vertical"
         variant="middle"
         flexItem
-        sx={{ backgroundColor: "#D8D8D8", width: "1px" }}
+        sx={{ backgroundColor: "#D8D8D8" }}
       />
       <IconButton>
         <a
           href="mailto:mystery.shop.original@gmail.com"
           style={{ color: "inherit" }}
         >
-          <MailOutlinedIcon />
+          <MailOutlinedIcon className={styles.styleIcons} />
         </a>
       </IconButton>
       <IconButton>
-        <Link to="https://www.facebook.com" style={{ color: "inherit" }}>
-          <FacebookOutlinedIcon />
+        <Link
+          to="https://www.facebook.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
+          <FacebookOutlinedIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
-        <Link to="https://www.instagram.com" style={{ color: "inherit" }}>
-          <InstagramIcon />
+        <Link
+          to="https://www.instagram.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
+          <InstagramIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
       <IconButton>
-        <Link to="https://www.twitter.com" style={{ color: "inherit" }}>
-          <TwitterIcon />
+        <Link
+          to="https://www.twitter.com"
+          target="blank"
+          style={{ color: "inherit" }}
+        >
+          <TwitterIcon className={styles.styleIcons} />
         </Link>
       </IconButton>
     </>

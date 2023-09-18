@@ -26,6 +26,7 @@ export default function FormChangePass() {
   const [showPasswordNew, setShowPasswordNew] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const isMobile = useMediaQuery("(max-width: 960px)");
   const token = useSelector((state) => state.auth.token);
@@ -37,6 +38,7 @@ export default function FormChangePass() {
     color: "#707070",
     border: "none",
     borderBottom: "1px solid #D8D8D8",
+    borderRadius: "0",
     outline: "none",
   };
 
@@ -49,7 +51,7 @@ export default function FormChangePass() {
   };
 
   const errorStyle = {
-    color: "#D82700",
+    color: "#000000",
   };
 
   const handleSubmit = async (values, { resetForm }) => {
@@ -57,16 +59,21 @@ export default function FormChangePass() {
       const response = await changePassword(values, token);
       if (response.data.message !== undefined) {
         setMessageText(response.data.message);
+        setMessageSeverenity("success");
         setMessageTitle("Success");
         setShowSnackbar(true);
         resetForm();
       } else {
         setMessageTitle("Error");
+        setMessageSeverenity("error");
         setMessageText(response.data.password);
         setShowSnackbar(true);
       }
     } catch (error) {
-      console.error("Error changing password:", error);
+      setMessageTitle("Error");
+      setMessageSeverenity("error");
+      setMessageText(error.response.data.newPassword);
+      setShowSnackbar(true);
     }
   };
   return (
@@ -104,7 +111,6 @@ export default function FormChangePass() {
         <div style={fieldContainerStyle}>
           <IconButton
             onClick={() => setShowPasswordNew(!showPasswordNew)}
-            // edge="end"
             aria-label="toggle password visibility"
           >
             {showPasswordNew ? <VisibilityIcon /> : <VisibilityOffIcon />}
@@ -142,6 +148,7 @@ export default function FormChangePass() {
         <CustomSnackbar
           open={showSnackbar}
           onClose={() => setShowSnackbar(false)}
+          severity={messageSeverenity}
           titleText={messageTitle}
           text={messageText}
         />

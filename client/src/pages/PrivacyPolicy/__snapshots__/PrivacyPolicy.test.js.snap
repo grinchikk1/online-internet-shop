@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PrivacyPolicy Snapshot Test PrivacyPolicy 1`] = `
+<div
+  style="margin: 0px auto; padding: 40px 16px 0px; font-weight: 400; max-width: 670px;"
+>
+  <div
+    class="MuiBox-root css-xi606m"
+  >
+    <h1
+      class="MuiTypography-root MuiTypography-h1 css-1k1uezg-MuiTypography-root"
+    >
+      Privacy Policy
+    </h1>
+  </div>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1r2tuf8-MuiTypography-root"
+  >
+    We understand the importance of your privacy and are committed to protecting your personal data. This document describes how we collect, use, process, and safeguard your information.
+  </p>
+  <h2
+    class="MuiTypography-root MuiTypography-h2 css-s294ip-MuiTypography-root"
+  >
+    Security
+  </h2>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-48hir6-MuiTypography-root"
+  >
+    We make every effort to ensure the security of your information. We utilize advanced technologies and security measures to protect your data from unauthorized access and use.
+  </p>
+  <h2
+    class="MuiTypography-root MuiTypography-h2 css-s294ip-MuiTypography-root"
+  >
+    Cookies
+  </h2>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1uiqyha-MuiTypography-root"
+  >
+    ● Duis rutrum dictum libero quis rutrum. Etiam sed neque aliquam, sollicitudin ante a, gravida arcume
+  </p>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1uiqyha-MuiTypography-root"
+  >
+    ● We use cookies to enhance the functionality of our website. They help us provide a convenient online experience for you.
+  </p>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1uiqyha-MuiTypography-root"
+  >
+    ● Nam fringilla molestie velit, eget pellentesque risus scelerisque
+  </p>
+  <p
+    class="MuiTypography-root MuiTypography-body1 css-1uiqyha-MuiTypography-root"
+  >
+    ● We also use cookies to analyze website usage data and improve its functionality.
+  </p>
+</div>
+`;

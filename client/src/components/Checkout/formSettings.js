@@ -1,4 +1,5 @@
 import * as Yup from "yup";
+
 export const validationSchema = Yup.object().shape({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
@@ -8,13 +9,29 @@ export const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Email is required"),
   paymentOption: Yup.string().required("Please select a payment option"),
 });
-export const initalValues = {
-  firstName: "",
-  lastName: "",
-  city: "",
-  streetAddress: "",
-  phone: "",
-  email: "",
-  notes: "",
-  paymentOption: "Paypal",
+
+export const getInitialValues = (token, user) => {
+  if (!!token) {
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      city: "",
+      streetAddress: "",
+      phone: user.telephone,
+      email: user.email,
+      notes: "",
+      paymentOption: "Paypal",
+    };
+  } else {
+    return {
+      firstName: "",
+      lastName: "",
+      city: "",
+      streetAddress: "",
+      phone: "",
+      email: "",
+      notes: "",
+      paymentOption: "Paypal",
+    };
+  }
 };

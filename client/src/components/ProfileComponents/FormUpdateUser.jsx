@@ -34,6 +34,7 @@ export default function FormUpdateUser() {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const user = useSelector((state) => state.auth.user);
   const token = useSelector((state) => state.auth.token);
@@ -46,6 +47,7 @@ export default function FormUpdateUser() {
     color: "#707070",
     border: "none",
     borderBottom: "1px solid #D8D8D8",
+    borderRadius: "0",
     outline: "none",
   };
 
@@ -58,7 +60,8 @@ export default function FormUpdateUser() {
   };
 
   const errorStyle = {
-    color: "#D82700",
+    color: "#000000",
+    marginLeft: "50%",
   };
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -75,15 +78,20 @@ export default function FormUpdateUser() {
       if (response.status === 200) {
         dispatch(setUser(response.data));
         setMessageText("Your data has been successfully updated!");
+        setMessageSeverenity("success");
         setMessageTitle("Success");
         setShowSnackbar(true);
-      } else {
-        setShowSnackbar(true);
-        setMessageTitle("Error");
-        setMessageText("Something went wrong!");
       }
     } catch (error) {
-      console.error("Error updating user data:", error);
+      setShowSnackbar(true);
+      setMessageTitle("Error");
+      setMessageText(
+        error.response.data.firstName ||
+          error.response.data.lastName ||
+          error.response.data.email ||
+          error.response.data.login ||
+          error.response.data.telephone
+      );
     } finally {
       setSubmitting(false);
     }
@@ -128,7 +136,7 @@ export default function FormUpdateUser() {
           <ErrorMessage name="email" component="div" style={errorStyle} />
         </div>
         <div style={fieldContainerStyle}>
-          <label htmlFor="login">Telephone:</label>
+          <label htmlFor="telephone">Telephone:</label>
           <Field
             type="phone"
             id="telephone"
@@ -159,6 +167,7 @@ export default function FormUpdateUser() {
         </Button>
         <CustomSnackbar
           open={showSnackbar}
+          severity={messageSeverenity}
           onClose={() => setShowSnackbar(false)}
           titleText={messageTitle}
           text={messageText}

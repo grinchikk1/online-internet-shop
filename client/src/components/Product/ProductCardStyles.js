@@ -13,14 +13,19 @@ export const useStyles = makeStyles(() => ({
   title_text_color_mobile: {
     fontSize: "14px",
   },
-  container_desktop: {
-    display: "flex",
-    width: "100%",
-  },
-  container_image_desktop: {
+  container_images_desktop: {
     display: "flex",
     flexDirection: "row",
     maxWidth: "750px",
+    margin: 0,
+  },
+  container_image_desktop: {
+    display: "flex",
+    flexDirection: "column",
+    width: "200px",
+    height: "100%",
+    gap: "40px",
+    paddingRight: "40px",
   },
   image_list_desktop: {
     width: "120px",
@@ -47,13 +52,19 @@ export const useStyles = makeStyles(() => ({
     width: "250px",
     color: "#707070",
   },
-  container_tabs: {
-    paddingTop: "100px",
-    width: "100%",
-  },
   description_text_desktop: {
     fontSize: "16px",
     lineHeight: "27px",
     color: "#707070",
+  },
+  styleIcons: {
+    "@media (max-width: 575.9px)": {
+      width: "16px",
+      height: "16px",
+    },
+    "@media (min-width: 576px) and (max-width: 769px)": {
+      width: "20px",
+      height: "20px",
+    },
   },
 }));

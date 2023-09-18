@@ -10,14 +10,23 @@ import {
 } from "@mui/material";
 import CustomButton from "../../components/CustomButton/CustomButton";
 import { useStyles, fieldStyle } from "./ContactStyles";
-import { initialValues, validationSchema } from "./formSettings";
+import { getInitialValues, validationSchema } from "./formSettings";
 import emailjs from "emailjs-com";
 import CustomSnackbar from "../../components/CustomSnackBar/CustomSnackBar";
+import { useSelector } from "react-redux";
 
 const ContactForm = () => {
   const classes = useStyles();
   const [showSnackbar, setShowSnackbar] = useState(false);
+
   emailjs.init("hGkWN5ybqobaBvF13");
+
+  const token = useSelector((state) => state.auth.token);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const initialValues = getInitialValues(token, user);
+
   const handleFormSubmit = async (values, { resetForm }) => {
     try {
       await emailjs.send(
@@ -48,8 +57,12 @@ const ContactForm = () => {
       >
         {({ isSubmitting, handleSubmit }) => (
           <Form>
-            <Grid container spacing={5}>
-              <Grid item xs={6}>
+            <Grid
+              container
+              spacing={5}
+              sx={{ marginBottom: "50px", paddingLeft: "25px" }}
+            >
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="firstName"
@@ -57,9 +70,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="firstName" component="div" />
+                <ErrorMessage
+                  name="firstName"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="lastName"
@@ -67,9 +84,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="lastName" component="div" />
+                <ErrorMessage
+                  name="lastName"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="email"
@@ -77,9 +98,13 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="email" component="div" />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={12} sm={6} sx={{ paddingX: "25px" }}>
                 <Field
                   as={Select}
                   label="Subject*"
@@ -93,11 +118,11 @@ const ContactForm = () => {
                     "& .MuiMenuItem-root": {
                       textAlign: "left",
                     },
+
                     "& fieldset": {
                       border: "none",
                       borderBottom: `1px solid ${"#D8D8D8"}`,
                       borderRadius: "0px",
-                      marginRight: "5vw",
                     },
                   }}
                 >
@@ -109,9 +134,14 @@ const ContactForm = () => {
                   <MenuItem value="Feedback">Feedback</MenuItem>
                   <MenuItem value="Another question">Another question</MenuItem>
                 </Field>
-                <ErrorMessage name="subject" component="div" />
+                <ErrorMessage
+                  name="subject"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
-              <Grid item xs={12}>
+
+              <Grid item xs={12} sx={{ paddingX: "25px" }}>
                 <Field
                   as={TextField}
                   name="message"
@@ -121,11 +151,16 @@ const ContactForm = () => {
                   className={classes.field}
                   sx={fieldStyle}
                 />
-                <ErrorMessage name="message" component="div" />
+                <ErrorMessage
+                  name="message"
+                  component="div"
+                  style={{ fontSize: "18px" }}
+                />
               </Grid>
             </Grid>
             <Grid item xs={12} className={classes.buttonContainer}>
-              <div style={{ paddingBottom: "20px" }}>
+              {/* <div style={{ paddingBottom: "20px" }}> */}
+              <div style={{ paddingBottom: "20px", marginBottom: "250px" }}>
                 <CustomButton
                   type="submit"
                   value={"SEND"}
@@ -140,6 +175,7 @@ const ContactForm = () => {
       <CustomSnackbar
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
+        severity="success"
         titleText="success"
         text="Your message was sent"
       />

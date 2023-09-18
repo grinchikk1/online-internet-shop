@@ -42,10 +42,9 @@ export default function MultiActionAreaCard({ card }) {
 
   const img = {
     height: 300,
-    width: 235,
+    width: 239,
     alignItems: "center",
-    borderBottomLeftRadius: "4px",
-    borderBottomRightRadius: "4px",
+    borderRadius: "6px",
     position: "relative",
   };
 
@@ -75,8 +74,8 @@ export default function MultiActionAreaCard({ card }) {
     alignItems: "center",
     paddingLeft: "10px",
     paddingRight: "10px",
-    top: "235px",
-    width: "100%",
+    top: "260px",
+    bottom: "0px",
     height: "65px",
     backgroundColor: "rgba(255, 255, 255, 0.50)",
     transition: "all 0.5s ease",
@@ -84,10 +83,12 @@ export default function MultiActionAreaCard({ card }) {
     "@media (max-width: 600px) ": {
       paddingLeft: "15px",
       paddingRight: "15px",
+      maxWidth: "240px",
     },
   };
 
   const cardHoverVisible = {
+    top: "235px",
     opacity: 1,
   };
   const cardHoverAdd = {
@@ -104,10 +105,9 @@ export default function MultiActionAreaCard({ card }) {
     },
   };
 
-  const discountPrice = (
-    (card.currentPrice / card.previousPrice) *
-    100
-  ).toFixed(0);
+  const discountPrice = Math.ceil(
+    ((card.previousPrice - card.currentPrice) / card.previousPrice) * 100
+  );
 
   const handleAddProductToCart = () => {
     dispatch(addProductToCart(card));
@@ -126,6 +126,9 @@ export default function MultiActionAreaCard({ card }) {
         sx={{
           backgroundColor: "#fff",
           "&:hover": "none",
+          maxWidth: "240px",
+          marginLeft: "auto",
+          marginRight: "auto",
         }}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -157,8 +160,8 @@ export default function MultiActionAreaCard({ card }) {
             fontSize: 20,
             fontWeight: "400",
             color: "black",
-            marginBottom: "16px",
-            marginTop: "20px",
+            marginBottom: "10px",
+            marginTop: "10px",
             paddingRight: "5px",
             paddingLeft: "5px",
           }}
@@ -172,21 +175,40 @@ export default function MultiActionAreaCard({ card }) {
             justifyContent: "space-between",
             paddingRight: "5px",
             paddingLeft: "5px",
+            maxWidth: "235px",
           }}
         >
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            sx={{
-              marginBottom: "10px",
-              fontSize: 20,
-              fontWeight: 500,
-              color: "rgba(161, 138, 104, 1)",
-            }}
-          >
-            ${card.currentPrice},00
-          </Typography>
+          <Box>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{
+                textDecoration: "line-through",
+                marginBottom: "5px",
+                fontSize: 14,
+                fontWeight: 500,
+                color: "rgba(161, 138, 104, 1)",
+              }}
+            >
+              ${card.previousPrice},00
+            </Typography>
+
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{
+                marginBottom: "5px",
+                fontSize: 18,
+                fontWeight: 500,
+                color: "rgba(161, 138, 104, 1)",
+              }}
+            >
+              ${card.currentPrice},00
+            </Typography>
+          </Box>
+
           <Typography
             gutterBottom
             variant="h5"
@@ -218,6 +240,7 @@ export default function MultiActionAreaCard({ card }) {
       <CustomSnackbar
         open={showSnackbar}
         onClose={() => setShowSnackbar(false)}
+        severity="success"
         titleText="success"
         text="The item added to your Shopping bag."
       />

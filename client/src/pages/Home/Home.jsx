@@ -18,6 +18,7 @@ import {
   name,
   price,
   latest,
+  discounts,
   btnAll,
   carouselIcon,
   carouselItem1,
@@ -27,6 +28,7 @@ import {
 } from "./HomeStyles";
 import { setProducts } from "../../features/shop/shopSlice";
 import { useDispatch, useSelector } from "react-redux";
+import CircularLoader from "../../components/Loader/Loader";
 
 function Home() {
   const styles = useStyles();
@@ -35,8 +37,9 @@ function Home() {
   const output = out();
 
   useEffect(() => {
-    filterProducts({ perPage: 6 }).then((data) => {
-      dispatch(setProducts(data.products));
+    dispatch(setProducts(null));
+    filterProducts("perPage=6").then((data) => {
+      dispatch(setProducts(data.data.products));
     });
   }, [dispatch]);
 
@@ -63,6 +66,8 @@ function Home() {
           />
         );
       });
+    } else {
+      return <CircularLoader />;
     }
   }
 
@@ -111,7 +116,12 @@ function Home() {
           <Typography sx={price}>$ 68,00</Typography>
         </Container>
         <Container sx={container3}>
-          <Typography sx={latest}>Shop The Latest</Typography>
+          <Box sx={{ marginBottom: "8px" }}>
+            <Typography sx={latest}>Shop The Latest</Typography>
+            <Typography sx={discounts}>
+              All products with discounts: &rarr;
+            </Typography>
+          </Box>
           <Link className={styles.link} to="/Shop">
             <Button variant="text" sx={btnAll}>
               View All

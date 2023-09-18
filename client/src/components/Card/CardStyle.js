@@ -20,7 +20,18 @@ export const cardContainer = {
       top: "285px",
     },
   },
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 437.9px)": {
+    padding: "0",
+    margin: "0 0px 60px 0px",
+    width: "150px",
+    height: "193px",
+    "&:hover": {
+      "& .cardHover": {
+        top: "120px",
+      },
+    },
+  },
+  "@media (min-width: 438px) and (max-width: 575.9px)": {
     padding: "0",
     margin: "0 0px 30px 0px",
     width: "140px",
@@ -31,7 +42,7 @@ export const cardContainer = {
       },
     },
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     padding: "0",
     margin: "0 5px 60px 5px",
     width: "150px",
@@ -53,7 +64,7 @@ export const cardContainer = {
       },
     },
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     padding: "0",
     margin: "0 5px 50px 5px",
     width: "205px",
@@ -64,7 +75,7 @@ export const cardContainer = {
       },
     },
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     padding: "0",
     margin: "0 5px 60px 5px",
     width: "240px",
@@ -106,14 +117,21 @@ export const cardImgContainer = {
   width: "350px",
   height: "350px",
   borderRadius: "8px",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 437.9px)": {
+    padding: "0",
+    margin: "0",
+    width: "150px",
+    height: "150px",
+    borderRadius: "5px",
+  },
+  "@media (min-width: 438px) and (max-width: 575.9px)": {
     padding: "0",
     margin: "0",
     width: "136px",
     height: "136px",
     borderRadius: "4px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     padding: "0",
     margin: "0",
     width: "150px",
@@ -127,14 +145,14 @@ export const cardImgContainer = {
     height: "170px",
     borderRadius: "5px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     padding: "0",
     margin: "0",
     width: "200px",
     height: "200px",
     borderRadius: "5px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     padding: "0",
     margin: "0",
     width: "240px",
@@ -160,12 +178,12 @@ export const cardNameContainer = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     padding: "0",
     margin: "0",
     width: "96%",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     padding: "0",
     margin: "0",
   },
@@ -174,12 +192,12 @@ export const cardNameContainer = {
     margin: "0",
     width: "93%",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     padding: "0",
     margin: "3px 0 0 0",
     width: "97%",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     padding: "0",
     margin: "8px 0 0 0",
   },
@@ -205,7 +223,15 @@ export const cardHover = {
   height: "65px",
   backgroundColor: "rgba(255, 255, 255, 0.50)",
   transition: "all 0.5s ease",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 437.9px)": {
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    top: "150px",
+    left: "0px",
+    width: "100%",
+    height: "30px",
+  },
+  "@media (min-width: 438px) and (max-width: 575.9px)": {
     paddingLeft: "20px",
     paddingRight: "20px",
     top: "136px",
@@ -213,7 +239,7 @@ export const cardHover = {
     width: "100%",
     height: "30px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     paddingLeft: "20px",
     paddingRight: "20px",
     top: "150px",
@@ -229,7 +255,7 @@ export const cardHover = {
     width: "100%",
     height: "35px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     paddingLeft: "20px",
     paddingRight: "20px",
     top: "200px",
@@ -237,7 +263,7 @@ export const cardHover = {
     width: "100%",
     height: "40px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     paddingLeft: "20px",
     paddingRight: "20px",
     top: "240px",
@@ -270,13 +296,13 @@ export const cardHoverAdd = {
   color: "#000000",
   cursor: "pointer",
   userSelect: "none",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     fontSize: "8px",
     fontWeight: "600",
     fontStyle: "normal",
     lineHeight: "normal",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     fontSize: "8px",
     fontWeight: "600",
     fontStyle: "normal",
@@ -288,13 +314,13 @@ export const cardHoverAdd = {
     fontStyle: "normal",
     lineHeight: "normal",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     fontSize: "10px",
     fontWeight: "600",
     fontStyle: "normal",
     lineHeight: "normal",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     fontSize: "12px",
     fontWeight: "600",
     fontStyle: "normal",
@@ -316,11 +342,11 @@ export const cardHoverAdd = {
 export const cardHoverFavouriteButton = {
   width: "30px",
   height: "30px",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     width: "16px",
     height: "16px",
   },
-  "@media (min-width: 580px) and (max-width: 769px)": {
+  "@media (min-width: 576px) and (max-width: 769px)": {
     width: "20px",
     height: "20px",
   },
@@ -333,14 +359,14 @@ export const cardName = {
   lineHeight: "26px",
   color: "#000000",
   textTransform: "capitalize",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     marginTop: "8px",
     fontSize: "14px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "22px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     marginTop: "8px",
     fontSize: "14px",
     fontWeight: "400",
@@ -354,14 +380,14 @@ export const cardName = {
     fontStyle: "normal",
     lineHeight: "22px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     marginTop: "10px",
     fontSize: "16px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "22px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     marginTop: "14px",
     fontSize: "18px",
     fontWeight: "400",
@@ -382,13 +408,13 @@ export const cardPrice = {
   fontStyle: "normal",
   lineHeight: "26px",
   color: "rgba(161, 138, 104, 1)",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     fontSize: "12px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "20px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     fontSize: "12px",
     fontWeight: "400",
     fontStyle: "normal",
@@ -400,13 +426,13 @@ export const cardPrice = {
     fontStyle: "normal",
     lineHeight: "20px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     fontSize: "14px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "20px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     fontSize: "16px",
     fontWeight: "400",
     fontStyle: "normal",
@@ -431,13 +457,13 @@ export const cardMaterial = {
   fontStyle: "normal",
   lineHeight: "26px",
   color: "#707070",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     fontSize: "10px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     fontSize: "10px",
     fontWeight: "400",
     fontStyle: "normal",
@@ -449,13 +475,13 @@ export const cardMaterial = {
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     fontSize: "12px",
     fontWeight: "400",
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     fontSize: "16px",
     fontWeight: "400",
     fontStyle: "normal",
@@ -481,14 +507,14 @@ export const cardBrand = {
   fontStyle: "normal",
   lineHeight: "26px",
   color: "#000000",
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 575.9px)": {
     marginTop: "0px",
     fontSize: "14px",
     fontWeight: "500",
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     marginTop: "0px",
     fontSize: "14px",
     fontWeight: "500",
@@ -502,14 +528,14 @@ export const cardBrand = {
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     marginTop: "0px",
     fontSize: "14px",
     fontWeight: "500",
     fontStyle: "normal",
     lineHeight: "26px",
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     marginTop: "5px",
     fontSize: "18px",
     fontWeight: "500",
@@ -540,13 +566,19 @@ export const useStyles = makeStyles(() => ({
     height: "350px",
     cursor: "pointer",
   },
-  "@media (max-width: 579.9px)": {
+  "@media (max-width: 437.9px)": {
+    cardImg: {
+      width: "150px",
+      height: "150px",
+    },
+  },
+  "@media (min-width: 438px) and (max-width: 575.9px)": {
     cardImg: {
       width: "136px",
       height: "136px",
     },
   },
-  "@media (min-width: 580px) and (max-width: 639.9px)": {
+  "@media (min-width: 576px) and (max-width: 639.9px)": {
     cardImg: {
       width: "150px",
       height: "150px",
@@ -558,13 +590,13 @@ export const useStyles = makeStyles(() => ({
       height: "170px",
     },
   },
-  "@media (min-width: 769px) and (max-width: 899.9px)": {
+  "@media (min-width: 769px) and (max-width: 887.9px)": {
     cardImg: {
       width: "200px",
       height: "200px",
     },
   },
-  "@media (min-width: 900px) and (max-width: 1023.9px)": {
+  "@media (min-width: 888px) and (max-width: 1023.9px)": {
     cardImg: {
       width: "240px",
       height: "240px",

@@ -27,6 +27,7 @@ const Login = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const initialValues = {
     loginOrEmail: "",
@@ -37,17 +38,18 @@ const Login = () => {
     try {
       const user = await loginUser(values);
 
-      if (user.success) {
+      if (user.data.success) {
         setShowSnackbar(true);
-        setMessageText("Login Successful");
+        setMessageSeverenity("success");
         setMessageTitle("Success");
+        setMessageText("Login Successfull");
       }
 
-      if (user.token !== undefined) {
-        const userData = await getUser(user.token);
-        dispatch(setUser(userData));
+      if (user.data.token !== undefined) {
+        const userData = await getUser(user.data.token);
+        dispatch(setUser(userData.data));
         const { cart, amount } = CartLocalStorageHelper.getCart();
-        const existingCart = await getCart(user.token);
+        const existingCart = await getCart(user.data.token);
         const localStorageCartBody = cart.map((product) => {
           return {
             product: product._id,
@@ -55,7 +57,7 @@ const Login = () => {
           };
         });
         const existingCartBody =
-          existingCart?.products.map((item) => {
+          existingCart.data?.products.map((item) => {
             return {
               product: item.product._id,
               cartQuantity: Number(item.cartQuantity) || 1,
@@ -79,20 +81,20 @@ const Login = () => {
           {
             products: updateCartBody,
           },
-          user.token
+          user.data.token
         );
         CartLocalStorageHelper.resetCart();
-        // Зберігання JWT в LocalStorage
-        localStorage.setItem("token", user.token);
+        localStorage.setItem("token", user.data.token);
         dispatch(clearFavorites());
-        dispatch(setToken(user.token));
-      } else {
-        setShowSnackbar(true);
-        setMessageTitle("Error");
-        setMessageText("Something went wrong!");
-        dispatch(setError("Error logging in"));
+        dispatch(setToken(user.data.token));
       }
     } catch (error) {
+      setShowSnackbar(true);
+      setMessageSeverenity("error");
+      setMessageTitle("Error");
+      setMessageText(
+        error.response.data.password || error.response.data.loginOrEmail
+      );
       dispatch(setError("Error logging in"));
     }
   };
@@ -148,6 +150,7 @@ const Login = () => {
           </button>
           <CustomSnackbar
             open={showSnackbar}
+            severity={messageSeverenity}
             onClose={() => setShowSnackbar(false)}
             titleText={messageTitle}
             text={messageText}

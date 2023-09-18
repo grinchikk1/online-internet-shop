@@ -36,7 +36,7 @@ function Shop() {
 
   useEffect(() => {
     getProducts().then((res) => {
-      dispatch(setProducts(res));
+      dispatch(setProducts(res.data));
     });
   }, [dispatch]);
 
@@ -80,9 +80,14 @@ function Shop() {
       maxPrice,
     };
 
+    const queryString = Object.keys(filterParams)
+      .filter((key) => filterParams[key] !== null)
+      .map((key) => `${key}=${encodeURIComponent(filterParams[key])}`)
+      .join("&");
+
     try {
-      const filteredData = await filterProducts(filterParams);
-      setFilteredCards(filteredData.products);
+      const filteredData = await filterProducts(queryString);
+      setFilteredCards(filteredData.data.products);
       setIsFilterApplied(true);
     } catch (error) {
       console.error("Error filtering products:", error);
@@ -175,8 +180,9 @@ function Shop() {
             rowSpacing={{ xs: 2, md: 4 }}
             columns={{ xs: 2, sm: 8, md: 12 }}
           >
-            {showSearchResults
-              ? productsSearch.map((card) => (
+            {showSearchResults ? (
+              productsSearch.length > 0 ? (
+                productsSearch.map((card) => (
                   <Grid
                     item
                     xs={12}
@@ -208,8 +214,24 @@ function Shop() {
                     )}
                   </Grid>
                 ))
-              : isFilterApplied
-              ? filteredCards.map((card) => (
+              ) : (
+                <Grid item xs={12}>
+                  {/* <Typography variant="h6">No products found!</Typography> */}
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontStyle: "italic",
+                      textAlign: "center",
+                      margin: "20px auto 0 10px",
+                    }}
+                  >
+                    No results found for your search...
+                  </Typography>
+                </Grid>
+              )
+            ) : isFilterApplied ? (
+              filteredCards.length > 0 ? (
+                filteredCards.map((card) => (
                   <Grid
                     item
                     xs={12}
@@ -241,22 +263,38 @@ function Shop() {
                     )}
                   </Grid>
                 ))
-              : cardList.map((card, index) => (
-                  <Grid
-                    item
-                    xs={12}
-                    sm={4}
-                    md={4}
-                    key={index}
+              ) : (
+                <Grid item xs={12}>
+                  {/* <Typography variant="h6">No products found!</Typography> */}
+                  <Typography
                     sx={{
-                      "@media (min-width: 900px)": {
-                        maxWidth: "100%",
-                      },
+                      fontSize: "18px",
+                      fontStyle: "italic",
+                      textAlign: "center",
                     }}
                   >
-                    {card}
-                  </Grid>
-                ))}
+                    No results found for your search...
+                  </Typography>
+                </Grid>
+              )
+            ) : (
+              cardList.map((card, index) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  md={4}
+                  key={index}
+                  sx={{
+                    "@media (min-width: 900px)": {
+                      maxWidth: "100%",
+                    },
+                  }}
+                >
+                  {card}
+                </Grid>
+              ))
+            )}
           </Grid>
           {btnAddProduct.length > cardsToShow &&
             !showSearchResults &&
@@ -269,6 +307,7 @@ function Shop() {
                     border: "1px solid rgba(0, 0, 0, 1)",
                     background: "white",
                     color: "black",
+                    marginTop: "50px",
                     "&:hover": {
                       background: "black",
                       color: "white",

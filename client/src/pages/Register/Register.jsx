@@ -29,6 +29,9 @@ const validationSchema = Yup.object().shape({
     .min(3, "Login must be between 3 and 10 characters")
     .max(10, "Login must be between 3 and 10 characters")
     .required("Login is required"),
+  telephone: Yup.string()
+    .matches(/^\+380\d{3}\d{2}\d{2}\d{2}$/, "Invalid phone number")
+    .required("Phone number is required"),
 });
 
 const Registration = () => {
@@ -38,6 +41,7 @@ const Registration = () => {
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [messageTitle, setMessageTitle] = useState("");
+  const [messageSeverenity, setMessageSeverenity] = useState("success");
 
   const handleSubmit = async (values) => {
     try {
@@ -45,6 +49,7 @@ const Registration = () => {
 
       if (user.status === 200) {
         setShowSnackbar(true);
+        setMessageSeverenity("success");
         setMessageText("Register Successful");
         setMessageTitle("Success");
 
@@ -54,12 +59,12 @@ const Registration = () => {
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else {
-        setShowSnackbar(true);
-        setMessageText("Something went wrong!");
-        setMessageTitle("Error");
       }
     } catch (error) {
+      setShowSnackbar(true);
+      setMessageSeverenity("error");
+      setMessageText(error.response.data.message);
+      setMessageTitle("Error");
       dispatch(setError("Error registering"));
     }
   };
@@ -74,6 +79,7 @@ const Registration = () => {
           email: "",
           password: "",
           login: "",
+          telephone: "",
         }}
         validationSchema={validationSchema}
         onSubmit={handleSubmit}
@@ -125,6 +131,21 @@ const Registration = () => {
           </div>
 
           <div className="form-group">
+            <label htmlFor="telephone">Phone Number</label>
+            <Field
+              type="text"
+              id="telephone"
+              name="telephone"
+              autoComplete="tel"
+            />
+            <ErrorMessage
+              name="telephone"
+              component="div"
+              className="error-message"
+            />
+          </div>
+
+          <div className="form-group">
             <label htmlFor="email">Email</label>
             <Field type="email" id="email" name="email" autoComplete="email" />
             <ErrorMessage
@@ -154,6 +175,7 @@ const Registration = () => {
           </button>
           <CustomSnackbar
             open={showSnackbar}
+            severity={messageSeverenity}
             onClose={() => setShowSnackbar(false)}
             titleText={messageTitle}
             text={messageText}

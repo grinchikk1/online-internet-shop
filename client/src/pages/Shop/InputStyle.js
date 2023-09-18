@@ -50,7 +50,7 @@ export const useStyles = makeStyles(() => ({
   },
   SelectInput: {
     fontSize: "14px",
-    border: "1px solid rgba(216, 216, 216, 1)",
+    // border: "1px solid rgba(216, 216, 216, 1)", // прибрала закреслення тексту при фокусі
     height: "53px",
     padding: "15px 12px",
   },
@@ -75,8 +75,10 @@ export const useStyles = makeStyles(() => ({
     paddingBottom: "250px",
     paddingTop: "96px",
     display: "flex",
-    justifyContent: "start",
-    alignItems: "start",
+    // justifyContent: "start",
+    // alignItems: "start",
+    justifyContent: "center",
+    alignItems: "center",
   },
   FilterTitle: {
     fontWeight: 400,

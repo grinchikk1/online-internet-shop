@@ -1,61 +1,26 @@
 import axios from "axios";
+import sendRequest from "./sendRequest";
 import { fetchFavoritesSuccess } from "../features/favorites/favoriteSlice";
 
-export const url =
-  "https://online-internet-shop-dcf87eaec7f8.herokuapp.com/api";
-
 export const createWishlist = async (token, newWishlist) => {
-  try {
-    const response = await axios.post(`${url}/wishlist`, newWishlist, {
-      headers: {
-        Authorization: token,
-      },
-    });
-
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  return sendRequest("post", "/wishlist", newWishlist, token);
 };
 
-export const updateWishlist = async (updatedWishlist) => {
-  try {
-    const response = await axios.put("/wishlist", updatedWishlist);
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+export const updateWishlist = async (token, updatedWishlist) => {
+  return sendRequest("put", "/wishlist", updatedWishlist, token);
 };
 
 export const addProductToWishlist = async (token, productId) => {
-  try {
-    const response = await axios.put(`${url}/wishlist/${productId}`, null, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  return sendRequest("put", `/wishlist/${productId}`, null, token);
 };
 
 export const deleteProductFromWishlist = async (token, productId) => {
-  try {
-    const response = await axios.delete(`${url}/wishlist/${productId}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  return sendRequest("delete", `/wishlist/${productId}`, null, token);
 };
 
 export const getWishlist = (token) => async (dispatch) => {
   try {
-    const response = await axios.get(`${url}/wishlist`, {
+    const response = await axios.get("/api/wishlist", {
       headers: {
         Authorization: token,
       },
@@ -65,17 +30,13 @@ export const getWishlist = (token) => async (dispatch) => {
         response.data == null ? (response.data = []) : response.data
       )
     );
-    return response.data; // Return the data extracted from the response
-  } catch (error) {
-    console.log(error);
-    throw error; // Re-throw the error to be handled outside
-  }
-};
-export const deleteWishlist = async () => {
-  try {
-    const response = await axios.delete("/wishlist");
     return response.data;
   } catch (error) {
-    console.log(error);
+    console.error("Request error:", error);
+    throw error;
   }
+};
+
+export const deleteWishlist = async (token) => {
+  return sendRequest("delete", "/wishlist", null, token);
 };
